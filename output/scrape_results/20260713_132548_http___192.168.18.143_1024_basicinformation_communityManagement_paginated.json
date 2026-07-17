@@ -1,0 +1,5908 @@
+{
+  "pages": [
+    {
+      "url": "http://192.168.18.143:1024/basicinformation/communityManagement",
+      "title": "智慧康养平台",
+      "timestamp": "2026-07-13T13:25:40.325274",
+      "sections": [
+        {
+          "section_type": "heading",
+          "level": 1,
+          "text": "智慧康养平台",
+          "children": []
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "首页",
+            "系统管理用户管理角色管理菜单管理部门管理岗位管理字典管理参数设置通知公告日志管理操作日志登录日志",
+            "用户管理",
+            "角色管理",
+            "菜单管理",
+            "部门管理",
+            "岗位管理",
+            "字典管理",
+            "参数设置",
+            "通知公告",
+            "日志管理操作日志登录日志",
+            "操作日志",
+            "登录日志",
+            "系统监控在线用户定时任务数据监控服务监控缓存监控缓存列表",
+            "在线用户",
+            "定时任务",
+            "数据监控",
+            "服务监控",
+            "缓存监控",
+            "缓存列表",
+            "系统工具表单构建代码生成系统接口",
+            "表单构建",
+            "代码生成",
+            "系统接口",
+            "档案管理社区管理长者档案医生管理护士管理",
+            "社区管理",
+            "长者档案",
+            "医生管理",
+            "护士管理",
+            "设备管理床位管理床位管理分配床位设备管理设备分配安防设备设备电量主机终端熙康设备设备配置",
+            "床位管理床位管理分配床位",
+            "床位管理",
+            "分配床位",
+            "设备管理",
+            "设备分配",
+            "安防设备设备电量主机终端",
+            "设备电量主机终端",
+            "主机",
+            "终端",
+            "熙康设备",
+            "设备配置",
+            "养老管理入托总览入托申请签订合同入托办理退托管理",
+            "入托总览",
+            "入托申请",
+            "签订合同",
+            "入托办理",
+            "退托管理",
+            "养老评估评估总览压疮评估抑郁评估焦虑评估跌倒评估ICVD评估老人能力评估",
+            "评估总览",
+            "压疮评估",
+            "抑郁评估",
+            "焦虑评估",
+            "跌倒评估",
+            "ICVD评估",
+            "老人能力评估",
+            "健康管理健康数据腕表数据血氧血压心率计步定位熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质健康报告健康评估健康干预",
+            "健康数据腕表数据血氧血压心率计步定位熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+            "腕表数据血氧血压心率计步定位",
+            "血氧",
+            "血压",
+            "心率",
+            "计步",
+            "定位",
+            "熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+            "血压",
+            "血糖",
+            "身高体重",
+            "血氧",
+            "心电",
+            "脉率",
+            "三围",
+            "体温",
+            "尿酸",
+            "人体成分",
+            "血脂",
+            "中医体质",
+            "健康报告",
+            "健康评估",
+            "健康干预",
+            "健康监控安防报警主机报警终端报警腕表跌倒报警跌倒报警呼救通话小度紧急呼救小度通话记录Sos通话视频浏览消息通知消息通知百度推送通知百度服务留言老人不活跃预警通知提醒答复",
+            "安防报警主机报警终端报警腕表跌倒报警跌倒报警",
+            "主机报警",
+            "终端报警",
+            "腕表跌倒报警",
+            "跌倒报警",
+            "呼救通话小度紧急呼救小度通话记录Sos通话视频浏览",
+            "小度紧急呼救",
+            "小度通话记录",
+            "Sos通话",
+            "视频浏览",
+            "消息通知消息通知百度推送通知百度服务留言老人不活跃预警通知",
+            "消息通知",
+            "百度推送通知",
+            "百度服务留言",
+            "老人不活跃预警通知",
+            "提醒答复",
+            "睡眠监控实时数据每日睡眠信息睡眠时长睡眠规律睡眠中断睡眠分期每日夜间体征睡眠心率睡眠呼吸心率变异睡眠分数总览睡眠分总览健康分总览睡眠报告 睡眠周报告睡眠月报告",
+            "实时数据",
+            "每日睡眠信息睡眠时长睡眠规律睡眠中断睡眠分期",
+            "睡眠时长",
+            "睡眠规律",
+            "睡眠中断",
+            "睡眠分期",
+            "每日夜间体征睡眠心率睡眠呼吸心率变异",
+            "睡眠心率",
+            "睡眠呼吸",
+            "心率变异",
+            "睡眠分数总览睡眠分总览健康分总览",
+            "睡眠分总览",
+            "健康分总览",
+            "睡眠报告 睡眠周报告睡眠月报告",
+            "睡眠周报告",
+            "睡眠月报告",
+            "护理服务照护看板长者需求指派护工护工接单照护执行长者评价工单归档护理计划护理记录护工排班",
+            "照护看板长者需求指派护工护工接单照护执行长者评价工单归档",
+            "长者需求",
+            "指派护工",
+            "护工接单",
+            "照护执行",
+            "长者评价",
+            "工单归档",
+            "护理计划",
+            "护理记录",
+            "护工排班",
+            "活动管理活动建立活动发布活动报名活动举行活动签到活动签退活动总结活动归档",
+            "活动建立",
+            "活动发布",
+            "活动报名",
+            "活动举行",
+            "活动签到",
+            "活动签退",
+            "活动总结",
+            "活动归档",
+            "费项管理费项管理费用总览预缴明细费用结算费用明细费项设置服务项目护理级别",
+            "费项管理费用总览预缴明细费用结算费用明细",
+            "费用总览",
+            "预缴明细",
+            "费用结算",
+            "费用明细",
+            "费项设置服务项目护理级别",
+            "服务项目",
+            "护理级别",
+            "数字屏幕数字孪生社区屏幕机构屏幕居家屏幕",
+            "数字孪生",
+            "社区屏幕",
+            "机构屏幕",
+            "居家屏幕"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "用户管理",
+            "角色管理",
+            "菜单管理",
+            "部门管理",
+            "岗位管理",
+            "字典管理",
+            "参数设置",
+            "通知公告",
+            "日志管理操作日志登录日志",
+            "操作日志",
+            "登录日志"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "操作日志",
+            "登录日志"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "在线用户",
+            "定时任务",
+            "数据监控",
+            "服务监控",
+            "缓存监控",
+            "缓存列表"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "表单构建",
+            "代码生成",
+            "系统接口"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "社区管理",
+            "长者档案",
+            "医生管理",
+            "护士管理"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "床位管理床位管理分配床位",
+            "床位管理",
+            "分配床位",
+            "设备管理",
+            "设备分配",
+            "安防设备设备电量主机终端",
+            "设备电量主机终端",
+            "主机",
+            "终端",
+            "熙康设备",
+            "设备配置"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "床位管理",
+            "分配床位"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "设备电量主机终端",
+            "主机",
+            "终端"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "主机",
+            "终端"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "入托总览",
+            "入托申请",
+            "签订合同",
+            "入托办理",
+            "退托管理"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "评估总览",
+            "压疮评估",
+            "抑郁评估",
+            "焦虑评估",
+            "跌倒评估",
+            "ICVD评估",
+            "老人能力评估"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "健康数据腕表数据血氧血压心率计步定位熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+            "腕表数据血氧血压心率计步定位",
+            "血氧",
+            "血压",
+            "心率",
+            "计步",
+            "定位",
+            "熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+            "血压",
+            "血糖",
+            "身高体重",
+            "血氧",
+            "心电",
+            "脉率",
+            "三围",
+            "体温",
+            "尿酸",
+            "人体成分",
+            "血脂",
+            "中医体质",
+            "健康报告",
+            "健康评估",
+            "健康干预"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "腕表数据血氧血压心率计步定位",
+            "血氧",
+            "血压",
+            "心率",
+            "计步",
+            "定位",
+            "熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+            "血压",
+            "血糖",
+            "身高体重",
+            "血氧",
+            "心电",
+            "脉率",
+            "三围",
+            "体温",
+            "尿酸",
+            "人体成分",
+            "血脂",
+            "中医体质"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "血氧",
+            "血压",
+            "心率",
+            "计步",
+            "定位"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "血压",
+            "血糖",
+            "身高体重",
+            "血氧",
+            "心电",
+            "脉率",
+            "三围",
+            "体温",
+            "尿酸",
+            "人体成分",
+            "血脂",
+            "中医体质"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "安防报警主机报警终端报警腕表跌倒报警跌倒报警",
+            "主机报警",
+            "终端报警",
+            "腕表跌倒报警",
+            "跌倒报警",
+            "呼救通话小度紧急呼救小度通话记录Sos通话视频浏览",
+            "小度紧急呼救",
+            "小度通话记录",
+            "Sos通话",
+            "视频浏览",
+            "消息通知消息通知百度推送通知百度服务留言老人不活跃预警通知",
+            "消息通知",
+            "百度推送通知",
+            "百度服务留言",
+            "老人不活跃预警通知",
+            "提醒答复"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "主机报警",
+            "终端报警",
+            "腕表跌倒报警",
+            "跌倒报警"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "小度紧急呼救",
+            "小度通话记录",
+            "Sos通话",
+            "视频浏览"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "消息通知",
+            "百度推送通知",
+            "百度服务留言",
+            "老人不活跃预警通知"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "实时数据",
+            "每日睡眠信息睡眠时长睡眠规律睡眠中断睡眠分期",
+            "睡眠时长",
+            "睡眠规律",
+            "睡眠中断",
+            "睡眠分期",
+            "每日夜间体征睡眠心率睡眠呼吸心率变异",
+            "睡眠心率",
+            "睡眠呼吸",
+            "心率变异",
+            "睡眠分数总览睡眠分总览健康分总览",
+            "睡眠分总览",
+            "健康分总览",
+            "睡眠报告 睡眠周报告睡眠月报告",
+            "睡眠周报告",
+            "睡眠月报告"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "睡眠时长",
+            "睡眠规律",
+            "睡眠中断",
+            "睡眠分期"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "睡眠心率",
+            "睡眠呼吸",
+            "心率变异"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "睡眠分总览",
+            "健康分总览"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "睡眠周报告",
+            "睡眠月报告"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "照护看板长者需求指派护工护工接单照护执行长者评价工单归档",
+            "长者需求",
+            "指派护工",
+            "护工接单",
+            "照护执行",
+            "长者评价",
+            "工单归档",
+            "护理计划",
+            "护理记录",
+            "护工排班"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "长者需求",
+            "指派护工",
+            "护工接单",
+            "照护执行",
+            "长者评价",
+            "工单归档"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "活动建立",
+            "活动发布",
+            "活动报名",
+            "活动举行",
+            "活动签到",
+            "活动签退",
+            "活动总结",
+            "活动归档"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "费项管理费用总览预缴明细费用结算费用明细",
+            "费用总览",
+            "预缴明细",
+            "费用结算",
+            "费用明细",
+            "费项设置服务项目护理级别",
+            "服务项目",
+            "护理级别"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "费用总览",
+            "预缴明细",
+            "费用结算",
+            "费用明细"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "服务项目",
+            "护理级别"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "数字孪生",
+            "社区屏幕",
+            "机构屏幕",
+            "居家屏幕"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": []
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "Default",
+            "Medium",
+            "Small",
+            "Mini"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "个人中心",
+            "布局设置",
+            "退出登录"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "刷新页面",
+            "关闭当前",
+            "关闭其他",
+            "关闭左侧",
+            "关闭右侧",
+            "全部关闭"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "1",
+            "2"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "10条/页",
+            "20条/页",
+            "30条/页",
+            "50条/页"
+          ]
+        }
+      ],
+      "images": [
+        {
+          "src": "http://192.168.18.143:1024/static/img/aixinLogo.6a55819b.png",
+          "alt": "",
+          "width": "64",
+          "height": "58",
+          "is_svg": false
+        },
+        {
+          "src": "http://192.168.18.143:1024/dev-api/profile/avatar/2025/05/25/admin_20250525193502A004.png",
+          "alt": "",
+          "width": 40,
+          "height": 40,
+          "is_svg": false
+        }
+      ],
+      "links": [
+        {
+          "href": "http://192.168.18.143:1024/",
+          "text": "智慧康养平台",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/index",
+          "text": "首页",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/user",
+          "text": "用户管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/role",
+          "text": "角色管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/menu",
+          "text": "菜单管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/dept",
+          "text": "部门管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/post",
+          "text": "岗位管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/dict",
+          "text": "字典管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/config",
+          "text": "参数设置",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/notice",
+          "text": "通知公告",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/log/operlog",
+          "text": "操作日志",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/log/logininfor",
+          "text": "登录日志",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/monitor/online",
+          "text": "在线用户",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/monitor/job",
+          "text": "定时任务",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/monitor/druid",
+          "text": "数据监控",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/monitor/server",
+          "text": "服务监控",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/monitor/cache",
+          "text": "缓存监控",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/monitor/cacheList",
+          "text": "缓存列表",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/tool/build",
+          "text": "表单构建",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/tool/gen",
+          "text": "代码生成",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/tool/swagger",
+          "text": "系统接口",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/basicinformation/communityManagement",
+          "text": "社区管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/basicinformation/community",
+          "text": "长者档案",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/basicinformation/doctor",
+          "text": "医生管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/basicinformation/nurse",
+          "text": "护士管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/bedroom/bedroomsManagement",
+          "text": "床位管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/bedroom/bedroom",
+          "text": "分配床位",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/security",
+          "text": "设备管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/assigner",
+          "text": "设备分配",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/security/power/hostDevice",
+          "text": "主机",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/security/power/endDevice",
+          "text": "终端",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/xiKangDevice",
+          "text": "熙康设备",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/configkeys",
+          "text": "设备配置",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/elderlyCare/enrollmentView",
+          "text": "入托总览",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/elderlyCare/enrollmentApply",
+          "text": "入托申请",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/elderlyCare/contract",
+          "text": "签订合同",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/elderlyCare/EnrollmentProcessing",
+          "text": "入托办理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/elderlyCare/exitcare",
+          "text": "退托管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/evaluation/assessmentView",
+          "text": "评估总览",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/evaluation/pressure",
+          "text": "压疮评估",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/evaluation/evaluation",
+          "text": "抑郁评估",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/evaluation/anxiety",
+          "text": "焦虑评估",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/evaluation/morse",
+          "text": "跌倒评估",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/evaluation/riskICVD",
+          "text": "ICVD评估",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/evaluation/ability",
+          "text": "老人能力评估",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchOxygen",
+          "text": "血氧",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchPressure",
+          "text": "血压",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchHeartrate",
+          "text": "心率",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchStep",
+          "text": "计步",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchPosition",
+          "text": "定位",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/bloodPressure",
+          "text": "血压",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/bloodSugar",
+          "text": "血糖",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/heightWeight",
+          "text": "身高体重",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/bloodOxygen",
+          "text": "血氧",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/ecg",
+          "text": "心电",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/pulseRate",
+          "text": "脉率",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/dimensional",
+          "text": "三围",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/temperature",
+          "text": "体温",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/uricacid",
+          "text": "尿酸",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/composition",
+          "text": "人体成分",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/lipids",
+          "text": "血脂",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/tcmconstitution",
+          "text": "中医体质",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/archives",
+          "text": "健康报告",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/assessment",
+          "text": "健康评估",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/interventions",
+          "text": "健康干预",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/securityAlarm/SosSenddata",
+          "text": "主机报警",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/securityAlarm/endDevice",
+          "text": "终端报警",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/securityAlarm/watchFall",
+          "text": "腕表跌倒报警",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/securityAlarm/fallGait",
+          "text": "跌倒报警",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/telephone/callhelp",
+          "text": "小度紧急呼救",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/telephone/CallRecords",
+          "text": "小度通话记录",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/telephone/telephone",
+          "text": "Sos通话",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/telephone/videoSee",
+          "text": "视频浏览",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/message/message",
+          "text": "消息通知",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/message/baiduNotification",
+          "text": "百度推送通知",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/message/baiduservice",
+          "text": "百度服务留言",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/message/oldNotification",
+          "text": "老人不活跃预警通知",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/reminderAnswer",
+          "text": "提醒答复",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/realData",
+          "text": "实时数据",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/daySleepInfo/duration",
+          "text": "睡眠时长",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/daySleepInfo/pattern",
+          "text": "睡眠规律",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/daySleepInfo/interruption",
+          "text": "睡眠中断",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/daySleepInfo/staging",
+          "text": "睡眠分期",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/dayNightSigns/sleepHeartrate",
+          "text": "睡眠心率",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/dayNightSigns/sleepBreath",
+          "text": "睡眠呼吸",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/dayNightSigns/variability",
+          "text": "心率变异",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/sleepScoreOverview/sleepScore",
+          "text": "睡眠分总览",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/sleepScoreOverview/sleepHealthy",
+          "text": "健康分总览",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/sleepReport/weekReport",
+          "text": "睡眠周报告",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/sleepReport/monthReport",
+          "text": "睡眠月报告",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careDashBoard/oldCare",
+          "text": "长者需求",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careDashBoard/caregiver",
+          "text": "指派护工",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careDashBoard/recieve",
+          "text": "护工接单",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careDashBoard/takeCare",
+          "text": "照护执行",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careDashBoard/comment",
+          "text": "长者评价",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careDashBoard/document",
+          "text": "工单归档",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careplan",
+          "text": "护理计划",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careRecord",
+          "text": "护理记录",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/weekly",
+          "text": "护工排班",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/activityCreate",
+          "text": "活动建立",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/pubilish",
+          "text": "活动发布",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/enlist",
+          "text": "活动报名",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/hold",
+          "text": "活动举行",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/sign",
+          "text": "活动签到",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/signoff",
+          "text": "活动签退",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/summary",
+          "text": "活动总结",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/archive",
+          "text": "活动归档",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/expenditure/managefee/feeView",
+          "text": "费用总览",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/expenditure/managefee/feedetails",
+          "text": "预缴明细",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/expenditure/managefee/settlement",
+          "text": "费用结算",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/expenditure/managefee/costdetails",
+          "text": "费用明细",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/expenditure/setupfee/nursing",
+          "text": "服务项目",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/expenditure/setupfee/nurseLevel",
+          "text": "护理级别",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/WebglTest/WebglTest",
+          "text": "数字孪生",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/WebglTest/panel",
+          "text": "社区屏幕",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/WebglTest/communityView",
+          "text": "机构屏幕",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/WebglTest/living",
+          "text": "居家屏幕",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/user/profile",
+          "text": "个人中心",
+          "is_internal": true,
+          "link_type": "page"
+        }
+      ],
+      "tables": [
+        {
+          "caption": "",
+          "headers": [
+            "",
+            "序号",
+            "名称",
+            "位置",
+            "床位数（张）",
+            "医生数（人）",
+            "护理人员数（人）",
+            "食堂面积（平方米）",
+            "医疗设备数量（台）",
+            "志愿者数量（人）",
+            "机构类型",
+            "审核状态",
+            "创建人",
+            "创建时间",
+            "操作"
+          ],
+          "rows": [],
+          "row_count": 0,
+          "col_count": 15
+        },
+        {
+          "caption": "",
+          "headers": [
+            "",
+            "1",
+            "大连市甘井子社区老年服务中心",
+            "甘井子区杨柳街17-4",
+            "278",
+            "6",
+            "20",
+            "105.85",
+            "28",
+            "13",
+            "机构养老",
+            "审核通过",
+            "admin",
+            "2025-06-11",
+            "审核通过"
+          ],
+          "rows": [
+            [
+              "",
+              "1",
+              "大连市甘井子社区老年服务中心",
+              "甘井子区杨柳街17-4",
+              "278",
+              "6",
+              "20",
+              "105.85",
+              "28",
+              "13",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2025-06-11",
+              "审核通过"
+            ],
+            [
+              "",
+              "2",
+              "大连坤大怡老院",
+              "大连市甘井子区甘欣街3号",
+              "205",
+              "5",
+              "14",
+              "89.69",
+              "24",
+              "9",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2024-11-16",
+              "审核通过"
+            ],
+            [
+              "",
+              "3",
+              "大连济宇养老院",
+              "大连市甘井子区海北路2号",
+              "201",
+              "4",
+              "11",
+              "191.82",
+              "42",
+              "26",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2025-08-31",
+              "审核通过"
+            ],
+            [
+              "",
+              "4",
+              "大连市甘井子区伸鹏养老院",
+              "大连市甘井子区营城子街道大黑石村",
+              "140",
+              "3",
+              "10",
+              "190.41",
+              "33",
+              "14",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2025-01-01",
+              "审核通过"
+            ],
+            [
+              "",
+              "5",
+              "大连市甘井子区辛寨子社区养老服务中心",
+              "大连市甘井子区辛寨子街道砬子山村",
+              "115",
+              "3",
+              "10",
+              "87.24",
+              "31",
+              "27",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2025-09-25",
+              "审核通过"
+            ],
+            [
+              "",
+              "6",
+              "大连甘井子鸿诚养老院",
+              "大连市甘井子区悦岭街1-10号",
+              "66",
+              "3",
+              "11",
+              "75.72",
+              "22",
+              "6",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2025-07-20",
+              "审核通过"
+            ],
+            [
+              "",
+              "7",
+              "大连甘井子大连湾翔福养老院",
+              "大连市甘井子区大连湾街道宋家村",
+              "42",
+              "3",
+              "10",
+              "78.28",
+              "47",
+              "11",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2025-05-15",
+              "审核通过"
+            ],
+            [
+              "",
+              "8",
+              "大连甘井子泡崖康乐养老院",
+              "大连市甘井子区宏业街13号",
+              "233",
+              "5",
+              "17",
+              "143.44",
+              "13",
+              "17",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2024-12-06",
+              "审核通过"
+            ],
+            [
+              "",
+              "9",
+              "大连甘井子虹德慈善养老中心",
+              "大连市甘井子区泉水B1区69号",
+              "191",
+              "3",
+              "13",
+              "179.2",
+              "27",
+              "21",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2025-03-02",
+              "审核通过"
+            ],
+            [
+              "",
+              "10",
+              "大连甘井子幸福养老院",
+              "大连市甘井子区景富铭苑小区",
+              "230",
+              "5",
+              "14",
+              "50.47",
+              "40",
+              "23",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2025-01-11",
+              "审核通过"
+            ],
+            [
+              "",
+              "11",
+              "大连市甘井子区兴隆颐养山庄",
+              "大连市甘井子区红旗西路棠梨西街705终点",
+              "64",
+              "3",
+              "10",
+              "60.44",
+              "36",
+              "18",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2024-09-26",
+              "审核通过"
+            ],
+            [
+              "",
+              "12",
+              "大连红旗福利中心",
+              "大连市甘井子区红旗街道棠梨村",
+              "100",
+              "3",
+              "10",
+              "51.53",
+              "42",
+              "15",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2024-11-23",
+              "审核通过"
+            ],
+            [
+              "",
+              "13",
+              "大连市总工会事业发展中心养老事业部",
+              "沙河口区黄浦路200号",
+              "185",
+              "4",
+              "13",
+              "68.2",
+              "41",
+              "29",
+              "社区养老",
+              "审核通过",
+              "admin",
+              "2024-11-24",
+              "审核通过"
+            ],
+            [
+              "",
+              "14",
+              "南沙老年之家",
+              "沙河口区河川街59A",
+              "39",
+              "3",
+              "11",
+              "147.12",
+              "31",
+              "12",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2024-11-24",
+              "审核通过"
+            ],
+            [
+              "",
+              "15",
+              "渤海养护院",
+              "沙河口区马栏南街32号",
+              "168",
+              "3",
+              "11",
+              "185.36",
+              "28",
+              "23",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2024-05-14",
+              "审核通过"
+            ],
+            [
+              "",
+              "16",
+              "大连西岗莲花老年服务中心",
+              "西岗区绕山路25A号",
+              "250",
+              "5",
+              "15",
+              "132.07",
+              "12",
+              "13",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2025-01-01",
+              "审核通过"
+            ],
+            [
+              "",
+              "17",
+              "大连市西岗区老年人综合服务中心",
+              "西岗区康庄街11号",
+              "498",
+              "13",
+              "29",
+              "194.66",
+              "32",
+              "6",
+              "社区养老",
+              "审核通过",
+              "admin",
+              "2025-01-29",
+              "审核通过"
+            ],
+            [
+              "",
+              "18",
+              "大连康养集团养老服务有限公司",
+              "大连市中山区葵英街1号",
+              "43",
+              "3",
+              "10",
+              "88.03",
+              "13",
+              "10",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2024-12-02",
+              "审核通过"
+            ],
+            [
+              "",
+              "19",
+              "中山区桂林养护院",
+              "大连市中山区望海街39号",
+              "261",
+              "7",
+              "16",
+              "180.09",
+              "39",
+              "24",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2025-07-27",
+              "审核通过"
+            ],
+            [
+              "",
+              "20",
+              "大连市社会福利院",
+              "大连市中山区葵英街1号10号楼",
+              "350",
+              "7",
+              "23",
+              "160.56",
+              "14",
+              "5",
+              "社区养老",
+              "审核通过",
+              "admin",
+              "2024-09-24",
+              "审核通过"
+            ]
+          ],
+          "row_count": 20,
+          "col_count": 15
+        }
+      ],
+      "forms": [
+        {
+          "form_id": "",
+          "form_action": "http://192.168.18.143:1024/basicinformation/communityManagement",
+          "fields": [
+            {
+              "label": "社区/机构名称",
+              "name": "",
+              "type": "text",
+              "value": "",
+              "placeholder": "请输入社区/机构名称"
+            },
+            {
+              "label": "社区/机构位置",
+              "name": "",
+              "type": "text",
+              "value": "",
+              "placeholder": "请输入社区/机构位置"
+            },
+            {
+              "label": "床位数",
+              "name": "",
+              "type": "text",
+              "value": "",
+              "placeholder": "请输入社区/机构床位数"
+            },
+            {
+              "label": "医生数",
+              "name": "",
+              "type": "text",
+              "value": "",
+              "placeholder": "请输入社区/机构医生数"
+            },
+            {
+              "label": "护理人员",
+              "name": "",
+              "type": "text",
+              "value": "",
+              "placeholder": "请输入护理人员数"
+            },
+            {
+              "label": "食堂面积",
+              "name": "",
+              "type": "text",
+              "value": "",
+              "placeholder": "请输入食堂面积"
+            },
+            {
+              "label": "医疗设备",
+              "name": "",
+              "type": "text",
+              "value": "",
+              "placeholder": "请输入医疗设备数量"
+            },
+            {
+              "label": "志愿者",
+              "name": "",
+              "type": "text",
+              "value": "",
+              "placeholder": "请输入志愿者数量"
+            },
+            {
+              "label": "",
+              "name": "",
+              "type": "",
+              "value": "",
+              "placeholder": ""
+            }
+          ]
+        }
+      ],
+      "raw_text": "智慧康养平台\n首页\n系统管理\n系统监控\n系统工具\n档案管理\n社区管理\n长者档案\n医生管理\n护士管理\n设备管理\n养老管理\n养老评估\n健康管理\n健康监控\n睡眠监控\n护理服务\n活动管理\n费项管理\n数字屏幕\n首页/\n档案管理/\n社区管理\n首页 社区管理 \n社区/机构名称社区/机构位置床位数医生数护理人员食堂面积医疗设备志愿者搜索重置\n新增社区/机构\n修改社区/机构\n删除社区/机构\n导出社区/机构列表\n\t序号\t名称\t位置\t床位数（张）\t医生数（人）\t护理人员数（人）\t食堂面积（平方米）\t医疗设备数量（台）\t志愿者数量（人）\t机构类型\t审核状态\t创建人\t创建时间\t操作\n\t\n1\n\t\n大连市甘井子社区老年服务中心\n\t\n甘井子区杨柳街17-4\n\t\n278\n\t\n6\n\t\n20\n\t\n105.85\n\t\n28\n\t\n13\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-06-11\n\t\n审核通过\n\n\n\t\n2\n\t\n大连坤大怡老院\n\t\n大连市甘井子区甘欣街3号\n\t\n205\n\t\n5\n\t\n14\n\t\n89.69\n\t\n24\n\t\n9\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-11-16\n\t\n审核通过\n\n\n\t\n3\n\t\n大连济宇养老院\n\t\n大连市甘井子区海北路2号\n\t\n201\n\t\n4\n\t\n11\n\t\n191.82\n\t\n42\n\t\n26\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-08-31\n\t\n审核通过\n\n\n\t\n4\n\t\n大连市甘井子区伸鹏养老院\n\t\n大连市甘井子区营城子街道大黑石村\n\t\n140\n\t\n3\n\t\n10\n\t\n190.41\n\t\n33\n\t\n14\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-01-01\n\t\n审核通过\n\n\n\t\n5\n\t\n大连市甘井子区辛寨子社区养老服务中心\n\t\n大连市甘井子区辛寨子街道砬子山村\n\t\n115\n\t\n3\n\t\n10\n\t\n87.24\n\t\n31\n\t\n27\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-09-25\n\t\n审核通过\n\n\n\t\n6\n\t\n大连甘井子鸿诚养老院\n\t\n大连市甘井子区悦岭街1-10号\n\t\n66\n\t\n3\n\t\n11\n\t\n75.72\n\t\n22\n\t\n6\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-07-20\n\t\n审核通过\n\n\n\t\n7\n\t\n大连甘井子大连湾翔福养老院\n\t\n大连市甘井子区大连湾街道宋家村\n\t\n42\n\t\n3\n\t\n10\n\t\n78.28\n\t\n47\n\t\n11\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-05-15\n\t\n审核通过\n\n\n\t\n8\n\t\n大连甘井子泡崖康乐养老院\n\t\n大连市甘井子区宏业街13号\n\t\n233\n\t\n5\n\t\n17\n\t\n143.44\n\t\n13\n\t\n17\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-12-06\n\t\n审核通过\n\n\n\t\n9\n\t\n大连甘井子虹德慈善养老中心\n\t\n大连市甘井子区泉水B1区69号\n\t\n191\n\t\n3\n\t\n13\n\t\n179.2\n\t\n27\n\t\n21\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-03-02\n\t\n审核通过\n\n\n\t\n10\n\t\n大连甘井子幸福养老院\n\t\n大连市甘井子区景富铭苑小区\n\t\n230\n\t\n5\n\t\n14\n\t\n50.47\n\t\n40\n\t\n23\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-01-11\n\t\n审核通过\n\n\n\t\n11\n\t\n大连市甘井子区兴隆颐养山庄\n\t\n大连市甘井子区红旗西路棠梨西街705终点\n\t\n64\n\t\n3\n\t\n10\n\t\n60.44\n\t\n36\n\t\n18\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-09-26\n\t\n审核通过\n\n\n\t\n12\n\t\n大连红旗福利中心\n\t\n大连市甘井子区红旗街道棠梨村\n\t\n100\n\t\n3\n\t\n10\n\t\n51.53\n\t\n42\n\t\n15\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-11-23\n\t\n审核通过\n\n\n\t\n13\n\t\n大连市总工会事业发展中心养老事业部\n\t\n沙河口区黄浦路200号\n\t\n185\n\t\n4\n\t\n13\n\t\n68.2\n\t\n41\n\t\n29\n\t\n社区养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-11-24\n\t\n审核通过\n\n\n\t\n14\n\t\n南沙老年之家\n\t\n沙河口区河川街59A\n\t\n39\n\t\n3\n\t\n11\n\t\n147.12\n\t\n31\n\t\n12\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-11-24\n\t\n审核通过\n\n\n\t\n15\n\t\n渤海养护院\n\t\n沙河口区马栏南街32号\n\t\n168\n\t\n3\n\t\n11\n\t\n185.36\n\t\n28\n\t\n23\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-05-14\n\t\n审核通过\n\n\n\t\n16\n\t\n大连西岗莲花老年服务中心\n\t\n西岗区绕山路25A号\n\t\n250\n\t\n5\n\t\n15\n\t\n132.07\n\t\n12\n\t\n13\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-01-01\n\t\n审核通过\n\n\n\t\n17\n\t\n大连市西岗区老年人综合服务中心\n\t\n西岗区康庄街11号\n\t\n498\n\t\n13\n\t\n29\n\t\n194.66\n\t\n32\n\t\n6\n\t\n社区养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-01-29\n\t\n审核通过\n\n\n\t\n18\n\t\n大连康养集团养老服务有限公司\n\t\n大连市中山区葵英街1号\n\t\n43\n\t\n3\n\t\n10\n\t\n88.03\n\t\n13\n\t\n10\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-12-02\n\t\n审核通过\n\n\n\t\n19\n\t\n中山区桂林养护院\n\t\n大连市中山区望海街39号\n\t\n261\n\t\n7\n\t\n16\n\t\n180.09\n\t\n39\n\t\n24\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-07-27\n\t\n审核通过\n\n\n\t\n20\n\t\n大连市社会福利院\n\t\n大连市中山区葵英街1号10号楼\n\t\n350\n\t\n7\n\t\n23\n\t\n160.56\n\t\n14\n\t\n5\n\t\n社区养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-09-24\n\t\n审核通过\n共 40 条\n12\n前往页",
+      "metadata": {},
+      "screenshot_base64": "",
+      "error": "",
+      "page_number": 1
+    },
+    {
+      "url": "http://192.168.18.143:1024/basicinformation/communityManagement",
+      "title": "智慧康养平台",
+      "timestamp": "2026-07-13T13:25:47.341518",
+      "sections": [
+        {
+          "section_type": "heading",
+          "level": 1,
+          "text": "智慧康养平台",
+          "children": []
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "首页",
+            "系统管理用户管理角色管理菜单管理部门管理岗位管理字典管理参数设置通知公告日志管理操作日志登录日志",
+            "用户管理",
+            "角色管理",
+            "菜单管理",
+            "部门管理",
+            "岗位管理",
+            "字典管理",
+            "参数设置",
+            "通知公告",
+            "日志管理操作日志登录日志",
+            "操作日志",
+            "登录日志",
+            "系统监控在线用户定时任务数据监控服务监控缓存监控缓存列表",
+            "在线用户",
+            "定时任务",
+            "数据监控",
+            "服务监控",
+            "缓存监控",
+            "缓存列表",
+            "系统工具表单构建代码生成系统接口",
+            "表单构建",
+            "代码生成",
+            "系统接口",
+            "档案管理社区管理长者档案医生管理护士管理",
+            "社区管理",
+            "长者档案",
+            "医生管理",
+            "护士管理",
+            "设备管理床位管理床位管理分配床位设备管理设备分配安防设备设备电量主机终端熙康设备设备配置",
+            "床位管理床位管理分配床位",
+            "床位管理",
+            "分配床位",
+            "设备管理",
+            "设备分配",
+            "安防设备设备电量主机终端",
+            "设备电量主机终端",
+            "主机",
+            "终端",
+            "熙康设备",
+            "设备配置",
+            "养老管理入托总览入托申请签订合同入托办理退托管理",
+            "入托总览",
+            "入托申请",
+            "签订合同",
+            "入托办理",
+            "退托管理",
+            "养老评估评估总览压疮评估抑郁评估焦虑评估跌倒评估ICVD评估老人能力评估",
+            "评估总览",
+            "压疮评估",
+            "抑郁评估",
+            "焦虑评估",
+            "跌倒评估",
+            "ICVD评估",
+            "老人能力评估",
+            "健康管理健康数据腕表数据血氧血压心率计步定位熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质健康报告健康评估健康干预",
+            "健康数据腕表数据血氧血压心率计步定位熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+            "腕表数据血氧血压心率计步定位",
+            "血氧",
+            "血压",
+            "心率",
+            "计步",
+            "定位",
+            "熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+            "血压",
+            "血糖",
+            "身高体重",
+            "血氧",
+            "心电",
+            "脉率",
+            "三围",
+            "体温",
+            "尿酸",
+            "人体成分",
+            "血脂",
+            "中医体质",
+            "健康报告",
+            "健康评估",
+            "健康干预",
+            "健康监控安防报警主机报警终端报警腕表跌倒报警跌倒报警呼救通话小度紧急呼救小度通话记录Sos通话视频浏览消息通知消息通知百度推送通知百度服务留言老人不活跃预警通知提醒答复",
+            "安防报警主机报警终端报警腕表跌倒报警跌倒报警",
+            "主机报警",
+            "终端报警",
+            "腕表跌倒报警",
+            "跌倒报警",
+            "呼救通话小度紧急呼救小度通话记录Sos通话视频浏览",
+            "小度紧急呼救",
+            "小度通话记录",
+            "Sos通话",
+            "视频浏览",
+            "消息通知消息通知百度推送通知百度服务留言老人不活跃预警通知",
+            "消息通知",
+            "百度推送通知",
+            "百度服务留言",
+            "老人不活跃预警通知",
+            "提醒答复",
+            "睡眠监控实时数据每日睡眠信息睡眠时长睡眠规律睡眠中断睡眠分期每日夜间体征睡眠心率睡眠呼吸心率变异睡眠分数总览睡眠分总览健康分总览睡眠报告 睡眠周报告睡眠月报告",
+            "实时数据",
+            "每日睡眠信息睡眠时长睡眠规律睡眠中断睡眠分期",
+            "睡眠时长",
+            "睡眠规律",
+            "睡眠中断",
+            "睡眠分期",
+            "每日夜间体征睡眠心率睡眠呼吸心率变异",
+            "睡眠心率",
+            "睡眠呼吸",
+            "心率变异",
+            "睡眠分数总览睡眠分总览健康分总览",
+            "睡眠分总览",
+            "健康分总览",
+            "睡眠报告 睡眠周报告睡眠月报告",
+            "睡眠周报告",
+            "睡眠月报告",
+            "护理服务照护看板长者需求指派护工护工接单照护执行长者评价工单归档护理计划护理记录护工排班",
+            "照护看板长者需求指派护工护工接单照护执行长者评价工单归档",
+            "长者需求",
+            "指派护工",
+            "护工接单",
+            "照护执行",
+            "长者评价",
+            "工单归档",
+            "护理计划",
+            "护理记录",
+            "护工排班",
+            "活动管理活动建立活动发布活动报名活动举行活动签到活动签退活动总结活动归档",
+            "活动建立",
+            "活动发布",
+            "活动报名",
+            "活动举行",
+            "活动签到",
+            "活动签退",
+            "活动总结",
+            "活动归档",
+            "费项管理费项管理费用总览预缴明细费用结算费用明细费项设置服务项目护理级别",
+            "费项管理费用总览预缴明细费用结算费用明细",
+            "费用总览",
+            "预缴明细",
+            "费用结算",
+            "费用明细",
+            "费项设置服务项目护理级别",
+            "服务项目",
+            "护理级别",
+            "数字屏幕数字孪生社区屏幕机构屏幕居家屏幕",
+            "数字孪生",
+            "社区屏幕",
+            "机构屏幕",
+            "居家屏幕"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "用户管理",
+            "角色管理",
+            "菜单管理",
+            "部门管理",
+            "岗位管理",
+            "字典管理",
+            "参数设置",
+            "通知公告",
+            "日志管理操作日志登录日志",
+            "操作日志",
+            "登录日志"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "操作日志",
+            "登录日志"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "在线用户",
+            "定时任务",
+            "数据监控",
+            "服务监控",
+            "缓存监控",
+            "缓存列表"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "表单构建",
+            "代码生成",
+            "系统接口"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "社区管理",
+            "长者档案",
+            "医生管理",
+            "护士管理"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "床位管理床位管理分配床位",
+            "床位管理",
+            "分配床位",
+            "设备管理",
+            "设备分配",
+            "安防设备设备电量主机终端",
+            "设备电量主机终端",
+            "主机",
+            "终端",
+            "熙康设备",
+            "设备配置"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "床位管理",
+            "分配床位"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "设备电量主机终端",
+            "主机",
+            "终端"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "主机",
+            "终端"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "入托总览",
+            "入托申请",
+            "签订合同",
+            "入托办理",
+            "退托管理"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "评估总览",
+            "压疮评估",
+            "抑郁评估",
+            "焦虑评估",
+            "跌倒评估",
+            "ICVD评估",
+            "老人能力评估"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "健康数据腕表数据血氧血压心率计步定位熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+            "腕表数据血氧血压心率计步定位",
+            "血氧",
+            "血压",
+            "心率",
+            "计步",
+            "定位",
+            "熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+            "血压",
+            "血糖",
+            "身高体重",
+            "血氧",
+            "心电",
+            "脉率",
+            "三围",
+            "体温",
+            "尿酸",
+            "人体成分",
+            "血脂",
+            "中医体质",
+            "健康报告",
+            "健康评估",
+            "健康干预"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "腕表数据血氧血压心率计步定位",
+            "血氧",
+            "血压",
+            "心率",
+            "计步",
+            "定位",
+            "熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+            "血压",
+            "血糖",
+            "身高体重",
+            "血氧",
+            "心电",
+            "脉率",
+            "三围",
+            "体温",
+            "尿酸",
+            "人体成分",
+            "血脂",
+            "中医体质"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "血氧",
+            "血压",
+            "心率",
+            "计步",
+            "定位"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "血压",
+            "血糖",
+            "身高体重",
+            "血氧",
+            "心电",
+            "脉率",
+            "三围",
+            "体温",
+            "尿酸",
+            "人体成分",
+            "血脂",
+            "中医体质"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "安防报警主机报警终端报警腕表跌倒报警跌倒报警",
+            "主机报警",
+            "终端报警",
+            "腕表跌倒报警",
+            "跌倒报警",
+            "呼救通话小度紧急呼救小度通话记录Sos通话视频浏览",
+            "小度紧急呼救",
+            "小度通话记录",
+            "Sos通话",
+            "视频浏览",
+            "消息通知消息通知百度推送通知百度服务留言老人不活跃预警通知",
+            "消息通知",
+            "百度推送通知",
+            "百度服务留言",
+            "老人不活跃预警通知",
+            "提醒答复"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "主机报警",
+            "终端报警",
+            "腕表跌倒报警",
+            "跌倒报警"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "小度紧急呼救",
+            "小度通话记录",
+            "Sos通话",
+            "视频浏览"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "消息通知",
+            "百度推送通知",
+            "百度服务留言",
+            "老人不活跃预警通知"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "实时数据",
+            "每日睡眠信息睡眠时长睡眠规律睡眠中断睡眠分期",
+            "睡眠时长",
+            "睡眠规律",
+            "睡眠中断",
+            "睡眠分期",
+            "每日夜间体征睡眠心率睡眠呼吸心率变异",
+            "睡眠心率",
+            "睡眠呼吸",
+            "心率变异",
+            "睡眠分数总览睡眠分总览健康分总览",
+            "睡眠分总览",
+            "健康分总览",
+            "睡眠报告 睡眠周报告睡眠月报告",
+            "睡眠周报告",
+            "睡眠月报告"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "睡眠时长",
+            "睡眠规律",
+            "睡眠中断",
+            "睡眠分期"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "睡眠心率",
+            "睡眠呼吸",
+            "心率变异"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "睡眠分总览",
+            "健康分总览"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "睡眠周报告",
+            "睡眠月报告"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "照护看板长者需求指派护工护工接单照护执行长者评价工单归档",
+            "长者需求",
+            "指派护工",
+            "护工接单",
+            "照护执行",
+            "长者评价",
+            "工单归档",
+            "护理计划",
+            "护理记录",
+            "护工排班"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "长者需求",
+            "指派护工",
+            "护工接单",
+            "照护执行",
+            "长者评价",
+            "工单归档"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "活动建立",
+            "活动发布",
+            "活动报名",
+            "活动举行",
+            "活动签到",
+            "活动签退",
+            "活动总结",
+            "活动归档"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "费项管理费用总览预缴明细费用结算费用明细",
+            "费用总览",
+            "预缴明细",
+            "费用结算",
+            "费用明细",
+            "费项设置服务项目护理级别",
+            "服务项目",
+            "护理级别"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "费用总览",
+            "预缴明细",
+            "费用结算",
+            "费用明细"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "服务项目",
+            "护理级别"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "数字孪生",
+            "社区屏幕",
+            "机构屏幕",
+            "居家屏幕"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": []
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "Default",
+            "Medium",
+            "Small",
+            "Mini"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "个人中心",
+            "布局设置",
+            "退出登录"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "刷新页面",
+            "关闭当前",
+            "关闭其他",
+            "关闭左侧",
+            "关闭右侧",
+            "全部关闭"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "1",
+            "2"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "10条/页",
+            "20条/页",
+            "30条/页",
+            "50条/页"
+          ]
+        }
+      ],
+      "images": [
+        {
+          "src": "http://192.168.18.143:1024/static/img/aixinLogo.6a55819b.png",
+          "alt": "",
+          "width": "64",
+          "height": "58",
+          "is_svg": false
+        },
+        {
+          "src": "http://192.168.18.143:1024/dev-api/profile/avatar/2025/05/25/admin_20250525193502A004.png",
+          "alt": "",
+          "width": 40,
+          "height": 40,
+          "is_svg": false
+        }
+      ],
+      "links": [
+        {
+          "href": "http://192.168.18.143:1024/",
+          "text": "智慧康养平台",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/index",
+          "text": "首页",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/user",
+          "text": "用户管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/role",
+          "text": "角色管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/menu",
+          "text": "菜单管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/dept",
+          "text": "部门管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/post",
+          "text": "岗位管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/dict",
+          "text": "字典管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/config",
+          "text": "参数设置",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/notice",
+          "text": "通知公告",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/log/operlog",
+          "text": "操作日志",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/log/logininfor",
+          "text": "登录日志",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/monitor/online",
+          "text": "在线用户",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/monitor/job",
+          "text": "定时任务",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/monitor/druid",
+          "text": "数据监控",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/monitor/server",
+          "text": "服务监控",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/monitor/cache",
+          "text": "缓存监控",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/monitor/cacheList",
+          "text": "缓存列表",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/tool/build",
+          "text": "表单构建",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/tool/gen",
+          "text": "代码生成",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/tool/swagger",
+          "text": "系统接口",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/basicinformation/communityManagement",
+          "text": "社区管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/basicinformation/community",
+          "text": "长者档案",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/basicinformation/doctor",
+          "text": "医生管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/basicinformation/nurse",
+          "text": "护士管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/bedroom/bedroomsManagement",
+          "text": "床位管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/bedroom/bedroom",
+          "text": "分配床位",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/security",
+          "text": "设备管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/assigner",
+          "text": "设备分配",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/security/power/hostDevice",
+          "text": "主机",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/security/power/endDevice",
+          "text": "终端",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/xiKangDevice",
+          "text": "熙康设备",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/configkeys",
+          "text": "设备配置",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/elderlyCare/enrollmentView",
+          "text": "入托总览",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/elderlyCare/enrollmentApply",
+          "text": "入托申请",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/elderlyCare/contract",
+          "text": "签订合同",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/elderlyCare/EnrollmentProcessing",
+          "text": "入托办理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/elderlyCare/exitcare",
+          "text": "退托管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/evaluation/assessmentView",
+          "text": "评估总览",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/evaluation/pressure",
+          "text": "压疮评估",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/evaluation/evaluation",
+          "text": "抑郁评估",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/evaluation/anxiety",
+          "text": "焦虑评估",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/evaluation/morse",
+          "text": "跌倒评估",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/evaluation/riskICVD",
+          "text": "ICVD评估",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/evaluation/ability",
+          "text": "老人能力评估",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchOxygen",
+          "text": "血氧",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchPressure",
+          "text": "血压",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchHeartrate",
+          "text": "心率",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchStep",
+          "text": "计步",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchPosition",
+          "text": "定位",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/bloodPressure",
+          "text": "血压",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/bloodSugar",
+          "text": "血糖",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/heightWeight",
+          "text": "身高体重",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/bloodOxygen",
+          "text": "血氧",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/ecg",
+          "text": "心电",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/pulseRate",
+          "text": "脉率",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/dimensional",
+          "text": "三围",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/temperature",
+          "text": "体温",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/uricacid",
+          "text": "尿酸",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/composition",
+          "text": "人体成分",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/lipids",
+          "text": "血脂",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/tcmconstitution",
+          "text": "中医体质",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/archives",
+          "text": "健康报告",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/assessment",
+          "text": "健康评估",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/interventions",
+          "text": "健康干预",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/securityAlarm/SosSenddata",
+          "text": "主机报警",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/securityAlarm/endDevice",
+          "text": "终端报警",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/securityAlarm/watchFall",
+          "text": "腕表跌倒报警",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/securityAlarm/fallGait",
+          "text": "跌倒报警",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/telephone/callhelp",
+          "text": "小度紧急呼救",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/telephone/CallRecords",
+          "text": "小度通话记录",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/telephone/telephone",
+          "text": "Sos通话",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/telephone/videoSee",
+          "text": "视频浏览",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/message/message",
+          "text": "消息通知",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/message/baiduNotification",
+          "text": "百度推送通知",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/message/baiduservice",
+          "text": "百度服务留言",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/message/oldNotification",
+          "text": "老人不活跃预警通知",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/reminderAnswer",
+          "text": "提醒答复",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/realData",
+          "text": "实时数据",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/daySleepInfo/duration",
+          "text": "睡眠时长",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/daySleepInfo/pattern",
+          "text": "睡眠规律",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/daySleepInfo/interruption",
+          "text": "睡眠中断",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/daySleepInfo/staging",
+          "text": "睡眠分期",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/dayNightSigns/sleepHeartrate",
+          "text": "睡眠心率",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/dayNightSigns/sleepBreath",
+          "text": "睡眠呼吸",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/dayNightSigns/variability",
+          "text": "心率变异",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/sleepScoreOverview/sleepScore",
+          "text": "睡眠分总览",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/sleepScoreOverview/sleepHealthy",
+          "text": "健康分总览",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/sleepReport/weekReport",
+          "text": "睡眠周报告",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/sleepReport/monthReport",
+          "text": "睡眠月报告",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careDashBoard/oldCare",
+          "text": "长者需求",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careDashBoard/caregiver",
+          "text": "指派护工",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careDashBoard/recieve",
+          "text": "护工接单",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careDashBoard/takeCare",
+          "text": "照护执行",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careDashBoard/comment",
+          "text": "长者评价",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careDashBoard/document",
+          "text": "工单归档",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careplan",
+          "text": "护理计划",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careRecord",
+          "text": "护理记录",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/weekly",
+          "text": "护工排班",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/activityCreate",
+          "text": "活动建立",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/pubilish",
+          "text": "活动发布",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/enlist",
+          "text": "活动报名",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/hold",
+          "text": "活动举行",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/sign",
+          "text": "活动签到",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/signoff",
+          "text": "活动签退",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/summary",
+          "text": "活动总结",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/archive",
+          "text": "活动归档",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/expenditure/managefee/feeView",
+          "text": "费用总览",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/expenditure/managefee/feedetails",
+          "text": "预缴明细",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/expenditure/managefee/settlement",
+          "text": "费用结算",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/expenditure/managefee/costdetails",
+          "text": "费用明细",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/expenditure/setupfee/nursing",
+          "text": "服务项目",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/expenditure/setupfee/nurseLevel",
+          "text": "护理级别",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/WebglTest/WebglTest",
+          "text": "数字孪生",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/WebglTest/panel",
+          "text": "社区屏幕",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/WebglTest/communityView",
+          "text": "机构屏幕",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/WebglTest/living",
+          "text": "居家屏幕",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/user/profile",
+          "text": "个人中心",
+          "is_internal": true,
+          "link_type": "page"
+        }
+      ],
+      "tables": [
+        {
+          "caption": "",
+          "headers": [
+            "",
+            "序号",
+            "名称",
+            "位置",
+            "床位数（张）",
+            "医生数（人）",
+            "护理人员数（人）",
+            "食堂面积（平方米）",
+            "医疗设备数量（台）",
+            "志愿者数量（人）",
+            "机构类型",
+            "审核状态",
+            "创建人",
+            "创建时间",
+            "操作"
+          ],
+          "rows": [],
+          "row_count": 0,
+          "col_count": 15
+        },
+        {
+          "caption": "",
+          "headers": [
+            "",
+            "1",
+            "大连市甘井子社区老年服务中心",
+            "甘井子区杨柳街17-4",
+            "131",
+            "3",
+            "10",
+            "85.86",
+            "42",
+            "27",
+            "机构养老",
+            "审核通过",
+            "admin",
+            "2025-09-12",
+            "审核通过"
+          ],
+          "rows": [
+            [
+              "",
+              "1",
+              "大连市甘井子社区老年服务中心",
+              "甘井子区杨柳街17-4",
+              "131",
+              "3",
+              "10",
+              "85.86",
+              "42",
+              "27",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2025-09-12",
+              "审核通过"
+            ],
+            [
+              "",
+              "2",
+              "大连坤大怡老院",
+              "大连市甘井子区甘欣街3号",
+              "220",
+              "5",
+              "13",
+              "105.93",
+              "44",
+              "18",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2024-11-02",
+              "审核通过"
+            ],
+            [
+              "",
+              "3",
+              "大连济宇养老院",
+              "大连市甘井子区海北路2号",
+              "94",
+              "3",
+              "10",
+              "183.94",
+              "14",
+              "11",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2025-06-22",
+              "审核通过"
+            ],
+            [
+              "",
+              "4",
+              "大连市甘井子区伸鹏养老院",
+              "大连市甘井子区营城子街道大黑石村",
+              "56",
+              "3",
+              "10",
+              "145.42",
+              "44",
+              "18",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2025-09-13",
+              "审核通过"
+            ],
+            [
+              "",
+              "5",
+              "大连市甘井子区辛寨子社区养老服务中心",
+              "大连市甘井子区辛寨子街道砬子山村",
+              "183",
+              "3",
+              "10",
+              "133.28",
+              "35",
+              "19",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2025-04-08",
+              "审核通过"
+            ],
+            [
+              "",
+              "6",
+              "大连甘井子鸿诚养老院",
+              "大连市甘井子区悦岭街1-10号",
+              "105",
+              "3",
+              "10",
+              "95.76",
+              "18",
+              "27",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2025-09-25",
+              "审核通过"
+            ],
+            [
+              "",
+              "7",
+              "大连甘井子大连湾翔福养老院",
+              "大连市甘井子区大连湾街道宋家村",
+              "33",
+              "3",
+              "10",
+              "190.47",
+              "39",
+              "16",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2024-06-30",
+              "审核通过"
+            ],
+            [
+              "",
+              "8",
+              "大连甘井子泡崖康乐养老院",
+              "大连市甘井子区宏业街13号",
+              "256",
+              "6",
+              "16",
+              "154.87",
+              "30",
+              "7",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2025-01-01",
+              "审核通过"
+            ],
+            [
+              "",
+              "9",
+              "大连甘井子虹德慈善养老中心",
+              "大连市甘井子区泉水B1区69号",
+              "250",
+              "5",
+              "18",
+              "59.28",
+              "21",
+              "30",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2025-09-23",
+              "审核通过"
+            ],
+            [
+              "",
+              "10",
+              "大连甘井子幸福养老院",
+              "大连市甘井子区景富铭苑小区",
+              "95",
+              "3",
+              "10",
+              "143.31",
+              "26",
+              "14",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2025-06-15",
+              "审核通过"
+            ],
+            [
+              "",
+              "11",
+              "大连市甘井子区兴隆颐养山庄",
+              "大连市甘井子区红旗西路棠梨西街705终点",
+              "188",
+              "3",
+              "13",
+              "168.37",
+              "17",
+              "20",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2024-09-23",
+              "审核通过"
+            ],
+            [
+              "",
+              "12",
+              "大连红旗福利中心",
+              "大连市甘井子区红旗街道棠梨村",
+              "105",
+              "3",
+              "10",
+              "105.85",
+              "35",
+              "10",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2025-03-24",
+              "审核通过"
+            ],
+            [
+              "",
+              "13",
+              "大连市总工会事业发展中心养老事业部",
+              "沙河口区黄浦路200号",
+              "304",
+              "5",
+              "17",
+              "189.78",
+              "49",
+              "16",
+              "社区养老",
+              "审核通过",
+              "admin",
+              "2024-11-19",
+              "审核通过"
+            ],
+            [
+              "",
+              "14",
+              "南沙老年之家",
+              "沙河口区河川街59A",
+              "233",
+              "5",
+              "13",
+              "70.7",
+              "43",
+              "10",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2025-03-10",
+              "审核通过"
+            ],
+            [
+              "",
+              "15",
+              "渤海养护院",
+              "沙河口区马栏南街32号",
+              "104",
+              "3",
+              "10",
+              "164.82",
+              "27",
+              "26",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2025-08-08",
+              "审核通过"
+            ],
+            [
+              "",
+              "16",
+              "大连西岗莲花老年服务中心",
+              "西岗区绕山路25A号",
+              "297",
+              "6",
+              "17",
+              "94.4",
+              "49",
+              "16",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2024-05-06",
+              "审核通过"
+            ],
+            [
+              "",
+              "17",
+              "大连市西岗区老年人综合服务中心",
+              "西岗区康庄街11号",
+              "203",
+              "4",
+              "13",
+              "85.76",
+              "27",
+              "29",
+              "社区养老",
+              "审核通过",
+              "admin",
+              "2025-04-21",
+              "审核通过"
+            ],
+            [
+              "",
+              "18",
+              "大连康养集团养老服务有限公司",
+              "大连市中山区葵英街1号",
+              "101",
+              "3",
+              "10",
+              "83",
+              "29",
+              "14",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2024-07-04",
+              "审核通过"
+            ],
+            [
+              "",
+              "19",
+              "中山区桂林养护院",
+              "大连市中山区望海街39号",
+              "190",
+              "4",
+              "11",
+              "171.9",
+              "41",
+              "16",
+              "机构养老",
+              "审核通过",
+              "admin",
+              "2025-07-02",
+              "审核通过"
+            ],
+            [
+              "",
+              "20",
+              "大连市社会福利院",
+              "大连市中山区葵英街1号10号楼",
+              "346",
+              "8",
+              "25",
+              "82.44",
+              "35",
+              "23",
+              "社区养老",
+              "审核通过",
+              "admin",
+              "2025-06-22",
+              "审核通过"
+            ]
+          ],
+          "row_count": 20,
+          "col_count": 15
+        }
+      ],
+      "forms": [
+        {
+          "form_id": "",
+          "form_action": "http://192.168.18.143:1024/basicinformation/communityManagement",
+          "fields": [
+            {
+              "label": "社区/机构名称",
+              "name": "",
+              "type": "text",
+              "value": "",
+              "placeholder": "请输入社区/机构名称"
+            },
+            {
+              "label": "社区/机构位置",
+              "name": "",
+              "type": "text",
+              "value": "",
+              "placeholder": "请输入社区/机构位置"
+            },
+            {
+              "label": "床位数",
+              "name": "",
+              "type": "text",
+              "value": "",
+              "placeholder": "请输入社区/机构床位数"
+            },
+            {
+              "label": "医生数",
+              "name": "",
+              "type": "text",
+              "value": "",
+              "placeholder": "请输入社区/机构医生数"
+            },
+            {
+              "label": "护理人员",
+              "name": "",
+              "type": "text",
+              "value": "",
+              "placeholder": "请输入护理人员数"
+            },
+            {
+              "label": "食堂面积",
+              "name": "",
+              "type": "text",
+              "value": "",
+              "placeholder": "请输入食堂面积"
+            },
+            {
+              "label": "医疗设备",
+              "name": "",
+              "type": "text",
+              "value": "",
+              "placeholder": "请输入医疗设备数量"
+            },
+            {
+              "label": "志愿者",
+              "name": "",
+              "type": "text",
+              "value": "",
+              "placeholder": "请输入志愿者数量"
+            },
+            {
+              "label": "",
+              "name": "",
+              "type": "",
+              "value": "",
+              "placeholder": ""
+            }
+          ]
+        }
+      ],
+      "raw_text": "智慧康养平台\n首页\n系统管理\n系统监控\n系统工具\n档案管理\n社区管理\n长者档案\n医生管理\n护士管理\n设备管理\n养老管理\n养老评估\n健康管理\n健康监控\n睡眠监控\n护理服务\n活动管理\n费项管理\n数字屏幕\n首页/\n档案管理/\n社区管理\n首页 社区管理 \n社区/机构名称社区/机构位置床位数医生数护理人员食堂面积医疗设备志愿者搜索重置\n新增社区/机构\n修改社区/机构\n删除社区/机构\n导出社区/机构列表\n\t序号\t名称\t位置\t床位数（张）\t医生数（人）\t护理人员数（人）\t食堂面积（平方米）\t医疗设备数量（台）\t志愿者数量（人）\t机构类型\t审核状态\t创建人\t创建时间\t操作\n\t\n1\n\t\n大连市甘井子社区老年服务中心\n\t\n甘井子区杨柳街17-4\n\t\n131\n\t\n3\n\t\n10\n\t\n85.86\n\t\n42\n\t\n27\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-09-12\n\t\n审核通过\n\n\n\t\n2\n\t\n大连坤大怡老院\n\t\n大连市甘井子区甘欣街3号\n\t\n220\n\t\n5\n\t\n13\n\t\n105.93\n\t\n44\n\t\n18\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-11-02\n\t\n审核通过\n\n\n\t\n3\n\t\n大连济宇养老院\n\t\n大连市甘井子区海北路2号\n\t\n94\n\t\n3\n\t\n10\n\t\n183.94\n\t\n14\n\t\n11\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-06-22\n\t\n审核通过\n\n\n\t\n4\n\t\n大连市甘井子区伸鹏养老院\n\t\n大连市甘井子区营城子街道大黑石村\n\t\n56\n\t\n3\n\t\n10\n\t\n145.42\n\t\n44\n\t\n18\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-09-13\n\t\n审核通过\n\n\n\t\n5\n\t\n大连市甘井子区辛寨子社区养老服务中心\n\t\n大连市甘井子区辛寨子街道砬子山村\n\t\n183\n\t\n3\n\t\n10\n\t\n133.28\n\t\n35\n\t\n19\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-04-08\n\t\n审核通过\n\n\n\t\n6\n\t\n大连甘井子鸿诚养老院\n\t\n大连市甘井子区悦岭街1-10号\n\t\n105\n\t\n3\n\t\n10\n\t\n95.76\n\t\n18\n\t\n27\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-09-25\n\t\n审核通过\n\n\n\t\n7\n\t\n大连甘井子大连湾翔福养老院\n\t\n大连市甘井子区大连湾街道宋家村\n\t\n33\n\t\n3\n\t\n10\n\t\n190.47\n\t\n39\n\t\n16\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-06-30\n\t\n审核通过\n\n\n\t\n8\n\t\n大连甘井子泡崖康乐养老院\n\t\n大连市甘井子区宏业街13号\n\t\n256\n\t\n6\n\t\n16\n\t\n154.87\n\t\n30\n\t\n7\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-01-01\n\t\n审核通过\n\n\n\t\n9\n\t\n大连甘井子虹德慈善养老中心\n\t\n大连市甘井子区泉水B1区69号\n\t\n250\n\t\n5\n\t\n18\n\t\n59.28\n\t\n21\n\t\n30\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-09-23\n\t\n审核通过\n\n\n\t\n10\n\t\n大连甘井子幸福养老院\n\t\n大连市甘井子区景富铭苑小区\n\t\n95\n\t\n3\n\t\n10\n\t\n143.31\n\t\n26\n\t\n14\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-06-15\n\t\n审核通过\n\n\n\t\n11\n\t\n大连市甘井子区兴隆颐养山庄\n\t\n大连市甘井子区红旗西路棠梨西街705终点\n\t\n188\n\t\n3\n\t\n13\n\t\n168.37\n\t\n17\n\t\n20\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-09-23\n\t\n审核通过\n\n\n\t\n12\n\t\n大连红旗福利中心\n\t\n大连市甘井子区红旗街道棠梨村\n\t\n105\n\t\n3\n\t\n10\n\t\n105.85\n\t\n35\n\t\n10\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-03-24\n\t\n审核通过\n\n\n\t\n13\n\t\n大连市总工会事业发展中心养老事业部\n\t\n沙河口区黄浦路200号\n\t\n304\n\t\n5\n\t\n17\n\t\n189.78\n\t\n49\n\t\n16\n\t\n社区养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-11-19\n\t\n审核通过\n\n\n\t\n14\n\t\n南沙老年之家\n\t\n沙河口区河川街59A\n\t\n233\n\t\n5\n\t\n13\n\t\n70.7\n\t\n43\n\t\n10\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-03-10\n\t\n审核通过\n\n\n\t\n15\n\t\n渤海养护院\n\t\n沙河口区马栏南街32号\n\t\n104\n\t\n3\n\t\n10\n\t\n164.82\n\t\n27\n\t\n26\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-08-08\n\t\n审核通过\n\n\n\t\n16\n\t\n大连西岗莲花老年服务中心\n\t\n西岗区绕山路25A号\n\t\n297\n\t\n6\n\t\n17\n\t\n94.4\n\t\n49\n\t\n16\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-05-06\n\t\n审核通过\n\n\n\t\n17\n\t\n大连市西岗区老年人综合服务中心\n\t\n西岗区康庄街11号\n\t\n203\n\t\n4\n\t\n13\n\t\n85.76\n\t\n27\n\t\n29\n\t\n社区养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-04-21\n\t\n审核通过\n\n\n\t\n18\n\t\n大连康养集团养老服务有限公司\n\t\n大连市中山区葵英街1号\n\t\n101\n\t\n3\n\t\n10\n\t\n83\n\t\n29\n\t\n14\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-07-04\n\t\n审核通过\n\n\n\t\n19\n\t\n中山区桂林养护院\n\t\n大连市中山区望海街39号\n\t\n190\n\t\n4\n\t\n11\n\t\n171.9\n\t\n41\n\t\n16\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-07-02\n\t\n审核通过\n\n\n\t\n20\n\t\n大连市社会福利院\n\t\n大连市中山区葵英街1号10号楼\n\t\n346\n\t\n8\n\t\n25\n\t\n82.44\n\t\n35\n\t\n23\n\t\n社区养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-06-22\n\t\n审核通过\n共 40 条\n12\n前往页",
+      "metadata": {},
+      "screenshot_base64": "",
+      "error": "",
+      "page_number": 2
+    }
+  ],
+  "merged_tables": [
+    {
+      "caption": "",
+      "headers": [
+        "",
+        "序号",
+        "名称",
+        "位置",
+        "床位数（张）",
+        "医生数（人）",
+        "护理人员数（人）",
+        "食堂面积（平方米）",
+        "医疗设备数量（台）",
+        "志愿者数量（人）",
+        "机构类型",
+        "审核状态",
+        "创建人",
+        "创建时间",
+        "操作"
+      ],
+      "rows": [],
+      "row_count": 0,
+      "col_count": 15
+    },
+    {
+      "caption": "",
+      "headers": [
+        "",
+        "1",
+        "大连市甘井子社区老年服务中心",
+        "甘井子区杨柳街17-4",
+        "278",
+        "6",
+        "20",
+        "105.85",
+        "28",
+        "13",
+        "机构养老",
+        "审核通过",
+        "admin",
+        "2025-06-11",
+        "审核通过"
+      ],
+      "rows": [
+        [
+          "",
+          "1",
+          "大连市甘井子社区老年服务中心",
+          "甘井子区杨柳街17-4",
+          "278",
+          "6",
+          "20",
+          "105.85",
+          "28",
+          "13",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2025-06-11",
+          "审核通过"
+        ],
+        [
+          "",
+          "2",
+          "大连坤大怡老院",
+          "大连市甘井子区甘欣街3号",
+          "205",
+          "5",
+          "14",
+          "89.69",
+          "24",
+          "9",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2024-11-16",
+          "审核通过"
+        ],
+        [
+          "",
+          "3",
+          "大连济宇养老院",
+          "大连市甘井子区海北路2号",
+          "201",
+          "4",
+          "11",
+          "191.82",
+          "42",
+          "26",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2025-08-31",
+          "审核通过"
+        ],
+        [
+          "",
+          "4",
+          "大连市甘井子区伸鹏养老院",
+          "大连市甘井子区营城子街道大黑石村",
+          "140",
+          "3",
+          "10",
+          "190.41",
+          "33",
+          "14",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2025-01-01",
+          "审核通过"
+        ],
+        [
+          "",
+          "5",
+          "大连市甘井子区辛寨子社区养老服务中心",
+          "大连市甘井子区辛寨子街道砬子山村",
+          "115",
+          "3",
+          "10",
+          "87.24",
+          "31",
+          "27",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2025-09-25",
+          "审核通过"
+        ],
+        [
+          "",
+          "6",
+          "大连甘井子鸿诚养老院",
+          "大连市甘井子区悦岭街1-10号",
+          "66",
+          "3",
+          "11",
+          "75.72",
+          "22",
+          "6",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2025-07-20",
+          "审核通过"
+        ],
+        [
+          "",
+          "7",
+          "大连甘井子大连湾翔福养老院",
+          "大连市甘井子区大连湾街道宋家村",
+          "42",
+          "3",
+          "10",
+          "78.28",
+          "47",
+          "11",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2025-05-15",
+          "审核通过"
+        ],
+        [
+          "",
+          "8",
+          "大连甘井子泡崖康乐养老院",
+          "大连市甘井子区宏业街13号",
+          "233",
+          "5",
+          "17",
+          "143.44",
+          "13",
+          "17",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2024-12-06",
+          "审核通过"
+        ],
+        [
+          "",
+          "9",
+          "大连甘井子虹德慈善养老中心",
+          "大连市甘井子区泉水B1区69号",
+          "191",
+          "3",
+          "13",
+          "179.2",
+          "27",
+          "21",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2025-03-02",
+          "审核通过"
+        ],
+        [
+          "",
+          "10",
+          "大连甘井子幸福养老院",
+          "大连市甘井子区景富铭苑小区",
+          "230",
+          "5",
+          "14",
+          "50.47",
+          "40",
+          "23",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2025-01-11",
+          "审核通过"
+        ],
+        [
+          "",
+          "11",
+          "大连市甘井子区兴隆颐养山庄",
+          "大连市甘井子区红旗西路棠梨西街705终点",
+          "64",
+          "3",
+          "10",
+          "60.44",
+          "36",
+          "18",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2024-09-26",
+          "审核通过"
+        ],
+        [
+          "",
+          "12",
+          "大连红旗福利中心",
+          "大连市甘井子区红旗街道棠梨村",
+          "100",
+          "3",
+          "10",
+          "51.53",
+          "42",
+          "15",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2024-11-23",
+          "审核通过"
+        ],
+        [
+          "",
+          "13",
+          "大连市总工会事业发展中心养老事业部",
+          "沙河口区黄浦路200号",
+          "185",
+          "4",
+          "13",
+          "68.2",
+          "41",
+          "29",
+          "社区养老",
+          "审核通过",
+          "admin",
+          "2024-11-24",
+          "审核通过"
+        ],
+        [
+          "",
+          "14",
+          "南沙老年之家",
+          "沙河口区河川街59A",
+          "39",
+          "3",
+          "11",
+          "147.12",
+          "31",
+          "12",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2024-11-24",
+          "审核通过"
+        ],
+        [
+          "",
+          "15",
+          "渤海养护院",
+          "沙河口区马栏南街32号",
+          "168",
+          "3",
+          "11",
+          "185.36",
+          "28",
+          "23",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2024-05-14",
+          "审核通过"
+        ],
+        [
+          "",
+          "16",
+          "大连西岗莲花老年服务中心",
+          "西岗区绕山路25A号",
+          "250",
+          "5",
+          "15",
+          "132.07",
+          "12",
+          "13",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2025-01-01",
+          "审核通过"
+        ],
+        [
+          "",
+          "17",
+          "大连市西岗区老年人综合服务中心",
+          "西岗区康庄街11号",
+          "498",
+          "13",
+          "29",
+          "194.66",
+          "32",
+          "6",
+          "社区养老",
+          "审核通过",
+          "admin",
+          "2025-01-29",
+          "审核通过"
+        ],
+        [
+          "",
+          "18",
+          "大连康养集团养老服务有限公司",
+          "大连市中山区葵英街1号",
+          "43",
+          "3",
+          "10",
+          "88.03",
+          "13",
+          "10",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2024-12-02",
+          "审核通过"
+        ],
+        [
+          "",
+          "19",
+          "中山区桂林养护院",
+          "大连市中山区望海街39号",
+          "261",
+          "7",
+          "16",
+          "180.09",
+          "39",
+          "24",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2025-07-27",
+          "审核通过"
+        ],
+        [
+          "",
+          "20",
+          "大连市社会福利院",
+          "大连市中山区葵英街1号10号楼",
+          "350",
+          "7",
+          "23",
+          "160.56",
+          "14",
+          "5",
+          "社区养老",
+          "审核通过",
+          "admin",
+          "2024-09-24",
+          "审核通过"
+        ]
+      ],
+      "row_count": 20,
+      "col_count": 15
+    },
+    {
+      "caption": "",
+      "headers": [
+        "",
+        "1",
+        "大连市甘井子社区老年服务中心",
+        "甘井子区杨柳街17-4",
+        "131",
+        "3",
+        "10",
+        "85.86",
+        "42",
+        "27",
+        "机构养老",
+        "审核通过",
+        "admin",
+        "2025-09-12",
+        "审核通过"
+      ],
+      "rows": [
+        [
+          "",
+          "1",
+          "大连市甘井子社区老年服务中心",
+          "甘井子区杨柳街17-4",
+          "131",
+          "3",
+          "10",
+          "85.86",
+          "42",
+          "27",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2025-09-12",
+          "审核通过"
+        ],
+        [
+          "",
+          "2",
+          "大连坤大怡老院",
+          "大连市甘井子区甘欣街3号",
+          "220",
+          "5",
+          "13",
+          "105.93",
+          "44",
+          "18",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2024-11-02",
+          "审核通过"
+        ],
+        [
+          "",
+          "3",
+          "大连济宇养老院",
+          "大连市甘井子区海北路2号",
+          "94",
+          "3",
+          "10",
+          "183.94",
+          "14",
+          "11",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2025-06-22",
+          "审核通过"
+        ],
+        [
+          "",
+          "4",
+          "大连市甘井子区伸鹏养老院",
+          "大连市甘井子区营城子街道大黑石村",
+          "56",
+          "3",
+          "10",
+          "145.42",
+          "44",
+          "18",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2025-09-13",
+          "审核通过"
+        ],
+        [
+          "",
+          "5",
+          "大连市甘井子区辛寨子社区养老服务中心",
+          "大连市甘井子区辛寨子街道砬子山村",
+          "183",
+          "3",
+          "10",
+          "133.28",
+          "35",
+          "19",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2025-04-08",
+          "审核通过"
+        ],
+        [
+          "",
+          "6",
+          "大连甘井子鸿诚养老院",
+          "大连市甘井子区悦岭街1-10号",
+          "105",
+          "3",
+          "10",
+          "95.76",
+          "18",
+          "27",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2025-09-25",
+          "审核通过"
+        ],
+        [
+          "",
+          "7",
+          "大连甘井子大连湾翔福养老院",
+          "大连市甘井子区大连湾街道宋家村",
+          "33",
+          "3",
+          "10",
+          "190.47",
+          "39",
+          "16",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2024-06-30",
+          "审核通过"
+        ],
+        [
+          "",
+          "8",
+          "大连甘井子泡崖康乐养老院",
+          "大连市甘井子区宏业街13号",
+          "256",
+          "6",
+          "16",
+          "154.87",
+          "30",
+          "7",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2025-01-01",
+          "审核通过"
+        ],
+        [
+          "",
+          "9",
+          "大连甘井子虹德慈善养老中心",
+          "大连市甘井子区泉水B1区69号",
+          "250",
+          "5",
+          "18",
+          "59.28",
+          "21",
+          "30",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2025-09-23",
+          "审核通过"
+        ],
+        [
+          "",
+          "10",
+          "大连甘井子幸福养老院",
+          "大连市甘井子区景富铭苑小区",
+          "95",
+          "3",
+          "10",
+          "143.31",
+          "26",
+          "14",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2025-06-15",
+          "审核通过"
+        ],
+        [
+          "",
+          "11",
+          "大连市甘井子区兴隆颐养山庄",
+          "大连市甘井子区红旗西路棠梨西街705终点",
+          "188",
+          "3",
+          "13",
+          "168.37",
+          "17",
+          "20",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2024-09-23",
+          "审核通过"
+        ],
+        [
+          "",
+          "12",
+          "大连红旗福利中心",
+          "大连市甘井子区红旗街道棠梨村",
+          "105",
+          "3",
+          "10",
+          "105.85",
+          "35",
+          "10",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2025-03-24",
+          "审核通过"
+        ],
+        [
+          "",
+          "13",
+          "大连市总工会事业发展中心养老事业部",
+          "沙河口区黄浦路200号",
+          "304",
+          "5",
+          "17",
+          "189.78",
+          "49",
+          "16",
+          "社区养老",
+          "审核通过",
+          "admin",
+          "2024-11-19",
+          "审核通过"
+        ],
+        [
+          "",
+          "14",
+          "南沙老年之家",
+          "沙河口区河川街59A",
+          "233",
+          "5",
+          "13",
+          "70.7",
+          "43",
+          "10",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2025-03-10",
+          "审核通过"
+        ],
+        [
+          "",
+          "15",
+          "渤海养护院",
+          "沙河口区马栏南街32号",
+          "104",
+          "3",
+          "10",
+          "164.82",
+          "27",
+          "26",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2025-08-08",
+          "审核通过"
+        ],
+        [
+          "",
+          "16",
+          "大连西岗莲花老年服务中心",
+          "西岗区绕山路25A号",
+          "297",
+          "6",
+          "17",
+          "94.4",
+          "49",
+          "16",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2024-05-06",
+          "审核通过"
+        ],
+        [
+          "",
+          "17",
+          "大连市西岗区老年人综合服务中心",
+          "西岗区康庄街11号",
+          "203",
+          "4",
+          "13",
+          "85.76",
+          "27",
+          "29",
+          "社区养老",
+          "审核通过",
+          "admin",
+          "2025-04-21",
+          "审核通过"
+        ],
+        [
+          "",
+          "18",
+          "大连康养集团养老服务有限公司",
+          "大连市中山区葵英街1号",
+          "101",
+          "3",
+          "10",
+          "83",
+          "29",
+          "14",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2024-07-04",
+          "审核通过"
+        ],
+        [
+          "",
+          "19",
+          "中山区桂林养护院",
+          "大连市中山区望海街39号",
+          "190",
+          "4",
+          "11",
+          "171.9",
+          "41",
+          "16",
+          "机构养老",
+          "审核通过",
+          "admin",
+          "2025-07-02",
+          "审核通过"
+        ],
+        [
+          "",
+          "20",
+          "大连市社会福利院",
+          "大连市中山区葵英街1号10号楼",
+          "346",
+          "8",
+          "25",
+          "82.44",
+          "35",
+          "23",
+          "社区养老",
+          "审核通过",
+          "admin",
+          "2025-06-22",
+          "审核通过"
+        ]
+      ],
+      "row_count": 20,
+      "col_count": 15
+    }
+  ],
+  "merged_links": [
+    {
+      "href": "http://192.168.18.143:1024/",
+      "text": "智慧康养平台",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/index",
+      "text": "首页",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/system/user",
+      "text": "用户管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/system/role",
+      "text": "角色管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/system/menu",
+      "text": "菜单管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/system/dept",
+      "text": "部门管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/system/post",
+      "text": "岗位管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/system/dict",
+      "text": "字典管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/system/config",
+      "text": "参数设置",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/system/notice",
+      "text": "通知公告",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/system/log/operlog",
+      "text": "操作日志",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/system/log/logininfor",
+      "text": "登录日志",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/monitor/online",
+      "text": "在线用户",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/monitor/job",
+      "text": "定时任务",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/monitor/druid",
+      "text": "数据监控",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/monitor/server",
+      "text": "服务监控",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/monitor/cache",
+      "text": "缓存监控",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/monitor/cacheList",
+      "text": "缓存列表",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/tool/build",
+      "text": "表单构建",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/tool/gen",
+      "text": "代码生成",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/tool/swagger",
+      "text": "系统接口",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/basicinformation/communityManagement",
+      "text": "社区管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/basicinformation/community",
+      "text": "长者档案",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/basicinformation/doctor",
+      "text": "医生管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/basicinformation/nurse",
+      "text": "护士管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/devManagement/bedroom/bedroomsManagement",
+      "text": "床位管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/devManagement/bedroom/bedroom",
+      "text": "分配床位",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/devManagement/security",
+      "text": "设备管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/devManagement/assigner",
+      "text": "设备分配",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/devManagement/security/power/hostDevice",
+      "text": "主机",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/devManagement/security/power/endDevice",
+      "text": "终端",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/devManagement/xiKangDevice",
+      "text": "熙康设备",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/devManagement/configkeys",
+      "text": "设备配置",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/elderlyCare/enrollmentView",
+      "text": "入托总览",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/elderlyCare/enrollmentApply",
+      "text": "入托申请",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/elderlyCare/contract",
+      "text": "签订合同",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/elderlyCare/EnrollmentProcessing",
+      "text": "入托办理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/elderlyCare/exitcare",
+      "text": "退托管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/evaluation/assessmentView",
+      "text": "评估总览",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/evaluation/pressure",
+      "text": "压疮评估",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/evaluation/evaluation",
+      "text": "抑郁评估",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/evaluation/anxiety",
+      "text": "焦虑评估",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/evaluation/morse",
+      "text": "跌倒评估",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/evaluation/riskICVD",
+      "text": "ICVD评估",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/evaluation/ability",
+      "text": "老人能力评估",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchOxygen",
+      "text": "血氧",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchPressure",
+      "text": "血压",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchHeartrate",
+      "text": "心率",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchStep",
+      "text": "计步",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchPosition",
+      "text": "定位",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/bloodPressure",
+      "text": "血压",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/bloodSugar",
+      "text": "血糖",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/heightWeight",
+      "text": "身高体重",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/bloodOxygen",
+      "text": "血氧",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/ecg",
+      "text": "心电",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/pulseRate",
+      "text": "脉率",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/dimensional",
+      "text": "三围",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/temperature",
+      "text": "体温",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/uricacid",
+      "text": "尿酸",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/composition",
+      "text": "人体成分",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/lipids",
+      "text": "血脂",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/tcmconstitution",
+      "text": "中医体质",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/archives",
+      "text": "健康报告",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/assessment",
+      "text": "健康评估",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/interventions",
+      "text": "健康干预",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/securityAlarm/SosSenddata",
+      "text": "主机报警",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/securityAlarm/endDevice",
+      "text": "终端报警",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/securityAlarm/watchFall",
+      "text": "腕表跌倒报警",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/securityAlarm/fallGait",
+      "text": "跌倒报警",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/telephone/callhelp",
+      "text": "小度紧急呼救",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/telephone/CallRecords",
+      "text": "小度通话记录",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/telephone/telephone",
+      "text": "Sos通话",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/telephone/videoSee",
+      "text": "视频浏览",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/message/message",
+      "text": "消息通知",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/message/baiduNotification",
+      "text": "百度推送通知",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/message/baiduservice",
+      "text": "百度服务留言",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/message/oldNotification",
+      "text": "老人不活跃预警通知",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/reminderAnswer",
+      "text": "提醒答复",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/realData",
+      "text": "实时数据",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/daySleepInfo/duration",
+      "text": "睡眠时长",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/daySleepInfo/pattern",
+      "text": "睡眠规律",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/daySleepInfo/interruption",
+      "text": "睡眠中断",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/daySleepInfo/staging",
+      "text": "睡眠分期",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/dayNightSigns/sleepHeartrate",
+      "text": "睡眠心率",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/dayNightSigns/sleepBreath",
+      "text": "睡眠呼吸",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/dayNightSigns/variability",
+      "text": "心率变异",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/sleepScoreOverview/sleepScore",
+      "text": "睡眠分总览",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/sleepScoreOverview/sleepHealthy",
+      "text": "健康分总览",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/sleepReport/weekReport",
+      "text": "睡眠周报告",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/sleepReport/monthReport",
+      "text": "睡眠月报告",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/careService/careDashBoard/oldCare",
+      "text": "长者需求",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/careService/careDashBoard/caregiver",
+      "text": "指派护工",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/careService/careDashBoard/recieve",
+      "text": "护工接单",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/careService/careDashBoard/takeCare",
+      "text": "照护执行",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/careService/careDashBoard/comment",
+      "text": "长者评价",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/careService/careDashBoard/document",
+      "text": "工单归档",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/careService/careplan",
+      "text": "护理计划",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/careService/careRecord",
+      "text": "护理记录",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/careService/weekly",
+      "text": "护工排班",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/activities/activityCreate",
+      "text": "活动建立",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/activities/pubilish",
+      "text": "活动发布",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/activities/enlist",
+      "text": "活动报名",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/activities/hold",
+      "text": "活动举行",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/activities/sign",
+      "text": "活动签到",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/activities/signoff",
+      "text": "活动签退",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/activities/summary",
+      "text": "活动总结",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/activities/archive",
+      "text": "活动归档",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/expenditure/managefee/feeView",
+      "text": "费用总览",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/expenditure/managefee/feedetails",
+      "text": "预缴明细",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/expenditure/managefee/settlement",
+      "text": "费用结算",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/expenditure/managefee/costdetails",
+      "text": "费用明细",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/expenditure/setupfee/nursing",
+      "text": "服务项目",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/expenditure/setupfee/nurseLevel",
+      "text": "护理级别",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/WebglTest/WebglTest",
+      "text": "数字孪生",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/WebglTest/panel",
+      "text": "社区屏幕",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/WebglTest/communityView",
+      "text": "机构屏幕",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/WebglTest/living",
+      "text": "居家屏幕",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/user/profile",
+      "text": "个人中心",
+      "is_internal": true,
+      "link_type": "page"
+    }
+  ],
+  "merged_images": [
+    {
+      "src": "http://192.168.18.143:1024/static/img/aixinLogo.6a55819b.png",
+      "alt": "",
+      "width": "64",
+      "height": "58",
+      "is_svg": false
+    },
+    {
+      "src": "http://192.168.18.143:1024/dev-api/profile/avatar/2025/05/25/admin_20250525193502A004.png",
+      "alt": "",
+      "width": 40,
+      "height": 40,
+      "is_svg": false
+    }
+  ],
+  "merged_text": "--- 第 1 页 ---\n智慧康养平台\n首页\n系统管理\n系统监控\n系统工具\n档案管理\n社区管理\n长者档案\n医生管理\n护士管理\n设备管理\n养老管理\n养老评估\n健康管理\n健康监控\n睡眠监控\n护理服务\n活动管理\n费项管理\n数字屏幕\n首页/\n档案管理/\n社区管理\n首页 社区管理 \n社区/机构名称社区/机构位置床位数医生数护理人员食堂面积医疗设备志愿者搜索重置\n新增社区/机构\n修改社区/机构\n删除社区/机构\n导出社区/机构列表\n\t序号\t名称\t位置\t床位数（张）\t医生数（人）\t护理人员数（人）\t食堂面积（平方米）\t医疗设备数量（台）\t志愿者数量（人）\t机构类型\t审核状态\t创建人\t创建时间\t操作\n\t\n1\n\t\n大连市甘井子社区老年服务中心\n\t\n甘井子区杨柳街17-4\n\t\n278\n\t\n6\n\t\n20\n\t\n105.85\n\t\n28\n\t\n13\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-06-11\n\t\n审核通过\n\n\n\t\n2\n\t\n大连坤大怡老院\n\t\n大连市甘井子区甘欣街3号\n\t\n205\n\t\n5\n\t\n14\n\t\n89.69\n\t\n24\n\t\n9\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-11-16\n\t\n审核通过\n\n\n\t\n3\n\t\n大连济宇养老院\n\t\n大连市甘井子区海北路2号\n\t\n201\n\t\n4\n\t\n11\n\t\n191.82\n\t\n42\n\t\n26\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-08-31\n\t\n审核通过\n\n\n\t\n4\n\t\n大连市甘井子区伸鹏养老院\n\t\n大连市甘井子区营城子街道大黑石村\n\t\n140\n\t\n3\n\t\n10\n\t\n190.41\n\t\n33\n\t\n14\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-01-01\n\t\n审核通过\n\n\n\t\n5\n\t\n大连市甘井子区辛寨子社区养老服务中心\n\t\n大连市甘井子区辛寨子街道砬子山村\n\t\n115\n\t\n3\n\t\n10\n\t\n87.24\n\t\n31\n\t\n27\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-09-25\n\t\n审核通过\n\n\n\t\n6\n\t\n大连甘井子鸿诚养老院\n\t\n大连市甘井子区悦岭街1-10号\n\t\n66\n\t\n3\n\t\n11\n\t\n75.72\n\t\n22\n\t\n6\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-07-20\n\t\n审核通过\n\n\n\t\n7\n\t\n大连甘井子大连湾翔福养老院\n\t\n大连市甘井子区大连湾街道宋家村\n\t\n42\n\t\n3\n\t\n10\n\t\n78.28\n\t\n47\n\t\n11\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-05-15\n\t\n审核通过\n\n\n\t\n8\n\t\n大连甘井子泡崖康乐养老院\n\t\n大连市甘井子区宏业街13号\n\t\n233\n\t\n5\n\t\n17\n\t\n143.44\n\t\n13\n\t\n17\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-12-06\n\t\n审核通过\n\n\n\t\n9\n\t\n大连甘井子虹德慈善养老中心\n\t\n大连市甘井子区泉水B1区69号\n\t\n191\n\t\n3\n\t\n13\n\t\n179.2\n\t\n27\n\t\n21\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-03-02\n\t\n审核通过\n\n\n\t\n10\n\t\n大连甘井子幸福养老院\n\t\n大连市甘井子区景富铭苑小区\n\t\n230\n\t\n5\n\t\n14\n\t\n50.47\n\t\n40\n\t\n23\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-01-11\n\t\n审核通过\n\n\n\t\n11\n\t\n大连市甘井子区兴隆颐养山庄\n\t\n大连市甘井子区红旗西路棠梨西街705终点\n\t\n64\n\t\n3\n\t\n10\n\t\n60.44\n\t\n36\n\t\n18\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-09-26\n\t\n审核通过\n\n\n\t\n12\n\t\n大连红旗福利中心\n\t\n大连市甘井子区红旗街道棠梨村\n\t\n100\n\t\n3\n\t\n10\n\t\n51.53\n\t\n42\n\t\n15\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-11-23\n\t\n审核通过\n\n\n\t\n13\n\t\n大连市总工会事业发展中心养老事业部\n\t\n沙河口区黄浦路200号\n\t\n185\n\t\n4\n\t\n13\n\t\n68.2\n\t\n41\n\t\n29\n\t\n社区养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-11-24\n\t\n审核通过\n\n\n\t\n14\n\t\n南沙老年之家\n\t\n沙河口区河川街59A\n\t\n39\n\t\n3\n\t\n11\n\t\n147.12\n\t\n31\n\t\n12\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-11-24\n\t\n审核通过\n\n\n\t\n15\n\t\n渤海养护院\n\t\n沙河口区马栏南街32号\n\t\n168\n\t\n3\n\t\n11\n\t\n185.36\n\t\n28\n\t\n23\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-05-14\n\t\n审核通过\n\n\n\t\n16\n\t\n大连西岗莲花老年服务中心\n\t\n西岗区绕山路25A号\n\t\n250\n\t\n5\n\t\n15\n\t\n132.07\n\t\n12\n\t\n13\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-01-01\n\t\n审核通过\n\n\n\t\n17\n\t\n大连市西岗区老年人综合服务中心\n\t\n西岗区康庄街11号\n\t\n498\n\t\n13\n\t\n29\n\t\n194.66\n\t\n32\n\t\n6\n\t\n社区养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-01-29\n\t\n审核通过\n\n\n\t\n18\n\t\n大连康养集团养老服务有限公司\n\t\n大连市中山区葵英街1号\n\t\n43\n\t\n3\n\t\n10\n\t\n88.03\n\t\n13\n\t\n10\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-12-02\n\t\n审核通过\n\n\n\t\n19\n\t\n中山区桂林养护院\n\t\n大连市中山区望海街39号\n\t\n261\n\t\n7\n\t\n16\n\t\n180.09\n\t\n39\n\t\n24\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-07-27\n\t\n审核通过\n\n\n\t\n20\n\t\n大连市社会福利院\n\t\n大连市中山区葵英街1号10号楼\n\t\n350\n\t\n7\n\t\n23\n\t\n160.56\n\t\n14\n\t\n5\n\t\n社区养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-09-24\n\t\n审核通过\n共 40 条\n12\n前往页\n--- 第 2 页 ---\n智慧康养平台\n首页\n系统管理\n系统监控\n系统工具\n档案管理\n社区管理\n长者档案\n医生管理\n护士管理\n设备管理\n养老管理\n养老评估\n健康管理\n健康监控\n睡眠监控\n护理服务\n活动管理\n费项管理\n数字屏幕\n首页/\n档案管理/\n社区管理\n首页 社区管理 \n社区/机构名称社区/机构位置床位数医生数护理人员食堂面积医疗设备志愿者搜索重置\n新增社区/机构\n修改社区/机构\n删除社区/机构\n导出社区/机构列表\n\t序号\t名称\t位置\t床位数（张）\t医生数（人）\t护理人员数（人）\t食堂面积（平方米）\t医疗设备数量（台）\t志愿者数量（人）\t机构类型\t审核状态\t创建人\t创建时间\t操作\n\t\n1\n\t\n大连市甘井子社区老年服务中心\n\t\n甘井子区杨柳街17-4\n\t\n131\n\t\n3\n\t\n10\n\t\n85.86\n\t\n42\n\t\n27\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-09-12\n\t\n审核通过\n\n\n\t\n2\n\t\n大连坤大怡老院\n\t\n大连市甘井子区甘欣街3号\n\t\n220\n\t\n5\n\t\n13\n\t\n105.93\n\t\n44\n\t\n18\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-11-02\n\t\n审核通过\n\n\n\t\n3\n\t\n大连济宇养老院\n\t\n大连市甘井子区海北路2号\n\t\n94\n\t\n3\n\t\n10\n\t\n183.94\n\t\n14\n\t\n11\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-06-22\n\t\n审核通过\n\n\n\t\n4\n\t\n大连市甘井子区伸鹏养老院\n\t\n大连市甘井子区营城子街道大黑石村\n\t\n56\n\t\n3\n\t\n10\n\t\n145.42\n\t\n44\n\t\n18\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-09-13\n\t\n审核通过\n\n\n\t\n5\n\t\n大连市甘井子区辛寨子社区养老服务中心\n\t\n大连市甘井子区辛寨子街道砬子山村\n\t\n183\n\t\n3\n\t\n10\n\t\n133.28\n\t\n35\n\t\n19\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-04-08\n\t\n审核通过\n\n\n\t\n6\n\t\n大连甘井子鸿诚养老院\n\t\n大连市甘井子区悦岭街1-10号\n\t\n105\n\t\n3\n\t\n10\n\t\n95.76\n\t\n18\n\t\n27\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-09-25\n\t\n审核通过\n\n\n\t\n7\n\t\n大连甘井子大连湾翔福养老院\n\t\n大连市甘井子区大连湾街道宋家村\n\t\n33\n\t\n3\n\t\n10\n\t\n190.47\n\t\n39\n\t\n16\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-06-30\n\t\n审核通过\n\n\n\t\n8\n\t\n大连甘井子泡崖康乐养老院\n\t\n大连市甘井子区宏业街13号\n\t\n256\n\t\n6\n\t\n16\n\t\n154.87\n\t\n30\n\t\n7\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-01-01\n\t\n审核通过\n\n\n\t\n9\n\t\n大连甘井子虹德慈善养老中心\n\t\n大连市甘井子区泉水B1区69号\n\t\n250\n\t\n5\n\t\n18\n\t\n59.28\n\t\n21\n\t\n30\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-09-23\n\t\n审核通过\n\n\n\t\n10\n\t\n大连甘井子幸福养老院\n\t\n大连市甘井子区景富铭苑小区\n\t\n95\n\t\n3\n\t\n10\n\t\n143.31\n\t\n26\n\t\n14\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-06-15\n\t\n审核通过\n\n\n\t\n11\n\t\n大连市甘井子区兴隆颐养山庄\n\t\n大连市甘井子区红旗西路棠梨西街705终点\n\t\n188\n\t\n3\n\t\n13\n\t\n168.37\n\t\n17\n\t\n20\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-09-23\n\t\n审核通过\n\n\n\t\n12\n\t\n大连红旗福利中心\n\t\n大连市甘井子区红旗街道棠梨村\n\t\n105\n\t\n3\n\t\n10\n\t\n105.85\n\t\n35\n\t\n10\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-03-24\n\t\n审核通过\n\n\n\t\n13\n\t\n大连市总工会事业发展中心养老事业部\n\t\n沙河口区黄浦路200号\n\t\n304\n\t\n5\n\t\n17\n\t\n189.78\n\t\n49\n\t\n16\n\t\n社区养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-11-19\n\t\n审核通过\n\n\n\t\n14\n\t\n南沙老年之家\n\t\n沙河口区河川街59A\n\t\n233\n\t\n5\n\t\n13\n\t\n70.7\n\t\n43\n\t\n10\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-03-10\n\t\n审核通过\n\n\n\t\n15\n\t\n渤海养护院\n\t\n沙河口区马栏南街32号\n\t\n104\n\t\n3\n\t\n10\n\t\n164.82\n\t\n27\n\t\n26\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-08-08\n\t\n审核通过\n\n\n\t\n16\n\t\n大连西岗莲花老年服务中心\n\t\n西岗区绕山路25A号\n\t\n297\n\t\n6\n\t\n17\n\t\n94.4\n\t\n49\n\t\n16\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-05-06\n\t\n审核通过\n\n\n\t\n17\n\t\n大连市西岗区老年人综合服务中心\n\t\n西岗区康庄街11号\n\t\n203\n\t\n4\n\t\n13\n\t\n85.76\n\t\n27\n\t\n29\n\t\n社区养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-04-21\n\t\n审核通过\n\n\n\t\n18\n\t\n大连康养集团养老服务有限公司\n\t\n大连市中山区葵英街1号\n\t\n101\n\t\n3\n\t\n10\n\t\n83\n\t\n29\n\t\n14\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2024-07-04\n\t\n审核通过\n\n\n\t\n19\n\t\n中山区桂林养护院\n\t\n大连市中山区望海街39号\n\t\n190\n\t\n4\n\t\n11\n\t\n171.9\n\t\n41\n\t\n16\n\t\n机构养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-07-02\n\t\n审核通过\n\n\n\t\n20\n\t\n大连市社会福利院\n\t\n大连市中山区葵英街1号10号楼\n\t\n346\n\t\n8\n\t\n25\n\t\n82.44\n\t\n35\n\t\n23\n\t\n社区养老\n\t\n审核通过\n\t\nadmin\n\t\n2025-06-22\n\t\n审核通过\n共 40 条\n12\n前往页",
+  "merged_forms": [
+    {
+      "form_id": "",
+      "form_action": "http://192.168.18.143:1024/basicinformation/communityManagement",
+      "fields": [
+        {
+          "label": "社区/机构名称",
+          "name": "",
+          "type": "text",
+          "value": "",
+          "placeholder": "请输入社区/机构名称"
+        },
+        {
+          "label": "社区/机构位置",
+          "name": "",
+          "type": "text",
+          "value": "",
+          "placeholder": "请输入社区/机构位置"
+        },
+        {
+          "label": "床位数",
+          "name": "",
+          "type": "text",
+          "value": "",
+          "placeholder": "请输入社区/机构床位数"
+        },
+        {
+          "label": "医生数",
+          "name": "",
+          "type": "text",
+          "value": "",
+          "placeholder": "请输入社区/机构医生数"
+        },
+        {
+          "label": "护理人员",
+          "name": "",
+          "type": "text",
+          "value": "",
+          "placeholder": "请输入护理人员数"
+        },
+        {
+          "label": "食堂面积",
+          "name": "",
+          "type": "text",
+          "value": "",
+          "placeholder": "请输入食堂面积"
+        },
+        {
+          "label": "医疗设备",
+          "name": "",
+          "type": "text",
+          "value": "",
+          "placeholder": "请输入医疗设备数量"
+        },
+        {
+          "label": "志愿者",
+          "name": "",
+          "type": "text",
+          "value": "",
+          "placeholder": "请输入志愿者数量"
+        },
+        {
+          "label": "",
+          "name": "",
+          "type": "",
+          "value": "",
+          "placeholder": ""
+        }
+      ]
+    }
+  ],
+  "merged_structure": [
+    {
+      "section_type": "heading",
+      "level": 1,
+      "text": "智慧康养平台",
+      "children": []
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "首页",
+        "系统管理用户管理角色管理菜单管理部门管理岗位管理字典管理参数设置通知公告日志管理操作日志登录日志",
+        "用户管理",
+        "角色管理",
+        "菜单管理",
+        "部门管理",
+        "岗位管理",
+        "字典管理",
+        "参数设置",
+        "通知公告",
+        "日志管理操作日志登录日志",
+        "操作日志",
+        "登录日志",
+        "系统监控在线用户定时任务数据监控服务监控缓存监控缓存列表",
+        "在线用户",
+        "定时任务",
+        "数据监控",
+        "服务监控",
+        "缓存监控",
+        "缓存列表",
+        "系统工具表单构建代码生成系统接口",
+        "表单构建",
+        "代码生成",
+        "系统接口",
+        "档案管理社区管理长者档案医生管理护士管理",
+        "社区管理",
+        "长者档案",
+        "医生管理",
+        "护士管理",
+        "设备管理床位管理床位管理分配床位设备管理设备分配安防设备设备电量主机终端熙康设备设备配置",
+        "床位管理床位管理分配床位",
+        "床位管理",
+        "分配床位",
+        "设备管理",
+        "设备分配",
+        "安防设备设备电量主机终端",
+        "设备电量主机终端",
+        "主机",
+        "终端",
+        "熙康设备",
+        "设备配置",
+        "养老管理入托总览入托申请签订合同入托办理退托管理",
+        "入托总览",
+        "入托申请",
+        "签订合同",
+        "入托办理",
+        "退托管理",
+        "养老评估评估总览压疮评估抑郁评估焦虑评估跌倒评估ICVD评估老人能力评估",
+        "评估总览",
+        "压疮评估",
+        "抑郁评估",
+        "焦虑评估",
+        "跌倒评估",
+        "ICVD评估",
+        "老人能力评估",
+        "健康管理健康数据腕表数据血氧血压心率计步定位熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质健康报告健康评估健康干预",
+        "健康数据腕表数据血氧血压心率计步定位熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+        "腕表数据血氧血压心率计步定位",
+        "血氧",
+        "血压",
+        "心率",
+        "计步",
+        "定位",
+        "熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+        "血压",
+        "血糖",
+        "身高体重",
+        "血氧",
+        "心电",
+        "脉率",
+        "三围",
+        "体温",
+        "尿酸",
+        "人体成分",
+        "血脂",
+        "中医体质",
+        "健康报告",
+        "健康评估",
+        "健康干预",
+        "健康监控安防报警主机报警终端报警腕表跌倒报警跌倒报警呼救通话小度紧急呼救小度通话记录Sos通话视频浏览消息通知消息通知百度推送通知百度服务留言老人不活跃预警通知提醒答复",
+        "安防报警主机报警终端报警腕表跌倒报警跌倒报警",
+        "主机报警",
+        "终端报警",
+        "腕表跌倒报警",
+        "跌倒报警",
+        "呼救通话小度紧急呼救小度通话记录Sos通话视频浏览",
+        "小度紧急呼救",
+        "小度通话记录",
+        "Sos通话",
+        "视频浏览",
+        "消息通知消息通知百度推送通知百度服务留言老人不活跃预警通知",
+        "消息通知",
+        "百度推送通知",
+        "百度服务留言",
+        "老人不活跃预警通知",
+        "提醒答复",
+        "睡眠监控实时数据每日睡眠信息睡眠时长睡眠规律睡眠中断睡眠分期每日夜间体征睡眠心率睡眠呼吸心率变异睡眠分数总览睡眠分总览健康分总览睡眠报告 睡眠周报告睡眠月报告",
+        "实时数据",
+        "每日睡眠信息睡眠时长睡眠规律睡眠中断睡眠分期",
+        "睡眠时长",
+        "睡眠规律",
+        "睡眠中断",
+        "睡眠分期",
+        "每日夜间体征睡眠心率睡眠呼吸心率变异",
+        "睡眠心率",
+        "睡眠呼吸",
+        "心率变异",
+        "睡眠分数总览睡眠分总览健康分总览",
+        "睡眠分总览",
+        "健康分总览",
+        "睡眠报告 睡眠周报告睡眠月报告",
+        "睡眠周报告",
+        "睡眠月报告",
+        "护理服务照护看板长者需求指派护工护工接单照护执行长者评价工单归档护理计划护理记录护工排班",
+        "照护看板长者需求指派护工护工接单照护执行长者评价工单归档",
+        "长者需求",
+        "指派护工",
+        "护工接单",
+        "照护执行",
+        "长者评价",
+        "工单归档",
+        "护理计划",
+        "护理记录",
+        "护工排班",
+        "活动管理活动建立活动发布活动报名活动举行活动签到活动签退活动总结活动归档",
+        "活动建立",
+        "活动发布",
+        "活动报名",
+        "活动举行",
+        "活动签到",
+        "活动签退",
+        "活动总结",
+        "活动归档",
+        "费项管理费项管理费用总览预缴明细费用结算费用明细费项设置服务项目护理级别",
+        "费项管理费用总览预缴明细费用结算费用明细",
+        "费用总览",
+        "预缴明细",
+        "费用结算",
+        "费用明细",
+        "费项设置服务项目护理级别",
+        "服务项目",
+        "护理级别",
+        "数字屏幕数字孪生社区屏幕机构屏幕居家屏幕",
+        "数字孪生",
+        "社区屏幕",
+        "机构屏幕",
+        "居家屏幕"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "用户管理",
+        "角色管理",
+        "菜单管理",
+        "部门管理",
+        "岗位管理",
+        "字典管理",
+        "参数设置",
+        "通知公告",
+        "日志管理操作日志登录日志",
+        "操作日志",
+        "登录日志"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "操作日志",
+        "登录日志"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "在线用户",
+        "定时任务",
+        "数据监控",
+        "服务监控",
+        "缓存监控",
+        "缓存列表"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "表单构建",
+        "代码生成",
+        "系统接口"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "社区管理",
+        "长者档案",
+        "医生管理",
+        "护士管理"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "床位管理床位管理分配床位",
+        "床位管理",
+        "分配床位",
+        "设备管理",
+        "设备分配",
+        "安防设备设备电量主机终端",
+        "设备电量主机终端",
+        "主机",
+        "终端",
+        "熙康设备",
+        "设备配置"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "床位管理",
+        "分配床位"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "设备电量主机终端",
+        "主机",
+        "终端"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "主机",
+        "终端"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "入托总览",
+        "入托申请",
+        "签订合同",
+        "入托办理",
+        "退托管理"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "评估总览",
+        "压疮评估",
+        "抑郁评估",
+        "焦虑评估",
+        "跌倒评估",
+        "ICVD评估",
+        "老人能力评估"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "健康数据腕表数据血氧血压心率计步定位熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+        "腕表数据血氧血压心率计步定位",
+        "血氧",
+        "血压",
+        "心率",
+        "计步",
+        "定位",
+        "熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+        "血压",
+        "血糖",
+        "身高体重",
+        "血氧",
+        "心电",
+        "脉率",
+        "三围",
+        "体温",
+        "尿酸",
+        "人体成分",
+        "血脂",
+        "中医体质",
+        "健康报告",
+        "健康评估",
+        "健康干预"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "腕表数据血氧血压心率计步定位",
+        "血氧",
+        "血压",
+        "心率",
+        "计步",
+        "定位",
+        "熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+        "血压",
+        "血糖",
+        "身高体重",
+        "血氧",
+        "心电",
+        "脉率",
+        "三围",
+        "体温",
+        "尿酸",
+        "人体成分",
+        "血脂",
+        "中医体质"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "血氧",
+        "血压",
+        "心率",
+        "计步",
+        "定位"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "血压",
+        "血糖",
+        "身高体重",
+        "血氧",
+        "心电",
+        "脉率",
+        "三围",
+        "体温",
+        "尿酸",
+        "人体成分",
+        "血脂",
+        "中医体质"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "安防报警主机报警终端报警腕表跌倒报警跌倒报警",
+        "主机报警",
+        "终端报警",
+        "腕表跌倒报警",
+        "跌倒报警",
+        "呼救通话小度紧急呼救小度通话记录Sos通话视频浏览",
+        "小度紧急呼救",
+        "小度通话记录",
+        "Sos通话",
+        "视频浏览",
+        "消息通知消息通知百度推送通知百度服务留言老人不活跃预警通知",
+        "消息通知",
+        "百度推送通知",
+        "百度服务留言",
+        "老人不活跃预警通知",
+        "提醒答复"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "主机报警",
+        "终端报警",
+        "腕表跌倒报警",
+        "跌倒报警"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "小度紧急呼救",
+        "小度通话记录",
+        "Sos通话",
+        "视频浏览"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "消息通知",
+        "百度推送通知",
+        "百度服务留言",
+        "老人不活跃预警通知"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "实时数据",
+        "每日睡眠信息睡眠时长睡眠规律睡眠中断睡眠分期",
+        "睡眠时长",
+        "睡眠规律",
+        "睡眠中断",
+        "睡眠分期",
+        "每日夜间体征睡眠心率睡眠呼吸心率变异",
+        "睡眠心率",
+        "睡眠呼吸",
+        "心率变异",
+        "睡眠分数总览睡眠分总览健康分总览",
+        "睡眠分总览",
+        "健康分总览",
+        "睡眠报告 睡眠周报告睡眠月报告",
+        "睡眠周报告",
+        "睡眠月报告"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "睡眠时长",
+        "睡眠规律",
+        "睡眠中断",
+        "睡眠分期"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "睡眠心率",
+        "睡眠呼吸",
+        "心率变异"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "睡眠分总览",
+        "健康分总览"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "睡眠周报告",
+        "睡眠月报告"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "照护看板长者需求指派护工护工接单照护执行长者评价工单归档",
+        "长者需求",
+        "指派护工",
+        "护工接单",
+        "照护执行",
+        "长者评价",
+        "工单归档",
+        "护理计划",
+        "护理记录",
+        "护工排班"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "长者需求",
+        "指派护工",
+        "护工接单",
+        "照护执行",
+        "长者评价",
+        "工单归档"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "活动建立",
+        "活动发布",
+        "活动报名",
+        "活动举行",
+        "活动签到",
+        "活动签退",
+        "活动总结",
+        "活动归档"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "费项管理费用总览预缴明细费用结算费用明细",
+        "费用总览",
+        "预缴明细",
+        "费用结算",
+        "费用明细",
+        "费项设置服务项目护理级别",
+        "服务项目",
+        "护理级别"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "费用总览",
+        "预缴明细",
+        "费用结算",
+        "费用明细"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "服务项目",
+        "护理级别"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "数字孪生",
+        "社区屏幕",
+        "机构屏幕",
+        "居家屏幕"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": []
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "Default",
+        "Medium",
+        "Small",
+        "Mini"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "个人中心",
+        "布局设置",
+        "退出登录"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "刷新页面",
+        "关闭当前",
+        "关闭其他",
+        "关闭左侧",
+        "关闭右侧",
+        "全部关闭"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "10条/页",
+        "20条/页",
+        "30条/页",
+        "50条/页"
+      ]
+    }
+  ],
+  "pagination_info": {
+    "found": true,
+    "total_items": 40,
+    "page_size": 20,
+    "current_page": 1,
+    "total_pages": 2
+  },
+  "total_pages_scraped": 2
+}

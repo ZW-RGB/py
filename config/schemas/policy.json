@@ -1,0 +1,54 @@
+{
+  "task_name": "康养政策采集",
+  "description": "从康养平台页面提取政策信息的字段定义",
+  "fields": [
+    {
+      "name": "title",
+      "type": "string",
+      "required": true,
+      "description": "政策标题"
+    },
+    {
+      "name": "publish_date",
+      "type": "date",
+      "required": true,
+      "description": "发布日期，格式YYYY-MM-DD"
+    },
+    {
+      "name": "doc_number",
+      "type": "string",
+      "required": false,
+      "description": "文号，如未找到则为空字符串"
+    },
+    {
+      "name": "issuing_authority",
+      "type": "string",
+      "required": false,
+      "description": "发布机构/发文单位"
+    },
+    {
+      "name": "category",
+      "type": "string",
+      "required": false,
+      "description": "政策类别，如养老服务、健康管理、医疗保险等"
+    },
+    {
+      "name": "summary",
+      "type": "string",
+      "required": true,
+      "description": "核心摘要，200字以内"
+    },
+    {
+      "name": "keywords",
+      "type": "list",
+      "required": false,
+      "description": "关键主题词列表"
+    },
+    {
+        "name": "source_url",
+      "type": "string",
+      "required": false,
+      "description": "原文链接（由系统自动填写）"
+    }
+  ]
+}

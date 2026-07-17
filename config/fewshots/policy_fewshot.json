@@ -1,0 +1,44 @@
+{
+  "description": "康养政策采集的 Few-shot 示例（2-3个「网页片段 → 提取结果」对）",
+  "examples": [
+    {
+      "html_snippet": "<html><head><title>关于推进养老服务高质量发展的实施意见</title></head><body><div class='article'><h1>关于推进养老服务高质量发展的实施意见</h1><p>发布日期：2024-03-15</p><p>文号：国办发〔2024〕8号</p><p>发布机构：国务院办公厅</p><p>为积极应对人口老龄化，推动养老服务从'有'向'优'转变，现提出以下意见……</p></div></body></html>",
+      "output": {
+        "title": "关于推进养老服务高质量发展的实施意见",
+        "publish_date": "2024-03-15",
+        "doc_number": "国办发〔2024〕8号",
+        "issuing_authority": "国务院办公厅",
+        "category": "养老服务",
+        "summary": "为积极应对人口老龄化，推动养老服务从有向优转变，提出的实施意见。",
+        "keywords": ["养老服务", "高质量发展", "人口老龄化"],
+        "source_url": ""
+      }
+    },
+    {
+      "html_snippet": "<html><body><article><header><span class='post-date'>2024.06.01</span><h2>关于加强老年健康服务体系建设的指导意见</h2></header><section><p>发文单位：国家卫生健康委员会</p><p>为贯彻落实健康中国战略，加强老年健康服务体系建设……</p></section></article></body></html>",
+      "output": {
+        "title": "关于加强老年健康服务体系建设的指导意见",
+        "publish_date": "2024-06-01",
+        "doc_number": "",
+        "issuing_authority": "国家卫生健康委员会",
+        "category": "健康服务",
+        "summary": "为贯彻落实健康中国战略，加强老年健康服务体系建设的指导意见。",
+        "keywords": ["老年健康", "服务体系", "健康中国"],
+        "source_url": ""
+      }
+    },
+    {
+      "html_snippet": "<html><body><div class='policy-detail'><h3>上海市长期护理保险试点办法（修订版）</h3><div class='meta'>发布时间：2024-01-20 | 文号：沪府办规〔2024〕1号 | 发布机构：上海市人民政府</div><div class='content'>为进一步完善本市长期护理保险制度，提高失能老年人照护水平……</div></div></body></html>",
+      "output": {
+        "title": "上海市长期护理保险试点办法（修订版）",
+        "publish_date": "2024-01-20",
+        "doc_number": "沪府办规〔2024〕1号",
+        "issuing_authority": "上海市人民政府",
+        "category": "长期护理保险",
+        "summary": "为进一步完善本市长期护理保险制度，提高失能老年人照护水平的修订办法。",
+        "keywords": ["长期护理保险", "失能老人", "照护"],
+        "source_url": ""
+      }
+    }
+  ]
+}

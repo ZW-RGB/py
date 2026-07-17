@@ -1,0 +1,61 @@
+# ============================================================
+# 多源康养数据智能采集系统 — 配置文件
+# ============================================================
+
+# ---- LLM 大模型配置 ----
+llm:
+  # Qwen2.5 API 地址（OpenAI 兼容接口，支持 vLLM / ollama / DashScope 等）
+  api_base: "https://llm-1v0imtosbtixzb6g.cn-beijing.maas.aliyuncs.com/compatible-mode/v1"
+  api_key: "sk-1028f0aa250441e7a71d437d37c885ab"
+  model: "deepseek-v4-pro"
+  temperature: 0.1
+  max_tokens: 4096
+  request_timeout: 120          # 单次请求超时（秒）
+
+  # 重试策略
+  max_retries: 2                # 字段缺失时最多重试次数
+
+# ---- MySQL 数据库配置 ----
+mysql:
+  host: "localhost"
+  port: 3306
+  user: "root"
+  password: ""
+  database: "kangyang_data"
+  charset: "utf8mb4"
+  # 连接池
+  pool_size: 5
+  pool_recycle: 3600
+
+# ---- Scrapy 爬虫配置 ----
+scrapy:
+  # 遵守 robots.txt
+  obey_robots: true
+  # 下载延迟（秒）
+  download_delay: 2
+  # 并发请求数
+  concurrent_requests: 4
+  # 用户代理
+  user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+  # 日志级别
+  log_level: "INFO"
+  # 输出日志文件
+  log_file: "logs/scrapy.log"
+
+# ---- 采集任务配置 ----
+tasks:
+  # 默认 Schema 定义文件名
+  default_schema: "policy.json"
+  # 默认 Few-shot 示例文件
+  default_fewshot: "policy_fewshot.json"
+  # HTML 过长时截断长度（字符数），避免超出 token 限制
+  html_max_length: 30000
+  # 输出目录
+  output_dir: "output"
+
+# ---- 字段校验白名单（全局必填字段） ----
+validation:
+  # 所有任务都需要的通用必填字段（为空时只按 Schema 自身 required 判断）
+  global_required: []
+  # 是否开启严格模式（字段类型不匹配即失败）
+  strict_mode: false

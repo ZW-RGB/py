@@ -1,0 +1,72 @@
+{
+  "task_name": "康养机构信息采集",
+  "description": "从康养平台页面提取养老机构/康养服务中心的信息字段定义",
+  "fields": [
+    {
+      "name": "institution_name",
+      "type": "string",
+      "required": true,
+      "description": "机构名称，如'阳光老年公寓'、'XX康养中心'"
+    },
+    {
+      "name": "institution_type",
+      "type": "string",
+      "required": false,
+      "description": "机构类型，如'养老院'、'护理院'、'康养中心'、'社区养老'、'日间照料中心'"
+    },
+    {
+      "name": "address",
+      "type": "string",
+      "required": true,
+      "description": "机构地址"
+    },
+    {
+      "name": "phone",
+      "type": "string",
+      "required": false,
+      "description": "联系电话"
+    },
+    {
+      "name": "bed_count",
+      "type": "string",
+      "required": false,
+      "description": "床位数，如'200张'，纯数字或含单位"
+    },
+    {
+      "name": "service_items",
+      "type": "list",
+      "required": false,
+      "description": "服务项目列表，如['日间照料','医疗护理','康复训练']"
+    },
+    {
+      "name": "price_range",
+      "type": "string",
+      "required": false,
+      "description": "价格区间，如'2000-5000元/月'"
+    },
+    {
+      "name": "nature",
+      "type": "string",
+      "required": false,
+      "description": "机构性质，如'公办'、'民办'、'公建民营'"
+    },
+    {
+      "name": "rating",
+      "type": "string",
+      "required": false,
+      "description": "评定等级，如'五星级'、'A级'、'优秀'"
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "required": true,
+      "description": "机构简介，100-300字"
+    },
+    {
+      "name": "source_url",
+      "type": "string",
+      "required": false,
+      "description": "原文链接（由系统自动填写）"
+    }
+  ]
+}

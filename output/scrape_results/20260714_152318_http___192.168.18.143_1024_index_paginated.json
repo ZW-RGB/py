@@ -1,0 +1,2974 @@
+{
+  "pages": [
+    {
+      "url": "http://192.168.18.143:1024/index",
+      "title": "智慧康养平台",
+      "timestamp": "2026-07-14T15:23:17.702736",
+      "sections": [
+        {
+          "section_type": "heading",
+          "level": 1,
+          "text": "智慧康养平台",
+          "children": []
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "首页",
+            "系统管理用户管理角色管理菜单管理部门管理岗位管理字典管理参数设置通知公告日志管理操作日志登录日志",
+            "用户管理",
+            "角色管理",
+            "菜单管理",
+            "部门管理",
+            "岗位管理",
+            "字典管理",
+            "参数设置",
+            "通知公告",
+            "日志管理操作日志登录日志",
+            "操作日志",
+            "登录日志",
+            "系统监控在线用户定时任务数据监控服务监控缓存监控缓存列表",
+            "在线用户",
+            "定时任务",
+            "数据监控",
+            "服务监控",
+            "缓存监控",
+            "缓存列表",
+            "系统工具表单构建代码生成系统接口",
+            "表单构建",
+            "代码生成",
+            "系统接口",
+            "档案管理社区管理长者档案医生管理护士管理",
+            "社区管理",
+            "长者档案",
+            "医生管理",
+            "护士管理",
+            "设备管理床位管理床位管理分配床位设备管理设备分配安防设备设备电量主机终端熙康设备设备配置",
+            "床位管理床位管理分配床位",
+            "床位管理",
+            "分配床位",
+            "设备管理",
+            "设备分配",
+            "安防设备设备电量主机终端",
+            "设备电量主机终端",
+            "主机",
+            "终端",
+            "熙康设备",
+            "设备配置",
+            "养老管理入托总览入托申请签订合同入托办理退托管理",
+            "入托总览",
+            "入托申请",
+            "签订合同",
+            "入托办理",
+            "退托管理",
+            "养老评估评估总览压疮评估抑郁评估焦虑评估跌倒评估ICVD评估老人能力评估",
+            "评估总览",
+            "压疮评估",
+            "抑郁评估",
+            "焦虑评估",
+            "跌倒评估",
+            "ICVD评估",
+            "老人能力评估",
+            "健康管理健康数据腕表数据血氧血压心率计步定位熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质健康报告健康评估健康干预",
+            "健康数据腕表数据血氧血压心率计步定位熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+            "腕表数据血氧血压心率计步定位",
+            "血氧",
+            "血压",
+            "心率",
+            "计步",
+            "定位",
+            "熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+            "血压",
+            "血糖",
+            "身高体重",
+            "血氧",
+            "心电",
+            "脉率",
+            "三围",
+            "体温",
+            "尿酸",
+            "人体成分",
+            "血脂",
+            "中医体质",
+            "健康报告",
+            "健康评估",
+            "健康干预",
+            "健康监控安防报警主机报警终端报警腕表跌倒报警跌倒报警呼救通话小度紧急呼救小度通话记录Sos通话视频浏览消息通知消息通知百度推送通知百度服务留言老人不活跃预警通知提醒答复",
+            "安防报警主机报警终端报警腕表跌倒报警跌倒报警",
+            "主机报警",
+            "终端报警",
+            "腕表跌倒报警",
+            "跌倒报警",
+            "呼救通话小度紧急呼救小度通话记录Sos通话视频浏览",
+            "小度紧急呼救",
+            "小度通话记录",
+            "Sos通话",
+            "视频浏览",
+            "消息通知消息通知百度推送通知百度服务留言老人不活跃预警通知",
+            "消息通知",
+            "百度推送通知",
+            "百度服务留言",
+            "老人不活跃预警通知",
+            "提醒答复",
+            "睡眠监控实时数据每日睡眠信息睡眠时长睡眠规律睡眠中断睡眠分期每日夜间体征睡眠心率睡眠呼吸心率变异睡眠分数总览睡眠分总览健康分总览睡眠报告 睡眠周报告睡眠月报告",
+            "实时数据",
+            "每日睡眠信息睡眠时长睡眠规律睡眠中断睡眠分期",
+            "睡眠时长",
+            "睡眠规律",
+            "睡眠中断",
+            "睡眠分期",
+            "每日夜间体征睡眠心率睡眠呼吸心率变异",
+            "睡眠心率",
+            "睡眠呼吸",
+            "心率变异",
+            "睡眠分数总览睡眠分总览健康分总览",
+            "睡眠分总览",
+            "健康分总览",
+            "睡眠报告 睡眠周报告睡眠月报告",
+            "睡眠周报告",
+            "睡眠月报告",
+            "护理服务照护看板长者需求指派护工护工接单照护执行长者评价工单归档护理计划护理记录护工排班",
+            "照护看板长者需求指派护工护工接单照护执行长者评价工单归档",
+            "长者需求",
+            "指派护工",
+            "护工接单",
+            "照护执行",
+            "长者评价",
+            "工单归档",
+            "护理计划",
+            "护理记录",
+            "护工排班",
+            "活动管理活动建立活动发布活动报名活动举行活动签到活动签退活动总结活动归档",
+            "活动建立",
+            "活动发布",
+            "活动报名",
+            "活动举行",
+            "活动签到",
+            "活动签退",
+            "活动总结",
+            "活动归档",
+            "费项管理费项管理费用总览预缴明细费用结算费用明细费项设置服务项目护理级别",
+            "费项管理费用总览预缴明细费用结算费用明细",
+            "费用总览",
+            "预缴明细",
+            "费用结算",
+            "费用明细",
+            "费项设置服务项目护理级别",
+            "服务项目",
+            "护理级别",
+            "数字屏幕数字孪生社区屏幕机构屏幕居家屏幕",
+            "数字孪生",
+            "社区屏幕",
+            "机构屏幕",
+            "居家屏幕"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "用户管理",
+            "角色管理",
+            "菜单管理",
+            "部门管理",
+            "岗位管理",
+            "字典管理",
+            "参数设置",
+            "通知公告",
+            "日志管理操作日志登录日志",
+            "操作日志",
+            "登录日志"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "操作日志",
+            "登录日志"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "在线用户",
+            "定时任务",
+            "数据监控",
+            "服务监控",
+            "缓存监控",
+            "缓存列表"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "表单构建",
+            "代码生成",
+            "系统接口"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "社区管理",
+            "长者档案",
+            "医生管理",
+            "护士管理"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "床位管理床位管理分配床位",
+            "床位管理",
+            "分配床位",
+            "设备管理",
+            "设备分配",
+            "安防设备设备电量主机终端",
+            "设备电量主机终端",
+            "主机",
+            "终端",
+            "熙康设备",
+            "设备配置"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "床位管理",
+            "分配床位"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "设备电量主机终端",
+            "主机",
+            "终端"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "主机",
+            "终端"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "入托总览",
+            "入托申请",
+            "签订合同",
+            "入托办理",
+            "退托管理"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "评估总览",
+            "压疮评估",
+            "抑郁评估",
+            "焦虑评估",
+            "跌倒评估",
+            "ICVD评估",
+            "老人能力评估"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "健康数据腕表数据血氧血压心率计步定位熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+            "腕表数据血氧血压心率计步定位",
+            "血氧",
+            "血压",
+            "心率",
+            "计步",
+            "定位",
+            "熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+            "血压",
+            "血糖",
+            "身高体重",
+            "血氧",
+            "心电",
+            "脉率",
+            "三围",
+            "体温",
+            "尿酸",
+            "人体成分",
+            "血脂",
+            "中医体质",
+            "健康报告",
+            "健康评估",
+            "健康干预"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "腕表数据血氧血压心率计步定位",
+            "血氧",
+            "血压",
+            "心率",
+            "计步",
+            "定位",
+            "熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+            "血压",
+            "血糖",
+            "身高体重",
+            "血氧",
+            "心电",
+            "脉率",
+            "三围",
+            "体温",
+            "尿酸",
+            "人体成分",
+            "血脂",
+            "中医体质"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "血氧",
+            "血压",
+            "心率",
+            "计步",
+            "定位"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "血压",
+            "血糖",
+            "身高体重",
+            "血氧",
+            "心电",
+            "脉率",
+            "三围",
+            "体温",
+            "尿酸",
+            "人体成分",
+            "血脂",
+            "中医体质"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "安防报警主机报警终端报警腕表跌倒报警跌倒报警",
+            "主机报警",
+            "终端报警",
+            "腕表跌倒报警",
+            "跌倒报警",
+            "呼救通话小度紧急呼救小度通话记录Sos通话视频浏览",
+            "小度紧急呼救",
+            "小度通话记录",
+            "Sos通话",
+            "视频浏览",
+            "消息通知消息通知百度推送通知百度服务留言老人不活跃预警通知",
+            "消息通知",
+            "百度推送通知",
+            "百度服务留言",
+            "老人不活跃预警通知",
+            "提醒答复"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "主机报警",
+            "终端报警",
+            "腕表跌倒报警",
+            "跌倒报警"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "小度紧急呼救",
+            "小度通话记录",
+            "Sos通话",
+            "视频浏览"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "消息通知",
+            "百度推送通知",
+            "百度服务留言",
+            "老人不活跃预警通知"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "实时数据",
+            "每日睡眠信息睡眠时长睡眠规律睡眠中断睡眠分期",
+            "睡眠时长",
+            "睡眠规律",
+            "睡眠中断",
+            "睡眠分期",
+            "每日夜间体征睡眠心率睡眠呼吸心率变异",
+            "睡眠心率",
+            "睡眠呼吸",
+            "心率变异",
+            "睡眠分数总览睡眠分总览健康分总览",
+            "睡眠分总览",
+            "健康分总览",
+            "睡眠报告 睡眠周报告睡眠月报告",
+            "睡眠周报告",
+            "睡眠月报告"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "睡眠时长",
+            "睡眠规律",
+            "睡眠中断",
+            "睡眠分期"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "睡眠心率",
+            "睡眠呼吸",
+            "心率变异"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "睡眠分总览",
+            "健康分总览"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "睡眠周报告",
+            "睡眠月报告"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "照护看板长者需求指派护工护工接单照护执行长者评价工单归档",
+            "长者需求",
+            "指派护工",
+            "护工接单",
+            "照护执行",
+            "长者评价",
+            "工单归档",
+            "护理计划",
+            "护理记录",
+            "护工排班"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "长者需求",
+            "指派护工",
+            "护工接单",
+            "照护执行",
+            "长者评价",
+            "工单归档"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "活动建立",
+            "活动发布",
+            "活动报名",
+            "活动举行",
+            "活动签到",
+            "活动签退",
+            "活动总结",
+            "活动归档"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "费项管理费用总览预缴明细费用结算费用明细",
+            "费用总览",
+            "预缴明细",
+            "费用结算",
+            "费用明细",
+            "费项设置服务项目护理级别",
+            "服务项目",
+            "护理级别"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "费用总览",
+            "预缴明细",
+            "费用结算",
+            "费用明细"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "服务项目",
+            "护理级别"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "数字孪生",
+            "社区屏幕",
+            "机构屏幕",
+            "居家屏幕"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": []
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "Default",
+            "Medium",
+            "Small",
+            "Mini"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "个人中心",
+            "布局设置",
+            "退出登录"
+          ]
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "刷新页面",
+            "关闭当前",
+            "关闭其他",
+            "关闭左侧",
+            "关闭右侧",
+            "全部关闭"
+          ]
+        },
+        {
+          "section_type": "blockquote",
+          "level": 0,
+          "text": "超级管理员工作台",
+          "children": []
+        },
+        {
+          "section_type": "heading",
+          "level": 1,
+          "text": "20000",
+          "children": []
+        },
+        {
+          "section_type": "heading",
+          "level": 1,
+          "text": "11",
+          "children": []
+        },
+        {
+          "section_type": "heading",
+          "level": 1,
+          "text": "40",
+          "children": []
+        },
+        {
+          "section_type": "list",
+          "level": 0,
+          "text": "",
+          "children": [
+            "215天前\n    曲一泓 触发了 无人 报警（设备类型：红外）",
+            "215天前\n    曲一泓 触发了 有人 报警（设备类型：红外）",
+            "215天前\n    曲一泓 触发了 有人 报警（设备类型：红外）",
+            "215天前\n    曲一泓 触发了 有人 报警（设备类型：红外）"
+          ]
+        },
+        {
+          "section_type": "heading",
+          "level": 4,
+          "text": "曲一泓 触发了 无人 报警（设备类型：红外）",
+          "children": []
+        },
+        {
+          "section_type": "heading",
+          "level": 4,
+          "text": "曲一泓 触发了 有人 报警（设备类型：红外）",
+          "children": []
+        },
+        {
+          "section_type": "heading",
+          "level": 4,
+          "text": "曲一泓 触发了 有人 报警（设备类型：红外）",
+          "children": []
+        },
+        {
+          "section_type": "heading",
+          "level": 4,
+          "text": "曲一泓 触发了 有人 报警（设备类型：红外）",
+          "children": []
+        },
+        {
+          "section_type": "heading",
+          "level": 3,
+          "text": "月度趋势图",
+          "children": []
+        },
+        {
+          "section_type": "heading",
+          "level": 3,
+          "text": "组织架构",
+          "children": []
+        },
+        {
+          "section_type": "heading",
+          "level": 3,
+          "text": "超级管理员",
+          "children": []
+        },
+        {
+          "section_type": "paragraph",
+          "level": 0,
+          "text": "账号：admin",
+          "children": []
+        },
+        {
+          "section_type": "paragraph",
+          "level": 0,
+          "text": "权限：管理员",
+          "children": []
+        },
+        {
+          "section_type": "paragraph",
+          "level": 0,
+          "text": "手机号：15888888888",
+          "children": []
+        },
+        {
+          "section_type": "paragraph",
+          "level": 0,
+          "text": "最后登录：2026-07-14 15:20:50",
+          "children": []
+        },
+        {
+          "section_type": "paragraph",
+          "level": 0,
+          "text": "名称 智慧康养平台",
+          "children": []
+        },
+        {
+          "section_type": "paragraph",
+          "level": 0,
+          "text": "品牌 东软",
+          "children": []
+        },
+        {
+          "section_type": "paragraph",
+          "level": 0,
+          "text": "型号 S-SP-GL-0006-001-2024-RE-SD-V3.0",
+          "children": []
+        }
+      ],
+      "images": [
+        {
+          "src": "http://192.168.18.143:1024/static/img/aixinLogo.6a55819b.png",
+          "alt": "",
+          "width": "64",
+          "height": "58",
+          "is_svg": false
+        },
+        {
+          "src": "http://192.168.18.143:1024/dev-api/profile/avatar/2025/05/25/admin_20250525193502A004.png",
+          "alt": "",
+          "width": 40,
+          "height": 40,
+          "is_svg": false
+        }
+      ],
+      "links": [
+        {
+          "href": "http://192.168.18.143:1024/",
+          "text": "智慧康养平台",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/index",
+          "text": "首页",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/user",
+          "text": "用户管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/role",
+          "text": "角色管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/menu",
+          "text": "菜单管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/dept",
+          "text": "部门管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/post",
+          "text": "岗位管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/dict",
+          "text": "字典管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/config",
+          "text": "参数设置",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/notice",
+          "text": "通知公告",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/log/operlog",
+          "text": "操作日志",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/system/log/logininfor",
+          "text": "登录日志",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/monitor/online",
+          "text": "在线用户",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/monitor/job",
+          "text": "定时任务",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/monitor/druid",
+          "text": "数据监控",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/monitor/server",
+          "text": "服务监控",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/monitor/cache",
+          "text": "缓存监控",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/monitor/cacheList",
+          "text": "缓存列表",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/tool/build",
+          "text": "表单构建",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/tool/gen",
+          "text": "代码生成",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/tool/swagger",
+          "text": "系统接口",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/basicinformation/communityManagement",
+          "text": "社区管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/basicinformation/community",
+          "text": "长者档案",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/basicinformation/doctor",
+          "text": "医生管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/basicinformation/nurse",
+          "text": "护士管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/bedroom/bedroomsManagement",
+          "text": "床位管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/bedroom/bedroom",
+          "text": "分配床位",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/security",
+          "text": "设备管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/assigner",
+          "text": "设备分配",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/security/power/hostDevice",
+          "text": "主机",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/security/power/endDevice",
+          "text": "终端",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/xiKangDevice",
+          "text": "熙康设备",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/devManagement/configkeys",
+          "text": "设备配置",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/elderlyCare/enrollmentView",
+          "text": "入托总览",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/elderlyCare/enrollmentApply",
+          "text": "入托申请",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/elderlyCare/contract",
+          "text": "签订合同",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/elderlyCare/EnrollmentProcessing",
+          "text": "入托办理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/elderlyCare/exitcare",
+          "text": "退托管理",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/evaluation/assessmentView",
+          "text": "评估总览",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/evaluation/pressure",
+          "text": "压疮评估",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/evaluation/evaluation",
+          "text": "抑郁评估",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/evaluation/anxiety",
+          "text": "焦虑评估",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/evaluation/morse",
+          "text": "跌倒评估",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/evaluation/riskICVD",
+          "text": "ICVD评估",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/evaluation/ability",
+          "text": "老人能力评估",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchOxygen",
+          "text": "血氧",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchPressure",
+          "text": "血压",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchHeartrate",
+          "text": "心率",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchStep",
+          "text": "计步",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchPosition",
+          "text": "定位",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/bloodPressure",
+          "text": "血压",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/bloodSugar",
+          "text": "血糖",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/heightWeight",
+          "text": "身高体重",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/bloodOxygen",
+          "text": "血氧",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/ecg",
+          "text": "心电",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/pulseRate",
+          "text": "脉率",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/dimensional",
+          "text": "三围",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/temperature",
+          "text": "体温",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/uricacid",
+          "text": "尿酸",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/composition",
+          "text": "人体成分",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/lipids",
+          "text": "血脂",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/tcmconstitution",
+          "text": "中医体质",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/archives",
+          "text": "健康报告",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/assessment",
+          "text": "健康评估",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/healthy/interventions",
+          "text": "健康干预",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/securityAlarm/SosSenddata",
+          "text": "主机报警",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/securityAlarm/endDevice",
+          "text": "终端报警",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/securityAlarm/watchFall",
+          "text": "腕表跌倒报警",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/securityAlarm/fallGait",
+          "text": "跌倒报警",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/telephone/callhelp",
+          "text": "小度紧急呼救",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/telephone/CallRecords",
+          "text": "小度通话记录",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/telephone/telephone",
+          "text": "Sos通话",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/telephone/videoSee",
+          "text": "视频浏览",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/message/message",
+          "text": "消息通知",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/message/baiduNotification",
+          "text": "百度推送通知",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/message/baiduservice",
+          "text": "百度服务留言",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/message/oldNotification",
+          "text": "老人不活跃预警通知",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/defense/reminderAnswer",
+          "text": "提醒答复",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/realData",
+          "text": "实时数据",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/daySleepInfo/duration",
+          "text": "睡眠时长",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/daySleepInfo/pattern",
+          "text": "睡眠规律",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/daySleepInfo/interruption",
+          "text": "睡眠中断",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/daySleepInfo/staging",
+          "text": "睡眠分期",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/dayNightSigns/sleepHeartrate",
+          "text": "睡眠心率",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/dayNightSigns/sleepBreath",
+          "text": "睡眠呼吸",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/dayNightSigns/variability",
+          "text": "心率变异",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/sleepScoreOverview/sleepScore",
+          "text": "睡眠分总览",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/sleepScoreOverview/sleepHealthy",
+          "text": "健康分总览",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/sleepReport/weekReport",
+          "text": "睡眠周报告",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/sleep/sleepReport/monthReport",
+          "text": "睡眠月报告",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careDashBoard/oldCare",
+          "text": "长者需求",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careDashBoard/caregiver",
+          "text": "指派护工",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careDashBoard/recieve",
+          "text": "护工接单",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careDashBoard/takeCare",
+          "text": "照护执行",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careDashBoard/comment",
+          "text": "长者评价",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careDashBoard/document",
+          "text": "工单归档",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careplan",
+          "text": "护理计划",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/careRecord",
+          "text": "护理记录",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/careService/weekly",
+          "text": "护工排班",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/activityCreate",
+          "text": "活动建立",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/pubilish",
+          "text": "活动发布",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/enlist",
+          "text": "活动报名",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/hold",
+          "text": "活动举行",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/sign",
+          "text": "活动签到",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/signoff",
+          "text": "活动签退",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/summary",
+          "text": "活动总结",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/activities/archive",
+          "text": "活动归档",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/expenditure/managefee/feeView",
+          "text": "费用总览",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/expenditure/managefee/feedetails",
+          "text": "预缴明细",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/expenditure/managefee/settlement",
+          "text": "费用结算",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/expenditure/managefee/costdetails",
+          "text": "费用明细",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/expenditure/setupfee/nursing",
+          "text": "服务项目",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/expenditure/setupfee/nurseLevel",
+          "text": "护理级别",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/WebglTest/WebglTest",
+          "text": "数字孪生",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/WebglTest/panel",
+          "text": "社区屏幕",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/WebglTest/communityView",
+          "text": "机构屏幕",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/WebglTest/living",
+          "text": "居家屏幕",
+          "is_internal": true,
+          "link_type": "page"
+        },
+        {
+          "href": "http://192.168.18.143:1024/user/profile",
+          "text": "个人中心",
+          "is_internal": true,
+          "link_type": "page"
+        }
+      ],
+      "tables": [],
+      "forms": [],
+      "raw_text": "智慧康养平台\n首页\n系统管理\n系统监控\n系统工具\n档案管理\n设备管理\n养老管理\n养老评估\n健康管理\n健康监控\n睡眠监控\n护理服务\n活动管理\n费项管理\n数字屏幕\n首页\n 首页\n超级管理员工作台\n累计长者数\n20000\n未办理3188\n已办理1843\n退托634\n累计设备数\n11\n总数11\n在用1\n未分配10\n累计机构数\n40\n录入0\n审核0\n通过40\n未通过0\n工作通知\n更多\n215天前\n曲一泓 触发了 无人 报警（设备类型：红外）\n215天前\n曲一泓 触发了 有人 报警（设备类型：红外）\n215天前\n曲一泓 触发了 有人 报警（设备类型：红外）\n215天前\n曲一泓 触发了 有人 报警（设备类型：红外）\n管理员总数\n更多\n3\n管理员权限\n合作信息\n大连市甘井子社区老年服务中心\n12个月前\n大连坤大怡老院\n20个月前\n大连济宇养老院\n9个月前\n大连市甘井子区伸鹏养老院\n18个月前\n月度趋势图\n组织架构\n合作机构\n合作社区\n合作医生\n超级管理员\nadmin\n\n账号：admin\n\n权限：管理员\n\n手机号：15888888888\n\n最后登录：2026-07-14 15:20:50\n\n名称 智慧康养平台\n\n品牌 东软\n\n型号 S-SP-GL-0006-001-2024-RE-SD-V3.0",
+      "metadata": {},
+      "screenshot_base64": "",
+      "error": ""
+    }
+  ],
+  "merged_tables": [],
+  "merged_links": [
+    {
+      "href": "http://192.168.18.143:1024/",
+      "text": "智慧康养平台",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/index",
+      "text": "首页",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/system/user",
+      "text": "用户管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/system/role",
+      "text": "角色管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/system/menu",
+      "text": "菜单管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/system/dept",
+      "text": "部门管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/system/post",
+      "text": "岗位管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/system/dict",
+      "text": "字典管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/system/config",
+      "text": "参数设置",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/system/notice",
+      "text": "通知公告",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/system/log/operlog",
+      "text": "操作日志",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/system/log/logininfor",
+      "text": "登录日志",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/monitor/online",
+      "text": "在线用户",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/monitor/job",
+      "text": "定时任务",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/monitor/druid",
+      "text": "数据监控",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/monitor/server",
+      "text": "服务监控",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/monitor/cache",
+      "text": "缓存监控",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/monitor/cacheList",
+      "text": "缓存列表",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/tool/build",
+      "text": "表单构建",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/tool/gen",
+      "text": "代码生成",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/tool/swagger",
+      "text": "系统接口",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/basicinformation/communityManagement",
+      "text": "社区管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/basicinformation/community",
+      "text": "长者档案",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/basicinformation/doctor",
+      "text": "医生管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/basicinformation/nurse",
+      "text": "护士管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/devManagement/bedroom/bedroomsManagement",
+      "text": "床位管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/devManagement/bedroom/bedroom",
+      "text": "分配床位",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/devManagement/security",
+      "text": "设备管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/devManagement/assigner",
+      "text": "设备分配",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/devManagement/security/power/hostDevice",
+      "text": "主机",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/devManagement/security/power/endDevice",
+      "text": "终端",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/devManagement/xiKangDevice",
+      "text": "熙康设备",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/devManagement/configkeys",
+      "text": "设备配置",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/elderlyCare/enrollmentView",
+      "text": "入托总览",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/elderlyCare/enrollmentApply",
+      "text": "入托申请",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/elderlyCare/contract",
+      "text": "签订合同",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/elderlyCare/EnrollmentProcessing",
+      "text": "入托办理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/elderlyCare/exitcare",
+      "text": "退托管理",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/evaluation/assessmentView",
+      "text": "评估总览",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/evaluation/pressure",
+      "text": "压疮评估",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/evaluation/evaluation",
+      "text": "抑郁评估",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/evaluation/anxiety",
+      "text": "焦虑评估",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/evaluation/morse",
+      "text": "跌倒评估",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/evaluation/riskICVD",
+      "text": "ICVD评估",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/evaluation/ability",
+      "text": "老人能力评估",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchOxygen",
+      "text": "血氧",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchPressure",
+      "text": "血压",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchHeartrate",
+      "text": "心率",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchStep",
+      "text": "计步",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/wirstWatch/watchPosition",
+      "text": "定位",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/bloodPressure",
+      "text": "血压",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/bloodSugar",
+      "text": "血糖",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/heightWeight",
+      "text": "身高体重",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/bloodOxygen",
+      "text": "血氧",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/ecg",
+      "text": "心电",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/pulseRate",
+      "text": "脉率",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/dimensional",
+      "text": "三围",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/temperature",
+      "text": "体温",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/uricacid",
+      "text": "尿酸",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/composition",
+      "text": "人体成分",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/lipids",
+      "text": "血脂",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/healthydata/xiKang/tcmconstitution",
+      "text": "中医体质",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/archives",
+      "text": "健康报告",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/assessment",
+      "text": "健康评估",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/healthy/interventions",
+      "text": "健康干预",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/securityAlarm/SosSenddata",
+      "text": "主机报警",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/securityAlarm/endDevice",
+      "text": "终端报警",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/securityAlarm/watchFall",
+      "text": "腕表跌倒报警",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/securityAlarm/fallGait",
+      "text": "跌倒报警",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/telephone/callhelp",
+      "text": "小度紧急呼救",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/telephone/CallRecords",
+      "text": "小度通话记录",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/telephone/telephone",
+      "text": "Sos通话",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/telephone/videoSee",
+      "text": "视频浏览",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/message/message",
+      "text": "消息通知",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/message/baiduNotification",
+      "text": "百度推送通知",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/message/baiduservice",
+      "text": "百度服务留言",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/message/oldNotification",
+      "text": "老人不活跃预警通知",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/defense/reminderAnswer",
+      "text": "提醒答复",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/realData",
+      "text": "实时数据",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/daySleepInfo/duration",
+      "text": "睡眠时长",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/daySleepInfo/pattern",
+      "text": "睡眠规律",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/daySleepInfo/interruption",
+      "text": "睡眠中断",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/daySleepInfo/staging",
+      "text": "睡眠分期",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/dayNightSigns/sleepHeartrate",
+      "text": "睡眠心率",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/dayNightSigns/sleepBreath",
+      "text": "睡眠呼吸",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/dayNightSigns/variability",
+      "text": "心率变异",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/sleepScoreOverview/sleepScore",
+      "text": "睡眠分总览",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/sleepScoreOverview/sleepHealthy",
+      "text": "健康分总览",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/sleepReport/weekReport",
+      "text": "睡眠周报告",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/sleep/sleepReport/monthReport",
+      "text": "睡眠月报告",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/careService/careDashBoard/oldCare",
+      "text": "长者需求",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/careService/careDashBoard/caregiver",
+      "text": "指派护工",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/careService/careDashBoard/recieve",
+      "text": "护工接单",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/careService/careDashBoard/takeCare",
+      "text": "照护执行",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/careService/careDashBoard/comment",
+      "text": "长者评价",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/careService/careDashBoard/document",
+      "text": "工单归档",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/careService/careplan",
+      "text": "护理计划",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/careService/careRecord",
+      "text": "护理记录",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/careService/weekly",
+      "text": "护工排班",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/activities/activityCreate",
+      "text": "活动建立",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/activities/pubilish",
+      "text": "活动发布",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/activities/enlist",
+      "text": "活动报名",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/activities/hold",
+      "text": "活动举行",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/activities/sign",
+      "text": "活动签到",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/activities/signoff",
+      "text": "活动签退",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/activities/summary",
+      "text": "活动总结",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/activities/archive",
+      "text": "活动归档",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/expenditure/managefee/feeView",
+      "text": "费用总览",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/expenditure/managefee/feedetails",
+      "text": "预缴明细",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/expenditure/managefee/settlement",
+      "text": "费用结算",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/expenditure/managefee/costdetails",
+      "text": "费用明细",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/expenditure/setupfee/nursing",
+      "text": "服务项目",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/expenditure/setupfee/nurseLevel",
+      "text": "护理级别",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/WebglTest/WebglTest",
+      "text": "数字孪生",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/WebglTest/panel",
+      "text": "社区屏幕",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/WebglTest/communityView",
+      "text": "机构屏幕",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/WebglTest/living",
+      "text": "居家屏幕",
+      "is_internal": true,
+      "link_type": "page"
+    },
+    {
+      "href": "http://192.168.18.143:1024/user/profile",
+      "text": "个人中心",
+      "is_internal": true,
+      "link_type": "page"
+    }
+  ],
+  "merged_images": [
+    {
+      "src": "http://192.168.18.143:1024/static/img/aixinLogo.6a55819b.png",
+      "alt": "",
+      "width": "64",
+      "height": "58",
+      "is_svg": false
+    },
+    {
+      "src": "http://192.168.18.143:1024/dev-api/profile/avatar/2025/05/25/admin_20250525193502A004.png",
+      "alt": "",
+      "width": 40,
+      "height": 40,
+      "is_svg": false
+    }
+  ],
+  "merged_text": "智慧康养平台\n首页\n系统管理\n系统监控\n系统工具\n档案管理\n设备管理\n养老管理\n养老评估\n健康管理\n健康监控\n睡眠监控\n护理服务\n活动管理\n费项管理\n数字屏幕\n首页\n 首页\n超级管理员工作台\n累计长者数\n20000\n未办理3188\n已办理1843\n退托634\n累计设备数\n11\n总数11\n在用1\n未分配10\n累计机构数\n40\n录入0\n审核0\n通过40\n未通过0\n工作通知\n更多\n215天前\n曲一泓 触发了 无人 报警（设备类型：红外）\n215天前\n曲一泓 触发了 有人 报警（设备类型：红外）\n215天前\n曲一泓 触发了 有人 报警（设备类型：红外）\n215天前\n曲一泓 触发了 有人 报警（设备类型：红外）\n管理员总数\n更多\n3\n管理员权限\n合作信息\n大连市甘井子社区老年服务中心\n12个月前\n大连坤大怡老院\n20个月前\n大连济宇养老院\n9个月前\n大连市甘井子区伸鹏养老院\n18个月前\n月度趋势图\n组织架构\n合作机构\n合作社区\n合作医生\n超级管理员\nadmin\n\n账号：admin\n\n权限：管理员\n\n手机号：15888888888\n\n最后登录：2026-07-14 15:20:50\n\n名称 智慧康养平台\n\n品牌 东软\n\n型号 S-SP-GL-0006-001-2024-RE-SD-V3.0",
+  "merged_forms": [],
+  "merged_structure": [
+    {
+      "section_type": "heading",
+      "level": 1,
+      "text": "智慧康养平台",
+      "children": []
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "首页",
+        "系统管理用户管理角色管理菜单管理部门管理岗位管理字典管理参数设置通知公告日志管理操作日志登录日志",
+        "用户管理",
+        "角色管理",
+        "菜单管理",
+        "部门管理",
+        "岗位管理",
+        "字典管理",
+        "参数设置",
+        "通知公告",
+        "日志管理操作日志登录日志",
+        "操作日志",
+        "登录日志",
+        "系统监控在线用户定时任务数据监控服务监控缓存监控缓存列表",
+        "在线用户",
+        "定时任务",
+        "数据监控",
+        "服务监控",
+        "缓存监控",
+        "缓存列表",
+        "系统工具表单构建代码生成系统接口",
+        "表单构建",
+        "代码生成",
+        "系统接口",
+        "档案管理社区管理长者档案医生管理护士管理",
+        "社区管理",
+        "长者档案",
+        "医生管理",
+        "护士管理",
+        "设备管理床位管理床位管理分配床位设备管理设备分配安防设备设备电量主机终端熙康设备设备配置",
+        "床位管理床位管理分配床位",
+        "床位管理",
+        "分配床位",
+        "设备管理",
+        "设备分配",
+        "安防设备设备电量主机终端",
+        "设备电量主机终端",
+        "主机",
+        "终端",
+        "熙康设备",
+        "设备配置",
+        "养老管理入托总览入托申请签订合同入托办理退托管理",
+        "入托总览",
+        "入托申请",
+        "签订合同",
+        "入托办理",
+        "退托管理",
+        "养老评估评估总览压疮评估抑郁评估焦虑评估跌倒评估ICVD评估老人能力评估",
+        "评估总览",
+        "压疮评估",
+        "抑郁评估",
+        "焦虑评估",
+        "跌倒评估",
+        "ICVD评估",
+        "老人能力评估",
+        "健康管理健康数据腕表数据血氧血压心率计步定位熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质健康报告健康评估健康干预",
+        "健康数据腕表数据血氧血压心率计步定位熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+        "腕表数据血氧血压心率计步定位",
+        "血氧",
+        "血压",
+        "心率",
+        "计步",
+        "定位",
+        "熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+        "血压",
+        "血糖",
+        "身高体重",
+        "血氧",
+        "心电",
+        "脉率",
+        "三围",
+        "体温",
+        "尿酸",
+        "人体成分",
+        "血脂",
+        "中医体质",
+        "健康报告",
+        "健康评估",
+        "健康干预",
+        "健康监控安防报警主机报警终端报警腕表跌倒报警跌倒报警呼救通话小度紧急呼救小度通话记录Sos通话视频浏览消息通知消息通知百度推送通知百度服务留言老人不活跃预警通知提醒答复",
+        "安防报警主机报警终端报警腕表跌倒报警跌倒报警",
+        "主机报警",
+        "终端报警",
+        "腕表跌倒报警",
+        "跌倒报警",
+        "呼救通话小度紧急呼救小度通话记录Sos通话视频浏览",
+        "小度紧急呼救",
+        "小度通话记录",
+        "Sos通话",
+        "视频浏览",
+        "消息通知消息通知百度推送通知百度服务留言老人不活跃预警通知",
+        "消息通知",
+        "百度推送通知",
+        "百度服务留言",
+        "老人不活跃预警通知",
+        "提醒答复",
+        "睡眠监控实时数据每日睡眠信息睡眠时长睡眠规律睡眠中断睡眠分期每日夜间体征睡眠心率睡眠呼吸心率变异睡眠分数总览睡眠分总览健康分总览睡眠报告 睡眠周报告睡眠月报告",
+        "实时数据",
+        "每日睡眠信息睡眠时长睡眠规律睡眠中断睡眠分期",
+        "睡眠时长",
+        "睡眠规律",
+        "睡眠中断",
+        "睡眠分期",
+        "每日夜间体征睡眠心率睡眠呼吸心率变异",
+        "睡眠心率",
+        "睡眠呼吸",
+        "心率变异",
+        "睡眠分数总览睡眠分总览健康分总览",
+        "睡眠分总览",
+        "健康分总览",
+        "睡眠报告 睡眠周报告睡眠月报告",
+        "睡眠周报告",
+        "睡眠月报告",
+        "护理服务照护看板长者需求指派护工护工接单照护执行长者评价工单归档护理计划护理记录护工排班",
+        "照护看板长者需求指派护工护工接单照护执行长者评价工单归档",
+        "长者需求",
+        "指派护工",
+        "护工接单",
+        "照护执行",
+        "长者评价",
+        "工单归档",
+        "护理计划",
+        "护理记录",
+        "护工排班",
+        "活动管理活动建立活动发布活动报名活动举行活动签到活动签退活动总结活动归档",
+        "活动建立",
+        "活动发布",
+        "活动报名",
+        "活动举行",
+        "活动签到",
+        "活动签退",
+        "活动总结",
+        "活动归档",
+        "费项管理费项管理费用总览预缴明细费用结算费用明细费项设置服务项目护理级别",
+        "费项管理费用总览预缴明细费用结算费用明细",
+        "费用总览",
+        "预缴明细",
+        "费用结算",
+        "费用明细",
+        "费项设置服务项目护理级别",
+        "服务项目",
+        "护理级别",
+        "数字屏幕数字孪生社区屏幕机构屏幕居家屏幕",
+        "数字孪生",
+        "社区屏幕",
+        "机构屏幕",
+        "居家屏幕"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "用户管理",
+        "角色管理",
+        "菜单管理",
+        "部门管理",
+        "岗位管理",
+        "字典管理",
+        "参数设置",
+        "通知公告",
+        "日志管理操作日志登录日志",
+        "操作日志",
+        "登录日志"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "操作日志",
+        "登录日志"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "在线用户",
+        "定时任务",
+        "数据监控",
+        "服务监控",
+        "缓存监控",
+        "缓存列表"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "表单构建",
+        "代码生成",
+        "系统接口"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "社区管理",
+        "长者档案",
+        "医生管理",
+        "护士管理"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "床位管理床位管理分配床位",
+        "床位管理",
+        "分配床位",
+        "设备管理",
+        "设备分配",
+        "安防设备设备电量主机终端",
+        "设备电量主机终端",
+        "主机",
+        "终端",
+        "熙康设备",
+        "设备配置"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "床位管理",
+        "分配床位"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "设备电量主机终端",
+        "主机",
+        "终端"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "主机",
+        "终端"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "入托总览",
+        "入托申请",
+        "签订合同",
+        "入托办理",
+        "退托管理"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "评估总览",
+        "压疮评估",
+        "抑郁评估",
+        "焦虑评估",
+        "跌倒评估",
+        "ICVD评估",
+        "老人能力评估"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "健康数据腕表数据血氧血压心率计步定位熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+        "腕表数据血氧血压心率计步定位",
+        "血氧",
+        "血压",
+        "心率",
+        "计步",
+        "定位",
+        "熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+        "血压",
+        "血糖",
+        "身高体重",
+        "血氧",
+        "心电",
+        "脉率",
+        "三围",
+        "体温",
+        "尿酸",
+        "人体成分",
+        "血脂",
+        "中医体质",
+        "健康报告",
+        "健康评估",
+        "健康干预"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "腕表数据血氧血压心率计步定位",
+        "血氧",
+        "血压",
+        "心率",
+        "计步",
+        "定位",
+        "熙康数据血压血糖身高体重血氧心电脉率三围体温尿酸人体成分血脂中医体质",
+        "血压",
+        "血糖",
+        "身高体重",
+        "血氧",
+        "心电",
+        "脉率",
+        "三围",
+        "体温",
+        "尿酸",
+        "人体成分",
+        "血脂",
+        "中医体质"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "血氧",
+        "血压",
+        "心率",
+        "计步",
+        "定位"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "血压",
+        "血糖",
+        "身高体重",
+        "血氧",
+        "心电",
+        "脉率",
+        "三围",
+        "体温",
+        "尿酸",
+        "人体成分",
+        "血脂",
+        "中医体质"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "安防报警主机报警终端报警腕表跌倒报警跌倒报警",
+        "主机报警",
+        "终端报警",
+        "腕表跌倒报警",
+        "跌倒报警",
+        "呼救通话小度紧急呼救小度通话记录Sos通话视频浏览",
+        "小度紧急呼救",
+        "小度通话记录",
+        "Sos通话",
+        "视频浏览",
+        "消息通知消息通知百度推送通知百度服务留言老人不活跃预警通知",
+        "消息通知",
+        "百度推送通知",
+        "百度服务留言",
+        "老人不活跃预警通知",
+        "提醒答复"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "主机报警",
+        "终端报警",
+        "腕表跌倒报警",
+        "跌倒报警"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "小度紧急呼救",
+        "小度通话记录",
+        "Sos通话",
+        "视频浏览"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "消息通知",
+        "百度推送通知",
+        "百度服务留言",
+        "老人不活跃预警通知"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "实时数据",
+        "每日睡眠信息睡眠时长睡眠规律睡眠中断睡眠分期",
+        "睡眠时长",
+        "睡眠规律",
+        "睡眠中断",
+        "睡眠分期",
+        "每日夜间体征睡眠心率睡眠呼吸心率变异",
+        "睡眠心率",
+        "睡眠呼吸",
+        "心率变异",
+        "睡眠分数总览睡眠分总览健康分总览",
+        "睡眠分总览",
+        "健康分总览",
+        "睡眠报告 睡眠周报告睡眠月报告",
+        "睡眠周报告",
+        "睡眠月报告"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "睡眠时长",
+        "睡眠规律",
+        "睡眠中断",
+        "睡眠分期"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "睡眠心率",
+        "睡眠呼吸",
+        "心率变异"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "睡眠分总览",
+        "健康分总览"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "睡眠周报告",
+        "睡眠月报告"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "照护看板长者需求指派护工护工接单照护执行长者评价工单归档",
+        "长者需求",
+        "指派护工",
+        "护工接单",
+        "照护执行",
+        "长者评价",
+        "工单归档",
+        "护理计划",
+        "护理记录",
+        "护工排班"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "长者需求",
+        "指派护工",
+        "护工接单",
+        "照护执行",
+        "长者评价",
+        "工单归档"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "活动建立",
+        "活动发布",
+        "活动报名",
+        "活动举行",
+        "活动签到",
+        "活动签退",
+        "活动总结",
+        "活动归档"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "费项管理费用总览预缴明细费用结算费用明细",
+        "费用总览",
+        "预缴明细",
+        "费用结算",
+        "费用明细",
+        "费项设置服务项目护理级别",
+        "服务项目",
+        "护理级别"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "费用总览",
+        "预缴明细",
+        "费用结算",
+        "费用明细"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "服务项目",
+        "护理级别"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "数字孪生",
+        "社区屏幕",
+        "机构屏幕",
+        "居家屏幕"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": []
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "Default",
+        "Medium",
+        "Small",
+        "Mini"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "个人中心",
+        "布局设置",
+        "退出登录"
+      ]
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "刷新页面",
+        "关闭当前",
+        "关闭其他",
+        "关闭左侧",
+        "关闭右侧",
+        "全部关闭"
+      ]
+    },
+    {
+      "section_type": "blockquote",
+      "level": 0,
+      "text": "超级管理员工作台",
+      "children": []
+    },
+    {
+      "section_type": "heading",
+      "level": 1,
+      "text": "20000",
+      "children": []
+    },
+    {
+      "section_type": "heading",
+      "level": 1,
+      "text": "11",
+      "children": []
+    },
+    {
+      "section_type": "heading",
+      "level": 1,
+      "text": "40",
+      "children": []
+    },
+    {
+      "section_type": "list",
+      "level": 0,
+      "text": "",
+      "children": [
+        "215天前\n    曲一泓 触发了 无人 报警（设备类型：红外）",
+        "215天前\n    曲一泓 触发了 有人 报警（设备类型：红外）",
+        "215天前\n    曲一泓 触发了 有人 报警（设备类型：红外）",
+        "215天前\n    曲一泓 触发了 有人 报警（设备类型：红外）"
+      ]
+    },
+    {
+      "section_type": "heading",
+      "level": 4,
+      "text": "曲一泓 触发了 无人 报警（设备类型：红外）",
+      "children": []
+    },
+    {
+      "section_type": "heading",
+      "level": 4,
+      "text": "曲一泓 触发了 有人 报警（设备类型：红外）",
+      "children": []
+    },
+    {
+      "section_type": "heading",
+      "level": 4,
+      "text": "曲一泓 触发了 有人 报警（设备类型：红外）",
+      "children": []
+    },
+    {
+      "section_type": "heading",
+      "level": 4,
+      "text": "曲一泓 触发了 有人 报警（设备类型：红外）",
+      "children": []
+    },
+    {
+      "section_type": "heading",
+      "level": 3,
+      "text": "月度趋势图",
+      "children": []
+    },
+    {
+      "section_type": "heading",
+      "level": 3,
+      "text": "组织架构",
+      "children": []
+    },
+    {
+      "section_type": "heading",
+      "level": 3,
+      "text": "超级管理员",
+      "children": []
+    },
+    {
+      "section_type": "paragraph",
+      "level": 0,
+      "text": "账号：admin",
+      "children": []
+    },
+    {
+      "section_type": "paragraph",
+      "level": 0,
+      "text": "权限：管理员",
+      "children": []
+    },
+    {
+      "section_type": "paragraph",
+      "level": 0,
+      "text": "手机号：15888888888",
+      "children": []
+    },
+    {
+      "section_type": "paragraph",
+      "level": 0,
+      "text": "最后登录：2026-07-14 15:20:50",
+      "children": []
+    },
+    {
+      "section_type": "paragraph",
+      "level": 0,
+      "text": "名称 智慧康养平台",
+      "children": []
+    },
+    {
+      "section_type": "paragraph",
+      "level": 0,
+      "text": "品牌 东软",
+      "children": []
+    },
+    {
+      "section_type": "paragraph",
+      "level": 0,
+      "text": "型号 S-SP-GL-0006-001-2024-RE-SD-V3.0",
+      "children": []
+    }
+  ],
+  "pagination_info": {
+    "found": false
+  },
+  "total_pages_scraped": 1
+}

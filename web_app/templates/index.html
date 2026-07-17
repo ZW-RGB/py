@@ -1,0 +1,2926 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>康养数据 Web 采集控制台</title>
+<style>
+  :root {
+    --bg: #1a1d23; --card: #252830; --border: #3a3d44;
+    --text: #d4d6db; --text-dim: #8b8e94; --accent: #4e8cf0;
+    --accent-hover: #3a6fd8; --green: #34c759; --red: #ff4757;
+    --orange: #ff9f0a; --purple: #af52de; --radius: 8px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+    background: var(--bg); color: var(--text);
+    display: flex; height: 100vh; overflow: auto;
+  }
+
+  /* ── 左侧面板 ── */
+  .sidebar {
+    width: 340px; min-width: 340px; background: var(--card);
+    border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden;
+  }
+  .sidebar-header { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+  .sidebar-header h1 { font-size: 18px; font-weight: 700; margin-bottom: 2px; }
+  .sidebar-header p { font-size: 11px; color: var(--text-dim); }
+
+  .login-form { padding: 12px 20px; border-bottom: 1px solid var(--border); }
+  .form-row { display: flex; gap: 8px; margin-bottom: 6px; }
+  .form-row label { font-size: 11px; color: var(--text-dim); min-width: 52px; line-height: 28px; text-align: right; }
+  .form-row input {
+    flex: 1; background: var(--bg); border: 1px solid var(--border);
+    color: var(--text); padding: 5px 8px; border-radius: 4px; font-size: 12px; outline: none;
+  }
+  .form-row input:focus { border-color: var(--accent); }
+
+  /* 模式切换 */
+  .mode-switch {
+    padding: 10px 20px; border-bottom: 1px solid var(--border);
+    display: flex; gap: 4px;
+  }
+  .mode-tab {
+    flex: 1; padding: 7px 0; text-align: center; font-size: 12px; font-weight: 600;
+    background: transparent; border: 1px solid var(--border); color: var(--text-dim);
+    cursor: pointer; border-radius: 5px; transition: all 0.15s;
+  }
+  .mode-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .mode-tab:first-child { border-radius: 5px 0 0 5px; }
+  .mode-tab:last-child { border-radius: 0 5px 5px 0; }
+
+  .toolbar {
+    padding: 10px 20px; border-bottom: 1px solid var(--border);
+    display: flex; gap: 8px; align-items: center;
+  }
+  .toolbar span { font-size: 11px; color: var(--text-dim); margin-right: auto; }
+  .toolbar a { font-size: 11px; color: var(--accent); cursor: pointer; text-decoration: none; }
+  .toolbar a:hover { color: var(--accent-hover); }
+
+  .table-list { flex: 1; overflow-y: auto; padding: 6px 0; }
+  .table-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 20px; cursor: pointer; transition: background 0.15s; font-size: 12px;
+  }
+  .table-item:hover { background: rgba(78,140,240,0.08); }
+  .table-item input[type=checkbox] { accent-color: var(--accent); width: 15px; height: 15px; }
+  .table-item .badge { font-size: 9px; background: var(--accent); color: #fff; padding: 1px 5px; border-radius: 8px; margin-left: auto; }
+  .table-item .badge.done { background: var(--green); }
+  .table-item .badge.error { background: var(--red); }
+
+  .action-bar { padding: 12px 20px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
+  .btn {
+    padding: 7px 16px; border-radius: 5px; border: none; font-size: 12px;
+    font-weight: 600; cursor: pointer; transition: all 0.2s;
+  }
+  .btn.primary { background: var(--accent); color: #fff; flex: 1; }
+  .btn.primary:hover { background: var(--accent-hover); }
+  .btn.primary:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn.paginated { background: #7c3aed; color: #fff; flex: 1; }
+  .btn.paginated:hover { background: #6d28d9; }
+  .btn.paginated:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn.outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+  .btn.outline:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.success { background: var(--green); color: #fff; }
+  .btn.success:hover { opacity: 0.85; }
+  .btn.purple { background: var(--purple); color: #fff; }
+  .btn.purple:hover { opacity: 0.85; }
+
+  /* ── 右侧主区域 ── */
+  .main { flex: 1; display: flex; flex-direction: column; overflow-y: auto; min-height: 0; }
+
+  .progress-section {
+    padding: 12px 24px; border-bottom: 1px solid var(--border); background: var(--card); display: none;
+  }
+  .progress-bar-outer { width: 100%; height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .progress-bar-inner { height: 100%; background: var(--accent); transition: width 0.3s; border-radius: 3px; }
+  .progress-text { display: flex; justify-content: space-between; margin-top: 6px; font-size: 11px; color: var(--text-dim); }
+  .progress-text .current { color: var(--accent); font-weight: 600; }
+
+  .results-area {
+    flex: 1; overflow-y: auto; padding: 16px 24px; display: flex; flex-direction: column; gap: 14px; min-height: 0;
+  }
+  .empty-state {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    height: 100%; color: var(--text-dim); text-align: center;
+  }
+  .empty-state .icon { font-size: 56px; opacity: 0.25; margin-bottom: 14px; }
+  .empty-state p { font-size: 13px; }
+
+  /* ── 智能模式面板 ── */
+  .smart-panel { display: none; flex-direction: column; padding: 20px 24px; gap: 16px; }
+  .smart-panel.show { display: flex; flex-direction: column; overflow: visible; }
+  /* ── 页面采集面板 ── */
+  .page-panel { display: none; flex: 1; min-height: 0; flex-direction: column; }
+  .page-panel.show {
+    display: flex;
+    /* 当内容超出视口时整体垂直滚动，确保所有控件和结果都可查看 */
+    overflow-y: auto;
+  }
+  .page-panel > :not(.page-result-body) { flex-shrink: 0; }
+  .page-config { padding: 16px 24px; border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; }
+  .page-config .fg { display: flex; flex-direction: column; gap: 4px; }
+  .page-config label { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
+  .page-config select, .page-config input {
+    background: var(--bg); border: 1px solid var(--border); color: var(--text);
+    padding: 6px 10px; border-radius: 4px; font-size: 12px; outline: none; min-width: 180px;
+  }
+  .page-config select:focus, .page-config input:focus { border-color: var(--accent); }
+  .page-result-tabs { display: flex; gap: 2px; padding: 0 24px; background: var(--card); border-bottom: 1px solid var(--border); flex-shrink: 0; }
+  .page-result-tab {
+    padding: 10px 16px; font-size: 12px; font-weight: 600; cursor: pointer; border: none; background: transparent;
+    color: var(--text-dim); border-bottom: 2px solid transparent; transition: all 0.15s;
+  }
+  .page-result-tab:hover { color: var(--text); }
+  .page-result-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  /* 结果区：随 .page-panel 整体滚动，不再单独截断 */
+  .page-result-body {
+    flex: 1; min-height: 0;
+    padding: 16px 24px;
+  }
+  .page-result-body .data-table-wrap { max-height: none; overflow-x: auto; }
+  /* 页面采集 - 图片网格 */
+  .img-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+  .img-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .img-card img { width: 100%; height: 100px; object-fit: cover; display: block; background: #111; }
+  .img-card .img-meta { padding: 6px 8px; font-size: 10px; color: var(--text-dim); }
+  /* 链接列表 */
+  .link-list { list-style: none; }
+  .link-list li { padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 12px; display: flex; gap: 10px; align-items: baseline; }
+  .link-list .ltag { font-size: 9px; padding: 1px 6px; border-radius: 4px; background: rgba(78,140,240,0.15); color: var(--accent); white-space: nowrap; }
+  .link-list a { color: var(--accent); text-decoration: none; word-break: break-all; }
+  .link-list a:hover { text-decoration: underline; }
+  .link-list .ltext { color: var(--text-dim); }
+  /* 标签选择器 */
+  .route-tags { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px 24px; border-bottom: 1px solid var(--border); max-height: 140px; overflow-y: auto; }
+  .route-tag { font-size: 11px; padding: 5px 12px; border-radius: 12px; border: 1px solid var(--border); background: transparent; color: var(--text); cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+  .route-tag:hover { border-color: var(--accent); color: var(--accent); }
+  .route-tag.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .empty-state.page-mode { height: auto; padding: 40px 0; }
+  .smart-panel .query-box {
+    display: flex; gap: 10px;
+  }
+  .smart-panel textarea {
+    flex: 1; background: var(--card); border: 2px solid var(--border); color: var(--text);
+    padding: 14px 16px; border-radius: var(--radius); font-size: 14px;
+    outline: none; resize: none; min-height: 80px; font-family: inherit; overflow-y: auto;
+  }
+  .smart-panel textarea:focus { border-color: var(--accent); }
+  .smart-panel textarea::placeholder { color: var(--text-dim); }
+  .query-actions { display: flex; flex-direction: column; gap: 8px; }
+
+  /* 意图预览卡片 */
+  .intent-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 20px; box-shadow: var(--shadow);
+  }
+  .intent-card h3 { font-size: 15px; margin-bottom: 14px; color: var(--accent); }
+  .intent-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .intent-field { font-size: 12px; }
+  .intent-field label { display: block; color: var(--text-dim); margin-bottom: 3px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .intent-field .val {
+    background: var(--bg); padding: 8px 10px; border-radius: 4px; word-break: break-all;
+    font-family: monospace; font-size: 13px;
+  }
+  .intent-field.full { grid-column: 1 / -1; }
+  .confidence-bar {
+    display: flex; align-items: center; gap: 8px; grid-column: 1 / -1;
+    margin-top: 4px;
+  }
+  .confidence-bar .bar-outer {
+    flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden;
+  }
+  .confidence-bar .bar-inner {
+    height: 100%; border-radius: 3px; transition: width 0.5s;
+  }
+  .confidence-bar .val { font-size: 14px; font-weight: 700; min-width: 42px; text-align: right; }
+  .conf-high { background: var(--green); }
+  .conf-mid { background: var(--orange); }
+  .conf-low { background: var(--red); }
+
+  .intent-buttons { display: flex; gap: 8px; margin-top: 14px; }
+
+  .field-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .field-tag {
+    font-size: 11px; padding: 3px 10px; border-radius: 12px;
+    background: rgba(78,140,240,0.15); color: var(--accent); border: 1px solid rgba(78,140,240,0.3);
+  }
+
+  /* 结果卡片 */
+  .result-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    overflow: hidden; box-shadow: var(--shadow); flex-shrink: 0;
+  }
+  .result-card-header {
+    display: flex; align-items: center; padding: 10px 16px;
+    background: rgba(78,140,240,0.06); border-bottom: 1px solid var(--border); gap: 10px;
+  }
+  .result-card-header h3 { font-size: 13px; font-weight: 600; }
+  .result-card-header .count { font-size: 11px; background: var(--accent); color: #fff; padding: 2px 9px; border-radius: 9px; }
+  .result-card-header .actions { margin-left: auto; display: flex; gap: 5px; }
+  .result-card-header .actions button {
+    padding: 3px 10px; font-size: 10px; border-radius: 4px;
+    border: 1px solid var(--border); background: transparent; color: var(--text); cursor: pointer; transition: all 0.15s;
+  }
+  .result-card-header .actions button:hover { border-color: var(--accent); color: var(--accent); }
+
+  .data-table-wrap { overflow-x: auto; }
+  .data-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .data-table th {
+    position: sticky; top: 0; background: #2a2d35; color: var(--accent);
+    padding: 7px 10px; text-align: left; white-space: nowrap; border-bottom: 2px solid var(--border); font-weight: 600;
+  }
+  .data-table td {
+    padding: 5px 10px; border-bottom: 1px solid var(--border);
+    white-space: nowrap; max-width: 240px; overflow: hidden; text-overflow: ellipsis;
+  }
+  .data-table tr:hover td { background: rgba(78,140,240,0.04); }
+
+  .global-export {
+    padding: 10px 24px; border-bottom: 1px solid var(--border); background: var(--card);
+    display: none; gap: 6px; align-items: center;
+  }
+  .global-export.show { display: flex; }
+
+  .spinner {
+    display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff; border-radius: 50%; animation: spin 0.6s linear infinite;
+    vertical-align: middle; margin-right: 6px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .toast {
+    position: fixed; bottom: 24px; right: 24px; padding: 11px 18px;
+    background: var(--green); color: #fff; border-radius: 6px;
+    font-size: 12px; box-shadow: var(--shadow); z-index: 999;
+    animation: toastIn 0.3s ease; display: none;
+  }
+  .toast.error { background: var(--red); }
+  .toast.warning { background: var(--orange, #f5a623); }
+  @keyframes toastIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
+
+  /* ── 侧栏子容器 flex 确保可滚动 ── */
+  #standard-sidebar { display: flex; flex-direction: column; flex: 1; overflow: hidden; min-height: 0; }
+  #smart-sidebar { display: flex; flex-direction: column; flex: 1; overflow-y: auto; min-height: 0; }
+  .data-table-wrap { overflow: auto; max-height: none; }
+
+  /* ── 响应式：窄屏时侧栏收窄 ── */
+  @media (max-width: 900px) {
+    .sidebar { width: 280px; min-width: 280px; }
+    .form-row label { min-width: 42px; font-size: 10px; }
+    .results-area { padding: 12px 16px; }
+    .smart-panel.show { padding: 12px 16px; }
+    .data-table-wrap { max-height: 280px; }
+  }
+  @media (max-width: 700px) {
+    body { flex-direction: column; }
+    .sidebar { width: 100%; min-width: 100%; max-height: 45vh; border-right: none; border-bottom: 1px solid var(--border); }
+    .main { min-height: 55vh; }
+  }
+
+  /* ── 可视化采集样式 ── */
+  .collector-panel { display: none; flex: 1; min-height: 0; flex-direction: column; }
+  .collector-panel.show { display: flex; overflow: hidden; }
+  .collector-wizard { padding: 16px 24px; border-bottom: 1px solid var(--border); display: flex; gap: 4px; align-items: center; flex-shrink: 0; }
+  .wizard-step {
+    padding: 8px 16px; font-size: 12px; font-weight: 600; border-radius: 20px;
+    background: var(--bg); color: var(--text-dim); cursor: pointer; border: 1px solid var(--border); transition: all 0.2s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .wizard-step .step-num {
+    width: 20px; height: 20px; border-radius: 50%; background: var(--border);
+    display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700;
+  }
+  .wizard-step.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .wizard-step.active .step-num { background: rgba(255,255,255,0.3); }
+  .wizard-step.done { background: rgba(52,199,89,0.15); color: var(--green); border-color: var(--green); }
+  .wizard-step.done .step-num { background: var(--green); color: #fff; }
+  .wizard-arrow { color: var(--text-dim); font-size: 10px; margin: 0 4px; }
+  .collector-body { flex: 1; min-height: 0; overflow-y: auto; padding: 20px 24px; }
+  .collector-step { display: none; }
+  .collector-step.active { display: block; }
+
+  /* Step 1: 目标配置 */
+  .collector-form { max-width: 600px; }
+  .collector-form .fg { margin-bottom: 14px; }
+  .collector-form label { display: block; font-size: 11px; color: var(--text-dim); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .collector-form input, .collector-form select {
+    width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text);
+    padding: 8px 12px; border-radius: 6px; font-size: 13px; outline: none;
+  }
+  .collector-form input:focus, .collector-form select:focus { border-color: var(--accent); }
+
+  /* Step 2: 元素选择 */
+  .selector-container { display: flex; gap: 20px; height: calc(100vh - 280px); min-height: 400px; }
+  .selector-preview {
+    flex: 1; position: relative; overflow: auto; border: 2px solid var(--border);
+    border-radius: var(--radius); background: #111; min-width: 0;
+  }
+  .selector-preview img { display: block; max-width: 100%; height: auto; cursor: crosshair; }
+  .selector-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+  .selector-highlight {
+    position: absolute; border: 3px solid var(--accent); background: rgba(78,140,240,0.2);
+    border-radius: 3px; pointer-events: none; animation: hlPulse 0.8s ease;
+  }
+  @keyframes hlPulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+  .selector-saved-mark {
+    position: absolute; border: 2px dashed var(--green); background: rgba(52,199,89,0.1);
+    border-radius: 3px; pointer-events: none;
+  }
+  .selector-label {
+    position: absolute; top: -22px; left: 0; background: var(--accent); color: #fff;
+    padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; white-space: nowrap; pointer-events: none;
+  }
+  .selector-label.saved { background: var(--green); }
+  .selector-info {
+    width: 320px; min-width: 320px; display: flex; flex-direction: column; gap: 12px; overflow-y: auto;
+  }
+  .selector-info-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px;
+  }
+  .selector-info-card h4 { font-size: 13px; color: var(--accent); margin-bottom: 10px; }
+  .sel-detail { font-size: 11px; line-height: 1.8; }
+  .sel-detail dt { color: var(--text-dim); }
+  .sel-detail dd { color: var(--text); margin-bottom: 6px; word-break: break-all; font-family: monospace; font-size: 10px; }
+  .selected-rules-list { max-height: 250px; overflow-y: auto; }
+  .rule-item {
+    display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--bg);
+    border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; font-size: 12px;
+  }
+  .rule-item .field-badge {
+    background: var(--accent); color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600;
+  }
+  .rule-item .rule-selector { color: var(--text-dim); font-size: 10px; font-family: monospace; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .rule-item .rule-remove { color: var(--red); cursor: pointer; font-size: 16px; line-height: 1; }
+
+  /* Step 3: 预览 */
+  .preview-container { max-width: 100%; }
+  .preview-stats { display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+  .preview-stat {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 14px 20px; min-width: 120px; text-align: center;
+  }
+  .preview-stat .num { font-size: 24px; font-weight: 700; color: var(--accent); }
+  .preview-stat .lbl { font-size: 10px; color: var(--text-dim); margin-top: 4px; text-transform: uppercase; }
+  .preview-table-wrap { max-height: 400px; overflow: auto; border: 1px solid var(--border); border-radius: var(--radius); }
+  .preview-error { background: rgba(255,71,87,0.1); border: 1px solid var(--red); border-radius: var(--radius); padding: 12px; margin-bottom: 12px; font-size: 12px; color: var(--red); }
+
+  /* 任务列表 */
+  .task-list { margin-top: 8px; }
+  .task-list-item {
+    display: flex; align-items: center; gap: 10px; padding: 10px 16px;
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    margin-bottom: 8px; transition: all 0.15s;
+  }
+  .task-list-item:hover { border-color: var(--accent); }
+  .task-list-item .task-name { font-size: 13px; font-weight: 600; flex: 1; }
+  .task-list-item .task-meta { font-size: 10px; color: var(--text-dim); }
+  .task-list-item .task-actions { display: flex; gap: 4px; }
+  .task-list-item .task-actions button {
+    padding: 4px 10px; font-size: 10px; border-radius: 4px; border: 1px solid var(--border); background: transparent; color: var(--text); cursor: pointer;
+  }
+  .btn-sm { padding: 4px 10px; font-size: 10px; border-radius: 4px; border: 1px solid var(--border); background: transparent; color: var(--text); cursor: pointer; }
+  .btn-sm:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-sm.danger { color: var(--red); border-color: var(--red); }
+  .btn-sm.success { color: var(--green); border-color: var(--green); }
+</style>
+</head>
+<body>
+
+<!-- ──────────── 左侧面板 ──────────── -->
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h1>康养数据采集</h1>
+    <p>LLM 驱动 · 自适应智能爬虫</p>
+  </div>
+
+  <div class="login-form">
+    <div class="form-row"><label>平台地址</label><input id="host" value="http://192.168.18.143:1024"></div>
+    <div class="form-row"><label>用户名</label><input id="username" value="admin"></div>
+    <div class="form-row"><label>密码</label><input id="password" type="password" value="admin123"></div>
+  </div>
+
+  <!-- 模式切换 -->
+  <div class="mode-switch">
+    <button class="mode-tab active" onclick="switchMode('standard')" id="tab-standard">标准模式</button>
+    <button class="mode-tab" onclick="switchMode('smart')" id="tab-smart">智能模式</button>
+    <button class="mode-tab" onclick="switchMode('page')" id="tab-page">页面采集</button>
+    <button class="mode-tab" onclick="switchMode('collector')" id="tab-collector">空白</button>
+  </div>
+
+  <!-- 标准模式：表列表 -->
+  <div id="standard-sidebar">
+    <div class="toolbar">
+      <span id="selected-count">已选 0 张表</span>
+      <a onclick="selectAll()">全选</a><a onclick="deselectAll()">取消</a>
+    </div>
+    <div class="table-list" id="table-list"></div>
+    <div class="action-bar">
+      <button class="btn outline" onclick="resetAll()" style="flex:0">重置</button>
+      <button class="btn primary" id="crawl-btn" onclick="startCrawl()">开始爬取</button>
+    </div>
+  </div>
+
+  <!-- 智能模式：提示信息 -->
+  <div id="smart-sidebar" style="display:none; padding:16px 20px; flex:1;">
+    <div style="font-size:12px; color:var(--text-dim); line-height:1.8;">
+      <p style="color:var(--accent);font-weight:600;margin-bottom:8px;">使用说明</p>
+      <p>在右侧输入自然语言描述你的数据需求，AI 将自动：</p>
+      <p style="margin-top:6px;">1. 匹配目标数据表/页面</p>
+      <p>2. 识别要提取的字段</p>
+      <p>3. 生成爬取规则供你确认</p>
+      <p>4. 确认后自动采集数据</p>
+      <p style="margin-top:10px;color:var(--orange);">示例：</p>
+      <p style="color:var(--text-dim);">"获取长者档案页面的所有长者姓名以及联系方式"</p>
+      <p style="color:var(--text-dim);">"提取心率监测数据中所有异常记录的姓名、心率和时间"</p>
+    </div>
+  </div>
+
+  <!-- 页面采集模式：提示 -->
+  <div id="page-sidebar" style="display:none; padding:16px 20px; flex:1;">
+    <div style="font-size:12px; color:var(--text-dim); line-height:1.8;">
+      <p style="color:var(--green);font-weight:600;margin-bottom:8px;">页面采集说明</p>
+      <p>使用无头浏览器完整爬取平台页面上的 <b>所有可见内容</b>：</p>
+      <p style="margin-top:6px;">1. 在右侧选择目标页面路由</p>
+      <p>2. 点击"开始页面采集"</p>
+      <p>3. 查看分类结果：</p>
+      <p style="padding-left:10px;color:var(--accent);">· 文本内容（段落/标题/列表）</p>
+      <p style="padding-left:10px;color:var(--accent);">· 页面图片（src/尺寸/描述）</p>
+      <p style="padding-left:10px;color:var(--accent);">· 链接（内链/外链/API）</p>
+      <p style="padding-left:10px;color:var(--accent);">· 表格数据（表头+数据行）</p>
+      <p style="padding-left:10px;color:var(--accent);">· 表单字段（标签+值）</p>
+      <p style="margin-top:10px;">支持导出为 JSON/CSV/Excel/TXT</p>
+      <p style="margin-top:10px;color:var(--orange);">注意：首次使用需安装 Playwright 浏览器</p>
+      <p style="color:var(--text-dim);font-size:10px;">pip install playwright</p>
+      <p style="color:var(--text-dim);font-size:10px;">python -m playwright install chromium</p>
+    </div>
+  <!-- 可视化采集模式：提示 -->
+  <div id="collector-sidebar" style="display:none; padding:16px 20px; flex:1;">
+    <div style="font-size:12px; color:var(--text-dim); line-height:1.8;">
+      <p style="color:var(--purple);font-weight:600;margin-bottom:8px;">可视化采集说明</p>
+      <p>通过<b>点击截图元素</b>的方式，无需编写代码即可完成数据采集规则配置。</p>
+      <p style="margin-top:6px;">1. 在右侧输入目标页面地址</p>
+      <p>2. 系统自动截图并标注元素</p>
+      <p>3. <b>点击截图上的元素</b>来选择目标</p>
+      <p>4. 配置提取规则并预览数据</p>
+      <p>5. 保存为任务供后续重复使用</p>
+      <p style="margin-top:10px;color:var(--orange);">已保存任务：</p>
+      <div id="collector-task-sidebar" style="font-size:10px;max-height:200px;overflow-y:auto;"></div>
+    </div>
+  </div>
+</aside>
+
+<!-- ──────────── 右侧主区域 ──────────── -->
+<main class="main">
+  <!-- 进度条（标准模式用） -->
+  <div class="progress-section" id="progress-section">
+    <div class="progress-bar-outer"><div class="progress-bar-inner" id="progress-bar" style="width:0%"></div></div>
+    <div class="progress-text"><span class="current" id="progress-current"></span><span id="progress-summary"></span></div>
+  </div>
+
+  <!-- 全局导出 -->
+  <div class="global-export" id="global-export">
+    <span style="font-size:12px;font-weight:600;margin-right:auto;">导出全部：</span>
+    <button class="btn outline" onclick="exportAll('csv')" style="font-size:10px;padding:4px 12px;">CSV</button>
+    <button class="btn outline" onclick="exportAll('json')" style="font-size:10px;padding:4px 12px;">JSON</button>
+    <button class="btn outline" onclick="exportAll('xlsx')" style="font-size:10px;padding:4px 12px;">Excel</button>
+    <button class="btn outline" onclick="exportAll('txt')" style="font-size:10px;padding:4px 12px;">TXT</button>
+  </div>
+
+  <!-- 标准模式结果区 -->
+  <div class="results-area" id="results-area">
+    <div class="empty-state" id="empty-state">
+      <div class="icon">&#x1F4CA;</div>
+      <p>选择左侧数据表，点击"开始爬取"</p>
+      <p style="font-size:11px;margin-top:6px;color:var(--text-dim);">或切换到"智能模式"用自然语言描述需求</p>
+    </div>
+  </div>
+
+  <!-- 智能模式面板 -->
+  <div class="smart-panel" id="smart-panel">
+  <div class="query-box">
+    <textarea 
+      id="smart-query" 
+      rows="4" 
+      placeholder="用自然语言描述你想提取什么数据，例如：&#10;获取长者档案页面的所有长者姓名以及联系方式&#10;爬取 /elderly/overview 页面的表格数据&#10;采集 http://192.168.18.143:1024/elderly/checkin 的表单数据"
+      style="width:100%;min-height:120px;"></textarea>
+    <div class="query-actions">
+      <button class="btn purple" id="parse-btn" onclick="parseIntent()" style="white-space:nowrap;height:36px;padding:0 18px;font-size:13px;">&#x1F50D; 解析需求</button>
+      <button class="btn outline" onclick="document.getElementById('smart-query').value=''" style="font-size:11px;height:36px;padding:0 16px;">清空</button>
+    </div>
+  </div>
+
+    <!-- 意图预览卡片（初始隐藏） -->
+    <div class="intent-card" id="intent-card" style="display:none;">
+      <h3>&#x1F9E0; 需求解析结果</h3>
+      <div class="intent-grid" id="intent-grid"></div>
+      <div class="intent-buttons">
+        <button class="btn success" id="confirm-btn" onclick="executeCustomCrawl()">&#x2705; 确认并开始爬取</button>
+        <button class="btn outline" onclick="clearIntent()">重新输入</button>
+      </div>
+    </div>
+
+    <!-- 自定义爬取进度 -->
+    <div class="progress-section" id="custom-progress" style="display:flex">
+      <div class="progress-bar-outer"><div class="progress-bar-inner" id="custom-progress-bar" style="width:0%"></div></div>
+      <div class="progress-text"><span class="current" id="custom-progress-text"></span></div>
+    </div>
+
+    <!-- 自定义结果 -->
+    <div id="custom-results" style="display:none;"></div>
+    <div class="global-export" id="custom-export" style="display:none;">
+      <span style="font-size:12px;font-weight:600;margin-right:auto;">导出结果：</span>
+      <button class="btn outline" onclick="exportCustom('csv')" style="font-size:10px;padding:4px 12px;">CSV</button>
+      <button class="btn outline" onclick="exportCustom('json')" style="font-size:10px;padding:4px 12px;">JSON</button>
+      <button class="btn outline" onclick="exportCustom('xlsx')" style="font-size:10px;padding:4px 12px;">Excel</button>
+      <button class="btn outline" onclick="exportCustom('txt')" style="font-size:10px;padding:4px 12px;">TXT</button>
+    </div>
+  </div>
+
+  <!-- ──────────── 页面采集面板 ──────────── -->
+  <div class="page-panel" id="page-panel">
+    <!-- 路由选择区 -->
+    <div class="route-tags" id="route-tags"></div>
+
+    <!-- 多网址批量采集 -->
+    <div class="page-config" style="border:1px dashed var(--accent);border-radius:8px;padding:12px;">
+      <div style="display:flex;align-items:flex-start;gap:12px;">
+        <div class="fg" style="flex:1;">
+          <label style="color:var(--accent);">📋 多网址批量采集（每行一个网址）</label>
+          <textarea id="batch-urls-input" placeholder="每行输入一个网址或路由，例如：&#10;/elderly/overview&#10;/elderly/checkin&#10;http://192.168.18.143:1024/health/heartrate"
+            style="width:400%;height:140px;font-size:12px;font-family:monospace;resize:vertical;border-radius:6px;padding:8px;border:1px solid var(--border);background:var(--bg-primary);color:var(--text-primary);"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+    
+        <button class="btn" id="page-batch-btn" onclick="startBatchScrape()"
+          style="flex:0;align-self:flex-end;background:var(--accent);font-size:13px;padding:8px 18px;white-space:nowrap;">
+          批量采集
+        </button>
+
+    <!-- 配置区：耗时提醒 + 操作按钮 -->
+    <div class="page-config">
+      <div class="fg">
+        <label>自定义路由</label>
+        <input id="page-route-input" placeholder="如 /elderly/checkin 或完整 URL" style="min-width:260px;">
+      </div>
+      <button class="btn primary" id="page-scrape-btn" onclick="startPageScrape()" style="flex:0;white-space:nowrap;">开始页面采集</button>
+
+      <button class="btn outline" onclick="resetPageScrape()" style="flex:0;font-size:10px;">重置</button>
+      <span style="font-size:10px;color:var(--text-dim);">提示：前端页面渲染需 3-5 秒，请耐心等待</span>
+    </div>
+
+    <!-- 分页控制 -->
+    <div class="page-config" style="border-top:1px dashed var(--border);padding-top:10px;margin-top:2px;">
+      <div class="fg" style="flex:0 0 auto;">
+        <label>每页条数</label>
+        <select id="page-size-select" style="width:70px;height:30px;font-size:12px;">
+          <option value="">默认</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="50">50</option>
+        </select>
+      </div>
+      <div class="fg" style="flex:0 0 auto;">
+        <label>起始页</label>
+        <input id="page-start-input" type="number" min="1" value="1" style="width:60px;height:30px;font-size:12px;">
+      </div>
+      <div class="fg" style="flex:0 0 auto;">
+        <label>结束页</label>
+        <input id="page-end-input" type="number" min="1" placeholder="全部" style="width:60px;height:30px;font-size:12px;">
+      </div>
+      <button class="btn paginated" id="page-paginated-btn" onclick="startPaginatedScrape()" style="flex:0;white-space:nowrap;">分页采集</button>
+      <span style="font-size:10px;color:var(--text-dim);">多页采集耗时会更长，请耐心等待</span>
+    </div>
+
+    <!-- 字段筛选 -->
+    <div id="page-fields-section" style="display:none;margin-bottom:12px;padding:10px 12px;background:var(--bg-tertiary);border-radius:8px;border:1px solid var(--border);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+        <span style="font-size:12px;font-weight:600;color:var(--accent);">字段筛选</span>
+        <div style="display:flex;gap:6px;">
+          <button class="btn outline" onclick="fieldsSelectAll()" style="font-size:10px;padding:2px 8px;">全选</button>
+          <button class="btn outline" onclick="fieldsSelectNone()" style="font-size:10px;padding:2px 8px;">取消</button>
+        </div>
+      </div>
+      <div id="page-fields-list" style="display:flex;flex-wrap:wrap;gap:4px 8px;margin-bottom:8px;">
+        <span style="font-size:11px;color:var(--text-dim);">请先完成一次采集以获取可用字段</span>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <span id="page-fields-hint" style="font-size:10px;color:var(--text-dim);flex:1;">勾选字段后点击下方按钮重新采集</span>
+        <button class="btn" id="page-refilter-btn" onclick="startPageScrapeWithFields()" style="font-size:11px;padding:4px 14px;background:var(--accent);" disabled>重新采集（选中字段）</button>
+        <button class="btn outline" id="page-paginated-refilter-btn" onclick="startPaginatedScrapeWithFields()" style="font-size:11px;padding:4px 14px;border-color:var(--accent);color:var(--accent);" disabled>分页采集（选中字段）</button>
+      </div>
+    </div>
+
+    <!-- 批量采集结果区域 -->
+    <div id="batch-result-section" style="display:none;margin-bottom:12px;border-radius:8px;border:1px solid var(--border);background:var(--bg-secondary);overflow:hidden;"></div>
+
+    <!-- 历史结果（旧结果自动折叠到此） -->
+    <div id="previous-results-history" style="display:none;margin-bottom:12px;">
+      <div style="font-size:11px;font-weight:600;color:var(--text-dim);margin-bottom:6px;cursor:pointer;"
+        onclick="toggleHistorySection()">
+        📋 历史采集结果 <span id="history-count" style="color:var(--accent);">(0)</span>
+        <span id="history-toggle-icon" style="float:right;font-size:14px;">▶</span>
+      </div>
+      <div id="history-list" style="display:none;max-height:300px;overflow-y:auto;"></div>
+    </div>
+
+    <!-- 进度条 -->
+    <div class="progress-section" id="page-progress" style="display:none">
+      <div class="progress-bar-outer"><div class="progress-bar-inner" id="page-progress-bar" style="width:0%"></div></div>
+      <div class="progress-text"><span class="current" id="page-progress-text"></span></div>
+    </div>
+
+    <!-- 导出栏 -->
+    <div class="global-export" id="page-export" style="display:none;">
+      <span style="font-size:12px;font-weight:600;margin-right:auto;">导出 <span id="page-export-cat" style="color:var(--accent);">全部</span>：</span>
+      <button class="btn outline" onclick="exportPageScrape('csv')" style="font-size:10px;padding:4px 12px;">CSV</button>
+      <button class="btn outline" onclick="exportPageScrape('json')" style="font-size:10px;padding:4px 12px;">JSON</button>
+      <button class="btn outline" onclick="exportPageScrape('xlsx')" style="font-size:10px;padding:4px 12px;">Excel</button>
+      <button class="btn outline" onclick="exportPageScrape('txt')" style="font-size:10px;padding:4px 12px;">TXT</button>
+      <span style="margin-left:8px;font-size:10px;color:var(--text-dim);">批量导出：</span>
+      <button class="btn outline" onclick="exportBatchScrape('csv')" style="font-size:10px;padding:4px 12px;">CSV</button>
+      <button class="btn outline" onclick="exportBatchScrape('json')" style="font-size:10px;padding:4px 12px;">JSON</button>
+    </div>
+
+    <!-- 分类结果标签 -->
+    <div class="page-result-tabs" id="page-result-tabs" style="display:none;">
+      <button class="page-result-tab active" onclick="switchPageTab('overview')" id="ptab-overview">概览</button>
+      <button class="page-result-tab" onclick="switchPageTab('text')" id="ptab-text">文本</button>
+      <button class="page-result-tab" onclick="switchPageTab('images')" id="ptab-images">图片</button>
+      <button class="page-result-tab" onclick="switchPageTab('links')" id="ptab-links">链接</button>
+      <button class="page-result-tab" onclick="switchPageTab('tables')" id="ptab-tables">表格</button>
+      <button class="page-result-tab" onclick="switchPageTab('forms')" id="ptab-forms">表单</button>
+      <button class="page-result-tab" onclick="switchPageTab('structure')" id="ptab-structure">结构</button>
+    </div>
+
+    <!-- 结果内容区 -->
+    <div class="page-result-body" id="page-result-body">
+      <div class="empty-state page-mode" id="page-empty">
+        <div class="icon">&#x1F310;</div>
+        <p>选择上方页面路由，点击"开始页面采集"</p>
+        <p style="font-size:11px;margin-top:6px;color:var(--text-dim);">将使用无头浏览器完整爬取页面上所有可见内容</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──────────── 可视化采集面板 ──────────── -->
+  <div class="collector-panel" id="collector-panel">
+    <!-- 步骤向导 -->
+    <div class="collector-wizard" id="collector-wizard">
+      <div class="wizard-step active" id="wstep-1" onclick="collectorGoStep(1)"><span class="step-num">1</span>目标页面</div>
+      <span class="wizard-arrow">→</span>
+      <div class="wizard-step" id="wstep-2" onclick="collectorGoStep(2)"><span class="step-num">2</span>选择元素</div>
+      <span class="wizard-arrow">→</span>
+      <div class="wizard-step" id="wstep-3" onclick="collectorGoStep(3)"><span class="step-num">3</span>预览确认</div>
+      <span class="wizard-arrow">→</span>
+      <div class="wizard-step" id="wstep-4" onclick="collectorGoStep(4)"><span class="step-num">4</span>保存任务</div>
+      <span style="margin-left:auto;font-size:11px;color:var(--text-dim);cursor:pointer;" onclick="switchMode('standard')">✕ 退出</span>
+    </div>
+
+    <div class="collector-body" id="collector-body">
+      <!-- Step 1: 目标页面配置 -->
+      <div class="collector-step active" id="cstep-1">
+        <div class="collector-form">
+          <h3 style="margin-bottom:16px;color:var(--accent);">第1步：配置目标页面</h3>
+          <p style="font-size:12px;color:var(--text-dim);margin-bottom:16px;">设置康养平台地址和要采集的目标页面，系统将自动打开页面并分析可采集的数据元素。</p>
+          <div class="fg">
+            <label>目标页面 URL 或路由</label>
+            <input id="col-target" placeholder="如 /elderly/overview 或完整 URL" value=""
+                   style="font-size:14px;padding:10px 14px;">
+          </div>
+          <p style="font-size:10px;color:var(--text-dim);margin:-8px 0 14px 0;">左侧已填写的登录信息将自动用于平台认证</p>
+          <button class="btn primary" id="col-start-btn" onclick="collectorStartSession()" style="width:100%;padding:12px;font-size:14px;">
+            🚀 打开页面并分析元素
+          </button>
+          <div id="col-step1-status" style="margin-top:12px;font-size:12px;color:var(--text-dim);"></div>
+        </div>
+      </div>
+
+      <!-- Step 2: 元素选择 -->
+      <div class="collector-step" id="cstep-2">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+          <h3 style="color:var(--accent);">第2步：点击截图选择数据元素</h3>
+          <span style="font-size:11px;color:var(--text-dim);">点击图片上的元素 → 在右侧配置字段名 → 添加规则</span>
+        </div>
+        <div class="selector-container">
+          <div class="selector-preview" id="selector-preview">
+            <img id="selector-img" src="" alt="页面截图" style="display:none;">
+            <div class="selector-overlay" id="selector-overlay"></div>
+            <div class="empty-state" id="selector-loading" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
+              <div class="spinner"></div><p style="margin-top:8px;">加载截图中...</p>
+            </div>
+            <div class="empty-state" id="selector-empty" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:none;">
+              <p>请先启动采集会话</p>
+            </div>
+          </div>
+          <div class="selector-info">
+            <!-- 选中元素详情 -->
+            <div class="selector-info-card" id="sel-detail-card" style="display:none;">
+              <h4>📌 选中元素</h4>
+              <dl class="sel-detail" id="sel-detail-content"></dl>
+              <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px;">
+                <div class="fg">
+                  <label>字段名称</label>
+                  <input id="sel-field-name" placeholder="给这个数据起个名字，如"姓名"" style="width:100%;padding:6px 10px;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:4px;font-size:12px;">
+                </div>
+                <div class="fg">
+                  <label>提取类型</label>
+                  <select id="sel-extract-type" style="width:100%;padding:6px 10px;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:4px;font-size:12px;">
+                    <option value="text">文本</option>
+                    <option value="attribute">属性(如 href/src)</option>
+                    <option value="list">列表</option>
+                    <option value="table">表格列</option>
+                  </select>
+                </div>
+                <div class="fg" id="sel-attr-group" style="display:none;">
+                  <label>属性名</label>
+                  <input id="sel-attr-name" placeholder="如 href、src" style="width:100%;padding:6px 10px;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:4px;font-size:12px;">
+                </div>
+                <label style="display:flex;align-items:center;gap:6px;font-size:11px;cursor:pointer;">
+                  <input type="checkbox" id="sel-is-list" onchange="document.getElementById('sel-extract-type').value = this.checked ? 'list' : 'text'"> 提取为列表（多行数据）
+                </label>
+                <button class="btn success" onclick="collectorAddRule()" style="width:100%;">➕ 添加此字段</button>
+              </div>
+            </div>
+            <!-- 已选规则列表 -->
+            <div class="selector-info-card">
+              <h4>📋 已选字段规则 (<span id="sel-rules-count">0</span>)</h4>
+              <div class="selected-rules-list" id="sel-rules-list">
+                <p style="color:var(--text-dim);font-size:11px;">点击截图选择元素，然后添加规则</p>
+              </div>
+              <button class="btn primary" id="col-preview-btn" onclick="collectorGoStep(3)" style="width:100%;margin-top:10px;" disabled>下一步：预览数据 →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: 预览确认 -->
+      <div class="collector-step" id="cstep-3">
+        <h3 style="color:var(--accent);margin-bottom:4px;">第3步：预览采集结果</h3>
+        <p style="font-size:12px;color:var(--text-dim);margin-bottom:16px;">系统将根据你配置的规则实际提取数据，确认无误后进入下一步保存。</p>
+        <button class="btn primary" id="col-do-preview-btn" onclick="collectorDoPreview()" style="margin-bottom:16px;">🔍 开始预览</button>
+        <div class="preview-container" id="preview-container" style="display:none;">
+          <div class="preview-stats" id="preview-stats"></div>
+          <div id="preview-errors"></div>
+          <div class="preview-table-wrap" id="preview-table-wrap"></div>
+        </div>
+        <div style="margin-top:16px;display:flex;gap:8px;">
+          <button class="btn outline" onclick="collectorGoStep(2)">← 返回修改</button>
+          <button class="btn success" onclick="collectorGoStep(4)" id="col-save-next-btn" disabled>下一步：保存任务 →</button>
+        </div>
+      </div>
+
+      <!-- Step 4: 保存任务 -->
+      <div class="collector-step" id="cstep-4">
+        <div class="collector-form">
+          <h3 style="color:var(--accent);margin-bottom:16px;">第4步：保存采集任务</h3>
+          <div class="fg">
+            <label>任务名称 *</label>
+            <input id="col-task-name" placeholder="如：老人档案数据采集" style="font-size:14px;padding:10px 14px;">
+          </div>
+          <div class="fg">
+            <label>任务描述</label>
+            <input id="col-task-desc" placeholder="可选：简要描述此任务的目的">
+          </div>
+          <div class="fg">
+            <label>导出格式</label>
+            <select id="col-export-fmt">
+              <option value="csv">CSV</option>
+              <option value="json">JSON</option>
+              <option value="xlsx">Excel (xlsx)</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+              <input type="checkbox" id="col-pagination-enabled" onchange="this.checked?document.getElementById('col-pagination-opts').style.display='block':document.getElementById('col-pagination-opts').style.display='none'">
+              启用分页采集
+            </label>
+            <div id="col-pagination-opts" style="display:none;margin-top:8px;display:flex;gap:12px;">
+              <div class="fg" style="flex:1;">
+                <label>每页条数</label>
+                <input id="col-page-size" type="number" value="20" min="5" max="100">
+              </div>
+              <div class="fg" style="flex:1;">
+                <label>最大页数(0=全部)</label>
+                <input id="col-max-pages" type="number" value="0" min="0">
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:16px;">
+            <button class="btn outline" onclick="collectorGoStep(3)">← 返回</button>
+            <button class="btn success" onclick="collectorSaveTask()" style="flex:1;padding:10px;font-size:14px;">💾 保存任务</button>
+          </div>
+          <div id="col-save-status" style="margin-top:12px;font-size:12px;"></div>
+        </div>
+
+        <!-- 任务列表 -->
+        <div style="margin-top:32px;border-top:1px solid var(--border);padding-top:20px;">
+          <h3 style="color:var(--text);margin-bottom:12px;">📂 已保存的采集任务</h3>
+          <div class="task-list" id="task-list-container">
+            <p style="color:var(--text-dim);font-size:12px;">加载中...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const ENDPOINTS = {{ endpoints | tojson }};
+const KNOWN_ROUTES = {{ routes | tojson }};
+let crawlResults = [], pollTimer = null;
+let activeMode = 'standard';
+let parsedIntent = null;
+
+// ═══════════ 模式切换 ═══════════
+function switchMode(mode) {
+  activeMode = mode;
+  document.getElementById('tab-standard').className = 'mode-tab' + (mode === 'standard' ? ' active' : '');
+  document.getElementById('tab-smart').className = 'mode-tab' + (mode === 'smart' ? ' active' : '');
+  document.getElementById('tab-page').className = 'mode-tab' + (mode === 'page' ? ' active' : '');
+  document.getElementById('tab-collector').className = 'mode-tab' + (mode === 'collector' ? ' active' : '');
+
+  document.getElementById('standard-sidebar').style.display = mode === 'standard' ? '' : 'none';
+  document.getElementById('smart-sidebar').style.display = mode === 'smart' ? '' : 'none';
+  document.getElementById('page-sidebar').style.display = mode === 'page' ? '' : 'none';
+  document.getElementById('collector-sidebar').style.display = mode === 'collector' ? '' : 'none';
+
+  document.getElementById('results-area').style.display = mode === 'standard' ? '' : 'none';
+  document.getElementById('smart-panel').className = 'smart-panel' + (mode === 'smart' ? ' show' : '');
+  document.getElementById('page-panel').className = 'page-panel' + (mode === 'page' ? ' show' : '');
+  document.getElementById('collector-panel').className = 'collector-panel' + (mode === 'collector' ? ' show' : '');
+  document.getElementById('progress-section').style.display = 'none';
+  document.getElementById('global-export').className = 'global-export';
+
+  // 清理智能模式状态
+  if (mode === 'smart') {
+    document.getElementById('results-area').style.display = 'none';
+    document.getElementById('custom-results').style.display = 'none';
+    document.getElementById('custom-export').style.display = 'none';
+    document.getElementById('custom-progress').style.display = 'none';
+  }
+
+  // 初始化可视化采集模式
+  if (mode === 'collector') {
+    collectorRefreshTaskList();
+  }
+}
+
+// ═══════════ 可视化采集 ═══════════
+let collectorSessionId = '';
+let collectorSnapshot = null;       // {elements, screenshot_base64, ...}
+let collectorSelectedRules = [];    // [{field_name, css_selector, extract_type, ...}, ...]
+let collectorStep = 1;
+let collectorPreviewOk = false;
+
+function collectorGoStep(step) {
+  if (step === 3 && collectorSelectedRules.length === 0) {
+    showToast('请先在步骤2选择至少一个元素', 'error'); return;
+  }
+  collectorStep = step;
+  // 更新步骤指示器
+  for (let i = 1; i <= 4; i++) {
+    const el = document.getElementById('wstep-' + i);
+    if (i < step) el.className = 'wizard-step done';
+    else if (i === step) el.className = 'wizard-step active';
+    else el.className = 'wizard-step';
+  }
+  // 显示/隐藏步骤
+  for (let i = 1; i <= 4; i++) {
+    document.getElementById('cstep-' + i).className = 'collector-step' + (i === step ? ' active' : '');
+  }
+  // 步骤4加载任务列表
+  if (step === 4) collectorRefreshTaskList();
+}
+
+async function collectorStartSession() {
+  const host = document.getElementById('host').value.trim();
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+  const target = document.getElementById('col-target').value.trim();
+
+  if (!host || !username) { showToast('请先在左侧填写平台地址和账号', 'error'); return; }
+  if (!target) { showToast('请输入目标页面URL或路由', 'error'); return; }
+
+  const btn = document.getElementById('col-start-btn');
+  const status = document.getElementById('col-step1-status');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>正在加载页面...';
+  status.textContent = '正在登录平台并分析页面元素，请耐心等待（约5-10秒）...';
+
+  try {
+    const resp = await fetch('/api/collector/start_session', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ host, username, password, target })
+    });
+    const data = await resp.json();
+    if (!data.ok) { showToast(data.message, 'error'); btn.disabled = false; btn.innerHTML = '🚀 打开页面并分析元素'; status.textContent = ''; return; }
+
+    collectorSessionId = data.session_id;
+    collectorSnapshot = data.snapshot;
+    collectorSelectedRules = [];
+
+    const elemCount = data.snapshot.elements_count || 0;
+    status.textContent = '✅ 页面分析完成！发现 ' + elemCount + ' 个可选元素' +
+      (data.snapshot.title ? ' | ' + data.snapshot.title : '') +
+      (data.snapshot.url ? ' | ' + data.snapshot.url : '') +
+      '，进入下一步选择。';
+
+    if (elemCount === 0) {
+      showToast('警告：页面未检测到可选元素，可能是空白页或页面未完全加载', 'warning');
+    }
+
+    // 渲染截图
+    const img = document.getElementById('selector-img');
+    img.onerror = () => {
+      document.getElementById('selector-loading').style.display = 'none';
+      showToast('截图加载失败，请检查后端日志', 'error');
+    };
+    img.src = 'data:image/png;base64,' + data.snapshot.screenshot_base64;
+    img.style.display = 'block';
+    img.onload = () => {
+      document.getElementById('selector-loading').style.display = 'none';
+      if (elemCount === 0) {
+        // 即使截图显示，也提示元素为空
+        console.warn('[Collector] 截图已加载，但 elements_count=0', data.snapshot);
+      }
+    };
+    document.getElementById('selector-empty').style.display = 'none';
+
+    // 设置点击事件
+    img.onclick = function(e) {
+      const rect = img.getBoundingClientRect();
+      const scaleX = collectorSnapshot.viewport_width / rect.width;
+      const scaleY = collectorSnapshot.viewport_height / rect.height;
+      const clickX = (e.clientX - rect.left) * scaleX;
+      const clickY = (e.clientY - rect.top) * scaleY;
+      collectorHandleClick(clickX, clickY, e.clientX - rect.left, e.clientY - rect.top);
+    };
+
+    // 进入步骤2
+    collectorGoStep(2);
+    document.getElementById('col-preview-btn').disabled = true;
+    document.getElementById('sel-rules-count').textContent = '0';
+    document.getElementById('sel-rules-list').innerHTML = '<p style="color:var(--text-dim);font-size:11px;">点击截图选择元素，然后添加规则</p>';
+    document.getElementById('sel-detail-card').style.display = 'none';
+    document.getElementById('selector-overlay').innerHTML = '';
+
+    showToast('页面加载完成！共 ' + data.snapshot.elements_count + ' 个可选元素');
+  } catch (err) {
+    showToast('启动失败: ' + err.message, 'error');
+    status.textContent = '❌ 启动失败: ' + err.message;
+  }
+  btn.disabled = false;
+  btn.innerHTML = '🚀 打开页面并分析元素';
+}
+
+async function collectorHandleClick(clickX, clickY, displayX, displayY) {
+  try {
+    const resp = await fetch('/api/collector/element_info', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ session_id: collectorSessionId, x: clickX, y: clickY })
+    });
+    const data = await resp.json();
+    if (!data.ok) { showToast(data.message, 'error'); return; }
+
+    const elem = data.element;
+    const overlay = document.getElementById('selector-overlay');
+
+    // 清除上一个高亮
+    overlay.querySelectorAll('.selector-highlight').forEach(h => h.remove());
+
+    if (!elem) {
+      showToast('附近没有找到可选元素，请尝试点击表格或文本区域', 'error');
+      return;
+    }
+
+    // 屏幕坐标 → 图片坐标
+    const img = document.getElementById('selector-img');
+    const rect = img.getBoundingClientRect();
+    const scaleX = rect.width / collectorSnapshot.viewport_width;
+    const scaleY = rect.height / collectorSnapshot.viewport_height;
+
+    // 添加高亮
+    const hl = document.createElement('div');
+    hl.className = 'selector-highlight';
+    hl.style.left = (elem.x * scaleX - 3) + 'px';
+    hl.style.top = (elem.y * scaleY - 3) + 'px';
+    hl.style.width = (Math.max(elem.w, 20) * scaleX + 6) + 'px';
+    hl.style.height = (Math.max(elem.h, 16) * scaleY + 6) + 'px';
+    overlay.appendChild(hl);
+
+    // 显示元素详情
+    const card = document.getElementById('sel-detail-card');
+    const content = document.getElementById('sel-detail-content');
+    content.innerHTML = `
+      <dt>标签</dt><dd>${escapeHtml(elem.tag)}</dd>
+      <dt>内容</dt><dd style="font-family:inherit;font-size:12px;color:var(--text);">${escapeHtml(elem.text || '(空)')}</dd>
+      <dt>CSS 选择器</dt><dd>${escapeHtml(elem.best_selector || elem.css)}</dd>
+      <dt>XPath</dt><dd>${escapeHtml(elem.xpath)}</dd>
+      <dt>父元素</dt><dd>${escapeHtml(elem.parent_tag)}</dd>
+      ${elem.attrs && elem.attrs.id ? '<dt>ID</dt><dd>' + escapeHtml(elem.attrs.id) + '</dd>' : ''}
+      ${elem.attrs && elem.attrs.class ? '<dt>Class</dt><dd>' + escapeHtml(elem.attrs.class) + '</dd>' : ''}
+    `;
+    card.style.display = 'block';
+
+    // 预填字段名
+    const fieldInput = document.getElementById('sel-field-name');
+    if (!fieldInput.value && elem.text) {
+      // 自动推断字段名
+      const text = elem.text.trim();
+      if (text.length <= 10) fieldInput.value = text;
+      else if (elem.attrs && elem.attrs['data-label']) fieldInput.value = elem.attrs['data-label'];
+      else if (elem.tag === 'th') fieldInput.value = text;
+    }
+
+    // 存储当前选中元素
+    collectorSnapshot._selectedElement = elem;
+
+    if (data.siblings_count > 0) {
+      showToast(`已选中: ${elem.tag} "${elem.text.substring(0,30)}" — 发现 ${data.siblings_count} 个相似元素`);
+    } else {
+      showToast(`已选中: ${elem.tag} "${elem.text.substring(0,30)}"`);
+    }
+  } catch (err) {
+    showToast('查询失败: ' + err.message, 'error');
+  }
+}
+
+async function collectorAddRule() {
+  const elem = collectorSnapshot._selectedElement;
+  if (!elem) { showToast('请先在截图上点击选择一个元素', 'error'); return; }
+
+  const fieldName = document.getElementById('sel-field-name').value.trim();
+  if (!fieldName) { showToast('请填写字段名称', 'error'); return; }
+
+  const extractType = document.getElementById('sel-extract-type').value;
+  const attrName = extractType === 'attribute' ? document.getElementById('sel-attr-name').value.trim() : '';
+  const isList = document.getElementById('sel-is-list').checked || extractType === 'list';
+
+  try {
+    const elemIndex = collectorSnapshot.elements.findIndex(
+      e => e.css === elem.css || e.css === elem.best_selector
+    );
+    const resp = await fetch('/api/collector/select', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        session_id: collectorSessionId,
+        element_index: elemIndex >= 0 ? elemIndex : 0,
+        field_name: fieldName,
+        extract_type: isList ? 'list' : extractType,
+        attribute_name: attrName,
+        is_list: isList,
+      })
+    });
+    const data = await resp.json();
+    if (!data.ok) { showToast(data.message, 'error'); return; }
+
+    collectorSelectedRules.push(data.rule);
+
+    // 在截图上标记已选
+    const overlay = document.getElementById('selector-overlay');
+    const img = document.getElementById('selector-img');
+    const rect = img.getBoundingClientRect();
+    const scaleX = rect.width / collectorSnapshot.viewport_width;
+    const scaleY = rect.height / collectorSnapshot.viewport_height;
+    const mark = document.createElement('div');
+    mark.className = 'selector-saved-mark';
+    mark.style.left = (elem.x * scaleX - 1) + 'px';
+    mark.style.top = (elem.y * scaleY - 1) + 'px';
+    mark.style.width = (Math.max(elem.w || 20, 20) * scaleX + 2) + 'px';
+    mark.style.height = (Math.max(elem.h || 16, 16) * scaleY + 2) + 'px';
+    const label = document.createElement('div');
+    label.className = 'selector-label saved';
+    label.textContent = fieldName;
+    label.style.left = (elem.x * scaleX) + 'px';
+    label.style.top = (elem.y * scaleY - 22) + 'px';
+    overlay.appendChild(mark);
+    overlay.appendChild(label);
+    overlay.querySelectorAll('.selector-highlight').forEach(h => h.remove());
+
+    // 更新规则列表
+    renderRulesList();
+    document.getElementById('col-preview-btn').disabled = false;
+    document.getElementById('sel-field-name').value = '';
+    document.getElementById('sel-detail-card').style.display = 'none';
+    showToast(`已添加: ${fieldName}`);
+  } catch (err) {
+    showToast('添加失败: ' + err.message, 'error');
+  }
+}
+
+function renderRulesList() {
+  const container = document.getElementById('sel-rules-list');
+  document.getElementById('sel-rules-count').textContent = collectorSelectedRules.length;
+  if (collectorSelectedRules.length === 0) {
+    container.innerHTML = '<p style="color:var(--text-dim);font-size:11px;">点击截图选择元素，然后添加规则</p>';
+    return;
+  }
+  container.innerHTML = collectorSelectedRules.map((r, i) => `
+    <div class="rule-item">
+      <span class="field-badge">${escapeHtml(r.field_name)}</span>
+      <span class="rule-selector">${escapeHtml(r.css_selector)}</span>
+      <span style="font-size:10px;color:var(--text-dim);">${r.extract_type}</span>
+      <span class="rule-remove" onclick="collectorRemoveRule(${i})" title="移除">✕</span>
+    </div>
+  `).join('');
+}
+
+function collectorRemoveRule(index) {
+  collectorSelectedRules.splice(index, 1);
+  renderRulesList();
+  if (collectorSelectedRules.length === 0) {
+    document.getElementById('col-preview-btn').disabled = true;
+  }
+}
+
+async function collectorDoPreview() {
+  const btn = document.getElementById('col-do-preview-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>正在提取数据...';
+
+  try {
+    const resp = await fetch('/api/collector/preview', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({})
+    });
+    const data = await resp.json();
+    if (!data.ok) { showToast(data.message, 'error'); btn.disabled = false; btn.innerHTML = '🔍 开始预览'; return; }
+
+    document.getElementById('preview-container').style.display = 'block';
+    document.getElementById('col-save-next-btn').disabled = false;
+    collectorPreviewOk = true;
+
+    // 统计
+    document.getElementById('preview-stats').innerHTML = `
+      <div class="preview-stat"><div class="num">${data.total}</div><div class="lbl">总记录数</div></div>
+      <div class="preview-stat"><div class="num">${data.columns.length}</div><div class="lbl">字段数</div></div>
+      <div class="preview-stat"><div class="num">${data.errors.length}</div><div class="lbl">错误</div></div>
+    `;
+
+    // 错误
+    const errDiv = document.getElementById('preview-errors');
+    errDiv.innerHTML = data.errors.length > 0
+      ? data.errors.map(e => `<div class="preview-error">⚠️ ${escapeHtml(e.field)}: ${escapeHtml(e.error)}</div>`).join('')
+      : '';
+
+    // 表格
+    const wrap = document.getElementById('preview-table-wrap');
+    if (data.columns.length > 0) {
+      let html = '<table class="data-table"><thead><tr>';
+      data.columns.forEach(c => { html += `<th>${escapeHtml(c)}</th>`; });
+      html += '</tr></thead><tbody>';
+      data.rows.forEach(row => {
+        html += '<tr>';
+        data.columns.forEach(c => {
+          const v = row[c] !== undefined ? String(row[c]) : '';
+          html += `<td title="${escapeHtml(v)}">${escapeHtml(v.substring(0, 80))}</td>`;
+        });
+        html += '</tr>';
+      });
+      html += '</tbody></table>';
+      if (data.total > 100) html += `<div style="padding:8px;font-size:11px;color:var(--text-dim);">预览前100条，共 ${data.total} 条</div>`;
+      wrap.innerHTML = html;
+    } else {
+      wrap.innerHTML = '<div class="empty-state"><p>没有提取到数据</p></div>';
+    }
+
+    showToast(`预览完成: ${data.total} 条记录`);
+  } catch (err) {
+    showToast('预览失败: ' + err.message, 'error');
+  }
+  btn.disabled = false;
+  btn.innerHTML = '🔍 开始预览';
+}
+
+async function collectorSaveTask() {
+  const name = document.getElementById('col-task-name').value.trim();
+  if (!name) { showToast('请输入任务名称', 'error'); return; }
+
+  const desc = document.getElementById('col-task-desc').value.trim();
+  const exportFmt = document.getElementById('col-export-fmt').value;
+  const pagination = {
+    enabled: document.getElementById('col-pagination-enabled').checked,
+    page_size: parseInt(document.getElementById('col-page-size').value) || 20,
+    max_pages: parseInt(document.getElementById('col-max-pages').value) || 0,
+  };
+
+  try {
+    const resp = await fetch('/api/collector/save', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, description: desc, export_format: exportFmt, pagination })
+    });
+    const data = await resp.json();
+    if (!data.ok) { showToast(data.message, 'error'); return; }
+
+    document.getElementById('col-save-status').innerHTML =
+      `<span style="color:var(--green);">✅ 任务 "${escapeHtml(name)}" 已保存！ID: ${data.task.task_id}</span>`;
+    showToast('任务已保存！');
+    collectorRefreshTaskList();
+  } catch (err) {
+    showToast('保存失败: ' + err.message, 'error');
+  }
+}
+
+async function collectorRefreshTaskList() {
+  const container = document.getElementById('task-list-container');
+  const sidebar = document.getElementById('collector-task-sidebar');
+  try {
+    const resp = await fetch('/api/collector/tasks');
+    const data = await resp.json();
+    if (!data.ok) { container.innerHTML = '<p style="color:var(--text-dim);">加载失败</p>'; return; }
+
+    if (data.tasks.length === 0) {
+      container.innerHTML = '<p style="color:var(--text-dim);font-size:12px;">还没有保存的任务</p>';
+      sidebar.innerHTML = '<p style="color:var(--text-dim);">暂无任务</p>';
+      return;
+    }
+
+    container.innerHTML = data.tasks.map(t => `
+      <div class="task-list-item">
+        <div>
+          <div class="task-name">${escapeHtml(t.name)}</div>
+          <div class="task-meta">${t.rules_count} 条规则 | ${t.export_format} | 执行 ${t.total_runs} 次</div>
+        </div>
+        <div class="task-actions" style="margin-left:auto;">
+          <button class="btn-sm success" onclick="collectorExecuteTask('${t.task_id}')" title="执行采集">▶ 执行</button>
+          <button class="btn-sm" onclick="collectorLoadTask('${t.task_id}')" title="加载到编辑器">📋 加载</button>
+          <button class="btn-sm" onclick="collectorExportTask('${t.task_id}')" title="导出JSON">📥</button>
+          <button class="btn-sm danger" onclick="collectorDeleteTask('${t.task_id}')" title="删除">✕</button>
+        </div>
+      </div>
+    `).join('');
+
+    sidebar.innerHTML = data.tasks.slice(0, 10).map(t =>
+      `<div style="padding:2px 0;cursor:pointer;" onclick="switchMode('collector');collectorGoStep(4);" title="${escapeHtml(t.name)}">
+        📋 ${escapeHtml(t.name.substring(0, 20))} (${t.rules_count}规则)
+      </div>`
+    ).join('');
+  } catch (err) { /* ignore */ }
+}
+
+async function collectorExecuteTask(taskId) {
+  const host = document.getElementById('host').value.trim();
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+
+  showToast('正在执行采集任务...');
+  try {
+    const resp = await fetch('/api/collector/tasks/' + taskId + '/execute', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ host, username, password, headless: true, max_rows: 5000 })
+    });
+    const data = await resp.json();
+    if (!data.ok || !data.success) { showToast(data.message || '执行失败', 'error'); return; }
+
+    showToast(`采集完成: ${data.data.total} 条, ${data.data.columns.length} 字段`);
+    // 下载结果
+    const blob = new Blob([JSON.stringify(data.data, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'collection_result_' + new Date().toISOString().slice(0,19).replace(/:/g,'-') + '.json';
+    a.click();
+    collectorRefreshTaskList();
+  } catch (err) { showToast('执行失败: ' + err.message, 'error'); }
+}
+
+async function collectorLoadTask(taskId) {
+  try {
+    const resp = await fetch('/api/collector/tasks/' + taskId);
+    const data = await resp.json();
+    if (!data.ok) { showToast('加载失败', 'error'); return; }
+    // 重新启动会话
+    const task = data.task;
+    document.getElementById('col-target').value = task.route || task.target_url;
+    document.getElementById('col-task-name').value = task.name + ' (副本)';
+    document.getElementById('col-task-desc').value = task.description || '';
+    document.getElementById('col-export-fmt').value = task.export_format || 'csv';
+    collectorGoStep(1);
+    showToast('已加载任务配置，请重新启动会话并选择元素');
+  } catch (err) { showToast('加载失败: ' + err.message, 'error'); }
+}
+
+function collectorExportTask(taskId) {
+  window.open('/api/collector/tasks/' + taskId + '/export', '_blank');
+}
+
+async function collectorDeleteTask(taskId) {
+  if (!confirm('确定要删除此任务吗？此操作不可撤销。')) return;
+  try {
+    await fetch('/api/collector/tasks/' + taskId, { method: 'DELETE' });
+    showToast('任务已删除');
+    collectorRefreshTaskList();
+  } catch (err) { showToast('删除失败: ' + err.message, 'error'); }
+}
+
+// 属性提取类型切换
+document.getElementById('sel-extract-type').addEventListener('change', function() {
+  document.getElementById('sel-attr-group').style.display = this.value === 'attribute' ? 'block' : 'none';
+  document.getElementById('sel-is-list').checked = this.value === 'list';
+});
+document.getElementById('sel-is-list').addEventListener('change', function() {
+  if (this.checked) document.getElementById('sel-extract-type').value = 'list';
+  else document.getElementById('sel-extract-type').value = 'text';
+});
+
+// ═══════════ 标准模式 - 初始化 ═══════════
+function init() {
+  const list = document.getElementById('table-list');
+  ENDPOINTS.forEach((ep, i) => {
+    const div = document.createElement('div');
+    div.className = 'table-item';
+    div.innerHTML = `<input type="checkbox" id="cb-${i}" data-index="${i}" data-path="${ep.path}" onchange="updateSelection()">
+      <span>${ep.name}</span><span style="font-size:10px;color:var(--text-dim)">${ep.module}</span>`;
+    div.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'INPUT') {
+        const cb = div.querySelector('input'); cb.checked = !cb.checked; updateSelection();
+      }
+    });
+    list.appendChild(div);
+  });
+  updateSelection();
+}
+
+function updateSelection() {
+  const n = document.querySelectorAll('#table-list input:checked').length;
+  document.getElementById('selected-count').textContent = `已选 ${n} 张表`;
+}
+function selectAll() { document.querySelectorAll('#table-list input').forEach(cb => cb.checked = true); updateSelection(); }
+function deselectAll() { document.querySelectorAll('#table-list input').forEach(cb => cb.checked = false); updateSelection(); }
+
+// ═══════════ 标准模式 - 爬取 ═══════════
+async function startCrawl() {
+  const host = document.getElementById('host').value.trim();
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+  const selected = [];
+  document.querySelectorAll('#table-list input:checked').forEach(cb => selected.push(cb.dataset.path));
+  if (!host || !username) { showToast('请填写平台地址和账号', 'error'); return; }
+  if (selected.length === 0) { showToast('请至少选择一张数据表', 'error'); return; }
+
+  document.getElementById('crawl-btn').disabled = true;
+  document.getElementById('crawl-btn').textContent = '爬取中...';
+  document.getElementById('progress-section').style.display = 'block';
+  document.getElementById('progress-bar').style.width = '0%';
+  document.getElementById('progress-current').textContent = '正在连接...';
+  document.getElementById('progress-summary').textContent = '0/' + selected.length;
+
+  try {
+    const resp = await fetch('/api/crawl', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ host, username, password, tables: selected })
+    });
+    const data = await resp.json();
+    if (!data.ok) { showToast(data.message, 'error'); resetButton(); return; }
+    pollTimer = setInterval(pollStatus, 800);
+  } catch (err) { showToast('请求失败: ' + err.message, 'error'); resetButton(); }
+}
+
+async function pollStatus() {
+  const resp = await fetch('/api/crawl_status');
+  const state = await resp.json();
+  document.getElementById('progress-bar').style.width = state.progress + '%';
+  document.getElementById('progress-current').textContent = state.current_table;
+  document.getElementById('progress-summary').textContent = state.completed_tables + '/' + state.total_tables + ' 表';
+
+  if (state.summary) {
+    state.summary.forEach(s => {
+      document.querySelectorAll('#table-list .table-item').forEach(item => {
+        if (item.querySelector('span').textContent === s.table_name) {
+          let badge = item.querySelector('.badge');
+          if (!badge) { badge = document.createElement('span'); badge.className = 'badge'; item.appendChild(badge); }
+          badge.textContent = s.count + ' 条';
+          badge.className = 'badge ' + (s.count > 0 ? 'done' : 'error');
+        }
+      });
+    });
+  }
+
+  if (!state.running) {
+    clearInterval(pollTimer); resetButton();
+    if (state.error) { showToast('爬取出错: ' + state.error, 'error'); }
+    else { showToast('爬取完成! 共 ' + state.completed_tables + ' 张表'); loadResults(); }
+  }
+}
+
+function resetButton() {
+  document.getElementById('crawl-btn').disabled = false;
+  document.getElementById('crawl-btn').textContent = '开始爬取';
+}
+
+async function loadResults() {
+  const resp = await fetch('/api/crawl_status');
+  const state = await resp.json();
+  crawlResults = state.summary || [];
+  const area = document.getElementById('results-area');
+  area.innerHTML = '';
+  document.getElementById('global-export').className = 'global-export show';
+
+  if (crawlResults.length === 0) { area.innerHTML = '<div class="empty-state"><div class="icon">&#x1F4ED;</div><p>没有采集到数据</p></div>'; return; }
+
+  crawlResults.forEach((r, i) => {
+    const card = document.createElement('div');
+    card.className = 'result-card'; card.id = 'card-' + i;
+    card.innerHTML = `<div class="result-card-header">
+      <h3>${r.table_name}</h3><span class="count">${r.count||0} 条</span>
+      <div class="actions">
+        <button onclick="previewTable(${i})" id="preview-btn-${i}">预览数据</button>
+        <button onclick="exportTable(${i},'csv')">CSV</button>
+        <button onclick="exportTable(${i},'json')">JSON</button>
+        <button onclick="exportTable(${i},'xlsx')">Excel</button>
+        <button onclick="exportTable(${i},'txt')">TXT</button>
+      </div></div>
+      <div class="data-table-wrap" id="table-wrap-${i}" style="display:none"></div>`;
+    area.appendChild(card);
+  });
+}
+
+async function previewTable(index) {
+  const wrap = document.getElementById('table-wrap-' + index);
+  const btn = document.getElementById('preview-btn-' + index);
+  if (wrap.style.display === 'block') { wrap.style.display = 'none'; btn.textContent = '预览数据'; return; }
+  btn.textContent = '加载中...';
+  const resp = await fetch('/api/preview/' + index);
+  const data = await resp.json();
+  if (!data.ok) { showToast(data.message, 'error'); btn.textContent = '预览数据'; return; }
+
+  let html = '<table class="data-table"><thead><tr>';
+  data.columns.forEach(col => { html += `<th>${col}</th>`; });
+  html += '</tr></thead><tbody>';
+  data.rows.forEach(row => {
+    html += '<tr>';
+    data.columns.forEach(col => {
+      let val = row[col] !== undefined ? String(row[col]) : '';
+      if (val.length > 80) val = val.substring(0, 80) + '...';
+      html += `<td title="${escapeHtml(String(row[col]||''))}">${escapeHtml(val)}</td>`;
+    });
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  if (data.count > 100) html += `<div style="padding:8px 16px;font-size:11px;color:var(--text-dim);">仅显示前 100 条，共 ${data.count} 条</div>`;
+  wrap.innerHTML = html; wrap.style.display = 'block'; btn.textContent = '收起';
+}
+
+function escapeHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// ═══════════ 智能模式 - 意图解析 ═══════════
+async function parseIntent() {
+  const query = document.getElementById('smart-query').value.trim();
+  if (!query) { showToast('请输入您要提取的数据需求', 'error'); return; }
+
+  const btn = document.getElementById('parse-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>AI 解析中...';
+
+  try {
+    const resp = await fetch('/api/parse_intent', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_query: query })
+    });
+    const data = await resp.json();
+
+    if (!data.ok) { showToast(data.message, 'error'); btn.disabled = false; btn.innerHTML = '&#x1F50D; 解析需求'; return; }
+
+    parsedIntent = data.intent;
+    showIntentPreview(data.intent);
+    showToast('解析完成! 确认无误后点击"开始爬取"');
+  } catch (err) {
+    showToast('解析失败: ' + err.message, 'error');
+  }
+  btn.disabled = false;
+  btn.innerHTML = '&#x1F50D; 解析需求';
+}
+
+function showIntentPreview(intent) {
+  const card = document.getElementById('intent-card');
+  const grid = document.getElementById('intent-grid');
+
+  const conf = intent.confidence || 0;
+  const confCls = conf >= 0.8 ? 'conf-high' : conf >= 0.5 ? 'conf-mid' : 'conf-low';
+
+  let fieldsHtml = '';
+  (intent.fields || []).forEach(f => {
+    const desc = (intent.field_descriptions || {})[f] || '';
+    fieldsHtml += `<span class="field-tag" title="${escapeHtml(desc)}">${escapeHtml(f)}</span>`;
+  });
+
+  // ── 页面采集模式 ──
+  if (intent.source_type === 'page') {
+    const matchTypeTag = intent.matched_by === 'url'
+      ? '<span style="background:var(--green);color:#fff;font-size:9px;padding:2px 6px;border-radius:3px;margin-left:6px;">URL匹配</span>'
+      : intent.matched_by === 'route'
+        ? '<span style="background:var(--accent);color:#fff;font-size:9px;padding:2px 6px;border-radius:3px;margin-left:6px;">路由匹配</span>'
+        : '<span style="background:var(--orange);color:#fff;font-size:9px;padding:2px 6px;border-radius:3px;margin-left:6px;">关键词匹配</span>';
+
+    const pageModeBadge = '<span style="background:var(--green);color:#fff;font-size:10px;padding:3px 8px;border-radius:4px;">页面采集</span>';
+    const paginatedTag = intent.is_paginated
+      ? '<span style="background:var(--purple);color:#fff;font-size:9px;padding:2px 6px;border-radius:3px;margin-left:4px;">自动分页</span>'
+      : '';
+
+    grid.innerHTML = `
+      <div class="intent-field full" style="margin-bottom:8px;">
+        ${pageModeBadge}
+        <span style="font-size:12px;color:var(--text);margin-left:8px;">智能识别为网页数据采集</span>
+        ${paginatedTag}
+      </div>
+      <div class="intent-field">
+        <label>页面路由/URL</label>
+        <div class="val" style="font-size:11px;word-break:break-all;">${escapeHtml(intent.url_or_route || '未识别')}</div>
+      </div>
+      <div class="intent-field">
+        <label>对应页面</label>
+        <div class="val">${escapeHtml(intent.route_name || '未知页面')}${matchTypeTag}</div>
+      </div>
+      <div class="intent-field">
+        <label>采集描述</label>
+        <div class="val">${escapeHtml(intent.description || '-')}</div>
+      </div>
+      <div class="confidence-bar">
+        <label style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;">匹配置信度</label>
+        <div class="bar-outer"><div class="bar-inner ${confCls}" style="width:${conf*100}%"></div></div>
+        <span class="val" style="color:${conf>=0.8?'var(--green)':conf>=0.5?'var(--orange)':'var(--red)'}">${(conf*100).toFixed(0)}%</span>
+      </div>
+      <div class="intent-field full">
+        <label>提取字段（${(intent.fields||[]).length} 个）</label>
+        <div class="field-tags">${fieldsHtml || '<span style="color:var(--text-dim);font-size:12px;">全部表格列</span>'}</div>
+      </div>
+      <div class="intent-field full">
+        <label>匹配依据</label>
+        <div class="val" style="font-family:inherit;font-size:12px;">${escapeHtml(intent.reasoning || '-')}</div>
+      </div>
+    `;
+
+    card.style.display = 'block';
+    document.getElementById('custom-results').style.display = 'none';
+    document.getElementById('custom-export').style.display = 'none';
+    document.getElementById('custom-progress').style.display = 'none';
+    return;
+  }
+
+  // ── API 采集模式（原有逻辑）──
+  // 规则匹配信息
+  let ruleInfo = '';
+  if (intent.rule_matched_keywords && intent.rule_matched_keywords.length > 0) {
+    ruleInfo = `<div class="intent-field full" style="margin-top:4px;">
+      <label>规则匹配关键词</label>
+      <div class="val" style="font-size:11px;color:var(--accent);">
+        ${intent.rule_matched_keywords.map(k => `<span class="field-tag" style="font-size:10px;padding:2px 6px;">${escapeHtml(k)}</span>`).join(' ')}
+      </div>
+    </div>`;
+  }
+  if (intent.endpoint_candidates && intent.endpoint_candidates.length > 1) {
+    const candHtml = intent.endpoint_candidates.map(c =>
+      `${escapeHtml(c.name)}(${c.score})`
+    ).join(' &gt; ');
+    ruleInfo += `<div class="intent-field full">
+      <label>候选端点排名</label>
+      <div class="val" style="font-size:11px;">${candHtml}</div>
+    </div>`;
+  }
+  if (intent.alternative_apis && intent.alternative_apis.length > 0) {
+    ruleInfo += `<div class="intent-field full">
+      <label>备选端点</label>
+      <div class="val" style="font-size:11px;color:var(--orange);">
+        ${intent.alternative_apis.map(a => escapeHtml(a)).join(', ')}
+      </div>
+    </div>`;
+  }
+
+  // 匹配方式标签
+  const matchTag = intent.rule_based
+    ? '<span style="background:var(--purple);color:#fff;font-size:9px;padding:2px 6px;border-radius:3px;margin-left:6px;">规则匹配</span>'
+    : '<span style="background:var(--accent);color:#fff;font-size:9px;padding:2px 6px;border-radius:3px;margin-left:6px;">AI增强</span>';
+
+  grid.innerHTML = `
+    <div class="intent-field">
+      <label>目标 API 接口</label>
+      <div class="val" style="font-size:11px;word-break:break-all;">${escapeHtml(intent.target_api || '未识别')}</div>
+    </div>
+    <div class="intent-field">
+      <label>对应数据表</label>
+      <div class="val">${escapeHtml(intent.api_name || '未知')}${matchTag}</div>
+    </div>
+    <div class="intent-field">
+      <label>提取描述</label>
+      <div class="val">${escapeHtml(intent.description || '-')}</div>
+    </div>
+    <div class="confidence-bar">
+      <label style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;">匹配置信度</label>
+      <div class="bar-outer"><div class="bar-inner ${confCls}" style="width:${conf*100}%"></div></div>
+      <span class="val" style="color:${conf>=0.8?'var(--green)':conf>=0.5?'var(--orange)':'var(--red)'}">${(conf*100).toFixed(0)}%</span>
+    </div>
+    <div class="intent-field full">
+      <label>提取字段（${(intent.fields||[]).length} 个）</label>
+      <div class="field-tags">${fieldsHtml || '<span style="color:var(--text-dim);font-size:12px;">全部字段</span>'}</div>
+    </div>
+    <div class="intent-field full">
+      <label>匹配依据</label>
+      <div class="val" style="font-family:inherit;font-size:12px;">${escapeHtml(intent.reasoning || '-')}</div>
+    </div>
+    ${ruleInfo}
+  `;
+
+  card.style.display = 'block';
+  // 隐藏旧结果
+  document.getElementById('custom-results').style.display = 'none';
+  document.getElementById('custom-export').style.display = 'none';
+  document.getElementById('custom-progress').style.display = 'none';
+}
+
+function clearIntent() {
+  parsedIntent = null;
+  document.getElementById('intent-card').style.display = 'none';
+  document.getElementById('custom-results').style.display = 'none';
+  document.getElementById('custom-export').style.display = 'none';
+  document.getElementById('custom-progress').style.display = 'none';
+  document.getElementById('smart-query').value = '';
+}
+
+// ═══════════ 智能模式 - 执行自定义爬取 ═══════════
+async function executeCustomCrawl() {
+  if (!parsedIntent) { showToast('请先解析需求', 'error'); return; }
+
+  const host = document.getElementById('host').value.trim();
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+
+  if (!host || !username) { showToast('请先在左侧填写平台地址和账号', 'error'); return; }
+
+  document.getElementById('confirm-btn').disabled = true;
+  document.getElementById('confirm-btn').innerHTML = '<span class="spinner"></span>爬取中...';
+  document.getElementById('custom-progress').style.display = 'block';
+  document.getElementById('custom-progress-bar').style.width = '20%';
+  const isPageMode = parsedIntent.source_type === 'page';
+  document.getElementById('custom-progress-text').textContent = isPageMode ? '正在启动浏览器...' : '正在调用 API...';
+
+  try {
+    const resp = await fetch('/api/crawl_custom', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ host, username, password, intent: parsedIntent })
+    });
+    const data = await resp.json();
+
+    if (!data.ok) { showToast(data.message, 'error'); resetCustomButton(); return; }
+
+    document.getElementById('custom-progress-bar').style.width = '100%';
+    document.getElementById('custom-progress-text').textContent = `完成！共提取 ${data.total_rows} 条记录`;
+
+    displayCustomResults(data);
+  } catch (err) {
+    showToast('爬取失败: ' + err.message, 'error');
+    resetCustomButton();
+  }
+}
+
+function displayCustomResults(data) {
+  const container = document.getElementById('custom-results');
+  const columns = data.columns || [];
+  const rows = data.rows || [];
+  const missingFields = data.missing_fields || [];
+  const isPage = data.source_type === 'page';
+
+  let html = `<div class="result-card">`;
+
+  // ── 页面采集提示 ──
+  if (isPage && data.page_info) {
+    const pi = data.page_info;
+    html += `<div class="result-card-header">
+      <h3>${escapeHtml(parsedIntent.description || '页面采集结果')}</h3>
+      <span class="count">${data.total_rows} 条</span>
+      <span style="background:var(--green);color:#fff;font-size:10px;padding:2px 8px;border-radius:4px;">页面采集</span>
+    </div>`;
+    html += `<div style="padding:4px 16px;font-size:11px;color:var(--text-dim);display:flex;gap:16px;flex-wrap:wrap;">
+      <span>页面: ${escapeHtml(pi.title || '-')}</span>
+      <span>URL: ${escapeHtml(pi.url || '-')}</span>
+      <span>共 ${pi.total_pages || 1} 页，${pi.tables_count || 0} 个表格</span>
+    </div>`;
+  } else {
+    html += `<div class="result-card-header">
+      <h3>${escapeHtml(parsedIntent.description || '自定义提取结果')}</h3>
+      <span class="count">${data.total_rows} 条</span>
+      <span style="font-size:10px;color:var(--text-dim);">（字段根据需求动态生成）</span>
+    </div>`;
+  }
+
+  // 缺失字段提示
+  if (missingFields.length > 0) {
+    html += `<div style="padding:8px 16px;background:rgba(255,159,10,0.1);border:1px solid var(--orange);border-radius:4px;margin:8px 0;font-size:11px;color:var(--orange);">
+      &#9888; 以下字段在数据源中未找到对应列: <strong>${missingFields.map(escapeHtml).join(', ')}</strong>（已用空值填充）
+    </div>`;
+  }
+
+  html += `<div class="data-table-wrap">
+    <table class="data-table"><thead><tr>`;
+  columns.forEach(col => { html += `<th>${escapeHtml(col)}</th>`; });
+  html += '</tr></thead><tbody>';
+  rows.forEach(row => {
+    html += '<tr>';
+    columns.forEach(col => {
+      let val = row[col] !== undefined && row[col] !== null ? String(row[col]) : '';
+      if (val.length > 80) val = val.substring(0, 80) + '...';
+      html += `<td title="${escapeHtml(String(row[col]||''))}">${escapeHtml(val)}</td>`;
+    });
+    html += '</tr>';
+  });
+  html += '</tbody></table></div>';
+  if (data.total_rows > 200) {
+    html += `<div style="padding:8px 16px;font-size:11px;color:var(--text-dim);">表格显示前 200 条，共 ${data.total_rows} 条。点击导出按钮获取完整数据。</div>`;
+  }
+  html += '</div>';
+
+  container.innerHTML = html;
+  container.style.display = 'block';
+  document.getElementById('custom-export').style.display = 'flex';
+  resetCustomButton();
+}
+
+function resetCustomButton() {
+  document.getElementById('confirm-btn').disabled = false;
+  document.getElementById('confirm-btn').innerHTML = '&#x2705; 确认并开始爬取';
+}
+
+// ═══════════ 导出 ═══════════
+function exportTable(index, format) { downloadFile('/api/export', { format, table_index: index }); }
+function exportAll(format) { downloadFile('/api/export', { format, table_index: null }); }
+function exportCustom(format) { downloadFile('/api/crawl_custom_export', { format }); }
+
+async function downloadFile(url, body) {
+  try {
+    const resp = await fetch(url, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+    });
+    if (!resp.ok) { const err = await resp.json(); showToast(err.message || '导出失败', 'error'); return; }
+    const blob = await resp.blob();
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    const disp = resp.headers.get('Content-Disposition') || '';
+    a.download = decodeURIComponent((disp.match(/filename="?(.*?)"?$/) || ['', 'export'])[1]);
+    a.click(); URL.revokeObjectURL(a.href);
+    showToast('下载已开始');
+  } catch (err) { showToast('下载失败: ' + err.message, 'error'); }
+}
+
+function resetAll() {
+  document.getElementById('crawl-btn').disabled = false;
+  document.getElementById('crawl-btn').textContent = '开始爬取';
+  deselectAll(); crawlResults = [];
+  document.getElementById('results-area').innerHTML = `<div class="empty-state" id="empty-state"><div class="icon">&#x1F4CA;</div><p>选择左侧数据表，点击"开始爬取"</p></div>`;
+  document.getElementById('global-export').className = 'global-export';
+  document.getElementById('progress-section').style.display = 'none';
+  document.querySelectorAll('#table-list .badge').forEach(b => b.remove());
+  clearIntent();
+}
+
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  let cls = 'toast';
+  if (type === 'error') cls += ' error';
+  else if (type === 'warning') cls += ' warning';
+  t.textContent = msg; t.className = cls;
+  t.style.display = 'block';
+  setTimeout(() => { t.style.display = 'none'; }, 3000);
+}
+
+// ═══════════ 页面采集模式 ═══════════
+let pageRoutesInited = false, pageSelectedRoute = '', pageScrapeResult = null, pageActiveTab = 'overview';
+let paginatedMode = false, paginatedSummary = null;
+
+function initPageRoutes() {
+  const container = document.getElementById('route-tags');
+  container.innerHTML = '';
+  KNOWN_ROUTES.forEach((r, i) => {
+    const tag = document.createElement('span');
+    tag.className = 'route-tag';
+    tag.textContent = r.name;
+    tag.title = r.route + ' [' + r.module + ']';
+    tag.dataset.route = r.route;
+    tag.addEventListener('click', () => {
+      document.querySelectorAll('#route-tags .route-tag').forEach(t => t.classList.remove('active'));
+      tag.classList.add('active');
+      pageSelectedRoute = r.route;
+      document.getElementById('page-route-input').value = r.route;
+    });
+    container.appendChild(tag);
+  });
+}
+
+document.getElementById('page-route-input').addEventListener('input', function() {
+  pageSelectedRoute = this.value.trim();
+  document.querySelectorAll('#route-tags .route-tag').forEach(t => {
+    t.classList.toggle('active', t.dataset.route === pageSelectedRoute);
+  });
+});
+
+// ========== 历史结果折叠管理 ==========
+let _historyEntries = [];
+let _historyExpanded = false;
+
+/** 保存当前已显示的结果到历史记录 */
+function saveCurrentToHistory() {
+  const batchSection = document.getElementById('batch-result-section');
+  const resultTabs = document.getElementById('page-result-tabs');
+
+  // 保存批量结果
+  if (batchSection.style.display !== 'none' && batchSection.innerHTML.trim()) {
+    const batchResults = window._batchResults;
+    const summaryHtml = batchSection.innerHTML;
+    _historyEntries.push({
+      type: 'batch',
+      label: '批量采集 (' + (batchResults ? batchResults.length : '?') + ' 个页面)',
+      batchResults: batchResults ? JSON.parse(JSON.stringify(batchResults)) : null,
+      summaryHtml: summaryHtml,
+      time: new Date().toLocaleTimeString()
+    });
+    batchSection.style.display = 'none';
+  }
+
+  // 保存单页结果
+  if (resultTabs.style.display !== 'none' && pageScrapeResult) {
+    const label = pageScrapeResult.title || pageScrapeResult.url || '单页采集';
+    _historyEntries.push({
+      type: 'single',
+      label: label,
+      result: JSON.parse(JSON.stringify(pageScrapeResult)),
+      tabState: pageActiveTab,
+      time: new Date().toLocaleTimeString()
+    });
+    resultTabs.style.display = 'none';
+    document.getElementById('page-export').style.display = 'none';
+  }
+
+  // 保存分页结果
+  if (paginatedMode && paginatedSummary) {
+    _historyEntries.push({
+      type: 'paginated',
+      label: '分页采集 (' + (paginatedSummary.total_pages_scraped || '?') + ' 页)',
+      summary: JSON.parse(JSON.stringify(paginatedSummary)),
+      time: new Date().toLocaleTimeString()
+    });
+  }
+
+  renderHistoryList();
+}
+
+/** 渲染历史列表 */
+function renderHistoryList() {
+  const container = document.getElementById('previous-results-history');
+  const countEl = document.getElementById('history-count');
+  const listEl = document.getElementById('history-list');
+
+  if (_historyEntries.length === 0) {
+    container.style.display = 'none';
+    return;
+  }
+
+  container.style.display = 'block';
+  countEl.textContent = '(' + _historyEntries.length + ')';
+
+  let html = '';
+  _historyEntries.forEach((entry, i) => {
+    html += '<div style="display:flex;align-items:center;padding:6px 10px;margin:3px 0;background:var(--bg-tertiary);border-radius:6px;font-size:12px;">';
+    html += '<span style="color:var(--accent);font-weight:600;margin-right:8px;">#' + (i + 1) + '</span>';
+    html += '<span style="flex:1;color:var(--text-primary);word-break:break-all;">' + escapeHtml(entry.label) + '</span>';
+    html += '<span style="font-size:10px;color:var(--text-dim);margin-right:10px;">' + entry.time + '</span>';
+    html += '<button onclick="restoreHistoryEntry(' + i + ')" style="font-size:10px;padding:2px 10px;border-radius:4px;border:1px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;">查看</button>';
+    html += '<button onclick="removeHistoryEntry(' + i + ')" style="font-size:10px;padding:2px 8px;margin-left:4px;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--text-dim);cursor:pointer;">✕</button>';
+    html += '</div>';
+  });
+
+  html += '<div style="margin-top:6px;text-align:right;">';
+  html += '<button onclick="clearHistory()" style="font-size:10px;padding:2px 10px;border-radius:4px;border:1px solid var(--danger);background:transparent;color:var(--danger);cursor:pointer;">清空历史</button>';
+  html += '</div>';
+
+  listEl.innerHTML = html;
+}
+
+/** 展开/收起历史区域 */
+function toggleHistorySection() {
+  _historyExpanded = !_historyExpanded;
+  const listEl = document.getElementById('history-list');
+  const iconEl = document.getElementById('history-toggle-icon');
+  if (_historyExpanded) {
+    listEl.style.display = 'block';
+    iconEl.textContent = '▼';
+  } else {
+    listEl.style.display = 'none';
+    iconEl.textContent = '▶';
+  }
+}
+
+/** 恢复历史条目 */
+function restoreHistoryEntry(index) {
+  const entry = _historyEntries[index];
+  if (!entry) return;
+
+  // 先保存当前结果到历史
+  _historyEntries.splice(index, 1);
+
+  const oldBatchResults = window._batchResults;
+  const oldPageResult = pageScrapeResult;
+  const oldPaginatedSummary = paginatedSummary;
+  const oldPaginatedMode = paginatedMode;
+
+  // 若当前有结果，压入历史顶部
+  if (oldBatchResults || oldPageResult || oldPaginatedSummary) {
+    const currentEntries = [];
+    if (oldBatchResults) {
+      currentEntries.push({
+        type: 'batch',
+        label: '批量采集 (' + oldBatchResults.length + ' 个页面)',
+        batchResults: JSON.parse(JSON.stringify(oldBatchResults)),
+        time: new Date().toLocaleTimeString()
+      });
+    }
+    if (oldPageResult) {
+      currentEntries.push({
+        type: 'single',
+        label: oldPageResult.title || oldPageResult.url || '单页采集',
+        result: JSON.parse(JSON.stringify(oldPageResult)),
+        tabState: pageActiveTab,
+        time: new Date().toLocaleTimeString()
+      });
+    }
+    if (oldPaginatedSummary) {
+      currentEntries.push({
+        type: 'paginated',
+        label: '分页采集 (' + (oldPaginatedSummary.total_pages_scraped || '?') + ' 页)',
+        summary: JSON.parse(JSON.stringify(oldPaginatedSummary)),
+        time: new Date().toLocaleTimeString()
+      });
+    }
+    _historyEntries = currentEntries.concat(_historyEntries);
+  }
+
+  // 恢复选中条目
+  if (entry.type === 'batch') {
+    window._batchResults = entry.batchResults;
+    pageScrapeResult = null;
+    paginatedMode = false;
+    document.getElementById('page-result-tabs').style.display = 'none';
+    document.getElementById('page-export').style.display = 'none';
+    document.getElementById('page-result-body').innerHTML = '';
+
+    if (entry.summaryHtml) {
+      const section = document.getElementById('batch-result-section');
+      section.style.display = 'block';
+      section.innerHTML = entry.summaryHtml;
+    } else if (entry.batchResults) {
+      const section = document.getElementById('batch-result-section');
+      section.style.display = 'block';
+      // 重建查看按钮（事件绑定）
+      let html = '<div style="padding:12px;">';
+      html += '<div style="font-weight:600;margin-bottom:8px;color:var(--text-primary);">📊 批量采集 <span style="color:var(--accent);">(' + entry.batchResults.length + ' 个页面)</span></div>';
+      entry.batchResults.forEach((r, j) => {
+        const ok = !r.error;
+        html += '<div style="display:flex;align-items:center;gap:8px;padding:6px 8px;margin:4px 0;background:var(--bg-tertiary);border-radius:6px;font-size:12px;">';
+        html += '<span style="color:' + (ok ? 'var(--success)' : 'var(--danger)') + ';width:16px;">' + (ok ? '✓' : '✕') + '</span>';
+        html += '<span style="flex:1;color:var(--text-primary);word-break:break-all;">' + (r.url || '页面 ' + (j+1)) + '</span>';
+        html += '<span style="color:var(--text-dim);font-size:11px;">表格:' + (r.tables ? r.tables.length : 0) + ' 图片:' + (r.images ? r.images.length : 0) + '</span>';
+        if (ok) html += '<button onclick="viewBatchResult(' + j + ')" style="font-size:10px;padding:2px 10px;border-radius:4px;border:1px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;">查看</button>';
+        html += '</div>';
+      });
+      html += '</div>';
+      section.innerHTML = html;
+    }
+    document.getElementById('batch-result-section').scrollIntoView({ behavior: 'smooth' });
+
+  } else if (entry.type === 'single') {
+    window._batchResults = null;
+    document.getElementById('batch-result-section').style.display = 'none';
+    paginatedMode = false;
+    pageScrapeResult = entry.result;
+    pageActiveTab = entry.tabState || 'overview';
+    renderPageResult(entry.result);
+    switchPageTab(pageActiveTab);
+    document.getElementById('page-result-tabs').scrollIntoView({ behavior: 'smooth' });
+
+  } else if (entry.type === 'paginated') {
+    paginatedMode = true;
+    paginatedSummary = entry.summary;
+    showPaginatedResult(entry.summary);
+    document.getElementById('page-result-tabs').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  renderHistoryList();
+}
+
+/** 移除单个历史条目 */
+function removeHistoryEntry(index) {
+  _historyEntries.splice(index, 1);
+  renderHistoryList();
+}
+
+/** 清空全部历史 */
+function clearHistory() {
+  _historyEntries = [];
+  renderHistoryList();
+  document.getElementById('previous-results-history').style.display = 'none';
+}
+
+/** 新采集开始时：自动折叠旧结果到历史 */
+function collapsePreviousResults() {
+  saveCurrentToHistory();
+  // 清空旧内容区域
+  pageScrapeResult = null;
+  window._batchResults = null;
+  paginatedMode = false;
+  paginatedSummary = null;
+  document.getElementById('page-result-tabs').style.display = 'none';
+  document.getElementById('page-export').style.display = 'none';
+  document.getElementById('page-result-body').innerHTML = '';
+  document.getElementById('batch-result-section').style.display = 'none';
+  document.getElementById('batch-result-section').innerHTML = '';
+}
+
+async function startPageScrape() {
+  collapsePreviousResults();  // 折叠之前的结果
+
+  const host = document.getElementById('host').value.trim();
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+  const target = pageSelectedRoute || document.getElementById('page-route-input').value.trim();
+
+  if (!host || !username) { showToast('请填写平台地址和账号', 'error'); return; }
+  if (!target) { showToast('请选择或输入页面路由', 'error'); return; }
+
+  paginatedMode = false;
+  paginatedSummary = null;
+
+  const btn = document.getElementById('page-scrape-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>采集中...';
+  document.getElementById('page-progress').style.display = 'flex';
+  document.getElementById('page-progress-bar').style.width = '10%';
+  document.getElementById('page-progress-text').textContent = '正在启动浏览器...';
+  document.getElementById('page-result-tabs').style.display = 'none';
+  document.getElementById('page-export').style.display = 'none';
+  document.getElementById('page-result-body').innerHTML = '';
+  document.getElementById('page-fields-section').style.display = 'none';
+
+  try {
+    const payload = { host, username, password, target, with_screenshot: false };
+    // 如果有选中字段，传入 fields 参数
+    if (selectedFields.length > 0) {
+      payload.fields = selectedFields;
+    }
+    const resp = await fetch('/api/page/scrape', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await resp.json();
+
+    if (!data.ok) { showToast(data.message, 'error'); resetPageButton(); return; }
+
+    pageScrapeResult = data.result;
+    document.getElementById('page-progress-bar').style.width = '100%';
+    document.getElementById('page-progress-text').textContent = '采集完成！';
+
+    renderPageResult(data.result);
+    showToast('页面采集完成！');
+
+    // 加载可用字段供筛选
+    loadAvailableFields();
+
+  } catch (err) {
+    showToast('采集失败: ' + err.message, 'error');
+    resetPageButton();
+  }
+}
+
+function renderPageResult(result) {
+  if (!result) return;
+  document.getElementById('page-result-tabs').style.display = 'flex';
+
+  // 更新各标签页计数
+  document.getElementById('ptab-images').textContent = '图片(' + (result.images||[]).length + ')';
+  document.getElementById('ptab-links').textContent = '链接(' + (result.links||[]).length + ')';
+  document.getElementById('ptab-tables').textContent = '表格(' + (result.tables||[]).length + ')';
+  document.getElementById('ptab-forms').textContent = '表单(' + (result.forms||[]).length + ')';
+
+  switchPageTab('overview');
+  document.getElementById('page-export').style.display = 'flex';
+  resetPageButton();
+}
+
+function switchPageTab(tab) {
+  pageActiveTab = tab;
+  document.querySelectorAll('.page-result-tab').forEach(t => t.classList.remove('active'));
+  const tabEl = document.getElementById('ptab-' + tab);
+  if (tabEl) tabEl.classList.add('active');
+
+  // 同步导出标签显示
+  const catLabels = {
+    'overview': '全部', 'text': '文本', 'images': '图片',
+    'links': '链接', 'tables': '表格', 'forms': '表单', 'structure': '结构'
+  };
+  const catEl = document.getElementById('page-export-cat');
+  if (catEl) catEl.textContent = catLabels[tab] || tab;
+
+  // 分页模式：从 API 加载数据
+  if (paginatedMode && paginatedSummary) {
+    fetchAndRenderPaginatedTab(tab);
+    return;
+  }
+
+  const body = document.getElementById('page-result-body');
+  const r = pageScrapeResult;
+  if (!r) { body.innerHTML = '<div class="empty-state page-mode"><p>无数据</p></div>'; return; }
+
+  if (r.error) {
+    body.innerHTML = `<div class="empty-state page-mode"><p style="color:var(--red);">错误: ${escapeHtml(r.error)}</p></div>`;
+    return;
+  }
+
+  switch (tab) {
+    case 'overview':
+      body.innerHTML = renderOverview(r);
+      break;
+    case 'text':
+      body.innerHTML = renderText(r);
+      break;
+    case 'images':
+      body.innerHTML = renderImages(r);
+      break;
+    case 'links':
+      body.innerHTML = renderLinks(r);
+      break;
+    case 'tables':
+      body.innerHTML = renderTables(r);
+      break;
+    case 'forms':
+      body.innerHTML = renderForms(r);
+      break;
+    case 'structure':
+      body.innerHTML = renderStructure(r);
+      break;
+  }
+}
+
+function renderOverview(r) {
+  const img_count = (r.images||[]).length, link_count = (r.links||[]).length;
+  const tbl_count = (r.tables||[]).length, form_count = (r.forms||[]).length;
+  const sec_count = (r.sections||[]).length, text_len = (r.raw_text||'').length;
+  const meta = r.metadata || {};
+
+  return `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;padding:8px 0;">
+    <div class="intent-field"><label>页面标题</label><div class="val" style="font-size:13px;">${escapeHtml(r.title||'无')}</div></div>
+    <div class="intent-field"><label>页面 URL</label><div class="val" style="font-size:11px;word-break:break-all;">${escapeHtml(r.url||'')}</div></div>
+    <div class="intent-field"><label>采集时间</label><div class="val">${escapeHtml(r.timestamp||'')}</div></div>
+    <div class="intent-field"><label>加载耗时</label><div class="val">${meta.load_time_ms||'?'} ms</div></div>
+    <div class="intent-field"><label>文本总量</label><div class="val">${text_len.toLocaleString()} 字符</div></div>
+    <div class="intent-field"><label>图片数量</label><div class="val" style="color:var(--accent);">${img_count} 张</div></div>
+    <div class="intent-field"><label>链接数量</label><div class="val" style="color:var(--accent);">${link_count} 个</div></div>
+    <div class="intent-field"><label>表格数据</label><div class="val" style="color:var(--accent);">${tbl_count} 个表格</div></div>
+    <div class="intent-field"><label>表单字段</label><div class="val" style="color:var(--accent);">${form_count} 个表单</div></div>
+    <div class="intent-field"><label>页面结构</label><div class="val">${sec_count} 个元素</div></div>
+  </div>`;
+}
+
+function renderText(r) {
+  const text = r.raw_text || '';
+  if (!text.trim()) return '<div class="empty-state page-mode"><p>未提取到文本内容</p></div>';
+  const lines = text.split('\n').filter(l => l.trim());
+  return `<div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;font-size:13px;line-height:1.8;white-space:pre-wrap;">${escapeHtml(lines.join('\n\n'))}</div>`;
+}
+
+function renderImages(r) {
+  const imgs = r.images || [];
+  if (imgs.length === 0) return '<div class="empty-state page-mode"><p>未提取到图片</p></div>';
+  let html = '<div class="img-grid">';
+  imgs.forEach(img => {
+    html += `<div class="img-card">
+      <img src="${escapeHtml(img.src||'')}" alt="${escapeHtml(img.alt||'')}" loading="lazy" onerror="this.style.display=\'none\'">
+      <div class="img-meta">
+        <div style="font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(img.alt||'(无描述)')}</div>
+        <div>${img.width||'?'}x${img.height||'?'} ${img.is_svg?'SVG':''}</div>
+        <div style="font-size:9px;word-break:break-all;max-height:24px;overflow:hidden;">${escapeHtml(img.src||'')}</div>
+      </div>
+    </div>`;
+  });
+  html += '</div>';
+  return html;
+}
+
+function renderLinks(r) {
+  const links = r.links || [];
+  if (links.length === 0) return '<div class="empty-state page-mode"><p>未提取到链接</p></div>';
+  let html = '<ul class="link-list">';
+  links.forEach(link => {
+    const typeLabel = link.link_type === 'api' ? 'API' : link.link_type === 'file' ? '文件' : link.is_internal ? '内链' : '外链';
+    const typeColor = link.link_type === 'api' ? 'var(--purple)' : link.link_type === 'file' ? 'var(--orange)' : link.is_internal ? 'var(--accent)' : 'var(--text-dim)';
+    html += `<li>
+      <span class="ltag" style="color:${typeColor};">${typeLabel}</span>
+      <span class="ltext">${escapeHtml(link.text||'(无文本)')}</span>
+      <a href="${escapeHtml(link.href||'')}" target="_blank" style="font-size:10px;">${escapeHtml((link.href||'').substring(0,80))}${(link.href||'').length>80?'...':''}</a>
+    </li>`;
+  });
+  html += '</ul>';
+  return html;
+}
+
+function renderTables(r) {
+  const tables = r.tables || [];
+  if (tables.length === 0) return '<div class="empty-state page-mode"><p>未提取到表格数据</p></div>';
+  let html = '';
+  tables.forEach((tbl, idx) => {
+    html += `<div class="result-card" style="margin-bottom:16px">
+      <div class="result-card-header"><h3>表格 ${idx+1}: ${escapeHtml(tbl.caption||'')}（${tbl.row_count||0} 行 x ${tbl.col_count||0} 列）</h3></div>
+      <div class="data-table-wrap"><table class="data-table"><thead><tr>`;
+    (tbl.headers||[]).forEach(h => { html += `<th>${escapeHtml(h)}</th>`; });
+    html += '</tr></thead><tbody>';
+    (tbl.rows||[]).slice(0, 200).forEach(row => {
+      html += '<tr>';
+      (row||[]).forEach(cell => {
+        let v = String(cell||'');
+        if (v.length > 80) v = v.substring(0,80)+'...';
+        html += `<td title="${escapeHtml(String(cell||''))}">${escapeHtml(v)}</td>`;
+      });
+      html += '</tr>';
+    });
+    html += '</tbody></table></div>';
+    if ((tbl.row_count||0) > 200) html += `<div style="padding:8px 16px;font-size:11px;color:var(--text-dim);">仅显示前 200 行，共 ${tbl.row_count} 行</div>`;
+    html += '</div>';
+  });
+  return html || '<div class="empty-state page-mode"><p>未提取到表格数据</p></div>';
+}
+
+function renderForms(r) {
+  const forms = r.forms || [];
+  if (forms.length === 0) return '<div class="empty-state page-mode"><p>未提取到表单</p></div>';
+  let html = '';
+  forms.forEach((form, idx) => {
+    html += `<div class="result-card" style="margin-bottom:16px">
+      <div class="result-card-header"><h3>表单 ${idx+1}: ${escapeHtml(form.form_id||'')}（${(form.fields||[]).length} 个字段）</h3></div>
+      <div class="data-table-wrap"><table class="data-table"><thead><tr><th>标签</th><th>字段名</th><th>类型</th><th>值</th><th>提示</th></tr></thead><tbody>`;
+    (form.fields||[]).forEach(f => {
+      html += `<tr>
+        <td>${escapeHtml(f.label||'')}</td>
+        <td>${escapeHtml(f.name||'')}</td>
+        <td>${escapeHtml(f.type||'')}</td>
+        <td>${escapeHtml(f.value||'')}</td>
+        <td>${escapeHtml(f.placeholder||'')}</td>
+      </tr>`;
+    });
+    html += '</tbody></table></div></div>';
+  });
+  return html;
+}
+
+function renderStructure(r) {
+  const sections = r.sections || [];
+  if (sections.length === 0) return '<div class="empty-state page-mode"><p>未提取到页面结构</p></div>';
+  let html = '<div style="font-size:13px;line-height:2;">';
+  sections.slice(0, 200).forEach(sec => {
+    const stype = sec.section_type, text = escapeHtml(sec.text||'');
+    switch (stype) {
+      case 'heading':
+        const size = Math.max(26 - (sec.level||1)*2, 13);
+        html += `<div style="font-size:${size}px;font-weight:700;margin-top:12px;color:var(--accent);">${'#' .repeat(sec.level||1)} ${text}</div>`;
+        break;
+      case 'paragraph':
+        html += `<p style="margin:6px 0;color:var(--text);max-width:900px;">${text.substring(0,500)}${text.length>500?'...':''}</p>`;
+        break;
+      case 'list':
+        html += '<ul style="margin:4px 0 4px 20px;color:var(--text-dim);">';
+        (sec.children||[]).forEach(c => { html += `<li>${escapeHtml(c)}</li>`; });
+        html += '</ul>';
+        break;
+      case 'blockquote':
+        html += `<blockquote style="border-left:3px solid var(--accent);padding-left:12px;margin:8px 0;color:var(--text-dim);">${text}</blockquote>`;
+        break;
+      case 'code':
+        html += `<pre style="background:var(--bg);padding:10px;border-radius:4px;font-size:11px;overflow-x:auto;margin:6px 0;">${text}</pre>`;
+        break;
+    }
+  });
+  if (sections.length > 200) html += `<p style="color:var(--text-dim);font-size:11px;">... 还有 ${sections.length-200} 个元素未显示</p>`;
+  html += '</div>';
+  return html;
+}
+
+function resetPageButton() {
+  document.getElementById('page-scrape-btn').disabled = false;
+  document.getElementById('page-scrape-btn').innerHTML = '开始页面采集';
+}
+
+function resetPageScrape() {
+  pageScrapeResult = null;
+  paginatedMode = false;
+  paginatedSummary = null;
+  selectedFields = [];
+  pageSelectedRoute = '';
+  document.getElementById('page-route-input').value = '';
+  document.querySelectorAll('#route-tags .route-tag').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-result-tabs').style.display = 'none';
+  document.getElementById('page-export').style.display = 'none';
+  document.getElementById('page-progress').style.display = 'none';
+  document.getElementById('page-fields-section').style.display = 'none';
+  document.getElementById('page-fields-list').innerHTML = '<span style="font-size:11px;color:var(--text-dim);">请先完成一次采集以获取可用字段</span>';
+  document.getElementById('page-refilter-btn').disabled = true;
+  document.getElementById('page-paginated-refilter-btn').disabled = true;
+  document.getElementById('page-result-body').innerHTML = `<div class="empty-state page-mode" id="page-empty">
+    <div class="icon">&#x1F310;</div><p>选择上方页面路由，点击"开始页面采集"</p>
+    <p style="font-size:11px;margin-top:6px;color:var(--text-dim);">将使用无头浏览器完整爬取页面上所有可见内容</p>
+  </div>`;
+  resetPageButton();
+}
+
+async function exportPageScrape(format) {
+  if (!pageScrapeResult) { showToast('没有可导出的数据', 'error'); return; }
+  // 分页模式：走分页导出接口
+  if (paginatedMode) {
+    const category = pageActiveTab || 'overview';
+    return exportPaginated(format, 'merged', category);
+  }
+  const category = pageActiveTab || 'overview';
+  try {
+    const resp = await fetch('/api/page/scrape_export', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ format, page_index: 0, category })
+    });
+    if (!resp.ok) { const err = await resp.json(); showToast(err.message||'导出失败','error'); return; }
+    const blob = await resp.blob();
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    const disp = resp.headers.get('Content-Disposition') || '';
+    a.download = decodeURIComponent((disp.match(/filename="?(.*?)"?$/)||['','export'])[1]);
+    a.click(); URL.revokeObjectURL(a.href);
+    const catLabels = {overview:'全部',text:'文本',images:'图片',links:'链接',tables:'表格',forms:'表单',structure:'结构'};
+    showToast(`${catLabels[category]||category} 数据下载已开始`);
+  } catch(err) { showToast('下载失败: '+err.message,'error'); }
+}
+
+// ═══════════ 字段筛选 ═══════════
+
+let selectedFields = [];
+
+async function loadAvailableFields() {
+  try {
+    const resp = await fetch('/api/page/available_fields');
+    const data = await resp.json();
+    if (!data.ok || !data.fields.length) return;
+
+    const list = document.getElementById('page-fields-list');
+    list.innerHTML = data.fields.map(f =>
+      `<label style="display:inline-flex;align-items:center;gap:3px;cursor:pointer;font-size:11px;padding:2px 6px;border-radius:4px;background:var(--bg-main);border:1px solid var(--border);">
+        <input type="checkbox" value="${escapeHtml(f)}" class="field-cb" onchange="onFieldChange()" style="margin:0;">
+        ${escapeHtml(f)}
+      </label>`
+    ).join('');
+
+    document.getElementById('page-fields-section').style.display = 'block';
+    document.getElementById('page-refilter-btn').disabled = false;
+    document.getElementById('page-paginated-refilter-btn').disabled = false;
+    updateFieldsHint();
+
+    // 默认全选
+    fieldsSelectAll();
+  } catch(e) { /* 忽略 */ }
+}
+
+function onFieldChange() {
+  updateFieldsHint();
+}
+
+function updateFieldsHint() {
+  const cbs = document.querySelectorAll('.field-cb:checked');
+  const hint = document.getElementById('page-fields-hint');
+  if (cbs.length === 0) {
+    hint.textContent = '请至少勾选一个字段';
+    document.getElementById('page-refilter-btn').disabled = true;
+    document.getElementById('page-paginated-refilter-btn').disabled = true;
+  } else {
+    hint.textContent = `已选 ${cbs.length} 个字段，点击按钮重新采集`;
+    document.getElementById('page-refilter-btn').disabled = false;
+    document.getElementById('page-paginated-refilter-btn').disabled = false;
+  }
+}
+
+function fieldsSelectAll() {
+  document.querySelectorAll('.field-cb').forEach(cb => cb.checked = true);
+  updateFieldsHint();
+}
+
+function fieldsSelectNone() {
+  document.querySelectorAll('.field-cb').forEach(cb => cb.checked = false);
+  updateFieldsHint();
+}
+
+function getSelectedFields() {
+  const cbs = document.querySelectorAll('.field-cb:checked');
+  return Array.from(cbs).map(cb => cb.value);
+}
+
+async function startPageScrapeWithFields() {
+  const fields = getSelectedFields();
+  if (!fields.length) { showToast('请至少选择一个字段', 'error'); return; }
+  selectedFields = fields;
+  await startPageScrape();  // 内部会读取 selectedFields
+}
+
+async function startPaginatedScrapeWithFields() {
+  const fields = getSelectedFields();
+  if (!fields.length) { showToast('请至少选择一个字段', 'error'); return; }
+  selectedFields = fields;
+  await startPaginatedScrape();  // 内部会读取 selectedFields
+}
+
+// ═══════════ 分页采集 ═══════════
+
+async function startPaginatedScrape() {
+  collapsePreviousResults();  // 折叠之前的结果
+
+  const host = document.getElementById('host').value.trim();
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const target = pageSelectedRoute || document.getElementById('page-route-input').value.trim();
+  if (!host || !target) return showToast('请填写平台地址和页面路由', 'error');
+
+  const pageSizeVal = document.getElementById('page-size-select').value;
+  const pageStartVal = document.getElementById('page-start-input').value;
+  const pageEndVal = document.getElementById('page-end-input').value;
+
+  const payload = {
+    host, username: username || 'admin', password: password || 'admin123',
+    route_or_url: target,
+    page_start: parseInt(pageStartVal) || 1,
+  };
+  if (pageSizeVal) payload.page_size = parseInt(pageSizeVal);
+  if (pageEndVal) payload.page_end = parseInt(pageEndVal);
+  // 如果有选中字段，传入 fields 参数
+  if (selectedFields.length > 0) {
+    payload.fields = selectedFields;
+  }
+
+  const btn = document.getElementById('page-paginated-btn');
+  btn.disabled = true;
+  btn.textContent = '采集启动中...';
+  document.getElementById('page-scrape-btn').disabled = true;
+
+  document.getElementById('page-progress').style.display = 'flex';
+  document.getElementById('page-progress-bar').style.width = '5%';
+  document.getElementById('page-progress-text').textContent = '正在启动浏览器...';
+
+  try {
+    const resp = await fetch('/api/page/scrape_paginated', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await resp.json();
+    if (!data.ok) { showToast(data.message || '启动失败', 'error'); resetPaginatedButton(); return; }
+    showToast('分页采集已启动，请等待...');
+    pollPaginatedStatus();
+  } catch (err) {
+    showToast('请求失败: ' + err.message, 'error');
+    resetPaginatedButton();
+  }
+}
+
+let paginatedPollTimer = null;
+
+function pollPaginatedStatus() {
+  paginatedPollTimer = setInterval(async () => {
+    try {
+      const resp = await fetch('/api/page/scrape_paginated_status');
+      const data = await resp.json();
+      const bar = document.getElementById('page-progress-bar');
+      const text = document.getElementById('page-progress-text');
+      bar.style.width = data.progress + '%';
+      text.textContent = data.status_text || '';
+
+      if (data.has_paginated_data && !data.running) {
+        // 采集完成
+        clearInterval(paginatedPollTimer);
+        paginatedPollTimer = null;
+        showPaginatedResult(data.summary);
+        resetPaginatedButton();
+        document.getElementById('page-scrape-btn').disabled = false;
+        showToast('分页采集完成！共 ' + data.summary.total_pages_scraped + ' 页');
+        // 加载可用字段供筛选
+        loadAvailableFields();
+      } else if (!data.running && data.summary && data.summary.total_pages_scraped === undefined) {
+        // 出错或未采集到
+        clearInterval(paginatedPollTimer);
+        paginatedPollTimer = null;
+        if (data.error) showToast('采集出错: ' + data.error, 'error');
+        resetPaginatedButton();
+        document.getElementById('page-scrape-btn').disabled = false;
+      }
+    } catch (err) { /* 轮询失败忽略 */ }
+  }, 1000);
+}
+
+function showPaginatedResult(summary) {
+  paginatedMode = true;
+  paginatedSummary = summary;
+
+  // 构造标准化结果对象供 render 函数使用
+  pageScrapeResult = {
+    title: summary.title || '',
+    url: summary.url || '',
+    images: [],
+    links: [],
+    tables: [],
+    forms: [],
+    sections: [],
+    raw_text: '',
+    _paginated: true,
+    _summary: summary,
+  };
+
+  // 显示标签页和计数
+  document.getElementById('page-result-tabs').style.display = 'flex';
+  document.getElementById('ptab-images').textContent = '图片(' + (summary.merged_images_count || 0) + ')';
+  document.getElementById('ptab-links').textContent = '链接(' + (summary.merged_links_count || 0) + ')';
+  document.getElementById('ptab-tables').textContent = '表格(' + (summary.merged_tables_count || 0) + ')';
+  document.getElementById('ptab-forms').textContent = '表单(' + (summary.merged_forms_count || 0) + ')';
+  document.getElementById('ptab-structure').textContent = '结构(' + (summary.merged_structure_count || 0) + ')';
+
+  // 概览直接显示
+  const body = document.getElementById('page-result-body');
+  body.innerHTML = _renderPaginatedOverview(summary);
+
+  document.getElementById('page-export').style.display = 'flex';
+  document.getElementById('page-progress').style.display = 'none';
+}
+
+function _renderPaginatedOverview(summary) {
+  const pi = summary.pagination_info || {};
+  return `<div style="padding:8px 0;">
+    <h4 style="margin-bottom:10px;color:var(--accent);">分页采集完成</h4>
+    <table style="font-size:12px;border-collapse:collapse;"><tbody>
+      <tr><td style="padding:4px 12px 4px 0;color:var(--text-dim);">页面标题</td><td style="font-weight:600;">${escapeHtml(summary.title || '-')}</td></tr>
+      <tr><td style="padding:4px 12px 4px 0;color:var(--text-dim);">页面URL</td><td style="font-size:11px;word-break:break-all;">${escapeHtml(summary.url || '-')}</td></tr>
+      <tr><td style="padding:4px 12px 4px 0;color:var(--text-dim);">爬取页数</td><td style="font-weight:600;">${summary.total_pages_scraped || 0} 页</td></tr>
+      <tr><td style="padding:4px 12px 4px 0;color:var(--text-dim);">总记录数</td><td style="font-weight:600;">${pi.total_items || '-'}</td></tr>
+      <tr><td style="padding:4px 12px 4px 0;color:var(--text-dim);">每页条数</td><td style="font-weight:600;">${pi.page_size || '-'}</td></tr>
+      <tr><td style="padding:4px 12px 4px 0;color:var(--text-dim);">合并表格</td><td style="font-weight:600;">${summary.merged_tables_count || 0} 个</td></tr>
+      <tr><td style="padding:4px 12px 4px 0;color:var(--text-dim);">合并链接</td><td style="font-weight:600;">${summary.merged_links_count || 0} 个</td></tr>
+      <tr><td style="padding:4px 12px 4px 0;color:var(--text-dim);">合并图片</td><td style="font-weight:600;">${summary.merged_images_count || 0} 个</td></tr>
+      <tr><td style="padding:4px 12px 4px 0;color:var(--text-dim);">合并表单</td><td style="font-weight:600;">${summary.merged_forms_count || 0} 个</td></tr>
+      <tr><td style="padding:4px 12px 4px 0;color:var(--text-dim);">文本总量</td><td style="font-weight:600;">${(summary.merged_text_length || 0).toLocaleString()} 字符</td></tr>
+    </tbody></table>
+    <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;">
+      <span style="font-size:12px;font-weight:600;line-height:30px;">导出数据：</span>
+      ${['csv','json','xlsx'].map(f => `<button class="btn outline" onclick="exportPaginated('${f}','merged','tables')" style="font-size:10px;padding:3px 10px;">${f.toUpperCase()}</button>`).join('')}
+      <span style="display:inline-block;width:1px;background:var(--border);margin:0 4px;align-self:stretch;"></span>
+      ${['tables','links','images','forms','text'].map(c => `<button class="btn outline" onclick="exportPaginated('csv','merged','${c}')" style="font-size:10px;padding:3px 8px;">${c}</button>`).join('')}
+    </div>
+  </div>`;
+}
+
+async function fetchAndRenderPaginatedTab(category) {
+  const body = document.getElementById('page-result-body');
+  body.innerHTML = '<div class="empty-state page-mode"><div class="spinner"></div><p>加载中...</p></div>';
+
+  try {
+    const resp = await fetch('/api/page/scrape_paginated_data?category=' + encodeURIComponent(category));
+    const data = await resp.json();
+    if (!data.ok) { body.innerHTML = '<div class="empty-state page-mode"><p>加载失败</p></div>'; return; }
+
+    // 填充到 pageScrapeResult 供已有渲染函数使用
+    const d = data.data;
+    pageScrapeResult.images = d.images || [];
+    pageScrapeResult.links = d.links || [];
+    pageScrapeResult.tables = d.tables || [];
+    pageScrapeResult.forms = d.forms || [];
+    pageScrapeResult.sections = d.sections || [];
+    pageScrapeResult.raw_text = d.text || '';
+
+    switch (category) {
+      case 'overview':
+        body.innerHTML = _renderPaginatedOverview(paginatedSummary);
+        break;
+      case 'text':
+        body.innerHTML = renderText(pageScrapeResult);
+        break;
+      case 'images':
+        body.innerHTML = renderImages(pageScrapeResult);
+        break;
+      case 'links':
+        body.innerHTML = renderLinks(pageScrapeResult);
+        break;
+      case 'tables':
+        body.innerHTML = renderTables(pageScrapeResult);
+        break;
+      case 'forms':
+        body.innerHTML = renderForms(pageScrapeResult);
+        break;
+      case 'structure':
+        body.innerHTML = renderStructure(pageScrapeResult);
+        break;
+    }
+  } catch (err) {
+    body.innerHTML = '<div class="empty-state page-mode"><p>加载失败: ' + escapeHtml(err.message) + '</p></div>';
+  }
+}
+
+async function exportPaginated(format, source, category) {
+  source = source || 'merged';
+  category = category || 'overview';
+  try {
+    const resp = await fetch('/api/page/scrape_paginated_export', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ format, source, category })
+    });
+    if (!resp.ok) { const err = await resp.json(); showToast(err.message||'导出失败','error'); return; }
+    const blob = await resp.blob();
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    const disp = resp.headers.get('Content-Disposition') || '';
+    a.download = decodeURIComponent((disp.match(/filename="?(.*?)"?$/)||['','export'])[1]);
+    a.click(); URL.revokeObjectURL(a.href);
+    showToast('下载已开始');
+  } catch(err) { showToast('下载失败: '+err.message,'error'); }
+}
+
+function resetPaginatedButton() {
+  const btn = document.getElementById('page-paginated-btn');
+  btn.disabled = false;
+  btn.textContent = '分页采集';
+}
+
+// 页面内部也加上重置按钮的联动
+const _origResetPage = resetPageScrape;
+resetPageScrape = function() {
+  _origResetPage();
+  if (paginatedPollTimer) { clearInterval(paginatedPollTimer); paginatedPollTimer = null; }
+  if (batchPollTimer) { clearInterval(batchPollTimer); batchPollTimer = null; }
+  resetPaginatedButton();
+  document.getElementById('page-scrape-btn').disabled = false;
+  document.getElementById('page-batch-btn').disabled = false;
+  document.getElementById('page-batch-btn').textContent = '批量采集';
+  document.getElementById('batch-result-section').style.display = 'none';
+  document.getElementById('previous-results-history').style.display = 'none';
+  _historyEntries = [];
+};
+
+// ═══════════════ 多网址批量采集 ═══════════════
+
+let batchPollTimer = null;
+
+async function startBatchScrape() {
+  collapsePreviousResults();  // 折叠之前的结果
+
+  const host = document.getElementById('host').value.trim();
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+  const urlsText = document.getElementById('batch-urls-input').value.trim();
+
+  if (!host || !username) { showToast('请填写平台地址和账号', 'error'); return; }
+  if (!urlsText) { showToast('请在多网址采集框中输入至少一个网址', 'error'); return; }
+
+  // 解析每行一个网址
+  const routes = urlsText.split('\n')
+    .map(s => s.trim())
+    .filter(s => s.length > 0);
+
+  if (routes.length === 0) { showToast('请输入有效的网址', 'error'); return; }
+
+  // 先停止单页采集相关状态
+  paginatedMode = false;
+
+  const btn = document.getElementById('page-batch-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>采集中...';
+  document.getElementById('page-scrape-btn').disabled = true;
+  document.getElementById('page-progress').style.display = 'flex';
+  document.getElementById('page-progress-bar').style.width = '5%';
+  document.getElementById('page-progress-text').textContent = `开始批量采集 ${routes.length} 个页面...`;
+  document.getElementById('page-result-tabs').style.display = 'none';
+  document.getElementById('page-export').style.display = 'none';
+  document.getElementById('page-result-body').innerHTML = '';
+
+  // 显示批量结果区域
+  const section = document.getElementById('batch-result-section');
+  section.style.display = 'block';
+  section.innerHTML = '<div style="padding:16px;text-align:center;color:var(--text-dim);">正在启动批量采集...</div>';
+
+  try {
+    const resp = await fetch('/api/page/scrape_batch', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ host, username, password, routes })
+    });
+    const data = await resp.json();
+    if (!data.ok) { showToast(data.message || '启动失败', 'error'); resetBatchButton(); return; }
+    showToast(data.message || '批量采集已启动');
+    pollBatchStatus();
+  } catch (err) {
+    showToast('请求失败: ' + err.message, 'error');
+    resetBatchButton();
+  }
+}
+
+function resetBatchButton() {
+  const btn = document.getElementById('page-batch-btn');
+  btn.disabled = false;
+  btn.textContent = '批量采集';
+  document.getElementById('page-scrape-btn').disabled = false;
+}
+
+function pollBatchStatus() {
+  if (batchPollTimer) clearInterval(batchPollTimer);
+  batchPollTimer = setInterval(async () => {
+    try {
+      const resp = await fetch('/api/page/scrape_status');
+      const data = await resp.json();
+
+      const bar = document.getElementById('page-progress-bar');
+      const text = document.getElementById('page-progress-text');
+      bar.style.width = data.progress + '%';
+      text.textContent = data.status_text || '';
+
+      // 更新结果区域的摘要信息
+      if (data.summary && data.summary.length > 0) {
+        renderBatchSummary(data.summary, data.running);
+      }
+
+      if (!data.running) {
+        clearInterval(batchPollTimer);
+        batchPollTimer = null;
+
+        if (data.error) {
+          showToast('批量采集出错: ' + data.error, 'error');
+        } else {
+          showToast('批量采集完成！共 ' + data.results_count + ' 个页面');
+          // 加载完整结果
+          await loadBatchResults(data.results_count);
+        }
+        resetBatchButton();
+        document.getElementById('page-progress').style.display = 'none';
+      }
+    } catch (err) {
+      // 轮询出错不中断
+    }
+  }, 1500);
+}
+
+function renderBatchSummary(summary, running) {
+  const section = document.getElementById('batch-result-section');
+  let html = '<div style="padding:12px;">';
+  html += '<div style="font-weight:600;margin-bottom:8px;color:var(--text-primary);">';
+  html += '📊 批量采集进度 <span style="color:var(--accent);">(' + summary.length + ' 个页面)</span>';
+  if (running) html += ' <span class="spinner" style="display:inline-block;"></span>';
+  html += '</div>';
+
+  summary.forEach((s, i) => {
+    const statusColor = s.error ? 'var(--danger)' : 'var(--success)';
+    const statusIcon = s.error ? '✕' : '✓';
+    html += '<div style="display:flex;align-items:center;gap:8px;padding:6px 8px;margin:4px 0;background:var(--bg-tertiary);border-radius:6px;font-size:12px;">';
+    html += '<span style="color:' + statusColor + ';width:16px;text-align:center;">' + statusIcon + '</span>';
+    html += '<span style="flex:1;color:var(--text-primary);word-break:break-all;">' + (s.url || '页面 ' + (i+1)) + '</span>';
+    html += '<span style="color:var(--text-dim);font-size:11px;">';
+    html += '表格:' + (s.tables || 0) + ' 图片:' + (s.images || 0) + ' 链接:' + (s.links || 0);
+    html += '</span>';
+    if (!running && !s.error) {
+      html += '<button onclick="viewBatchResult(' + i + ')" style="font-size:11px;padding:2px 10px;border-radius:4px;border:1px solid var(--accent);color:var(--accent);background:transparent;cursor:pointer;">查看</button>';
+    }
+    if (s.error) {
+      html += '<span style="color:var(--danger);font-size:10px;">' + s.error + '</span>';
+    }
+    html += '</div>';
+  });
+
+  html += '</div>';
+  section.innerHTML = html;
+}
+
+async function loadBatchResults(count) {
+  const section = document.getElementById('batch-result-section');
+  let allResults = [];
+  for (let i = 0; i < count; i++) {
+    try {
+      const resp = await fetch('/api/page/scrape_result/' + i);
+      const data = await resp.json();
+      if (data.ok && data.result) {
+        allResults.push(data.result);
+      }
+    } catch (e) { /* skip */ }
+  }
+  // 存储结果并在底部重新渲染
+  window._batchResults = allResults;
+  renderBatchSummaryFromFull(allResults);
+}
+
+function renderBatchSummaryFromFull(results) {
+  const section = document.getElementById('batch-result-section');
+  let html = '<div style="padding:12px;">';
+  html += '<div style="font-weight:600;margin-bottom:8px;color:var(--text-primary);">';
+  html += '📊 批量采集完成 <span style="color:var(--accent);">(' + results.length + ' 个页面)</span>';
+  html += '</div>';
+
+  results.forEach((r, i) => {
+    const hasError = !!r.error;
+    const statusColor = hasError ? 'var(--danger)' : 'var(--success)';
+    const statusIcon = hasError ? '✕' : '✓';
+    const url = r.url || r.error_url || ('页面 ' + (i+1));
+    html += '<div style="display:flex;align-items:center;gap:8px;padding:6px 8px;margin:4px 0;background:var(--bg-tertiary);border-radius:6px;font-size:12px;">';
+    html += '<span style="color:' + statusColor + ';width:16px;text-align:center;">' + statusIcon + '</span>';
+    html += '<span style="flex:1;color:var(--text-primary);word-break:break-all;">' + url + '</span>';
+    html += '<span style="color:var(--text-dim);font-size:11px;">';
+    html += '表格:' + (r.tables ? r.tables.length : 0) + ' 图片:' + (r.images ? r.images.length : 0) + ' 链接:' + (r.links ? r.links.length : 0);
+    html += '</span>';
+    if (!hasError) {
+      html += '<button onclick="viewBatchResult(' + i + ')" style="font-size:11px;padding:2px 10px;border-radius:4px;border:1px solid var(--accent);color:var(--accent);background:transparent;cursor:pointer;">查看</button>';
+    }
+    if (hasError) {
+      html += '<span style="color:var(--danger);font-size:10px;">' + (r.error || '出错') + '</span>';
+    }
+    html += '</div>';
+  });
+
+  html += '</div>';
+  section.innerHTML = html;
+}
+
+function viewBatchResult(index) {
+  const results = window._batchResults;
+  if (!results || !results[index]) return;
+
+  const result = results[index];
+  // 复用现有的 renderPageResult 显示结果
+  pageScrapeResult = result;
+  renderPageResult(result);
+
+  // 滚动到结果区域
+  document.getElementById('page-result-tabs').scrollIntoView({ behavior: 'smooth' });
+}
+
+function exportBatchScrape(format) {
+  const results = window._batchResults;
+  if (!results || results.length === 0) {
+    showToast('没有可导出的数据', 'warning');
+    return;
+  }
+
+  // 合并所有页面的表格数据
+  let allTables = [];
+  results.forEach((r, i) => {
+    if (r.tables && r.tables.length > 0) {
+      r.tables.forEach(t => {
+        allTables.push({
+          source_url: r.url || ('页面 ' + (i+1)),
+          ...t
+        });
+      });
+    }
+  });
+
+  if (allTables.length === 0) {
+    showToast('没有表格数据可导出', 'warning');
+    return;
+  }
+
+  // 取第一个表格的结构作为列头
+  const sampleTable = allTables[0];
+  const columns = sampleTable.columns || sampleTable.headers || Object.keys(sampleTable).filter(k => k !== 'source_url');
+
+  if (format === 'json') {
+    const blob = new Blob([JSON.stringify(allTables, null, 2)], { type: 'application/json' });
+    downloadBlob(blob, 'batch_export_' + new Date().toISOString().slice(0,10) + '.json');
+  } else if (format === 'csv') {
+    let csv = '来源页面,' + columns.join(',') + '\n';
+    allTables.forEach(t => {
+      const row = [t.source_url || ''];
+      columns.forEach(c => {
+        let val = t[c] !== undefined ? String(t[c]) : '';
+        if (val.includes(',') || val.includes('"')) {
+          val = '"' + val.replace(/"/g, '""') + '"';
+        }
+        row.push(val);
+      });
+      csv += row.join(',') + '\n';
+    });
+    const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8' });
+    downloadBlob(blob, 'batch_export_' + new Date().toISOString().slice(0,10) + '.csv');
+  }
+  showToast('批量导出完成');
+}
+
+function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+init();
+</script>
+</body>
+</html>

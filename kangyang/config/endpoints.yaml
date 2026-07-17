@@ -1,0 +1,94 @@
+# 康养平台 API 端点配置
+# 格式: module + name + path (RuoYi 若依框架标准)
+# 修改此文件后无需改代码，重启服务或调用 /api/config/reload 即可生效
+endpoints:
+  # ── 老人管理 ──
+  - module: elderlyCare
+    name: 入住处理
+    path: /dev-api/elderlyCare/EnrollmentProcessing/list
+  - module: elderlyCare
+    name: 入住概览
+    path: /dev-api/elderlyCare/enrollmentView/list
+
+  # ── 入住申请 ──
+  - module: enrollmentApply
+    name: 入住申请
+    path: /dev-api/enrollmentApply/enrollmentApply/list
+
+  # ── 老人护理 ──
+  - module: oldCare
+    name: 老人护理
+    path: /dev-api/oldCare/oldCare/list
+
+  # ── 基本信息 ──
+  - module: basicinformation
+    name: 社区信息
+    path: /dev-api/basicinformation/community/list
+  - module: basicinformation
+    name: 社区管理
+    path: /dev-api/basicinformation/communityManagement/list
+  - module: basicinformation
+    name: 医生信息
+    path: /dev-api/basicinformation/doctor/list
+  - module: basicinformation
+    name: 护士信息
+    path: /dev-api/basicinformation/nurse/list
+
+  # ── 护理看板 ──
+  - module: careDashBoard
+    name: 护理记录
+    path: /dev-api/careDashBoard/careRecord/list
+
+  # ── 合同管理 ──
+  - module: contract
+    name: 合同管理
+    path: /dev-api/contract/contract/list
+
+  # ── 护理等级 ──
+  - module: nurseLevel
+    name: 护理等级
+    path: /dev-api/nurseLevel/nurseLevel/list
+
+  # ── 设备管理 ──
+  - module: devManagement
+    name: 床位管理
+    path: /dev-api/devManagement/bedroomsManagement/list
+
+  # ── 能力评估 ──
+  - module: ability
+    name: 能力评估
+    path: /dev-api/ability/ability/list
+
+  # ── 活动管理 ──
+  - module: activities
+    name: 活动管理
+    path: /dev-api/activities/activities/list
+
+  # ── 安全设备 ──
+  - module: securityEquipment
+    name: 安全设备
+    path: /dev-api/securityEquipment/equipment/list
+
+  # ── 终端设备 ──
+  - module: endDevice
+    name: 终端设备
+    path: /dev-api/endDevice/endDevice/list
+
+  # ── 健康监测 ──
+  - module: watchData
+    name: 心率监测
+    path: /dev-api/watchData/watchHeartrate/watchHeartrate/list
+  - module: watchData
+    name: 血氧监测
+    path: /dev-api/watchData/watchOxygen/watchOxygen/list
+
+  # ── 系统管理 ──
+  - module: system
+    name: 用户列表
+    path: /dev-api/system/user/list
+  - module: system
+    name: 角色列表
+    path: /dev-api/system/role/list
+  - module: system
+    name: 字典数据
+    path: /dev-api/system/dict/data/list

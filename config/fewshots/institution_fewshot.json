@@ -1,0 +1,53 @@
+{
+  "description": "康养机构信息采集的 Few-shot 示例",
+  "examples": [
+    {
+      "html_snippet": "<html><body><div class='org-detail'><h1>阳光老年公寓</h1><div class='info'><span class='type'>养老院</span><span class='nature'>民办</span><span class='rating'>四星级</span></div><p class='address'>地址：北京市朝阳区幸福路88号</p><p class='phone'>联系电话：010-88888888</p><p class='beds'>床位：200张</p><p class='price'>收费标准：3000-6000元/月</p><p class='services'>服务项目：日间照料、医疗护理、康复训练、营养配餐</p><p class='desc'>阳光老年公寓是一家集养老、康复、娱乐于一体的综合性养老机构，拥有专业的医护团队和完善的设施设备，为老年人提供温馨舒适的居住环境和全方位的照护服务。</p></div></body></html>",
+      "output": {
+        "institution_name": "阳光老年公寓",
+        "institution_type": "养老院",
+        "address": "北京市朝阳区幸福路88号",
+        "phone": "010-88888888",
+        "bed_count": "200张",
+        "service_items": ["日间照料", "医疗护理", "康复训练", "营养配餐"],
+        "price_range": "3000-6000元/月",
+        "nature": "民办",
+        "rating": "四星级",
+        "description": "阳光老年公寓是一家集养老、康复、娱乐于一体的综合性养老机构，拥有专业的医护团队和完善的设施设备，为老年人提供温馨舒适的居住环境和全方位的照护服务。",
+        "source_url": ""
+      }
+    },
+    {
+      "html_snippet": "<html><body><article><header><h2>幸福康养服务中心</h2><div class='meta'><span>类型：康养中心</span> | <span>性质：公建民营</span> | <span>等级：A级</span></div></header><section><div class='contact'><p>地址：上海市浦东新区张江路100号</p><p>电话：021-66666666</p><p>床位数：150张</p><p>价格：4000-8000元/月</p></div><div class='service-list'>服务内容：健康管理、中医康复、心理疏导、文化娱乐</div><p>幸福康养服务中心是政府主导建设的养老服务机构，引入专业运营团队管理，秉承医养结合理念，为老年人提供专业的健康管理和照护服务。</p></section></article></body></html>",
+      "output": {
+        "institution_name": "幸福康养服务中心",
+        "institution_type": "康养中心",
+        "address": "上海市浦东新区张江路100号",
+        "phone": "021-66666666",
+        "bed_count": "150张",
+        "service_items": ["健康管理", "中医康复", "心理疏导", "文化娱乐"],
+        "price_range": "4000-8000元/月",
+        "nature": "公建民营",
+        "rating": "A级",
+        "description": "幸福康养服务中心是政府主导建设的养老服务机构，引入专业运营团队管理，秉承医养结合理念，为老年人提供专业的健康管理和照护服务。",
+        "source_url": ""
+      }
+    },
+    {
+      "html_snippet": "<html><body><div class='institution'><h3>社区日间照料中心</h3><ul class='basic'><li>机构类型：日间照料中心</li><li>性质：公办</li><li>地址：广州市天河区体育西路20号</li><li>电话：020-33333333</li><li>床位：50张</li><li>收费：1000-2000元/月</li></ul><p>服务项目：日间照料、配餐服务、健康监测、文体活动</p><p class='intro'>本中心是天河区民政局直属的社区养老服务机构，主要为社区内老年人提供日间照料服务，解决家庭照护难题。</p></div></body></html>",
+      "output": {
+        "institution_name": "社区日间照料中心",
+        "institution_type": "日间照料中心",
+        "address": "广州市天河区体育西路20号",
+        "phone": "020-33333333",
+        "bed_count": "50张",
+        "service_items": ["日间照料", "配餐服务", "健康监测", "文体活动"],
+        "price_range": "1000-2000元/月",
+        "nature": "公办",
+        "rating": "",
+        "description": "本中心是天河区民政局直属的社区养老服务机构，主要为社区内老年人提供日间照料服务，解决家庭照护难题。",
+        "source_url": ""
+      }
+    }
+  ]
+}

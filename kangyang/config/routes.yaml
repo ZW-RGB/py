@@ -1,0 +1,119 @@
+# 康养平台 Vue 前端路由配置
+# 格式: name + route + module
+# 修改此文件后无需改代码，重启服务或调用 /api/config/reload 即可生效
+routes:
+  # ── 老人管理 ──
+  - name: 入住处理
+    route: /elderly/checkin
+    module: 老人管理
+  - name: 入住概览
+    route: /elderly/overview
+    module: 老人管理
+  - name: 入住申请
+    route: /elderly/apply
+    module: 老人管理
+
+  # ── 老人护理 ──
+  - name: 老人护理
+    route: /elderly/nursing
+    module: 老人护理
+
+  # ── 基本信息 ──
+  - name: 社区信息
+    route: /base/community
+    module: 基本信息
+  - name: 社区管理
+    route: /base/communityManage
+    module: 基本信息
+  - name: 医生信息
+    route: /base/doctor
+    module: 基本信息
+  - name: 护士信息
+    route: /base/nurse
+    module: 基本信息
+
+  # ── 护理看板 ──
+  - name: 护理记录
+    route: /nursing/record
+    module: 护理看板
+
+  # ── 合同管理 ──
+  - name: 合同管理
+    route: /contract/manage
+    module: 合同管理
+
+  # ── 护理等级 ──
+  - name: 护理等级
+    route: /nursing/level
+    module: 护理等级
+
+  # ── 设备管理 ──
+  - name: 床位管理
+    route: /device/bed
+    module: 设备管理
+
+  # ── 能力评估 ──
+  - name: 能力评估
+    route: /assessment/ability
+    module: 能力评估
+  - name: 评估总览
+    route: /assessment/overview
+    module: 养老评估
+  - name: 压疮评估
+    route: /assessment/pressureUlcer
+    module: 养老评估
+  - name: 抑郁评估
+    route: /assessment/depression
+    module: 养老评估
+  - name: 焦虑评估
+    route: /assessment/anxiety
+    module: 养老评估
+  - name: 跌倒评估
+    route: /assessment/fall
+    module: 养老评估
+  - name: ICVD评估
+    route: /assessment/icvd
+    module: 养老评估
+  - name: 老人能力评估
+    route: /assessment/elderlyAbility
+    module: 养老评估
+
+  # ── 活动管理 ──
+  - name: 活动管理
+    route: /activity/manage
+    module: 活动管理
+
+  # ── 安全设备 ──
+  - name: 安全设备
+    route: /safety/device
+    module: 安全设备
+
+  # ── 终端设备 ──
+  - name: 终端设备
+    route: /terminal/device
+    module: 终端设备
+
+  # ── 健康监测 ──
+  - name: 心率监测
+    route: /health/heartrate
+    module: 健康监测
+  - name: 血氧监测
+    route: /health/spo2
+    module: 健康监测
+  - name: 体温监测
+    route: /health/temperature
+    module: 健康监测
+  - name: 血压监测
+    route: /health/bloodPressure
+    module: 健康监测
+
+  # ── 系统管理 ──
+  - name: 用户列表
+    route: /system/user
+    module: 系统管理
+  - name: 角色列表
+    route: /system/role
+    module: 系统管理
+  - name: 字典数据
+    route: /system/dict
+    module: 系统管理

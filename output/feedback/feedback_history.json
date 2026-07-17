@@ -1,0 +1,159 @@
+{
+  "records": [
+    {
+      "query": "获取压疮评估页面所有数据",
+      "timestamp": "2026-07-16T14:35:04.451078",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "压疮评估页面所有数据",
+      "timestamp": "2026-07-16T14:35:11.451856",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取压疮评估页面所有数据",
+      "timestamp": "2026-07-16T14:38:28.717753",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取压疮评估页面所有数据",
+      "timestamp": "2026-07-16T14:46:14.153979",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取http://192.168.18.143:1024/evaluation/pressure页面所有数据",
+      "timestamp": "2026-07-16T14:49:56.631585",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取http://192.168.18.143:1024/evaluation/evaluation页面所有数据",
+      "timestamp": "2026-07-16T14:50:22.365095",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取首页全部数据",
+      "timestamp": "2026-07-16T16:37:51.890375",
+      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
+      "parsed_api_name": "入住概览",
+      "parsed_fields": [],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "你能做数据分析么",
+      "timestamp": "2026-07-16T16:53:53.221742",
+      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
+      "parsed_api_name": "入住概览",
+      "parsed_fields": [
+        "你能做数据分析么"
+      ],
+      "parsed_confidence": 0.1,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "我想要获取这个平台中的长者数据",
+      "timestamp": "2026-07-16T17:15:09.978277",
+      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
+      "parsed_api_name": "入住概览",
+      "parsed_fields": [
+        "我这个平台"
+      ],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取长者档案所有数据",
+      "timestamp": "2026-07-17T10:22:07.224703",
+      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
+      "parsed_api_name": "入住概览",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取长者档案所有长者信息",
+      "timestamp": "2026-07-17T10:55:59.620714",
+      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
+      "parsed_api_name": "入住概览",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取http://192.168.18.143:1024/index数据",
+      "timestamp": "2026-07-17T11:04:15.602258",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    }
+  ],
+  "stats": {
+    "/dev-api/elderlyCare/enrollmentView/list": {
+      "total": 5,
+      "confirmed": 0,
+      "corrected_to": 0
+    }
+  }
+}
