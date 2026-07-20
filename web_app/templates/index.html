@@ -411,7 +411,7 @@
     <button class="mode-tab active" onclick="switchMode('standard')" id="tab-standard">标准模式</button>
     <button class="mode-tab" onclick="switchMode('smart')" id="tab-smart">智能模式</button>
     <button class="mode-tab" onclick="switchMode('page')" id="tab-page">页面采集</button>
-    <button class="mode-tab" onclick="switchMode('collector')" id="tab-collector">空白</button>
+    <button class="mode-tab" onclick="switchMode('collector')" id="tab-collector">可视化采集</button>
   </div>
 
   <!-- 标准模式：表列表 -->
@@ -496,7 +496,7 @@
   <!-- 标准模式结果区 -->
   <div class="results-area" id="results-area">
     <div class="empty-state" id="empty-state">
-      <div class="icon">&#x1F4CA;</div>
+      <div class="icon"></div>
       <p>选择左侧数据表，点击"开始爬取"</p>
       <p style="font-size:11px;margin-top:6px;color:var(--text-dim);">或切换到"智能模式"用自然语言描述需求</p>
     </div>
@@ -511,17 +511,17 @@
       placeholder="用自然语言描述你想提取什么数据，例如：&#10;获取长者档案页面的所有长者姓名以及联系方式&#10;爬取 /elderly/overview 页面的表格数据&#10;采集 http://192.168.18.143:1024/elderly/checkin 的表单数据"
       style="width:100%;min-height:120px;"></textarea>
     <div class="query-actions">
-      <button class="btn purple" id="parse-btn" onclick="parseIntent()" style="white-space:nowrap;height:36px;padding:0 18px;font-size:13px;">&#x1F50D; 解析需求</button>
+      <button class="btn purple" id="parse-btn" onclick="parseIntent()" style="white-space:nowrap;height:36px;padding:0 18px;font-size:13px;"> 解析需求</button>
       <button class="btn outline" onclick="document.getElementById('smart-query').value=''" style="font-size:11px;height:36px;padding:0 16px;">清空</button>
     </div>
   </div>
 
     <!-- 意图预览卡片（初始隐藏） -->
     <div class="intent-card" id="intent-card" style="display:none;">
-      <h3>&#x1F9E0; 需求解析结果</h3>
+      <h3>需求解析结果</h3>
       <div class="intent-grid" id="intent-grid"></div>
       <div class="intent-buttons">
-        <button class="btn success" id="confirm-btn" onclick="executeCustomCrawl()">&#x2705; 确认并开始爬取</button>
+        <button class="btn success" id="confirm-btn" onclick="executeCustomCrawl()">确认并开始爬取</button>
         <button class="btn outline" onclick="clearIntent()">重新输入</button>
       </div>
     </div>
@@ -552,7 +552,7 @@
     <div class="page-config" style="border:1px dashed var(--accent);border-radius:8px;padding:12px;">
       <div style="display:flex;align-items:flex-start;gap:12px;">
         <div class="fg" style="flex:1;">
-          <label style="color:var(--accent);">📋 多网址批量采集（每行一个网址）</label>
+          <label style="color:var(--accent);">多网址批量采集（每行一个网址）</label>
           <textarea id="batch-urls-input" placeholder="每行输入一个网址或路由，例如：&#10;/elderly/overview&#10;/elderly/checkin&#10;http://192.168.18.143:1024/health/heartrate"
             style="width:400%;height:140px;font-size:12px;font-family:monospace;resize:vertical;border-radius:6px;padding:8px;border:1px solid var(--border);background:var(--bg-primary);color:var(--text-primary);"
           ></textarea>
@@ -925,14 +925,14 @@ async function collectorStartSession() {
       body: JSON.stringify({ host, username, password, target })
     });
     const data = await resp.json();
-    if (!data.ok) { showToast(data.message, 'error'); btn.disabled = false; btn.innerHTML = '🚀 打开页面并分析元素'; status.textContent = ''; return; }
+    if (!data.ok) { showToast(data.message, 'error'); btn.disabled = false; btn.innerHTML = ' 打开页面并分析元素'; status.textContent = ''; return; }
 
     collectorSessionId = data.session_id;
     collectorSnapshot = data.snapshot;
     collectorSelectedRules = [];
 
     const elemCount = data.snapshot.elements_count || 0;
-    status.textContent = '✅ 页面分析完成！发现 ' + elemCount + ' 个可选元素' +
+    status.textContent = ' 页面分析完成！发现 ' + elemCount + ' 个可选元素' +
       (data.snapshot.title ? ' | ' + data.snapshot.title : '') +
       (data.snapshot.url ? ' | ' + data.snapshot.url : '') +
       '，进入下一步选择。';
@@ -979,10 +979,10 @@ async function collectorStartSession() {
     showToast('页面加载完成！共 ' + data.snapshot.elements_count + ' 个可选元素');
   } catch (err) {
     showToast('启动失败: ' + err.message, 'error');
-    status.textContent = '❌ 启动失败: ' + err.message;
+    status.textContent = ' 启动失败: ' + err.message;
   }
   btn.disabled = false;
-  btn.innerHTML = '🚀 打开页面并分析元素';
+  btn.innerHTML = ' 打开页面并分析元素';
 }
 
 async function collectorHandleClick(clickX, clickY, displayX, displayY) {
@@ -1172,7 +1172,7 @@ async function collectorDoPreview() {
     // 错误
     const errDiv = document.getElementById('preview-errors');
     errDiv.innerHTML = data.errors.length > 0
-      ? data.errors.map(e => `<div class="preview-error">⚠️ ${escapeHtml(e.field)}: ${escapeHtml(e.error)}</div>`).join('')
+      ? data.errors.map(e => `<div class="preview-error"> ${escapeHtml(e.field)}: ${escapeHtml(e.error)}</div>`).join('')
       : '';
 
     // 表格
@@ -1201,7 +1201,7 @@ async function collectorDoPreview() {
     showToast('预览失败: ' + err.message, 'error');
   }
   btn.disabled = false;
-  btn.innerHTML = '🔍 开始预览';
+  btn.innerHTML = ' 开始预览';
 }
 
 async function collectorSaveTask() {
@@ -1225,7 +1225,7 @@ async function collectorSaveTask() {
     if (!data.ok) { showToast(data.message, 'error'); return; }
 
     document.getElementById('col-save-status').innerHTML =
-      `<span style="color:var(--green);">✅ 任务 "${escapeHtml(name)}" 已保存！ID: ${data.task.task_id}</span>`;
+      `<span style="color:var(--green);"> 任务 "${escapeHtml(name)}" 已保存！ID: ${data.task.task_id}</span>`;
     showToast('任务已保存！');
     collectorRefreshTaskList();
   } catch (err) {
@@ -1264,7 +1264,7 @@ async function collectorRefreshTaskList() {
 
     sidebar.innerHTML = data.tasks.slice(0, 10).map(t =>
       `<div style="padding:2px 0;cursor:pointer;" onclick="switchMode('collector');collectorGoStep(4);" title="${escapeHtml(t.name)}">
-        📋 ${escapeHtml(t.name.substring(0, 20))} (${t.rules_count}规则)
+         ${escapeHtml(t.name.substring(0, 20))} (${t.rules_count}规则)
       </div>`
     ).join('');
   } catch (err) { /* ignore */ }

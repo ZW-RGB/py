@@ -147,11 +147,1011 @@
       "corrected_endpoint": "",
       "corrected_fields": [],
       "source_type": "page"
+    },
+    {
+      "query": "获取所有数据",
+      "timestamp": "2026-07-17T11:18:18.440559",
+      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
+      "parsed_api_name": "入住概览",
+      "parsed_fields": [],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "我想要获取所有页面的所有数据",
+      "timestamp": "2026-07-17T11:25:58.003507",
+      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
+      "parsed_api_name": "入住概览",
+      "parsed_fields": [],
+      "parsed_confidence": 0.1,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "我想要获取http://192.168.18.143:1024/index页面的所有数据",
+      "timestamp": "2026-07-17T11:28:15.922120",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取所有老人的姓名、年龄、护理等级和房间号",
+      "timestamp": "2026-07-17T13:53:04.245830",
+      "parsed_endpoint": "/dev-api/nurseLevel/nurseLevel/list",
+      "parsed_api_name": "护理等级",
+      "parsed_fields": [
+        "姓名",
+        "年龄",
+        "护理等级",
+        "房间号"
+      ],
+      "parsed_confidence": 0.98,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "查询心率监测中老人的心率数据和采集时间",
+      "timestamp": "2026-07-17T13:53:43.832190",
+      "parsed_endpoint": "/dev-api/watchData/watchHeartrate/watchHeartrate/list",
+      "parsed_api_name": "心率监测",
+      "parsed_fields": [
+        "心率",
+        "时间"
+      ],
+      "parsed_confidence": 0.98,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取合同管理中所有合同编号、缴费金额、签订日期和到期日期",
+      "timestamp": "2026-07-17T13:53:59.636901",
+      "parsed_endpoint": "/dev-api/contract/contract/list",
+      "parsed_api_name": "合同管理",
+      "parsed_fields": [
+        "合同编号",
+        "缴费金额",
+        "签订日期",
+        "到期日期"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "爬取 http://192.168.18.143:1024/elderly/checkin 页面的表单数据",
+      "timestamp": "2026-07-17T13:55:16.539303",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取所有老人的姓名、年龄、护理等级和房间号",
+      "timestamp": "2026-07-17T14:44:47.244750",
+      "parsed_endpoint": "/dev-api/nurseLevel/nurseLevel/list",
+      "parsed_api_name": "护理等级",
+      "parsed_fields": [
+        "姓名",
+        "年龄",
+        "护理等级",
+        "房间号"
+      ],
+      "parsed_confidence": 0.98,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取所有老人的姓名、年龄、护理等级和房间号",
+      "timestamp": "2026-07-17T14:59:24.777376",
+      "parsed_endpoint": "/dev-api/nurseLevel/nurseLevel/list",
+      "parsed_api_name": "护理等级",
+      "parsed_fields": [
+        "姓名",
+        "年龄",
+        "护理等级",
+        "房间号"
+      ],
+      "parsed_confidence": 0.98,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "爬取 http://192.168.18.143:1024/elderly/checkin 页面的表单数据",
+      "timestamp": "2026-07-17T14:59:43.089880",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "爬取http://192.168.18.143:1024/basicinformation/doctor页面的表单数据",
+      "timestamp": "2026-07-17T15:00:04.998850",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "爬取 http://192.168.18.143:1024/basicinformation/doctor页面的表单数据",
+      "timestamp": "2026-07-17T15:05:32.918436",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "爬取 http://192.168.18.143:1024/elderly/checkin 页面的表单数据",
+      "timestamp": "2026-07-17T15:20:28.120770",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "爬取 http://192.168.18.143:1024/index页面的数据",
+      "timestamp": "2026-07-17T15:21:40.179000",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "查询心率监测中老人的心率数据和采集时间",
+      "timestamp": "2026-07-17T15:23:10.296215",
+      "parsed_endpoint": "/dev-api/watchData/watchHeartrate/watchHeartrate/list",
+      "parsed_api_name": "心率监测",
+      "parsed_fields": [
+        "心率",
+        "时间"
+      ],
+      "parsed_confidence": 0.98,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "查询心率监测中老人的心率数据和测量时间和长者姓名",
+      "timestamp": "2026-07-17T15:24:19.535668",
+      "parsed_endpoint": "/dev-api/watchData/watchHeartrate/watchHeartrate/list",
+      "parsed_api_name": "心率监测",
+      "parsed_fields": [
+        "心率",
+        "时间",
+        "长者姓名"
+      ],
+      "parsed_confidence": 0.98,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "查询社区管理中社区名称和位置",
+      "timestamp": "2026-07-17T15:25:57.672885",
+      "parsed_endpoint": "/dev-api/basicinformation/communityManagement/list",
+      "parsed_api_name": "社区管理",
+      "parsed_fields": [
+        "社区管理",
+        "名称",
+        "位置"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "查询社区管理页面中社区名称和位置",
+      "timestamp": "2026-07-17T15:26:19.562110",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "名称",
+        "位置"
+      ],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "查询社区管理页面中社区名称和位置",
+      "timestamp": "2026-07-17T15:27:14.690848",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "名称",
+        "位置"
+      ],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "查询社区管理页面中社区名称和位置",
+      "timestamp": "2026-07-17T15:27:15.648842",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "名称",
+        "位置"
+      ],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "查询社区管理页面中社区名称和位置",
+      "timestamp": "2026-07-17T15:27:16.330122",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "名称",
+        "位置"
+      ],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "查询社区管理页面中社区名称和位置",
+      "timestamp": "2026-07-17T15:27:16.463128",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "名称",
+        "位置"
+      ],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "查询社区管理中社区名称和位置",
+      "timestamp": "2026-07-17T15:27:20.503424",
+      "parsed_endpoint": "/dev-api/basicinformation/communityManagement/list",
+      "parsed_api_name": "社区管理",
+      "parsed_fields": [
+        "社区管理",
+        "名称",
+        "位置"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "查询社区管理的社区名称和位置床位数",
+      "timestamp": "2026-07-17T15:27:36.859508",
+      "parsed_endpoint": "/dev-api/basicinformation/communityManagement/list",
+      "parsed_api_name": "社区管理",
+      "parsed_fields": [
+        "名称",
+        "位置床位数"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "查询社区管理的社区名称和位置和床位数",
+      "timestamp": "2026-07-17T15:27:49.469585",
+      "parsed_endpoint": "/dev-api/basicinformation/communityManagement/list",
+      "parsed_api_name": "社区管理",
+      "parsed_fields": [
+        "名称",
+        "位置",
+        "床位数"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "查询护士管理的护士姓名和工作年限",
+      "timestamp": "2026-07-17T15:28:32.234529",
+      "parsed_endpoint": "/dev-api/basicinformation/nurse/list",
+      "parsed_api_name": "护士信息",
+      "parsed_fields": [
+        "姓名",
+        "工作年限"
+      ],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "查询护士管理的护士姓名和工作年限、护工收入",
+      "timestamp": "2026-07-17T15:29:20.716567",
+      "parsed_endpoint": "/dev-api/basicinformation/nurse/list",
+      "parsed_api_name": "护士信息",
+      "parsed_fields": [
+        "护士管理",
+        "姓名",
+        "工作年限",
+        "护工收入"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "查询护士管理页面中的护士姓名和工作年限、护工收入",
+      "timestamp": "2026-07-17T15:29:40.435393",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "姓名",
+        "工作年限",
+        "护工收入"
+      ],
+      "parsed_confidence": 0.7,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "查询护士管理的护士姓名和工作年限、护工收入",
+      "timestamp": "2026-07-17T15:29:48.263894",
+      "parsed_endpoint": "/dev-api/basicinformation/nurse/list",
+      "parsed_api_name": "护士信息",
+      "parsed_fields": [
+        "护士管理",
+        "姓名",
+        "工作年限",
+        "护工收入"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse页面上所有长者姓名、联系方式及入住日期",
+      "timestamp": "2026-07-17T15:30:03.211345",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "长者姓名",
+        "联系方式",
+        "入住日期",
+        "日期"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse页面上所有护士姓名、工作年限",
+      "timestamp": "2026-07-17T15:31:00.867929",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "姓名",
+        "工作年限"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse页面上护士姓名、工作年限",
+      "timestamp": "2026-07-17T15:32:52.627941",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "姓名",
+        "工作年限"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse页面上护士姓名、工作年限",
+      "timestamp": "2026-07-17T15:32:56.041661",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "姓名",
+        "工作年限"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse页面上护士姓名、工作年限",
+      "timestamp": "2026-07-17T15:32:56.740511",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "姓名",
+        "工作年限"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse护士姓名、工作年限",
+      "timestamp": "2026-07-17T15:33:07.806729",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "姓名",
+        "工作年限"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse护士姓名、工作年限",
+      "timestamp": "2026-07-17T15:33:09.064168",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "姓名",
+        "工作年限"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse护士姓名、工作年限",
+      "timestamp": "2026-07-17T15:33:09.232296",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "姓名",
+        "工作年限"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse护士姓名、工作年限",
+      "timestamp": "2026-07-17T15:33:09.452770",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "姓名",
+        "工作年限"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse护士姓名、工作年限",
+      "timestamp": "2026-07-17T15:33:09.571533",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "姓名",
+        "工作年限"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse 的护士姓名、工作年限",
+      "timestamp": "2026-07-17T15:33:14.256343",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "姓名",
+        "工作年限"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse 的护士姓名和工作年限",
+      "timestamp": "2026-07-17T15:33:18.754317",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "姓名",
+        "工作年限"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse 的护士姓名和工作年限",
+      "timestamp": "2026-07-17T15:33:19.835191",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "姓名",
+        "工作年限"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse 的护士姓名和工作年限和护士收入",
+      "timestamp": "2026-07-17T15:33:31.202799",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "姓名",
+        "工作年限",
+        "护士收入"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "采集 http://192.168.18.143:1024/basicinformation/doctor的医生姓名和工作年限",
+      "timestamp": "2026-07-17T15:34:30.232896",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "姓名",
+        "工作年限"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取合同管理中所有合同编号、缴费金额、签订日期和到期日期",
+      "timestamp": "2026-07-17T15:35:28.844532",
+      "parsed_endpoint": "/dev-api/contract/contract/list",
+      "parsed_api_name": "合同管理",
+      "parsed_fields": [
+        "合同编号",
+        "缴费金额",
+        "签订日期",
+        "到期日期"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取入托办理中全部数据",
+      "timestamp": "2026-07-17T15:36:15.326751",
+      "parsed_endpoint": "/dev-api/elderlyCare/EnrollmentProcessing/list",
+      "parsed_api_name": "入住处理",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取在线用户全部数据",
+      "timestamp": "2026-07-17T16:01:15.762622",
+      "parsed_endpoint": "/dev-api/system/user/list",
+      "parsed_api_name": "用户列表",
+      "parsed_fields": [],
+      "parsed_confidence": 0.75,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取http://192.168.18.143:1024/evaluation/morse页面所有数据",
+      "timestamp": "2026-07-17T16:01:58.796788",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取http://192.168.18.143:1024/evaluation/morse页面姓名\t年龄\t性别",
+      "timestamp": "2026-07-17T16:03:49.815587",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "姓名",
+        "年龄",
+        "性别"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取所有老人的姓名、年龄、护理等级和房间号",
+      "timestamp": "2026-07-17T16:05:27.857172",
+      "parsed_endpoint": "/dev-api/nurseLevel/nurseLevel/list",
+      "parsed_api_name": "护理等级",
+      "parsed_fields": [
+        "姓名",
+        "年龄",
+        "护理等级",
+        "房间号"
+      ],
+      "parsed_confidence": 0.98,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取https://www.cenc.ac.cn/cenc/index.html数据",
+      "timestamp": "2026-07-17T17:26:11.428250",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取档案管理的长者档案全部数据",
+      "timestamp": "2026-07-20T09:59:00.694468",
+      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
+      "parsed_api_name": "入住概览",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取长者档案全部数据",
+      "timestamp": "2026-07-20T09:59:48.491355",
+      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
+      "parsed_api_name": "入住概览",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取长者档案全部数据",
+      "timestamp": "2026-07-20T09:59:54.726308",
+      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
+      "parsed_api_name": "入住概览",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取所有老人的姓名、年龄、护理等级和房间号",
+      "timestamp": "2026-07-20T10:00:09.816728",
+      "parsed_endpoint": "/dev-api/nurseLevel/nurseLevel/list",
+      "parsed_api_name": "护理等级",
+      "parsed_fields": [
+        "姓名",
+        "年龄",
+        "护理等级",
+        "房间号"
+      ],
+      "parsed_confidence": 0.98,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取医生管理的全部数据",
+      "timestamp": "2026-07-20T10:01:02.034572",
+      "parsed_endpoint": "/dev-api/basicinformation/doctor/list",
+      "parsed_api_name": "医生信息",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取长者档案的数据",
+      "timestamp": "2026-07-20T10:02:55.793361",
+      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
+      "parsed_api_name": "入住概览",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取医生管理的数据",
+      "timestamp": "2026-07-20T10:03:17.368428",
+      "parsed_endpoint": "/dev-api/basicinformation/doctor/list",
+      "parsed_api_name": "医生信息",
+      "parsed_fields": [
+        "医生管理"
+      ],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取医生管理的全部数据",
+      "timestamp": "2026-07-20T10:03:47.088056",
+      "parsed_endpoint": "/dev-api/basicinformation/doctor/list",
+      "parsed_api_name": "医生信息",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取健康评估的长者姓名",
+      "timestamp": "2026-07-20T16:13:07.215883",
+      "parsed_endpoint": "/dev-api/ability/ability/list",
+      "parsed_api_name": "能力评估",
+      "parsed_fields": [
+        "长者姓名"
+      ],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取养老评估中健康评估的长者姓名",
+      "timestamp": "2026-07-20T16:14:09.196991",
+      "parsed_endpoint": "/dev-api/ability/ability/list",
+      "parsed_api_name": "能力评估",
+      "parsed_fields": [
+        "长者姓名"
+      ],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取养老评估模块中健康评估的长者姓名",
+      "timestamp": "2026-07-20T16:14:22.230248",
+      "parsed_endpoint": "/dev-api/ability/ability/list",
+      "parsed_api_name": "能力评估",
+      "parsed_fields": [
+        "长者姓名"
+      ],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取腕表数据中的血氧",
+      "timestamp": "2026-07-20T16:14:55.029731",
+      "parsed_endpoint": "/dev-api/watchData/watchOxygen/watchOxygen/list",
+      "parsed_api_name": "血氧监测",
+      "parsed_fields": [
+        "血氧"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取睡眠时长中的长者姓名",
+      "timestamp": "2026-07-20T16:15:56.635035",
+      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
+      "parsed_api_name": "入住概览",
+      "parsed_fields": [
+        "长者姓名"
+      ],
+      "parsed_confidence": 0.4,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取老年人数据",
+      "timestamp": "2026-07-20T17:18:53.601862",
+      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
+      "parsed_api_name": "入住概览",
+      "parsed_fields": [
+        "老年人"
+      ],
+      "parsed_confidence": 0.7,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "实时",
+      "timestamp": "2026-07-20T17:21:58.483686",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.0,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
     }
   ],
   "stats": {
     "/dev-api/elderlyCare/enrollmentView/list": {
+      "total": 13,
+      "confirmed": 0,
+      "corrected_to": 0
+    },
+    "/dev-api/nurseLevel/nurseLevel/list": {
       "total": 5,
+      "confirmed": 0,
+      "corrected_to": 0
+    },
+    "/dev-api/watchData/watchHeartrate/watchHeartrate/list": {
+      "total": 3,
+      "confirmed": 0,
+      "corrected_to": 0
+    },
+    "/dev-api/contract/contract/list": {
+      "total": 2,
+      "confirmed": 0,
+      "corrected_to": 0
+    },
+    "/dev-api/basicinformation/communityManagement/list": {
+      "total": 4,
+      "confirmed": 0,
+      "corrected_to": 0
+    },
+    "/dev-api/basicinformation/nurse/list": {
+      "total": 3,
+      "confirmed": 0,
+      "corrected_to": 0
+    },
+    "/dev-api/elderlyCare/EnrollmentProcessing/list": {
+      "total": 1,
+      "confirmed": 0,
+      "corrected_to": 0
+    },
+    "/dev-api/system/user/list": {
+      "total": 1,
+      "confirmed": 0,
+      "corrected_to": 0
+    },
+    "/dev-api/basicinformation/doctor/list": {
+      "total": 3,
+      "confirmed": 0,
+      "corrected_to": 0
+    },
+    "/dev-api/ability/ability/list": {
+      "total": 3,
+      "confirmed": 0,
+      "corrected_to": 0
+    },
+    "/dev-api/watchData/watchOxygen/watchOxygen/list": {
+      "total": 1,
       "confirmed": 0,
       "corrected_to": 0
     }

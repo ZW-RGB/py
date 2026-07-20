@@ -18,8 +18,11 @@ import threading
 import time
 import hashlib
 import logging
+import re as _re
 from datetime import datetime
-from flask import Flask, render_template, request, jsonify, send_file, session
+from urllib.parse import urljoin, urlparse, urlunparse
+from flask import Flask, render_template, request, jsonify, send_file, session, Response
+import requests as _requests
 
 logger = logging.getLogger(__name__)
 
@@ -181,7 +184,12 @@ def run_crawl(host, username, password, selected_paths):
 @app.route("/")
 def index():
     """主页面"""
-    return render_template("index.html", endpoints=KNOWN_ENDPOINTS, routes=KNOWN_ROUTES)
+    from flask import make_response
+    resp = make_response(render_template("index.html", endpoints=KNOWN_ENDPOINTS, routes=KNOWN_ROUTES))
+    resp.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    resp.headers["Pragma"] = "no-cache"
+    resp.headers["Expires"] = "0"
+    return resp
 
 
 # ═══════════════ API 路由 ═══════════════
@@ -695,6 +703,28 @@ def _execute_page_crawl(host, username, password, intent):
         # 检查缺失字段
         missing_fields = [f for f in user_fields if f not in columns] if user_fields else []
 
+        # 提取多格式数据（images, links, text, forms, sections）
+        if is_paginated:
+            all_data = {
+                "images": result.get("merged_images", []),
+                "links": result.get("merged_links", []),
+                "raw_text": result.get("merged_text", ""),
+                "forms": result.get("merged_forms", []),
+                "sections": result.get("merged_structure", []),
+                "tables": result.get("merged_tables", []),
+                "metadata": {},
+            }
+        else:
+            all_data = {
+                "images": result.get("images", []),
+                "links": result.get("links", []),
+                "raw_text": result.get("raw_text", ""),
+                "forms": result.get("forms", []),
+                "sections": result.get("sections", []),
+                "tables": result.get("tables", []),
+                "metadata": result.get("metadata", {}),
+            }
+
         return jsonify({
             "ok": True,
             "count": len(rows),
@@ -707,9 +737,11 @@ def _execute_page_crawl(host, username, password, intent):
             "page_info": {
                 "title": result.get("title", ""),
                 "url": result.get("url", ""),
+                "timestamp": result.get("timestamp", ""),
                 "total_pages": result.get("total_pages_scraped", 1),
                 "tables_count": len(result.get("merged_tables", result.get("tables", []))),
             },
+            "all_data": all_data,
         })
 
     except Exception as e:
@@ -2403,7 +2435,1309 @@ visual_collector_state = {
     "username": "",
     "password": "",
     "target": "",
+    # ── 代理模式 ──
+    "proxy_active": False,
+    "proxy_cookies": {},     # {name: value}
+    "proxy_target_origin": "",
+    "proxy_storage_state": None,  # context.storage_state() — 完整认证状态（线程安全）
+    "proxy_page": None,      # Playwright page 对象（不可跨线程使用！）
+    "proxy_browser": None,   # Playwright browser 对象
+    "proxy_context": None,   # Playwright context 对象
 }
+
+# ── 动态 URL 拦截器（必须在所有 SPA 脚本之前注入）
+# 拦截 JS 运行时动态创建的 script/img/link 的 src/href，将根相对路径重写为代理路径
+# 解决 webpack 动态 chunk 加载 (/static/js/0.js) 404 的问题
+DYNAMIC_URL_INTERCEPTOR_JS = r"""
+<script>
+(function(){
+  if (window.__kwb_url_intercepted) return;
+  window.__kwb_url_intercepted = true;
+
+  var PROXY_BASE = '/api/collector/proxy';
+
+  window.__kwb_shouldProxy = function(url) {
+    if (!url || typeof url !== 'string') return false;
+    if (url.startsWith(PROXY_BASE) || url.startsWith('/api/collector/')) return false;
+    if (url.startsWith('blob:') || url.startsWith('data:') || url.startsWith('javascript:')) return false;
+    if (url.startsWith('//')) return false;
+    if (url.startsWith('http:') || url.startsWith('https:')) return false;
+    if (url.startsWith('/') && !url.startsWith('//')) return true;
+    return false;
+  };
+
+  window.__kwb_proxyUrl = function(url) {
+    if (url.startsWith('/') && !url.startsWith('//')) return PROXY_BASE + url;
+    return url;
+  };
+
+  // 1. Patch HTMLScriptElement.prototype.src
+  function patchSrcProperty(proto, propName) {
+    try {
+      var desc = Object.getOwnPropertyDescriptor(proto, propName);
+      if (!desc || !desc.set) {
+        // Walk up the prototype chain
+        var p = Object.getPrototypeOf(proto);
+        while (p) {
+          desc = Object.getOwnPropertyDescriptor(p, propName);
+          if (desc && desc.set) break;
+          p = Object.getPrototypeOf(p);
+        }
+      }
+      if (!desc || !desc.set) return;
+      var origSet = desc.set;
+      var origGet = desc.get;
+      Object.defineProperty(proto, propName, {
+        get: origGet,
+        set: function(val) {
+          if (typeof val === 'string' && window.__kwb_shouldProxy(val)) val = window.__kwb_proxyUrl(val);
+          return origSet.call(this, val);
+        },
+        configurable: true,
+        enumerable: desc.enumerable !== false
+      });
+    } catch(e) { console.warn('[WorkBuddy] patchSrcProperty failed for', propName, e); }
+  }
+
+  patchSrcProperty(HTMLScriptElement.prototype, 'src');
+  patchSrcProperty(HTMLImageElement.prototype, 'src');
+  if (typeof HTMLLinkElement !== 'undefined') patchSrcProperty(HTMLLinkElement.prototype, 'href');
+  if (typeof HTMLSourceElement !== 'undefined') patchSrcProperty(HTMLSourceElement.prototype, 'src');
+
+  // 2. Patch Element.prototype.setAttribute for dynamic src/href
+  var origSetAttr = Element.prototype.setAttribute;
+  Element.prototype.setAttribute = function(name, value) {
+    try {
+      if (typeof value === 'string' && typeof name === 'string') {
+        var ln = name.toLowerCase();
+        var tag = (this.tagName || '').toUpperCase();
+        if ((ln === 'src' && (tag === 'SCRIPT' || tag === 'IMG' || tag === 'SOURCE')) ||
+            (ln === 'href' && (tag === 'LINK' || tag === 'A'))) {
+          if (window.__kwb_shouldProxy(value)) value = window.__kwb_proxyUrl(value);
+        }
+      }
+    } catch(_) {}
+    return origSetAttr.call(this, name, value);
+  };
+
+  // 3. Patch document.createElement to intercept dynamically created script/link/img elements
+  // (catches webpack's dynamic chunk loading via new Script())
+  var origCreate = document.createElement.bind(document);
+  document.createElement = function(tag) {
+    var el = origCreate(tag);
+    if (typeof tag === 'string') {
+      var tl = tag.toLowerCase();
+      if (tl === 'script' || tl === 'img' || tl === 'link' || tl === 'source') {
+        // The src/href setter is already patched via prototype, so this is just a safety net
+        // for cases where the element's src is set before it's added to the DOM
+      }
+    }
+    return el;
+  };
+
+  // 4. Patch XMLHttpRequest.prototype.open — 拦截 Axios/原生 XHR 请求通过代理
+  var origXHROpen = XMLHttpRequest.prototype.open;
+  XMLHttpRequest.prototype.open = function(method, url) {
+    try {
+      if (typeof url === 'string' && window.__kwb_shouldProxy(url)) {
+        var newUrl = window.__kwb_proxyUrl(url);
+        console.log('[WorkBuddy] XHR proxy:', url, '→', newUrl);
+        url = newUrl;
+      }
+    } catch(_) {}
+    // 兼容 open(method, url) 和 open(method, url, async, user, password)
+    if (arguments.length === 2) return origXHROpen.call(this, method, url);
+    return origXHROpen.apply(this, [method, url].concat(Array.prototype.slice.call(arguments, 2)));
+  };
+
+  // 5. Patch window.fetch — 拦截 fetch 请求通过代理
+  if (typeof fetch !== 'undefined') {
+    var origFetch = fetch;
+    window.fetch = function(input, init) {
+      try {
+        if (typeof input === 'string') {
+          if (window.__kwb_shouldProxy(input)) {
+            input = window.__kwb_proxyUrl(input);
+            console.log('[WorkBuddy] fetch proxy:', input);
+          }
+        } else if (input && typeof input === 'object' && input.url) {
+          // Request 对象
+          var reqUrl = input.url;
+          if (typeof reqUrl === 'string' && window.__kwb_shouldProxy(reqUrl)) {
+            var newUrl = window.__kwb_proxyUrl(reqUrl);
+            console.log('[WorkBuddy] fetch(Request) proxy:', reqUrl, '→', newUrl);
+            input = new Request(newUrl, input);
+          }
+        }
+      } catch(_) {}
+      return origFetch.call(this, input, init);
+    };
+  }
+
+  console.log('[WorkBuddy] Dynamic URL interceptor ready (XHR + fetch patched)');
+})();
+</script>
+"""
+
+# ── 注入到代理页面的元素选择器脚本（八爪鱼风格） ──
+ELEMENT_PICKER_JS = r"""
+<script>
+(function() {
+  if (window.__kwb_picker_loaded) return;
+  window.__kwb_picker_loaded = true;
+
+  var pickerActive = false;
+  var hoverBox = null;
+  var selectedHighlights = [];
+  var actionPopup = null;
+  var pickedCount = 0;
+
+  // ── 工具函数 ──
+  function buildSelector(el) {
+    if (el.id) {
+      try { return '#' + CSS.escape(el.id); } catch(_) { return '#' + el.id; }
+    }
+    var tag = (el.tagName || 'div').toLowerCase();
+
+    // 1) el-table 单元格：优先使用列唯一类名，如 el-table_1_column_1
+    // 这个类名在表头(th)和数据单元格(td)上都存在，天然匹配整列
+    if (el.className && typeof el.className === 'string') {
+      var classes = el.className.split(/\s+/);
+      for (var i = 0; i < classes.length; i++) {
+        var c = classes[i];
+        if (/^el-table_\d+_column_\d+$/.test(c)) {
+          var table = el.closest('.el-table, .el-table__body, .el-table__header');
+          if (table && table.id) return '#' + table.id + ' .' + c;
+          return '.el-table .' + c;
+        }
+      }
+    }
+
+    // 2) 普通 table / role="table" 单元格：生成 "tr > td:nth-child(N)" 形式
+    if (tag === 'th' || tag === 'td') {
+      var row = el.parentElement;
+      if (row) {
+        var cells = Array.from(row.children).filter(function(c) {
+          return c.tagName === 'TH' || c.tagName === 'TD';
+        });
+        var idx = cells.indexOf(el) + 1;
+        if (idx > 0) {
+          var table = el.closest('table, [role="table"], .el-table');
+          var tablePrefix = '';
+          if (table) {
+            if (table.id) tablePrefix = '#' + table.id + ' ';
+            else if (table.className && typeof table.className === 'string') {
+              var tableCls = table.className.split(/\s+/).filter(function(c) {
+                return c && c.length > 1 && c.indexOf('el-table__') < 0;
+              })[0];
+              if (tableCls) tablePrefix = '.' + tableCls + ' ';
+            }
+          }
+          return tablePrefix + 'tr > :nth-child(' + idx + ')';
+        }
+      }
+    }
+
+    // 3) 普通元素：保留有意义的类名
+    var cls = '';
+    if (el.className && typeof el.className === 'string') {
+      var rawClasses = el.className.split(/\s+/).filter(function(c) {
+        return c && c.length > 1 &&
+               !c.startsWith('is-') && !c.startsWith('has-') &&
+               !c.startsWith('v-') && !c.startsWith('router-') &&
+               !c.startsWith('el-loading');
+      });
+      // 如果过滤后为空，保留一些结构性类名兜底
+      if (rawClasses.length === 0) {
+        rawClasses = el.className.split(/\s+/).filter(function(c) {
+          return c && (c === 'el-table__cell' || c === 'el-table__header-wrapper' || c === 'el-table__body-wrapper');
+        });
+      }
+      cls = rawClasses.slice(0, 2).join('.');
+    }
+    if (cls) return tag + '.' + cls;
+
+    // 4) nth-child fallback
+    var parent = el.parentElement;
+    if (parent) {
+      var siblings = parent.children;
+      for (var i = 0; i < siblings.length; i++) {
+        if (siblings[i] === el) return tag + ':nth-child(' + (i+1) + ')';
+      }
+    }
+    return tag;
+  }
+
+  function getXPath(el) {
+    if (el.id) return '//*[@id="' + el.id + '"]';
+    var parts = [];
+    var current = el;
+    while (current && current.nodeType === 1) {
+      var tag = current.tagName.toLowerCase();
+      var parent = current.parentElement;
+      if (parent) {
+        var siblings = Array.from(parent.children).filter(function(c) { return c.tagName === current.tagName; });
+        if (siblings.length > 1) {
+          var idx = siblings.indexOf(current) + 1;
+          tag += '[' + idx + ']';
+        }
+      }
+      parts.unshift(tag);
+      current = parent;
+      if (current === document.body) break;
+    }
+    return '/' + parts.join('/');
+  }
+
+  function getElementInfo(el) {
+    var tag = (el.tagName || '').toLowerCase();
+    var text = (el.textContent || '').trim().substring(0, 200);
+    var rect = el.getBoundingClientRect();
+    return {
+      tag: tag, text: text,
+      css: buildSelector(el), xpath: getXPath(el),
+      x: Math.round(rect.left + window.scrollX),
+      y: Math.round(rect.top + window.scrollY),
+      w: Math.round(rect.width), h: Math.round(rect.height),
+      id: el.id || '',
+      className: (typeof el.className === 'string' ? el.className : ''),
+      parentTag: el.parentElement ? el.parentElement.tagName.toLowerCase() : '',
+      parentClass: (el.parentElement && typeof el.parentElement.className === 'string') ? el.parentElement.className : '',
+      href: el.getAttribute('href') || '',
+      src: el.getAttribute('src') || '',
+      placeholder: el.getAttribute('placeholder') || '',
+      inputName: el.getAttribute('name') || '',
+      inputType: el.getAttribute('type') || '',
+    };
+  }
+
+  // ── 查找相似元素（八爪鱼核心功能） ──
+  function findSimilarElements(el) {
+    var parent = el.parentElement;
+    if (!parent) return [el];
+    var tag = el.tagName;
+    // 获取元素的"特征类名"（排除框架类名）
+    function featureClasses(node) {
+      if (!node.className || typeof node.className !== 'string') return [];
+      return node.className.split(/\s+/).filter(function(c) {
+        return c && c.length > 1 && !c.startsWith('el-') && !c.startsWith('is-') && !c.startsWith('has-') && !c.startsWith('v-');
+      });
+    }
+    var myClasses = featureClasses(el);
+    var siblings = Array.from(parent.children).filter(function(s) {
+      if (s === el) return true;
+      if (s.tagName !== tag) return false;
+      // 检查是否有相似的 class 结构
+      var sibClasses = featureClasses(s);
+      if (myClasses.length > 0 && sibClasses.length > 0) {
+        // 至少有一个共同的特征类名
+        return myClasses.some(function(c) { return sibClasses.indexOf(c) >= 0; });
+      }
+      // 如果都没有类名，检查文本长度是否相似
+      var myText = (el.textContent || '').trim().length;
+      var sibText = (s.textContent || '').trim().length;
+      if (myText > 0 && sibText > 0) {
+        return Math.abs(myText - sibText) < Math.max(myText, sibText) * 0.5 + 20;
+      }
+      return true;
+    });
+    return siblings;
+  }
+
+  // ── 查找包含的表格或列表 ──
+  function findTableOrList(el) {
+    // 向上查找最近的 table, .el-table, ul, .list, [role="table"] 等
+    var container = el.closest('table, .el-table, .el-table__body-wrapper, [role="table"], .list, .data-list, .table-wrapper');
+    if (container) return container;
+    // 检查父级是否是重复结构
+    var parent = el.parentElement;
+    if (parent && parent.parentElement) {
+      var grandparent = parent.parentElement;
+      var siblings = Array.from(grandparent.children).filter(function(c) { return c.tagName === parent.tagName; });
+      if (siblings.length > 2) return grandparent;
+    }
+    return null;
+  }
+
+  // ── 创建工具栏 ──
+  var pickerBar = document.createElement('div');
+  pickerBar.id = '__kwb_picker_bar';
+  pickerBar.innerHTML =
+    '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">' +
+      '<span style="font-weight:700;font-size:13px;color:#409eff;white-space:nowrap;">🔍 元素选择</span>' +
+      '<span id="__kwb_picker_status" style="font-size:11px;color:#aaa;white-space:nowrap;">已暂停 — 页面可正常操作</span>' +
+      '<span style="flex:1;"></span>' +
+      '<span id="__kwb_picked_count" style="font-size:11px;color:#67c23a;font-weight:700;white-space:nowrap;">已选 0</span>' +
+      '<button data-action="toggle" style="padding:4px 12px;background:#409eff;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:12px;white-space:nowrap;">开始选择</button>' +
+      '<button data-action="select-table" style="padding:4px 12px;background:#67c23a;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:12px;white-space:nowrap;">📋 选表格</button>' +
+      '<button data-action="clear" style="padding:4px 10px;background:#909399;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:12px;white-space:nowrap;">清空</button>' +
+    '</div>';
+  pickerBar.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:2147483647;background:#1a1a2e;color:#eee;padding:6px 16px;box-shadow:0 2px 12px rgba(0,0,0,.6);font-family:Arial,sans-serif;line-height:1.5;';
+
+  // ── 事件委托：工具栏按钮 ──
+  pickerBar.addEventListener('click', function(e) {
+    var btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+    e.preventDefault();
+    e.stopPropagation();
+    var action = btn.getAttribute('data-action');
+    if (action === 'toggle') {
+      pickerActive = !pickerActive;
+      updateToolbarUI();
+    } else if (action === 'select-table') {
+      doSelectTable();
+    } else if (action === 'clear') {
+      clearAllSelections();
+    }
+  });
+
+  function updateToolbarUI() {
+    var toggleBtn = pickerBar.querySelector('button[data-action="toggle"]');
+    var statusText = pickerBar.querySelector('#__kwb_picker_status');
+    if (!toggleBtn || !statusText) return;
+    if (pickerActive) {
+      toggleBtn.textContent = '⏸ 暂停选择';
+      toggleBtn.style.background = '#f56c6c';
+      statusText.textContent = '🔴 选择模式已开启 — 点击页面元素选择数据';
+      statusText.style.color = '#f56c6c';
+      document.body.style.cursor = 'crosshair';
+    } else {
+      toggleBtn.textContent = '🎯 开始选择';
+      toggleBtn.style.background = '#409eff';
+      statusText.textContent = '已暂停 — 页面可正常操作';
+      statusText.style.color = '#aaa';
+      document.body.style.cursor = '';
+      removeHoverBox();
+      removeActionPopup();
+    }
+  }
+
+  // ── 插入工具栏到 DOM ──
+  function ensureToolbar() {
+    if (!document.getElementById('__kwb_picker_bar')) {
+      document.body.insertBefore(pickerBar, document.body.firstChild);
+      document.body.style.paddingTop = '44px';
+      updateToolbarUI();
+      var cnt = pickerBar.querySelector('#__kwb_picked_count');
+      if (cnt) cnt.textContent = '已选 ' + pickedCount;
+    }
+  }
+  ensureToolbar();
+
+  // MutationObserver：SPA 可能重新渲染 body，需重新插入工具栏
+  var observer = new MutationObserver(function() { ensureToolbar(); });
+  observer.observe(document.documentElement, { childList: true, subtree: true });
+
+  // ── hover 高亮框 ──
+  function removeHoverBox() {
+    if (hoverBox) { hoverBox.remove(); hoverBox = null; }
+  }
+  function showHoverBox(el) {
+    if (!hoverBox) {
+      hoverBox = document.createElement('div');
+      hoverBox.style.cssText = 'position:fixed;z-index:2147483644;pointer-events:none;border:2px dashed #409eff;background:rgba(64,158,255,.08);transition:all .1s ease;';
+      document.body.appendChild(hoverBox);
+    }
+    hoverBox.style.display = 'block';
+    var r = el.getBoundingClientRect();
+    hoverBox.style.left = r.left + 'px';
+    hoverBox.style.top = r.top + 'px';
+    hoverBox.style.width = r.width + 'px';
+    hoverBox.style.height = r.height + 'px';
+  }
+
+  // ── 选中高亮（持久） ──
+  function highlightElement(el, color) {
+    var hl = document.createElement('div');
+    hl.style.cssText = 'position:fixed;z-index:2147483643;pointer-events:none;border:2px solid ' + (color||'#67c23a') + ';background:rgba(103,194,58,.12);';
+    var r = el.getBoundingClientRect();
+    hl.style.left = r.left + 'px';
+    hl.style.top = r.top + 'px';
+    hl.style.width = r.width + 'px';
+    hl.style.height = r.height + 'px';
+    hl.__target = el;
+    document.body.appendChild(hl);
+    selectedHighlights.push(hl);
+    // 滚动时更新位置
+    return hl;
+  }
+
+  function clearAllSelections() {
+    selectedHighlights.forEach(function(h) { h.remove(); });
+    selectedHighlights = [];
+    pickedCount = 0;
+    var cnt = pickerBar.querySelector('#__kwb_picked_count');
+    if (cnt) cnt.textContent = '已选 0';
+    removeActionPopup();
+  }
+
+  // ── 操作弹窗（八爪鱼风格：选中后弹出操作面板） ──
+  function removeActionPopup() {
+    if (actionPopup) { actionPopup.remove(); actionPopup = null; }
+  }
+
+  function showActionPopup(el, info, similar) {
+    removeActionPopup();
+    actionPopup = document.createElement('div');
+    actionPopup.id = '__kwb_action_popup';
+    actionPopup.style.cssText = 'position:fixed;z-index:2147483646;background:#fff;border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.3);padding:0;min-width:280px;max-width:360px;font-family:Arial,sans-serif;overflow:hidden;';
+
+    var r = el.getBoundingClientRect();
+    var top = r.bottom + 6;
+    var left = r.left;
+    if (top + 200 > window.innerHeight) top = r.top - 206;
+    if (left + 300 > window.innerWidth) left = window.innerWidth - 310;
+    actionPopup.style.left = Math.max(8, left) + 'px';
+    actionPopup.style.top = Math.max(52, top) + 'px';
+
+    var tagClr = '#409eff';
+    var typeLabel = '文本';
+    if (info.tag === 'img') { typeLabel = '图片'; tagClr = '#e6a23c'; }
+    else if (info.tag === 'a') { typeLabel = '链接'; tagClr = '#67c23a'; }
+    else if (['input','textarea','select'].indexOf(info.tag) >= 0) { typeLabel = '输入框'; tagClr = '#909399'; }
+    else if (info.tag === 'td' || info.tag === 'th') { typeLabel = '表格单元格'; tagClr = '#f56c6c'; }
+
+    var html =
+      '<div style="background:#f5f7fa;padding:8px 12px;border-bottom:1px solid #ebeef5;display:flex;align-items:center;gap:6px;">' +
+        '<span style="background:' + tagClr + ';color:#fff;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:700;">' + escapeHtml(info.tag) + '</span>' +
+        '<span style="font-size:11px;color:#909399;">' + typeLabel + '</span>' +
+        '<span style="flex:1;"></span>' +
+        '<button data-popup-action="close" style="background:none;border:none;cursor:pointer;color:#c0c4cc;font-size:16px;padding:0 4px;">&times;</button>' +
+      '</div>' +
+      '<div style="padding:8px 12px;font-size:12px;color:#333;max-height:60px;overflow:hidden;border-bottom:1px solid #f0f0f0;">' +
+        '<span style="color:#909399;font-size:10px;">内容：</span>' +
+        '<span style="font-weight:600;">' + escapeHtml(info.text.substring(0,80) || '(空)') + '</span>' +
+      '</div>';
+
+    // 相似元素提示
+    if (similar.length > 1) {
+      html +=
+        '<div style="padding:8px 12px;background:#fdf6ec;border-bottom:1px solid #f0f0f0;">' +
+          '<span style="font-size:11px;color:#e6a23c;">⚡ 检测到 ' + similar.length + ' 个相似元素</span>' +
+        '</div>';
+    }
+
+    html +=
+      '<div style="padding:8px;display:flex;flex-direction:column;gap:6px;">' +
+        '<button data-popup-action="select-one" style="padding:8px 12px;background:#409eff;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:12px;font-weight:600;">✅ 选中此元素</button>';
+
+    if (similar.length > 1) {
+      html += '<button data-popup-action="select-similar" style="padding:8px 12px;background:#e6a23c;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:12px;font-weight:600;">⚡ 选中全部相似元素 (' + similar.length + '个)</button>';
+    }
+
+    // 表格/列表检测
+    var tableContainer = findTableOrList(el);
+    if (tableContainer && tableContainer !== el) {
+      html += '<button data-popup-action="select-table-area" style="padding:8px 12px;background:#67c23a;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:12px;font-weight:600;">📋 选择整个表格/列表</button>';
+    }
+
+    html += '</div>';
+
+    // CSS 选择器/XPath 信息（折叠）
+    html +=
+      '<details style="border-top:1px solid #f0f0f0;padding:4px 12px;font-size:10px;color:#909399;">' +
+        '<summary style="cursor:pointer;padding:4px 0;">CSS / XPath</summary>' +
+        '<div style="padding:4px 0;word-break:break-all;">' +
+          '<div style="color:#409eff;">' + escapeHtml(info.css) + '</div>' +
+          '<div style="color:#909399;margin-top:4px;">' + escapeHtml(info.xpath) + '</div>' +
+        '</div>' +
+      '</details>';
+
+    actionPopup.innerHTML = html;
+
+    // 事件委托
+    actionPopup.addEventListener('click', function(e) {
+      var btn = e.target.closest('button[data-popup-action]');
+      if (!btn) return;
+      var act = btn.getAttribute('data-popup-action');
+      if (act === 'close') {
+        removeActionPopup();
+      } else if (act === 'select-one') {
+        pickElement(el, false);
+        removeActionPopup();
+      } else if (act === 'select-similar') {
+        pickElement(el, true);
+        removeActionPopup();
+      } else if (act === 'select-table-area' && tableContainer) {
+        pickTableArea(tableContainer);
+        removeActionPopup();
+      }
+    });
+
+    document.body.appendChild(actionPopup);
+  }
+
+  function escapeHtml(s) {
+    if (!s) return '';
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // ── 选中元素 → 发送到父窗口 ──
+  function pickElement(el, selectAllSimilar) {
+    var info = getElementInfo(el);
+    var similar = selectAllSimilar ? findSimilarElements(el) : [el];
+    var similarInfos = similar.map(function(e) { return getElementInfo(e); });
+
+    // 高亮所有选中元素
+    similar.forEach(function(e) {
+      highlightElement(e, selectAllSimilar ? '#e6a23c' : '#67c23a');
+    });
+    pickedCount += similar.length;
+    var cnt = pickerBar.querySelector('#__kwb_picked_count');
+    if (cnt) cnt.textContent = '已选 ' + pickedCount;
+
+    // 发送消息到父窗口
+    window.parent.postMessage(JSON.stringify({
+      type: 'kwb_element_picked',
+      element: info,
+      is_batch: selectAllSimilar && similar.length > 1,
+      similar_count: similar.length,
+      similar_elements: similarInfos,
+      source: 'kwb_proxy'
+    }), '*');
+  }
+
+  // ── 选中整个表格/列表 ──
+  function pickTableArea(container) {
+    var info = getElementInfo(container);
+    highlightElement(container, '#67c23a');
+    pickedCount++;
+    var cnt = pickerBar.querySelector('#__kwb_picked_count');
+    if (cnt) cnt.textContent = '已选 ' + pickedCount;
+
+    // 查找表格列
+    var rows = container.querySelectorAll('tr, [role="row"]');
+    if (rows.length >= 1) {
+      var headerRow = rows[0];
+      var headerCells = headerRow.querySelectorAll('th, td, [role="columnheader"], [role="gridcell"]');
+      var headers = [];
+      var colSelectors = [];
+      var colXpaths = [];
+      headerCells.forEach(function(cell) {
+        var txt = (cell.textContent || '').trim().substring(0, 20);
+        headers.push(txt || '列' + (headers.length+1));
+        colSelectors.push(buildSelector(cell));
+        colXpaths.push(getXPath(cell));
+      });
+      window.parent.postMessage(JSON.stringify({
+        type: 'kwb_table_columns',
+        headers: headers,
+        selectors: colSelectors,
+        xpaths: colXpaths,
+        row_count: rows.length,
+        source: 'kwb_proxy'
+      }), '*');
+    } else {
+      // 列表模式
+      window.parent.postMessage(JSON.stringify({
+        type: 'kwb_element_picked',
+        element: info,
+        is_batch: true,
+        similar_count: 1,
+        similar_elements: [info],
+        is_list_area: true,
+        source: 'kwb_proxy'
+      }), '*');
+    }
+  }
+
+  // ── "选表格"按钮 ──
+  function doSelectTable() {
+    var table = document.querySelector('table.el-table__body, table.el-table, .el-table table, [role="table"] table, table');
+    if (!table) {
+      // 尝试找 div-based 列表
+      var listContainer = document.querySelector('.el-table, .data-list, .list, .table-wrapper, [role="table"]');
+      if (listContainer) {
+        pickTableArea(listContainer);
+        showToast('已选中列表区域');
+        return;
+      }
+      alert('未找到表格或列表元素\n请先点击"开始选择"，然后点击表格中的某个单元格');
+      return;
+    }
+    pickTableArea(table);
+  }
+
+  function showToast(msg) {
+    var t = document.createElement('div');
+    t.textContent = msg;
+    t.style.cssText = 'position:fixed;top:50px;left:50%;transform:translateX(-50%);background:#67c23a;color:#fff;padding:8px 20px;border-radius:4px;font-size:13px;z-index:2147483647;box-shadow:0 2px 8px rgba(0,0,0,.3);';
+    document.body.appendChild(t);
+    setTimeout(function() { t.remove(); }, 2500);
+  }
+
+  // ── 核心点击处理 ──
+  function onPickerClick(e) {
+    // 关键修复：先检查是否点击了我们自己的 UI，再决定是否拦截
+    if (e.target.closest('#__kwb_picker_bar')) return;
+    if (e.target.closest('#__kwb_action_popup')) return;
+
+    if (!pickerActive) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    var el = e.target;
+    // 如果点击的是高亮框，取高亮框对应的目标元素
+    if (el.__target) el = el.__target;
+
+    var info = getElementInfo(el);
+    var similar = findSimilarElements(el);
+
+    // 高亮当前选中元素
+    highlightElement(el, '#409eff');
+
+    // 显示操作弹窗
+    showActionPopup(el, info, similar);
+  }
+
+  // ── hover 处理 ──
+  function onMouseMove(e) {
+    if (!pickerActive) return;
+    if (e.target.closest('#__kwb_picker_bar')) { removeHoverBox(); return; }
+    if (e.target.closest('#__kwb_action_popup')) { removeHoverBox(); return; }
+    var el = e.target;
+    if (el.__target) el = el.__target;
+    showHoverBox(el);
+  }
+
+  // ── 注册事件 ──
+  document.addEventListener('click', onPickerClick, true);
+  document.addEventListener('mousemove', onMouseMove, true);
+
+  // ESC 键退出选择模式
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && pickerActive) {
+      pickerActive = false;
+      updateToolbarUI();
+      removeHoverBox();
+      removeActionPopup();
+    } else if (e.key === 'Escape' && actionPopup) {
+      removeActionPopup();
+    }
+  });
+
+  // ── 通知父窗口：DOM 已就绪 ──
+  function notifyReady() {
+    try {
+      window.parent.postMessage(JSON.stringify({
+        source: 'kwb_proxy',
+        type: 'kwb_proxy_dom_ready',
+        url: location.href,
+        title: document.title
+      }), '*');
+    } catch(_) {}
+  }
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(notifyReady, 100);
+  } else {
+    document.addEventListener('DOMContentLoaded', function() { setTimeout(notifyReady, 100); });
+    window.addEventListener('load', function() { setTimeout(notifyReady, 200); });
+  }
+
+  // 错误捕获
+  window.addEventListener('error', function(e) {
+    try {
+      window.parent.postMessage(JSON.stringify({
+        source: 'kwb_proxy', type: 'kwb_proxy_error',
+        message: e.message || 'unknown error', filename: e.filename || '', line: e.lineno || 0
+      }), '*');
+    } catch(_) {}
+  });
+
+  console.log('[WorkBuddy Picker] 八爪鱼风格元素选择器已就绪');
+})();
+</script>
+"""
+
+
+# ═══════════════ 代理模式：实时页面元素选择 ═══════════════
+
+@app.route("/api/collector/proxy_start", methods=["POST"])
+def api_collector_proxy_start():
+    """
+    启动代理模式：登录目标平台并捕获 Cookie，返回代理 URL。
+
+    请求: { "host": "...", "username": "...", "password": "...", "target": "..." }
+    响应: { "ok": true, "session_id": "...", "proxy_url": "/api/collector/proxy/...", "title": "..." }
+    """
+    global visual_collector_state
+
+    # 如果已有代理会话，先关闭它
+    if visual_collector_state.get("proxy_active"):
+        try:
+            for key in ("proxy_page", "proxy_context", "proxy_browser"):
+                obj = visual_collector_state.get(key)
+                if obj:
+                    try: obj.close()
+                    except: pass
+                visual_collector_state[key] = None
+            visual_collector_state["proxy_active"] = False
+            logger.info("[ProxyStart] 已关闭旧代理会话")
+        except Exception as e:
+            logger.warning(f"[ProxyStart] 关闭旧会话失败: {e}")
+
+    data = request.get_json()
+    host = (data.get("host") or "").strip()
+    username = (data.get("username") or "").strip()
+    password = data.get("password", "")
+    target = (data.get("target") or "").strip()
+
+    if not host or not username or not target:
+        return jsonify({"ok": False, "message": "请填写平台地址、账号和目标页面"}), 400
+
+    visual_collector_state["host"] = host
+    visual_collector_state["username"] = username
+    visual_collector_state["password"] = password
+    visual_collector_state["target"] = target
+    visual_collector_state["selected_elements"] = []
+
+    # 构建完整目标 URL
+    if target.startswith("http"):
+        full_url = target
+    else:
+        full_url = urljoin(host.rstrip("/") + "/", target.lstrip("/"))
+
+    target_origin = urlparse(host).scheme + "://" + urlparse(host).netloc
+    visual_collector_state["proxy_target_origin"] = target_origin
+
+    try:
+        # 1. 启动 Playwright 登录
+        from playwright.sync_api import sync_playwright
+        pw = sync_playwright().start()
+        browser = pw.chromium.launch(headless=True)
+        context = browser.new_context(viewport={"width": 1440, "height": 900}, locale="zh-CN")
+        page = context.new_page()
+
+        logger.info(f"[ProxyStart] 登录 {host}/login ...")
+        page.goto(host.rstrip("/") + "/login", wait_until="domcontentloaded", timeout=30000)
+        page.wait_for_timeout(1500)
+
+        # 填写登录表单
+        try:
+            page.fill('input[placeholder*="账号"], input[name="username"], input[type="text"]', username)
+        except Exception:
+            page.fill('input[type="text"]', username)
+        page.fill('input[placeholder*="密码"], input[name="password"], input[type="password"]', password)
+
+        login_btn = page.locator('button:has-text("登录"), button:has-text("登 录"), button[type="submit"], .login-btn')
+        if login_btn.count() == 0:
+            login_btn = page.locator('button, .el-button')
+        login_btn.first.click()
+
+        # 等待登录成功
+        page.wait_for_url(lambda u: "/login" not in u.lower(), timeout=30000, wait_until="domcontentloaded")
+        page.wait_for_timeout(2000)
+
+        # 2. 导航到目标页面
+        logger.info(f"[ProxyStart] 导航到目标页面 {full_url}")
+        page.goto(full_url, wait_until="domcontentloaded", timeout=30000)
+        page.wait_for_timeout(2000)
+
+        page_title = page.title()
+
+        # 3. 提取所有 Cookie
+        cookies = context.cookies()
+        cookie_dict = {}
+        for c in cookies:
+            cookie_dict[c["name"]] = c["value"]
+
+        # 3.1 提取 localStorage / sessionStorage（Vue/SPA 通常把 token 存在这里）
+        storage_data = {"local": {}, "session": {}}
+        try:
+            storage_data = page.evaluate("""() => {
+                const local = {};
+                for (let i = 0; i < localStorage.length; i++) {
+                    const k = localStorage.key(i);
+                    local[k] = localStorage.getItem(k);
+                }
+                const session = {};
+                for (let i = 0; i < sessionStorage.length; i++) {
+                    const k = sessionStorage.key(i);
+                    session[k] = sessionStorage.getItem(k);
+                }
+                return { local, session };
+            }""")
+            logger.info(f"[ProxyStart] 捕获 localStorage {len(storage_data.get('local', {}))} 项, "
+                        f"sessionStorage {len(storage_data.get('session', {}))} 项")
+        except Exception as e:
+            logger.warning(f"[ProxyStart] 提取 storage 失败: {e}")
+
+        logger.info(f"[ProxyStart] 登录成功，捕获 {len(cookie_dict)} 个 Cookie, 页面标题: {page_title}")
+
+        # 4. 保存代理会话
+        session_id = hashlib.md5(f"proxy_{host}{target}{time.time()}".encode()).hexdigest()[:16]
+        visual_collector_state["session_id"] = session_id
+        visual_collector_state["proxy_active"] = True
+        visual_collector_state["proxy_cookies"] = cookie_dict
+        visual_collector_state["proxy_storage"] = storage_data
+        visual_collector_state["proxy_page"] = page
+        visual_collector_state["proxy_browser"] = browser
+        visual_collector_state["proxy_context"] = context
+        visual_collector_state["running"] = False
+
+        # 保存完整认证状态（线程安全，供预览/采集端点复用）
+        try:
+            visual_collector_state["proxy_storage_state"] = context.storage_state()
+            logger.info(f"[ProxyStart] 已保存 storage_state "
+                        f"(cookies: {len(visual_collector_state['proxy_storage_state'].get('cookies', []))} 条)")
+        except Exception as e:
+            logger.warning(f"[ProxyStart] 保存 storage_state 失败: {e}")
+            visual_collector_state["proxy_storage_state"] = None
+
+        # 5. 构建代理访问路径
+        proxy_path = urlparse(full_url).path or "/"
+        if urlparse(full_url).query:
+            proxy_path += "?" + urlparse(full_url).query
+
+        return jsonify({
+            "ok": True,
+            "session_id": session_id,
+            "proxy_url": f"/api/collector/proxy{proxy_path}",
+            "title": page_title,
+            "target_origin": target_origin,
+        })
+
+    except Exception as e:
+        visual_collector_state["running"] = False
+        visual_collector_state["proxy_active"] = False
+        logger.error(f"[ProxyStart] 失败: {e}", exc_info=True)
+        return jsonify({"ok": False, "message": f"启动代理失败: {str(e)}"}), 500
+
+
+@app.route("/api/collector/proxy", defaults={"subpath": ""}, methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
+@app.route("/api/collector/proxy/<path:subpath>", methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
+def api_collector_proxy(subpath):
+    """
+    反向代理：将请求转发到目标平台，对 HTML 注入元素选择器脚本。
+
+    所有请求方法均支持（GET 获取页面/资源，POST/PUT 转发 API 调用）。
+    """
+    if not visual_collector_state.get("proxy_active"):
+        return jsonify({"ok": False, "message": "没有活跃的代理会话"}), 400
+
+    target_origin = visual_collector_state.get("proxy_target_origin", "")
+    cookies = visual_collector_state.get("proxy_cookies", {})
+
+    # 构建目标 URL
+    query_string = request.query_string.decode("utf-8")
+    target_url = urljoin(target_origin.rstrip("/") + "/", subpath.lstrip("/"))
+    if query_string:
+        target_url += "?" + query_string
+
+    logger.info(f"[Proxy] {request.method} {target_url}")
+
+    try:
+        # 转发请求
+        req_headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+        }
+        # 转发客户端的一些关键头部
+        for h in ["Accept", "Accept-Language", "Content-Type", "X-Requested-With", "Referer"]:
+            if h in request.headers:
+                req_headers[h] = request.headers[h]
+        # 转发自定义认证头
+        for h in ["Authorization"]:
+            if h in request.headers:
+                req_headers[h] = request.headers[h]
+
+        body = request.get_data() or None
+
+        if request.method == "GET":
+            resp = _requests.get(target_url, headers=req_headers, cookies=cookies,
+                                allow_redirects=True, timeout=30)
+        elif request.method == "POST":
+            resp = _requests.post(target_url, headers=req_headers, cookies=cookies,
+                                 data=body, allow_redirects=True, timeout=30)
+        elif request.method == "PUT":
+            resp = _requests.put(target_url, headers=req_headers, cookies=cookies,
+                                data=body, allow_redirects=True, timeout=30)
+        elif request.method == "DELETE":
+            resp = _requests.delete(target_url, headers=req_headers, cookies=cookies,
+                                   allow_redirects=True, timeout=30)
+        else:
+            resp = _requests.request(request.method, target_url, headers=req_headers, cookies=cookies,
+                                     data=body, allow_redirects=True, timeout=30)
+
+        content_type = resp.headers.get("Content-Type", "")
+        raw_body = resp.content
+        status_code = resp.status_code
+
+        # 构建响应头
+        resp_headers = {}
+        SKIP_HEADERS = {
+            "transfer-encoding", "content-encoding", "content-length",
+            "content-security-policy", "content-security-policy-report-only",
+            "x-frame-options", "x-content-security-policy",
+            "x-webkit-csp", "strict-transport-security",
+            "set-cookie",  # Cookie 由代理管理，不透传
+        }
+        for k, v in resp.headers.items():
+            if k.lower() in SKIP_HEADERS:
+                continue
+            resp_headers[k] = v
+
+        # 如果请求的是非 HTML 资源（JS/CSS/图片等），但服务器返回了 HTML（可能是登录页重定向）
+        # 则不注入脚本，直接返回空内容或错误
+        request_ext = "." + subpath.rsplit(".", 1)[-1].lower() if "." in subpath.rsplit("/", 1)[-1] else ""
+        is_static_resource = request_ext in (".js", ".css", ".png", ".jpg", ".jpeg", ".gif", ".svg",
+                                              ".woff", ".woff2", ".ttf", ".eot", ".ico", ".map")
+        if is_static_resource and "text/html" in content_type:
+            # 静态资源被重定向到 HTML 页面（可能是 session 过期）
+            logger.warning(f"[Proxy] 静态资源 {subpath} 返回了 HTML（可能 session 过期）, 返回空内容")
+            return Response(b"", status=401, content_type=content_type)
+
+        # 如果是 HTML 页面，注入元素选择器脚本
+        if "text/html" in content_type:
+            try:
+                html = raw_body.decode("utf-8", errors="replace")
+            except Exception:
+                html = raw_body.decode("latin-1", errors="replace")
+
+            # 1. 注入动态 URL 拦截器（必须在所有 SPA 脚本之前，拦截 webpack 动态 chunk 加载）
+            html = _re.sub(r'<base[^>]*>', '', html, flags=_re.IGNORECASE)
+            head_pos = html.find("<head")
+            if head_pos >= 0:
+                head_close = html.find(">", head_pos) + 1
+                html = html[:head_close] + DYNAMIC_URL_INTERCEPTOR_JS + html[head_close:]
+            else:
+                html_close = html.find(">", html.find("<html")) + 1 if "<html" in html else 0
+                html = html[:html_close] + DYNAMIC_URL_INTERCEPTOR_JS + html[html_close:]
+
+            # 2. 注入 storage 恢复脚本（必须在 SPA 脚本之前执行，否则 SPA 读不到 token 会一直 loading）
+            storage_data = visual_collector_state.get("proxy_storage") or {"local": {}, "session": {}}
+            try:
+                storage_json = json.dumps(storage_data, ensure_ascii=False)
+            except Exception:
+                storage_json = '{"local":{},"session":{}}'
+            storage_script = (
+                "<script>\n"
+                "(function(){\n"
+                "  try {\n"
+                "    var data = " + storage_json + ";\n"
+                "    if (data.local) { for (var k in data.local) { try { localStorage.setItem(k, data.local[k]); } catch(_){} } }\n"
+                "    if (data.session) { for (var k in data.session) { try { sessionStorage.setItem(k, data.session[k]); } catch(_){} } }\n"
+                "  } catch(e) { console.warn('[WorkBuddy Storage] 恢复失败:', e); }\n"
+                "})();\n"
+                "</script>"
+            )
+            head_pos = html.find("<head")
+            if head_pos >= 0:
+                head_close = html.find(">", head_pos) + 1
+                html = html[:head_close] + storage_script + html[head_close:]
+            else:
+                # 无 <head>，注入到 <html> 后
+                html_close = html.find(">", html.find("<html")) + 1 if "<html" in html else 0
+                html = html[:html_close] + storage_script + html[html_close:]
+
+            # 2. 注入 <base> 标签，让相对 URL 以代理基准解析
+            # 让 base 包含当前子路径，这样相对路径能正确解析到目标服务器的对应子路径
+            base_path = subpath.rstrip("/") if subpath else ""
+            base_href = f"/api/collector/proxy/{base_path}/" if base_path else "/api/collector/proxy/"
+            base_tag = f'<base href="{base_href}">'
+            head_pos = html.find("<head")
+            if head_pos >= 0:
+                head_close = html.find(">", head_pos) + 1
+                html = html[:head_close] + base_tag + html[head_close:]
+            else:
+                html_close = html.find(">", html.find("<html")) + 1 if "<html" in html else 0
+                html = html[:html_close] + base_tag + html[html_close:]
+
+            # 3. 注入元素选择器脚本到 <body> 之后（因为脚本需要 document.body）
+            body_open = html.find("<body")
+            if body_open >= 0:
+                body_close = html.find(">", body_open) + 1
+                html = html[:body_close] + ELEMENT_PICKER_JS + html[body_close:]
+            else:
+                # 无 body 标签，追加到末尾
+                html += ELEMENT_PICKER_JS
+
+            # 2. 重写绝对 URL（http(s)://target_origin/xxx → /api/collector/proxy/xxx）
+            html = html.replace(target_origin + "/", "/api/collector/proxy/")
+
+            # 3. 重写 CSS url() 中的绝对路径
+            def _rewrite_css_url(m):
+                url = m.group(1).strip().strip('"\'')
+                if url.startswith("http") and url.startswith(target_origin):
+                    rel = url[len(target_origin):]
+                    return f'url("/api/collector/proxy{rel}")'
+                if url.startswith("/") and not url.startswith("//") and not url.startswith("/api/collector/"):
+                    return f'url("/api/collector/proxy{url}")'
+                return m.group(0)
+
+            html = _re.sub(r'url\(([^)]+)\)', _rewrite_css_url, html)
+
+            # 4. 重写 src/href 属性（仅绝对路径 / 开头的）
+            def _rewrite_attr(m):
+                attr = m.group(1)
+                url = m.group(2)
+                if url.startswith("http:") or url.startswith("https:"):
+                    if url.startswith(target_origin):
+                        rel = url[len(target_origin):]
+                        return f'{attr}="/api/collector/proxy{rel}"'
+                    return m.group(0)
+                if url.startswith("//"):
+                    return m.group(0)
+                if url.startswith("/api/collector/"):
+                    return m.group(0)
+                if url.startswith("/") and not url.startswith("//"):
+                    return f'{attr}="/api/collector/proxy{url}"'
+                # 相对路径（如 "js/app.js"）由 <base> 标签处理，不需要改
+                return m.group(0)
+
+            html = _re.sub(r'(src|href)="([^"]*)"', _rewrite_attr, html)
+            html = _re.sub(r"(src|href)='([^']*)'", _rewrite_attr, html)
+
+            # 5. 重写 data-src（懒加载图片）
+            html = _re.sub(r'(data-src)="([^"]*)"', _rewrite_attr, html)
+
+            # 6. 重写 srcset
+            def _rewrite_srcset(m):
+                full = m.group(2)
+                parts = full.split(",")
+                new_parts = []
+                for part in parts:
+                    part = part.strip()
+                    space_idx = part.find(" ")
+                    if space_idx > 0:
+                        url_part = part[:space_idx].strip()
+                        desc = part[space_idx:].strip()
+                    else:
+                        url_part = part
+                        desc = ""
+                    if url_part.startswith("http") and url_part.startswith(target_origin):
+                        url_part = "/api/collector/proxy" + url_part[len(target_origin):]
+                    elif url_part.startswith("/") and not url_part.startswith("//") and not url_part.startswith("/api/collector/"):
+                        url_part = "/api/collector/proxy" + url_part
+                    new_parts.append(url_part + (" " + desc if desc else ""))
+                return f'{m.group(1)}="{", ".join(new_parts)}"'
+
+            html = _re.sub(r'(srcset)="([^"]*)"', _rewrite_srcset, html)
+
+            # 注入 API 拦截脚本（让 SPA 的 AJAX 请求也走代理）
+            api_interceptor = """
+<script>
+(function(){
+  if(window.__kwb_api_patched) return;
+  window.__kwb_api_patched = true;
+  var TARGET_ORIGIN = '""" + target_origin + """';
+  var PROXY_BASE = '/api/collector/proxy';
+
+  function shouldProxy(url) {
+    if (!url || typeof url !== 'string') return false;
+    if (url.startsWith(PROXY_BASE) || url.startsWith('/api/collector/')) return false;
+    if (url.startsWith('blob:') || url.startsWith('data:') || url.startsWith('javascript:')) return false;
+    if (url.startsWith(TARGET_ORIGIN)) return true;
+    if (url.startsWith('/') && !url.startsWith('//')) return true;
+    return false;
+  }
+
+  function proxyUrl(url) {
+    if (url.startsWith(TARGET_ORIGIN)) return PROXY_BASE + url.substring(TARGET_ORIGIN.length);
+    if (url.startsWith('/') && !url.startsWith('//')) return PROXY_BASE + url;
+    return url;
+  }
+
+  // Patch fetch
+  var _origFetch = window.fetch;
+  window.fetch = function(input, init) {
+    try {
+      var url = typeof input === 'string' ? input : (input && input.url) || '';
+      if (shouldProxy(url)) {
+        var newUrl = proxyUrl(url);
+        if (typeof input === 'string') input = newUrl;
+        else if (input instanceof Request) input = new Request(newUrl, input);
+      }
+    } catch(_) {}
+    return _origFetch.call(this, input, init);
+  };
+
+  // Patch XMLHttpRequest（修正版：通过 prototype.open 拦截，避免共享实例问题）
+  var OrigXHR = window.XMLHttpRequest;
+  var origXHROpen = OrigXHR.prototype.open;
+  OrigXHR.prototype.open = function(method, url, async, user, password) {
+    try {
+      if (shouldProxy(url)) url = proxyUrl(url);
+    } catch(_) {}
+    return origXHROpen.call(this, method, url, async, user, password);
+  };
+
+  // Patch axios（许多 Vue 应用使用 axios）
+  function patchAxios(axios) {
+    if (!axios || axios.__kwbPatched) return;
+    axios.__kwbPatched = true;
+    if (axios.request) {
+      var origReq = axios.request.bind(axios);
+      axios.request = function(config) {
+        if (config && config.url && shouldProxy(config.url)) {
+          config = Object.assign({}, config, { url: proxyUrl(config.url) });
+        }
+        return origReq(config);
+      };
+    }
+    ['get','post','put','delete','patch','head','options'].forEach(function(m){
+      if (!axios[m]) return;
+      var orig = axios[m].bind(axios);
+      axios[m] = function(url, data, config) {
+        if (typeof url === 'string' && shouldProxy(url)) url = proxyUrl(url);
+        if (typeof data === 'string' && shouldProxy(data)) data = proxyUrl(data);
+        return orig(url, data, config);
+      };
+    });
+    if (axios.create) {
+      var origCreate = axios.create.bind(axios);
+      axios.create = function() {
+        var inst = origCreate.apply(null, arguments);
+        patchAxios(inst);
+        return inst;
+      };
+    }
+    if (axios.defaults) {
+      var _bu = axios.defaults.baseURL;
+      if (_bu && shouldProxy(_bu)) {
+        axios.defaults.baseURL = proxyUrl(_bu);
+      }
+    }
+  }
+  // axios 是异步加载的，每 50ms 检查一次
+  var axiosInterval = setInterval(function() {
+    if (window.axios) {
+      clearInterval(axiosInterval);
+      patchAxios(window.axios);
+    }
+  }, 50);
+  setTimeout(function() { clearInterval(axiosInterval); }, 10000);
+
+  console.log('[WorkBuddy Proxy] API 拦截已启用, 目标: ' + TARGET_ORIGIN);
+})();
+
+// 通知父窗口页面已就绪
+(function(){
+  function notifyParent(type) {
+    try { window.parent.postMessage(JSON.stringify({type: type, source: 'kwb_proxy'}), '*'); } catch(e) {}
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function(){ notifyParent('kwb_proxy_dom_ready'); });
+  } else {
+    notifyParent('kwb_proxy_dom_ready');
+  }
+  window.addEventListener('load', function(){ notifyParent('kwb_proxy_loaded'); });
+  // 兜底：3秒后无论如何通知一次（SPA 可能不会触发 load）
+  setTimeout(function(){ notifyParent('kwb_proxy_timeout'); }, 3000);
+})();
+</script>
+"""
+            inject_pos2 = html.find("</head>")
+            if inject_pos2 > 0:
+                html = html[:inject_pos2] + api_interceptor + html[inject_pos2:]
+            else:
+                # 无 </head>，追加到 body 开头
+                body_tag = html.find("<body")
+                if body_tag >= 0:
+                    body_close = html.find(">", body_tag) + 1
+                    html = html[:body_close] + api_interceptor + html[body_close:]
+
+            raw_body = html.encode("utf-8")
+
+        # 对外部 CSS 文件做 url() / @import 重写（处理 @font-face 字体、背景图等）
+        if "text/css" in content_type:
+            try:
+                css_text = raw_body.decode("utf-8", errors="replace")
+            except Exception:
+                css_text = raw_body.decode("latin-1", errors="replace")
+
+            def _rewrite_css_url_external(m):
+                url = m.group(1).strip().strip('"\'')
+                if url.startswith("http") and url.startswith(target_origin):
+                    return f'url("/api/collector/proxy{url[len(target_origin):]}")'
+                if url.startswith("/") and not url.startswith("//") and not url.startswith("/api/collector/"):
+                    return f'url("/api/collector/proxy{url}")'
+                return m.group(0)
+
+            css_text = _re.sub(r'url\(([^)]+)\)', _rewrite_css_url_external, css_text)
+
+            def _rewrite_css_import(m):
+                url = m.group(1).strip().strip('"\'')
+                if url.startswith("http") and url.startswith(target_origin):
+                    return f'@import url("/api/collector/proxy{url[len(target_origin):]}")'
+                if url.startswith("/") and not url.startswith("//") and not url.startswith("/api/collector/"):
+                    return f'@import url("/api/collector/proxy{url}")'
+                return m.group(0)
+
+            css_text = _re.sub(r'@import\s+(?:url\()?["\']?([^"\')]+)["\']?\)?', _rewrite_css_import, css_text)
+            raw_body = css_text.encode("utf-8")
+
+        # 返回响应
+        return Response(raw_body, status=status_code, headers=resp_headers)
+
+    except _requests.exceptions.RequestException as e:
+        logger.error(f"[Proxy] 请求失败: {target_url} - {e}")
+        return jsonify({"ok": False, "message": f"代理请求失败: {str(e)}"}), 502
+
+
+@app.route("/api/collector/element_picked", methods=["POST"])
+def api_collector_element_picked():
+    """
+    接收来自代理页面中元素选择器的元素信息
+    请求: { "session_id": "...", "element": { "tag":"td", "text":"...", "css":"...", ... } }
+    """
+    data = request.get_json() or {}
+    elem = data.get("element") or {}
+    session_id = data.get("session_id", "")
+
+    if session_id != visual_collector_state.get("session_id", ""):
+        return jsonify({"ok": False, "message": "会话不匹配"}), 400
+
+    # 构建立即添加到 selected_elements 的规则建议
+    # 前端可以通过 /api/collector/select 正式添加
+    css = elem.get("css", "")
+    xpath = elem.get("xpath", "")
+    tag = elem.get("tag", "")
+    text = elem.get("text", "")
+
+    # 自动推断字段名
+    auto_name = text[:15] if text and len(text) <= 15 else (tag + "_" + css.replace(".", "_").replace("#", "_")[:20])
+
+    return jsonify({
+        "ok": True,
+        "suggestion": {
+            "field_name": auto_name,
+            "css_selector": css,
+            "xpath": xpath,
+            "extract_type": "text",
+            "sample_value": text[:50] if text else "",
+        },
+        "element": elem,
+    })
+
+
+@app.route("/api/collector/proxy_stop", methods=["POST"])
+def api_collector_proxy_stop():
+    """停止代理会话，关闭 Playwright 浏览器"""
+    global visual_collector_state
+    try:
+        page = visual_collector_state.get("proxy_page")
+        browser = visual_collector_state.get("proxy_browser")
+        context = visual_collector_state.get("proxy_context")
+        if page:
+            try: page.close()
+            except: pass
+        if context:
+            try: context.close()
+            except: pass
+        if browser:
+            try: browser.close()
+            except: pass
+    except Exception as e:
+        logger.warning(f"[ProxyStop] 清理浏览器失败: {e}")
+
+    visual_collector_state["proxy_active"] = False
+    visual_collector_state["proxy_page"] = None
+    visual_collector_state["proxy_browser"] = None
+    visual_collector_state["proxy_context"] = None
+    visual_collector_state["proxy_cookies"] = {}
+    visual_collector_state["proxy_storage_state"] = None
+    return jsonify({"ok": True, "message": "代理会话已停止"})
 
 
 @app.route("/api/collector/start_session", methods=["POST"])
@@ -2580,64 +3914,88 @@ def api_collector_select():
 
     请求: {
         "session_id": "abc123",
-        "element_index": 5,     // 从 snapshop.elements 列表中的索引
-        "field_name": "姓名",    // 用户指定的字段名
-        "extract_type": "text",  // text / attribute / list / table
-        "attribute_name": "",    // 仅 attribute 类型时用
-        "is_list": false
+        "element_index": 5,         // 从 snapshop.elements 列表中的索引（旧截图模式）
+        "field_name": "姓名",        // 用户指定的字段名
+        "extract_type": "text",      // text / attribute / list / table
+        "attribute_name": "",        // 仅 attribute 类型时用
+        "is_list": false,
+        // ── 代理模式（新）──
+        "css_selector_override": "td.name",  // 直接从代理页面获取的选择器
+        "xpath_override": "/html/body/...",   // 直接从代理页面获取的 XPath
     }
-    响应: {"ok": true, "selected_count": N}
+    响应: {"ok": true, "rule": {...}}
     """
     global visual_collector_state
 
     data = request.get_json()
     session_id = data.get("session_id", "")
-    element_index = data.get("element_index", 0)
     field_name = data.get("field_name", "").strip()
     extract_type = data.get("extract_type", "text")
     attribute_name = data.get("attribute_name", "")
     is_list = data.get("is_list", False)
 
+    # ── 代理模式：直接使用前端传来的选择器 ──
+    css_override = data.get("css_selector_override", "")
+    xpath_override = data.get("xpath_override", "")
+
     if not field_name:
         return jsonify({"ok": False, "message": "请填写字段名称"}), 400
 
-    snapshot = get_cached_snapshot(session_id)
-    if not snapshot:
-        return jsonify({"ok": False, "message": "会话不存在或已过期"}), 400
+    if css_override and xpath_override:
+        # ── 代理模式：直接使用前端传来的选择器 ──
+        best_selector = css_override
+        xpath = xpath_override
+        sample_text = ""
 
-    if element_index < 0 or element_index >= len(snapshot.elements):
-        return jsonify({"ok": False, "message": "元素索引无效"}), 400
+        # 检查重复
+        for existing in visual_collector_state["selected_elements"]:
+            _, existing_name, existing_rule = existing
+            if existing_rule.css_selector == best_selector:
+                return jsonify({"ok": False, "message": f"该元素已选为 '{existing_name}'"}), 400
 
-    element = snapshot.elements[element_index]
+    else:
+        # ── 旧截图模式：从缓存中查找元素 ──
+        element_index = data.get("element_index", 0)
+        snapshot = get_cached_snapshot(session_id)
+        if not snapshot:
+            return jsonify({"ok": False, "message": "会话不存在或已过期"}), 400
 
-    # 检查是否重复选择
-    for existing in visual_collector_state["selected_elements"]:
-        if existing[0].css_selector == element.css_selector:
-            return jsonify({"ok": False, "message": f"该元素已选为 '{existing[1]}'"}), 400
+        if element_index < 0 or element_index >= len(snapshot.elements):
+            return jsonify({"ok": False, "message": "元素索引无效"}), 400
 
-    # 构建最佳选择器
-    best_selector = build_selector_for_element(element)
+        element = snapshot.elements[element_index]
 
-    # 如果是表格提取，优化选择器覆盖整列
+        # 检查是否重复选择
+        for existing in visual_collector_state["selected_elements"]:
+            if existing[0].css_selector == element.css_selector:
+                return jsonify({"ok": False, "message": f"该元素已选为 '{existing[1]}'"}), 400
+
+        # 构建最佳选择器
+        best_selector = build_selector_for_element(element)
+        xpath = element.xpath
+        sample_text = element.text
+
+    # 如果是表格/列表提取，优化选择器
     if extract_type in ("table", "list") or is_list:
-        # 尝试从 CSS 选择器调整为更通用的行内模式
-        if ":nth-child" in best_selector:
-            # 对于表格列，移除 nth-child 以匹配所有行
-            # 但保留列的位置（如 td 的第 N 个）
-            pass
+        # 旧的截图模式可能生成 th:nth-child(N)，这种只匹配表头；
+        # 改造成 tr > :nth-child(N) 可匹配整列（表头+数据行）
+        m = _re.match(r"^(th|td):nth-child\((\d+)\)$", best_selector.strip())
+        if m:
+            best_selector = f"tr > :nth-child({m.group(2)})"
+        # 若已经是更复杂/完整的形式，保留原样
 
     rule = ExtractionRule(
         field_name=field_name,
         css_selector=best_selector,
-        xpath=element.xpath,
+        xpath=xpath,
         extract_type=extract_type,
         attribute_name=attribute_name,
-        sample_value=element.text,
+        sample_value=sample_text,
         is_list=is_list,
         parent_index=len(visual_collector_state["selected_elements"]),
     )
 
-    visual_collector_state["selected_elements"].append((element, field_name, rule))
+    visual_collector_state["selected_elements"].append((None, field_name, rule))
 
     return jsonify({
         "ok": True,
@@ -2745,9 +4103,15 @@ def api_collector_preview():
         return jsonify({"ok": False, "message": "会话状态异常，请重新启动"}), 400
 
     try:
+        # 优先使用 proxy_start 保存的 storage_state（线程安全，无需重新登录）
+        # 注意：不能直接传递 proxy_page 对象（Playwright sync API 对象不可跨线程使用）
+        storage_state = visual_collector_state.get("proxy_storage_state")
+
+        logger.info(f"[Collector] 预览提取, storage_state={storage_state is not None}")
         result = preview_extraction(
             host=host, username=username, password=password,
             target=target, rules=rules, headless=True,
+            storage_state=storage_state,
         )
         return jsonify({
             "ok": True,
@@ -2755,6 +4119,8 @@ def api_collector_preview():
             "rows": result["rows"][:100],
             "total": result["total"],
             "errors": result.get("errors", []),
+            "diagnostics": result.get("diagnostics", []),
+            "global_diag": result.get("global_diag", {}),
         })
     except Exception as e:
         return jsonify({"ok": False, "message": f"预览失败: {str(e)}"}), 500
@@ -2788,31 +4154,22 @@ def api_collector_save():
     if not raw_rules:
         return jsonify({"ok": False, "message": "请先选择至少一个元素"}), 400
 
-    def _rule_to_dict(r):
-        """兼容 ExtractionRule 对象和 dict"""
+    # 确保 rules 都是 ExtractionRule 对象（不做 dict 转换，避免 to_dict() 崩溃）
+    rules = []
+    for r in raw_rules:
         if isinstance(r, dict):
-            return {
-                "field_name": r.get("field_name", ""),
-                "css_selector": r.get("css_selector", ""),
-                "xpath": r.get("xpath", ""),
-                "extract_type": r.get("extract_type", "text"),
-                "attribute_name": r.get("attribute_name", ""),
-                "sample_value": r.get("sample_value", ""),
-                "is_list": r.get("is_list", False),
-                "parent_index": r.get("parent_index", 0),
-            }
-        return {
-            "field_name": r.field_name,
-            "css_selector": r.css_selector,
-            "xpath": r.xpath,
-            "extract_type": r.extract_type,
-            "attribute_name": r.attribute_name,
-            "sample_value": r.sample_value,
-            "is_list": r.is_list,
-            "parent_index": r.parent_index,
-        }
-
-    rules = [_rule_to_dict(r) for r in raw_rules]
+            rules.append(ExtractionRule(
+                field_name=r.get("field_name", ""),
+                css_selector=r.get("css_selector", ""),
+                xpath=r.get("xpath", ""),
+                extract_type=r.get("extract_type", "text"),
+                attribute_name=r.get("attribute_name", ""),
+                sample_value=r.get("sample_value", ""),
+                is_list=r.get("is_list", False),
+                parent_index=r.get("parent_index", 0),
+            ))
+        else:
+            rules.append(r)
 
     try:
         # 构建完整 URL
@@ -3010,6 +4367,122 @@ def api_collector_session_end():
         "target": "",
     }
     return jsonify({"ok": True, "message": "会话已结束"})
+
+
+# ═══════════════ 图片下载 ═══════════════
+
+@app.route("/api/images/download", methods=["POST"])
+def api_images_download():
+    """下载采集到的图片，打包为 ZIP 返回"""
+    import zipfile
+    import tempfile
+    import shutil
+    try:
+        import urllib.request as urllib_req
+    except ImportError:
+        import urllib as urllib_req
+
+    data = request.get_json(force=True, silent=True) or {}
+    urls = data.get("urls", [])
+    if not urls:
+        return jsonify({"ok": False, "message": "没有要下载的图片 URL"}), 400
+
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    # 创建输出目录
+    out_dir = os.path.join(PROJECT_ROOT, "output", "image_downloads")
+    os.makedirs(out_dir, exist_ok=True)
+
+    zip_path = os.path.join(out_dir, f"images_{timestamp}.zip")
+    downloaded = 0
+    failed = []
+    used_names = set()
+
+    # 使用临时目录收集图片再打包
+    tmp_dir = tempfile.mkdtemp(prefix="imgdl_")
+    try:
+        for i, url in enumerate(urls):
+            try:
+                req = urllib_req.Request(
+                    url,
+                    headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"},
+                )
+                resp = urllib_req.urlopen(req, timeout=20)
+                raw = resp.read()
+                if not raw or len(raw) < 100:
+                    failed.append({"url": url[:120], "error": "响应内容过小（<100字节）"})
+                    continue
+
+                # 确定文件名
+                content_type = resp.headers.get("Content-Type", "image/png")
+                ext_map = {"image/jpeg": ".jpg", "image/png": ".png", "image/gif": ".gif",
+                           "image/webp": ".webp", "image/svg+xml": ".svg", "image/bmp": ".bmp"}
+                ext = ext_map.get(content_type.split(";")[0].strip(), ".png")
+
+                # 从 URL 提取原始文件名
+                try:
+                    from urllib.parse import urlparse
+                    path = urlparse(url).path
+                    orig_name = os.path.basename(path) if path else ""
+                except Exception:
+                    orig_name = ""
+
+                if orig_name and "." in orig_name:
+                    base, _ext = os.path.splitext(orig_name)
+                    if _ext.lower() in {".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg", ".bmp"}:
+                        # 安全文件名
+                        safe_name = "".join(c if c.isalnum() or c in "._-" else "_" for c in orig_name)
+                        if safe_name and "." in safe_name:
+                            name = safe_name
+                        else:
+                            name = f"image_{i:04d}{ext}"
+                    else:
+                        name = f"image_{i:04d}{ext}"
+                else:
+                    name = f"image_{i:04d}{ext}"
+
+                # 避免重名
+                final_name = name
+                counter = 1
+                while final_name in used_names:
+                    stem, fext = os.path.splitext(name)
+                    final_name = f"{stem}_{counter}{fext}"
+                    counter += 1
+                used_names.add(final_name)
+
+                # 写入临时目录
+                filepath = os.path.join(tmp_dir, final_name)
+                with open(filepath, "wb") as f:
+                    f.write(raw)
+                downloaded += 1
+                if downloaded <= 3:
+                    logger.info(f"[ImageDownload] 已下载 ({downloaded}): {url[:80]} -> {final_name}")
+
+            except Exception as e:
+                failed.append({"url": url[:120], "error": str(e)})
+
+        if downloaded == 0:
+            shutil.rmtree(tmp_dir, ignore_errors=True)
+            err_detail = "; ".join([f"{f['url'][:40]}: {f['error']}" for f in failed[:3]])
+            return jsonify({"ok": False, "message": f"所有 {len(urls)} 张图片下载失败", "errors": failed[:10],
+                            "detail": err_detail}), 500
+
+        # 打包为 ZIP
+        import zipfile as zf_module
+        with zf_module.ZipFile(zip_path, "w", zf_module.ZIP_DEFLATED) as zf:
+            for root, dirs, files in os.walk(tmp_dir):
+                for fname in files:
+                    zf.write(os.path.join(root, fname), fname)
+
+        logger.info(f"[ImageDownload] 打包完成: {downloaded}/{len(urls)} 张, {len(failed)} 失败, {os.path.getsize(zip_path)} 字节")
+    finally:
+        shutil.rmtree(tmp_dir, ignore_errors=True)
+
+    return send_file(
+        zip_path,
+        as_attachment=True,
+        download_name=f"images_{downloaded}pics_{timestamp}.zip",
+        mimetype="application/zip",
+    )
 
 
 # ═══════════════ 启动 ═══════════════

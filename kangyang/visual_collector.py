@@ -127,16 +127,10 @@ class CollectionTask:
     total_runs: int = 0
 
     def to_dict(self) -> dict:
-        return {
-            "task_id": self.task_id,
-            "name": self.name,
-            "description": self.description,
-            "target_url": self.target_url,
-            "route": self.route,
-            "login_required": self.login_required,
-            "login_host": self.login_host,
-            "rules": [
-                {
+        def _r(r):
+            """兼容 ExtractionRule 对象和 dict"""
+            if hasattr(r, 'field_name'):
+                return {
                     "field_name": r.field_name,
                     "css_selector": r.css_selector,
                     "xpath": r.xpath,
@@ -146,8 +140,25 @@ class CollectionTask:
                     "is_list": r.is_list,
                     "parent_index": r.parent_index,
                 }
-                for r in self.rules
-            ],
+            return {
+                "field_name": r.get("field_name", ""),
+                "css_selector": r.get("css_selector", ""),
+                "xpath": r.get("xpath", ""),
+                "extract_type": r.get("extract_type", "text"),
+                "attribute_name": r.get("attribute_name", ""),
+                "sample_value": r.get("sample_value", ""),
+                "is_list": r.get("is_list", False),
+                "parent_index": r.get("parent_index", 0),
+            }
+        return {
+            "task_id": self.task_id,
+            "name": self.name,
+            "description": self.description,
+            "target_url": self.target_url,
+            "route": self.route,
+            "login_required": self.login_required,
+            "login_host": self.login_host,
+            "rules": [_r(r) for r in self.rules],
             "pagination": self.pagination,
             "export_format": self.export_format,
             "created_at": self.created_at,
@@ -666,6 +677,203 @@ def get_sibling_elements(
     return siblings[:max_count]
 
 
+def _collect_page_diagnostics(page) -> Dict[str, Any]:
+    """收集页面的诊断信息：控制台错误 + 截图"""
+    diag = {}
+
+    # 收集 console 错误
+    console_errors: List[str] = []
+    try:
+        page.evaluate("""() => {
+            if (!window.__kwb_console_errors) {
+                window.__kwb_console_errors = [];
+                var origError = console.error;
+                console.error = function() {
+                    window.__kwb_console_errors.push(Array.from(arguments).join(' '));
+                    return origError.apply(console, arguments);
+                };
+            }
+        }""")
+        console_errors = page.evaluate("() => window.__kwb_console_errors || []")
+        diag["console_errors"] = console_errors[:20]
+    except Exception as e:
+        logger.warning(f"[VisualCollector] 收集 console 错误失败: {e}")
+
+    # 截图
+    try:
+        screenshot_dir = os.path.join(tempfile.gettempdir(), "workbuddy_previews")
+        os.makedirs(screenshot_dir, exist_ok=True)
+        screenshot_path = os.path.join(screenshot_dir, f"preview_{int(time.time())}.png")
+        page.screenshot(path=screenshot_path, full_page=False)
+        diag["screenshot"] = screenshot_path
+        logger.info(f"[VisualCollector] 截图已保存: {screenshot_path}")
+    except Exception as e:
+        logger.warning(f"[VisualCollector] 截图失败: {e}")
+
+    return diag
+
+
+def _run_extraction_on_page(
+    page,
+    rules: List[ExtractionRule],
+    full_url: str = "",
+    console_errors: Optional[List[str]] = None,
+    screenshot_path: str = "",
+) -> Dict[str, Any]:
+    """
+    在已有 page 上执行规则提取（不创建新浏览器）。
+
+    参数:
+        page: Playwright Page 对象（已登录、已加载目标页面）
+        rules: 提取规则列表
+        full_url: 目标 URL（日志/诊断用）
+        console_errors: 页面控制台错误列表（在提取前收集）
+        screenshot_path: 页面截图保存路径
+
+    返回:
+        {"columns": [...], "rows": [...], "total": N, "errors": [...], "diagnostics": [...]}
+    """
+    columns = []
+    all_rows = []
+    errors = []
+    diagnostics = []
+    global_diag = {}  # 全局诊断（非逐字段）
+
+    # ── 页面诊断信息 ──
+    try:
+        actual_url = page.url
+        actual_title = page.title()
+        logger.info(f"[VisualCollector] 页面诊断: URL={actual_url}, Title='{actual_title}'")
+        global_diag["page_url"] = actual_url
+        global_diag["page_title"] = actual_title
+
+        # 检查是否跳转到登录页
+        if "/login" in actual_url.lower():
+            diagnostics.append({
+                "field": "*",
+                "selector": "",
+                "reason": f"预览页面跳转到了登录页 ({actual_url})，认证可能已失效。请重新启动代理会话。",
+            })
+            return {
+                "columns": [],
+                "rows": [],
+                "total": 0,
+                "errors": [{"field": "*", "selector": "", "error": f"页面重定向到登录页: {actual_url}"}],
+                "diagnostics": diagnostics,
+            }
+    except Exception as diag_err:
+        logger.warning(f"[VisualCollector] 页面诊断失败: {diag_err}")
+
+    # ── 全局页面信息收集（一次性） ──
+    try:
+        global_diag["el_table_count"] = page.locator('.el-table').count()
+        global_diag["body_text_preview"] = (page.inner_text('body') or '')[:500]
+        global_diag["body_html_preview"] = (page.inner_html('body') or '')[:2000]
+        logger.info(f"[VisualCollector] 全局诊断: .el-table={global_diag['el_table_count']}, "
+                    f"body_text='{global_diag['body_text_preview'][:100]}'")
+
+        if console_errors:
+            global_diag["console_errors"] = console_errors[:10]  # 最多10条
+            for err in console_errors[:3]:
+                logger.info(f"[VisualCollector] 控制台错误: {err}")
+
+        if screenshot_path:
+            global_diag["screenshot"] = screenshot_path
+    except Exception as diag_err:
+        logger.warning(f"[VisualCollector] 全局诊断收集失败: {diag_err}")
+
+    for rule in rules:
+        field_name = rule.field_name if hasattr(rule, "field_name") else rule.get("field_name", "")
+        css_selector = rule.css_selector if hasattr(rule, "css_selector") else rule.get("css_selector", "")
+        xpath = rule.xpath if hasattr(rule, "xpath") else rule.get("xpath", "")
+        extract_type = rule.extract_type if hasattr(rule, "extract_type") else rule.get("extract_type", "text")
+        attribute_name = rule.attribute_name if hasattr(rule, "attribute_name") else rule.get("attribute_name", "")
+        is_list = rule.is_list if hasattr(rule, "is_list") else rule.get("is_list", False)
+
+        columns.append(field_name)
+        try:
+            els = page.locator(css_selector)
+            count = els.count()
+            logger.info(f"[VisualCollector] 字段 '{field_name}': CSS '{css_selector}' 匹配 {count} 个元素")
+
+            # CSS 选择器匹配为 0，尝试 XPath 回退
+            if count == 0 and xpath:
+                logger.info(f"[VisualCollector]   → CSS 无匹配，尝试 XPath: {xpath}")
+                try:
+                    els = page.locator(f"xpath={xpath}")
+                    count = els.count()
+                    logger.info(f"[VisualCollector]   → XPath 匹配 {count} 个元素")
+                except Exception:
+                    count = 0
+
+            # 仍然 0，尝试部分选择器匹配
+            if count == 0 and '.' in css_selector:
+                parts = css_selector.split(' ')
+                if len(parts) > 0:
+                    simple_sel = parts[0]
+                    logger.info(f"[VisualCollector]   → 尝试简化选择器: {simple_sel}")
+                    try:
+                        els = page.locator(simple_sel)
+                        count = els.count()
+                        logger.info(f"[VisualCollector]   → 简化选择器匹配 {count} 个元素")
+                    except Exception:
+                        count = 0
+
+            if count == 0:
+                # 收集页面上实际存在的元素信息用于诊断
+                diag_info = {
+                    "field": field_name,
+                    "selector": css_selector,
+                    "xpath": xpath,
+                    "reason": f"选择器在目标页面上未匹配到任何元素。当前页面 URL: {global_diag.get('page_url', actual_url if 'actual_url' in dir() else 'unknown')}",
+                    "el_table_count": global_diag.get("el_table_count", -1),
+                }
+                diagnostics.append(diag_info)
+                errors.append({
+                    "field": field_name,
+                    "selector": css_selector,
+                    "error": f"选择器未匹配: {css_selector}",
+                })
+
+            values = []
+            for i in range(min(count, 200)):
+                val = _extract_value(els.nth(i), extract_type, attribute_name)
+                values.append(val)
+                if i < 3:
+                    snippet = val[:80] + '...' if len(val) > 80 else val
+                    logger.info(f"[VisualCollector]   - 第 {i+1} 个值: '{snippet}'")
+
+            # 填充到行
+            for row_idx in range(len(values)):
+                while row_idx >= len(all_rows):
+                    all_rows.append({})
+                all_rows[row_idx][field_name] = values[row_idx]
+
+        except Exception as e:
+            logger.error(f"[VisualCollector] 字段 '{field_name}' 提取异常: {e}")
+            diagnostics.append({
+                "field": field_name,
+                "selector": css_selector,
+                "error": str(e),
+            })
+            errors.append({"field": field_name, "selector": css_selector, "error": str(e)})
+
+    total = len(all_rows)
+    logger.info(f"[VisualCollector] 预览完成: {total} 行, {len(columns)} 列, {len(errors)} 个错误")
+
+    result = {
+        "columns": columns,
+        "rows": all_rows[:200],
+        "total": total,
+        "errors": errors,
+    }
+    if diagnostics:
+        result["diagnostics"] = diagnostics
+    if global_diag:
+        result["global_diag"] = global_diag
+    return result
+
+
 def preview_extraction(
     host: str,
     username: str,
@@ -673,12 +881,16 @@ def preview_extraction(
     target: str,
     rules: List[ExtractionRule],
     headless: bool = True,
+    storage_state: Optional[Dict[str, Any]] = None,  # 可选：复用认证状态（避免重新登录）
 ) -> Dict[str, Any]:
     """
     预览采集规则提取结果。
 
     参数:
         rules: 提取规则列表
+        storage_state: 可选，Playwright storage_state 格式的认证状态。
+                      传入后跳过登录，直接用该状态创建 context。
+                      （从 proxy_start 的 context.storage_state() 获取，线程安全）
 
     返回:
         {"columns": [...], "rows": [...], "total": N, "errors": [...]}
@@ -694,6 +906,59 @@ def preview_extraction(
 
     with sync_playwright() as pw:
         browser = pw.chromium.launch(headless=headless)
+
+        # ── 如果有已认证的 storage_state，直接用它创建 context ──
+        if storage_state:
+            logger.info(f"[VisualCollector] 使用 storage_state 创建已认证 context "
+                        f"(cookies: {len(storage_state.get('cookies', []))} 条)")
+            context = browser.new_context(
+                viewport={"width": 1440, "height": 900},
+                locale="zh-CN",
+                storage_state=storage_state,
+            )
+            page = context.new_page()
+            try:
+                # 导航到目标页面（已认证，无需登录）
+                # 使用 networkidle 等待 SPA 完成初始渲染和数据加载
+                logger.info(f"[VisualCollector] 导航到 {full_url} (networkidle)")
+                page.goto(full_url, wait_until="networkidle", timeout=60000)
+                page.wait_for_timeout(1000)
+
+                # 验证是否跳转到登录页
+                actual_url = page.url
+                logger.info(f"[VisualCollector] 当前页面 URL: {actual_url}")
+                if "/login" in actual_url.lower():
+                    logger.warning(f"[VisualCollector] storage_state 认证失败，页面在登录页 {actual_url}")
+                    context.close()
+                else:
+                    # 等待 Element UI 表格完全渲染
+                    try:
+                        page.wait_for_selector('.el-table, table, [class*="table"]', timeout=15000)
+                        logger.info("[VisualCollector] 表格已渲染")
+                    except Exception:
+                        logger.info("[VisualCollector] 未检测到表格元素，使用固定等待")
+                    page.wait_for_timeout(2000)
+
+                    # 收集诊断：控制台错误 + 截图
+                    page_diag = _collect_page_diagnostics(page)
+                    result = _run_extraction_on_page(
+                        page, rules, full_url,
+                        console_errors=page_diag.get("console_errors"),
+                        screenshot_path=page_diag.get("screenshot", ""),
+                    )
+                    context.close()
+                    # 如果提取成功（非登录页），直接返回
+                    if not any(e.get("error", "").startswith("页面重定向到登录页") for e in result.get("errors", [])):
+                        return result
+
+                    # 否则回退到手动登录
+                    logger.info("[VisualCollector] storage_state 结果异常，回退到手动登录")
+            except Exception as e:
+                logger.warning(f"[VisualCollector] storage_state 方式失败: {e}，回退到手动登录", exc_info=True)
+                context.close()
+
+        # ── 回退：新建浏览器并手动登录 ──
+        logger.info("[VisualCollector] 手动登录方式")
         context = browser.new_context(
             viewport={"width": 1440, "height": 900},
             locale="zh-CN",
@@ -702,7 +967,9 @@ def preview_extraction(
 
         try:
             # 登录
-            page.goto(host.rstrip("/") + "/login", wait_until="domcontentloaded", timeout=30000)
+            login_url = host.rstrip("/") + "/login"
+            logger.info(f"[VisualCollector] 导航到登录页: {login_url}")
+            page.goto(login_url, wait_until="networkidle", timeout=30000)
             page.wait_for_timeout(1000)
             page.fill('input[placeholder*="账号"], input[name="username"]', username)
             page.fill('input[placeholder*="密码"], input[name="password"]', password)
@@ -712,59 +979,38 @@ def preview_extraction(
             if login_btn.count() == 0:
                 login_btn = page.locator('button, .el-button')
             login_btn.first.click()
-            page.wait_for_url(lambda u: "/login" not in u.lower(), timeout=30000, wait_until="domcontentloaded")
+            logger.info("[VisualCollector] 已点击登录按钮，等待跳转...")
+            page.wait_for_url(lambda u: "/login" not in u.lower(), timeout=30000, wait_until="networkidle")
             page.wait_for_timeout(2000)
 
             # 导航到目标页面
-            page.goto(full_url, wait_until="domcontentloaded", timeout=30000)
-            page.wait_for_timeout(2500)  # 等待 Vue 渲染
+            logger.info(f"[VisualCollector] 导航到目标页面: {full_url}")
+            page.goto(full_url, wait_until="networkidle", timeout=60000)
+            page.wait_for_timeout(1000)
 
-            columns = []
-            all_rows = []
-            errors = []
+            # 验证
+            actual_url = page.url
+            logger.info(f"[VisualCollector] 当前页面 URL: {actual_url}")
+            try:
+                page.wait_for_selector('.el-table, table, [class*="table"]', timeout=15000)
+                logger.info("[VisualCollector] 表格已渲染")
+            except Exception:
+                logger.info("[VisualCollector] 未检测到表格元素，使用固定等待")
+            page.wait_for_timeout(2000)
 
-            for rule in rules:
-                field_name = rule.field_name if hasattr(rule, "field_name") else rule.get("field_name", "")
-                css_selector = rule.css_selector if hasattr(rule, "css_selector") else rule.get("css_selector", "")
-                extract_type = rule.extract_type if hasattr(rule, "extract_type") else rule.get("extract_type", "text")
-                attribute_name = rule.attribute_name if hasattr(rule, "attribute_name") else rule.get("attribute_name", "")
-                is_list = rule.is_list if hasattr(rule, "is_list") else rule.get("is_list", False)
-
-                columns.append(field_name)
-                try:
-                    els = page.locator(css_selector)
-                    count = els.count()
-                    logger.info(f"[VisualCollector] 字段 '{field_name}': 选择器 '{css_selector}' 匹配 {count} 个元素")
-                    values = []
-                    for i in range(min(count, 200)):
-                        val = _extract_value(els.nth(i), extract_type, attribute_name)
-                        values.append(val)
-                        if i < 3:
-                            logger.info(f"[VisualCollector]   - 第 {i+1} 个值: '{val[:80]}...'" if len(val) > 80 else f"[VisualCollector]   - 第 {i+1} 个值: '{val}'")
-
-                    # 填充到行
-                    for row_idx in range(len(values)):
-                        while row_idx >= len(all_rows):
-                            all_rows.append({})
-                        all_rows[row_idx][field_name] = values[row_idx]
-
-                except Exception as e:
-                    errors.append({"field": field_name, "error": str(e)})
-
-            total = len(all_rows)
-            logger.info(f"[VisualCollector] 预览完成: {total} 行, {len(columns)} 列, {len(errors)} 个错误")
-
-            return {
-                "columns": columns,
-                "rows": all_rows[:200],
-                "total": total,
-                "errors": errors,
-            }
+            # 收集诊断：控制台错误 + 截图
+            page_diag = _collect_page_diagnostics(page)
+            return _run_extraction_on_page(
+                page, rules, full_url,
+                console_errors=page_diag.get("console_errors"),
+                screenshot_path=page_diag.get("screenshot", ""),
+            )
 
         except Exception as e:
             logger.error(f"[VisualCollector] 预览失败: {e}", exc_info=True)
             return {"columns": [], "rows": [], "total": 0, "errors": [{"field": "*", "error": str(e)}]}
         finally:
+            context.close()
             browser.close()
 
 
@@ -822,7 +1068,7 @@ def execute_collection(
             # 登录
             if task.login_required:
                 login_url = host.rstrip("/") + "/login"
-                page.goto(login_url, wait_until="domcontentloaded", timeout=30000)
+                page.goto(login_url, wait_until="networkidle", timeout=30000)
                 page.wait_for_timeout(1000)
                 page.fill('input[placeholder*="账号"], input[name="username"]', user)
                 page.fill('input[placeholder*="密码"], input[name="password"]', pwd)
@@ -832,12 +1078,13 @@ def execute_collection(
                 if login_btn.count() == 0:
                     login_btn = page.locator('button, .el-button')
                 login_btn.first.click()
-                page.wait_for_url(lambda u: "/login" not in u.lower(), timeout=30000, wait_until="domcontentloaded")
+                page.wait_for_url(lambda u: "/login" not in u.lower(), timeout=30000, wait_until="networkidle")
                 page.wait_for_timeout(2000)
 
             # 导航到目标页
-            page.goto(full_url, wait_until="domcontentloaded", timeout=30000)
-            page.wait_for_timeout(2500)
+            logger.info(f"[VisualCollector] 采集导航到: {full_url}")
+            page.goto(full_url, wait_until="networkidle", timeout=60000)
+            page.wait_for_timeout(1500)
 
             all_columns = []
             all_rows = []
