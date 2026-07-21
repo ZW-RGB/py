@@ -2748,7 +2748,14 @@ ELEMENT_PICKER_JS = r"""
   function findTableOrList(el) {
     // 向上查找最近的 table, .el-table, ul, .list, [role="table"] 等
     var container = el.closest('table, .el-table, .el-table__body-wrapper, [role="table"], .list, .data-list, .table-wrapper');
-    if (container) return container;
+    if (container) {
+      // Element UI 表格：.el-table 是 div，需要找内部 table
+      if (container.classList && (container.classList.contains('el-table') || container.classList.contains('el-table__body-wrapper') || container.classList.contains('table-wrapper'))) {
+        var innerTable = container.querySelector('table');
+        if (innerTable) return innerTable;
+      }
+      return container;
+    }
     // 检查父级是否是重复结构
     var parent = el.parentElement;
     if (parent && parent.parentElement) {
@@ -2767,10 +2774,15 @@ ELEMENT_PICKER_JS = r"""
       '<span style="font-weight:700;font-size:13px;color:#409eff;white-space:nowrap;">🔍 元素选择</span>' +
       '<span id="__kwb_picker_status" style="font-size:11px;color:#aaa;white-space:nowrap;">已暂停 — 页面可正常操作</span>' +
       '<span style="flex:1;"></span>' +
+      '<span id="__kwb_load_progress" style="font-size:11px;color:#e6a23c;white-space:nowrap;display:none;"></span>' +
       '<span id="__kwb_picked_count" style="font-size:11px;color:#67c23a;font-weight:700;white-space:nowrap;">已选 0</span>' +
-      '<button data-action="toggle" style="padding:4px 12px;background:#409eff;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:12px;white-space:nowrap;">开始选择</button>' +
+      '<button data-action="toggle" style="padding:4px 12px;background:#409eff;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:12px;white-space:nowrap;">🎯 开始选择</button>' +
       '<button data-action="select-table" style="padding:4px 12px;background:#67c23a;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:12px;white-space:nowrap;">📋 选表格</button>' +
       '<button data-action="clear" style="padding:4px 10px;background:#909399;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:12px;white-space:nowrap;">清空</button>' +
+      '<span style="color:#555;margin:0 2px;font-size:12px;">|</span>' +
+      '<button data-action="reload" title="普通刷新" style="padding:4px 10px;background:#409eff;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:12px;white-space:nowrap;">🔄 刷新</button>' +
+      '<button data-action="force-reload" title="跳过缓存强制重载" style="padding:4px 10px;background:#e6a23c;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:12px;white-space:nowrap;">⚡ 强制重载</button>' +
+      '<button data-action="clear-cache-reload" title="清空缓存并重新加载" style="padding:4px 10px;background:#f56c6c;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:12px;white-space:nowrap;">🧹 清空缓存重载</button>' +
     '</div>';
   pickerBar.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:2147483647;background:#1a1a2e;color:#eee;padding:6px 16px;box-shadow:0 2px 12px rgba(0,0,0,.6);font-family:Arial,sans-serif;line-height:1.5;';
 
@@ -2788,8 +2800,32 @@ ELEMENT_PICKER_JS = r"""
       doSelectTable();
     } else if (action === 'clear') {
       clearAllSelections();
+    } else if (action === 'reload') {
+      notifyReloading('刷新');
+      location.reload();
+    } else if (action === 'force-reload') {
+      notifyReloading('强制重载（跳过缓存）');
+      location.reload(true);
+    } else if (action === 'clear-cache-reload') {
+      notifyReloading('清空缓存并重新加载');
+      try {
+        // 清除 page 级别缓存
+        if (typeof localStorage !== 'undefined') localStorage.clear();
+        if (typeof sessionStorage !== 'undefined') sessionStorage.clear();
+        // 清除所有 cookie（同源下）
+        document.cookie.split(';').forEach(function(c) {
+          document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date(0).toUTCString() + ';path=/');
+        });
+      } catch(_) {}
+      location.reload(true);
     }
   });
+
+  function notifyReloading(msg) {
+    try {
+      window.parent.postMessage(JSON.stringify({ type: 'kwb_proxy_reloading', message: msg }), '*');
+    } catch(_) {}
+  }
 
   function updateToolbarUI() {
     var toggleBtn = pickerBar.querySelector('button[data-action="toggle"]');
@@ -3043,10 +3079,18 @@ ELEMENT_PICKER_JS = r"""
 
   // ── "选表格"按钮 ──
   function doSelectTable() {
-    var table = document.querySelector('table.el-table__body, table.el-table, .el-table table, [role="table"] table, table');
+    // 优先查找 Element UI 表格（.el-table 是 div，内部有 <table>）
+    var table = null;
+    var elTable = document.querySelector('.el-table');
+    if (elTable) {
+      table = elTable.querySelector('table');
+    }
+    if (!table) {
+      table = document.querySelector('.el-table table, table.el-table__body, [role="table"] table, .table-wrapper table, table');
+    }
     if (!table) {
       // 尝试找 div-based 列表
-      var listContainer = document.querySelector('.el-table, .data-list, .list, .table-wrapper, [role="table"]');
+      var listContainer = document.querySelector('.data-list, .list, [role="table"]');
       if (listContainer) {
         pickTableArea(listContainer);
         showToast('已选中列表区域');
@@ -4314,12 +4358,17 @@ def api_collector_task_execute(task_id):
         return jsonify({"ok": False, "message": "未配置登录信息"}), 400
 
     try:
+        # ── 优先复用 proxy 会话的 storage_state，跳过重新登录 ──
+        storage_state = visual_collector_state.get("proxy_storage_state")
+        logger.info(f"[TaskExecute] storage_state={'available' if storage_state else 'none'}")
+        
         result = execute_collection(
             task=task,
             username=username,
             password=password,
             headless=headless,
             max_rows=max_rows,
+            storage_state=storage_state,
         )
 
         if result["success"]:
@@ -4330,6 +4379,8 @@ def api_collector_task_execute(task_id):
             "success": result["success"],
             "data": result["data"],
             "errors": result.get("errors", []),
+            "error": result.get("error", ""),
+            "message": result.get("error", "") if not result["success"] else "",
             "task_name": task.name,
         })
     except Exception as e:

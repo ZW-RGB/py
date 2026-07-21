@@ -305,6 +305,7 @@
   .collector-body { flex: 1; min-height: 0; overflow-y: auto; padding: 20px 24px; }
   .collector-step { display: none; }
   .collector-step.active { display: block; }
+  #cstep-2.active { display: flex; flex-direction: column; }
 
   /* Step 1: 目标配置 */
   .collector-form { max-width: 600px; }
@@ -317,7 +318,7 @@
   .collector-form input:focus, .collector-form select:focus { border-color: var(--accent); }
 
   /* Step 2: 元素选择 */
-  .selector-container { display: flex; gap: 20px; height: calc(100vh - 280px); min-height: 400px; }
+  .selector-container { display: flex; gap: 20px; flex: 1; min-height: 400px; }
   .selector-preview {
     flex: 1; position: relative; overflow: auto; border: 2px solid var(--border);
     border-radius: var(--radius); background: #111; min-width: 0;
@@ -705,22 +706,22 @@
         </div>
       </div>
 
-      <!-- Step 2: 元素选择 -->
+      <!-- Step 2: 元素选择（代理模式 - 实时 iframe + 点选） -->
       <div class="collector-step" id="cstep-2">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-          <h3 style="color:var(--accent);">第2步：点击截图选择数据元素</h3>
-          <span style="font-size:11px;color:var(--text-dim);">点击图片上的元素 → 在右侧配置字段名 → 添加规则</span>
+          <h3 style="color:var(--accent);">第2步：在页面中直接点选数据元素</h3>
+          <span style="font-size:11px;color:var(--text-dim);" id="proxy-status-hint">页面加载后，点击数据区域 → 右侧配置字段名 → 添加规则</span>
         </div>
         <div class="selector-container">
-          <div class="selector-preview" id="selector-preview">
-            <img id="selector-img" src="" alt="页面截图" style="display:none;">
-            <div class="selector-overlay" id="selector-overlay"></div>
-            <div class="empty-state" id="selector-loading" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
-              <div class="spinner"></div><p style="margin-top:8px;">加载截图中...</p>
+          <div class="selector-preview" id="selector-preview" style="position:relative;overflow:hidden;">
+            <div class="empty-state" id="proxy-loading" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:10;">
+              <div class="spinner"></div><p style="margin-top:8px;">正在连接代理页面...</p>
             </div>
-            <div class="empty-state" id="selector-empty" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:none;">
-              <p>请先启动采集会话</p>
+            <div class="empty-state" id="proxy-empty" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:10;display:none;">
+              <p>请先在步骤1打开目标页面</p>
             </div>
+            <iframe id="proxy-iframe" src="" style="display:none;width:100%;height:100%;border:none;"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
           </div>
           <div class="selector-info">
             <!-- 选中元素详情 -->
@@ -755,7 +756,7 @@
             <div class="selector-info-card">
               <h4>📋 已选字段规则 (<span id="sel-rules-count">0</span>)</h4>
               <div class="selected-rules-list" id="sel-rules-list">
-                <p style="color:var(--text-dim);font-size:11px;">点击截图选择元素，然后添加规则</p>
+                <p style="color:var(--text-dim);font-size:11px;">在页面中点选数据元素，然后添加规则</p>
               </div>
               <button class="btn primary" id="col-preview-btn" onclick="collectorGoStep(3)" style="width:100%;margin-top:10px;" disabled>下一步：预览数据 →</button>
             </div>
@@ -834,6 +835,23 @@
   </div>
 </main>
 
+<!-- 采集结果弹窗 -->
+<div id="result-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;justify-content:center;align-items:center;">
+  <div style="background:var(--card);border-radius:12px;width:90%;max-width:1000px;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 8px 32px rgba(0,0,0,0.3);">
+    <div style="padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+      <h3 style="color:var(--accent);font-size:16px;" id="result-modal-title">采集结果</h3>
+      <button onclick="document.getElementById('result-modal').style.display='none'" style="background:none;border:none;color:var(--text-dim);font-size:22px;cursor:pointer;">&times;</button>
+    </div>
+    <div style="padding:16px 20px;overflow-y:auto;flex:1;" id="result-modal-body">
+    </div>
+    <div style="padding:12px 20px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;">
+      <button class="btn outline" onclick="document.getElementById('result-modal').style.display='none'">关闭</button>
+      <button class="btn primary" id="result-download-btn">下载 JSON</button>
+      <button class="btn success" id="result-download-csv-btn">下载 CSV</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -874,6 +892,9 @@ function switchMode(mode) {
   // 初始化可视化采集模式
   if (mode === 'collector') {
     collectorRefreshTaskList();
+  } else if (collectorSessionId) {
+    // 离开可视化采集，清理代理
+    cleanupProxyIframe();
   }
 }
 
@@ -883,10 +904,18 @@ let collectorSnapshot = null;       // {elements, screenshot_base64, ...}
 let collectorSelectedRules = [];    // [{field_name, css_selector, extract_type, ...}, ...]
 let collectorStep = 1;
 let collectorPreviewOk = false;
+// ── 代理模式状态 ──
+let collectorIframeLoaded = false;
+let collectorIframeTimer = null;
+let collectorPickedElement = null;  // 当前在 iframe 中选中的元素信息
 
 function collectorGoStep(step) {
   if (step === 3 && collectorSelectedRules.length === 0) {
     showToast('请先在步骤2选择至少一个元素', 'error'); return;
+  }
+  // 回到步骤1时清理代理
+  if (step === 1) {
+    cleanupProxyIframe();
   }
   collectorStep = step;
   // 更新步骤指示器
@@ -904,6 +933,116 @@ function collectorGoStep(step) {
   if (step === 4) collectorRefreshTaskList();
 }
 
+// ── 清理代理 iframe ──
+function cleanupProxyIframe() {
+  const iframe = document.getElementById('proxy-iframe');
+  iframe.src = '';
+  iframe.style.display = 'none';
+  document.getElementById('proxy-loading').style.display = '';
+  document.getElementById('proxy-empty').style.display = 'none';
+  collectorIframeLoaded = false;
+  collectorPickedElement = null;
+  if (collectorIframeTimer) { clearTimeout(collectorIframeTimer); collectorIframeTimer = null; }
+  // 通知后端关闭代理
+  if (collectorSessionId) {
+    fetch('/api/collector/proxy_stop', { method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ session_id: collectorSessionId })
+    }).catch(() => {});
+  }
+}
+
+// ── postMessage 监听：接收代理页面 iframe 发来的元素选择事件 ──
+window.addEventListener('message', function(e) {
+  // iframe 中的代理页面通过 postMessage(JSON.stringify({...})) 发送消息
+  // 需要先反序列化再读取 type 字段
+  var d = e.data;
+  if (typeof d === 'string') {
+    try { d = JSON.parse(d); } catch(_) { return; }
+  }
+  if (!d || !d.type) return;
+  switch (d.type) {
+    case 'kwb_proxy_dom_ready':
+      // 代理页面 DOM 就绪
+      if (collectorIframeTimer) { clearTimeout(collectorIframeTimer); collectorIframeTimer = null; }
+      collectorIframeLoaded = true;
+      document.getElementById('proxy-loading').style.display = 'none';
+      document.getElementById('proxy-status-hint').textContent = '页面已加载！点击数据元素 → 右侧配置字段名 → 添加规则';
+      break;
+
+    case 'kwb_proxy_error':
+      console.warn('[Collector] 代理页面错误:', d.message);
+      break;
+
+    case 'kwb_element_picked':
+      // 用户在 iframe 中选中了元素
+      handlePickedElement(d);
+      break;
+
+    case 'kwb_table_columns':
+      // 用户选中了表格
+      handleTableColumns(d);
+      break;
+  }
+});
+
+// ── 处理 iframe 中选中的元素 ──
+function handlePickedElement(d) {
+  const elem = d.element || {};
+  collectorPickedElement = elem;
+
+  const card = document.getElementById('sel-detail-card');
+  const content = document.getElementById('sel-detail-content');
+  content.innerHTML = `
+    <dt>标签</dt><dd>${escapeHtml(elem.tag || '')}</dd>
+    <dt>内容</dt><dd style="font-family:inherit;font-size:12px;color:var(--text);">${escapeHtml(elem.text || '(空)')}</dd>
+    <dt>CSS 选择器</dt><dd>${escapeHtml(elem.css || '')}</dd>
+    <dt>XPath</dt><dd>${escapeHtml(elem.xpath || '')}</dd>
+    ${elem.parent_tag ? '<dt>父元素</dt><dd>' + escapeHtml(elem.parent_tag) + '</dd>' : ''}
+  `;
+  card.style.display = 'block';
+
+  // 预填字段名
+  const fieldInput = document.getElementById('sel-field-name');
+  const text = (elem.text || '').trim();
+  if (!fieldInput.value && text && text.length <= 15) {
+    fieldInput.value = text;
+  }
+
+  // 如果选中了全部相似元素（列表模式），自动勾选
+  // 注意：iframe 发送的字段是 is_batch / similar_count（下划线命名）
+  if (d.is_batch || d.selectAllSimilar) {
+    document.getElementById('sel-is-list').checked = true;
+    document.getElementById('sel-extract-type').value = 'list';
+  }
+
+  const count = d.similar_count || d.similarCount || 1;
+  showToast(`已选中: ${elem.tag || ''} "${text.substring(0, 30)}" — 发现 ${count} 个相似元素`);
+}
+
+// ── 处理表格列选择 ──
+function handleTableColumns(d) {
+  // iframe 发送 { headers, selectors, xpaths, row_count } 而非 { columns }
+  const headers = d.headers || [];
+  const selectors = d.selectors || [];
+  const xpaths = d.xpaths || [];
+  if (headers.length === 0) return;
+  showToast(`检测到表格，共 ${headers.length} 列，请逐列添加字段`);
+  // 自动选中第一列
+  if (headers[0]) {
+    handlePickedElement({
+      element: {
+        tag: 'th',
+        text: headers[0],
+        css: selectors[0] || '',
+        xpath: xpaths[0] || '',
+      },
+      is_batch: false,
+      similar_count: headers.length
+    });
+  }
+}
+
 async function collectorStartSession() {
   const host = document.getElementById('host').value.trim();
   const username = document.getElementById('username').value.trim();
@@ -916,150 +1055,71 @@ async function collectorStartSession() {
   const btn = document.getElementById('col-start-btn');
   const status = document.getElementById('col-step1-status');
   btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span>正在加载页面...';
-  status.textContent = '正在登录平台并分析页面元素，请耐心等待（约5-10秒）...';
+  btn.innerHTML = '<span class="spinner"></span>正在登录并启动代理...';
+  status.textContent = '正在登录平台并启动代理会话，请耐心等待（约5-10秒）...';
+
+  // 先清理旧代理
+  cleanupProxyIframe();
 
   try {
-    const resp = await fetch('/api/collector/start_session', {
+    const resp = await fetch('/api/collector/proxy_start', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ host, username, password, target })
     });
     const data = await resp.json();
-    if (!data.ok) { showToast(data.message, 'error'); btn.disabled = false; btn.innerHTML = ' 打开页面并分析元素'; status.textContent = ''; return; }
+    if (!data.ok) { showToast(data.message, 'error'); btn.disabled = false; btn.innerHTML = '🚀 打开页面并分析元素'; status.textContent = ''; return; }
 
     collectorSessionId = data.session_id;
-    collectorSnapshot = data.snapshot;
     collectorSelectedRules = [];
+    collectorPickedElement = null;
+    collectorIframeLoaded = false;
 
-    const elemCount = data.snapshot.elements_count || 0;
-    status.textContent = ' 页面分析完成！发现 ' + elemCount + ' 个可选元素' +
-      (data.snapshot.title ? ' | ' + data.snapshot.title : '') +
-      (data.snapshot.url ? ' | ' + data.snapshot.url : '') +
-      '，进入下一步选择。';
+    status.textContent = '✅ 代理会话已启动 | ' + (data.title || '') + ' | 进入下一步选择元素';
+    showToast('代理会话启动成功！页面: ' + (data.title || target));
 
-    if (elemCount === 0) {
-      showToast('警告：页面未检测到可选元素，可能是空白页或页面未完全加载', 'warning');
-    }
+    // 准备 iframe
+    document.getElementById('proxy-empty').style.display = 'none';
+    document.getElementById('proxy-loading').style.display = '';
+    document.getElementById('proxy-status-hint').textContent = '正在加载代理页面...';
 
-    // 渲染截图
-    const img = document.getElementById('selector-img');
-    img.onerror = () => {
-      document.getElementById('selector-loading').style.display = 'none';
-      showToast('截图加载失败，请检查后端日志', 'error');
+    const iframe = document.getElementById('proxy-iframe');
+    iframe.style.display = '';
+    iframe.src = data.proxy_url;
+
+    // iframe onload 事件
+    iframe.onload = function() {
+      if (collectorIframeTimer) { clearTimeout(collectorIframeTimer); }
+      // 等待 postMessage 通知（ELEMENT_PICKER_JS 会发 kwb_proxy_dom_ready）
+      collectorIframeTimer = setTimeout(function() {
+        if (!collectorIframeLoaded) {
+          document.getElementById('proxy-loading').style.display = 'none';
+          document.getElementById('proxy-status-hint').textContent = '页面加载超时，但可能仍可使用。请尝试点击数据区域。';
+          collectorIframeLoaded = true;
+        }
+      }, 15000);
     };
-    img.src = 'data:image/png;base64,' + data.snapshot.screenshot_base64;
-    img.style.display = 'block';
-    img.onload = () => {
-      document.getElementById('selector-loading').style.display = 'none';
-      if (elemCount === 0) {
-        // 即使截图显示，也提示元素为空
-        console.warn('[Collector] 截图已加载，但 elements_count=0', data.snapshot);
-      }
-    };
-    document.getElementById('selector-empty').style.display = 'none';
 
-    // 设置点击事件
-    img.onclick = function(e) {
-      const rect = img.getBoundingClientRect();
-      const scaleX = collectorSnapshot.viewport_width / rect.width;
-      const scaleY = collectorSnapshot.viewport_height / rect.height;
-      const clickX = (e.clientX - rect.left) * scaleX;
-      const clickY = (e.clientY - rect.top) * scaleY;
-      collectorHandleClick(clickX, clickY, e.clientX - rect.left, e.clientY - rect.top);
-    };
+    // 重置规则UI
+    document.getElementById('col-preview-btn').disabled = true;
+    document.getElementById('sel-rules-count').textContent = '0';
+    document.getElementById('sel-rules-list').innerHTML = '<p style="color:var(--text-dim);font-size:11px;">在页面中点选数据元素，然后添加规则</p>';
+    document.getElementById('sel-detail-card').style.display = 'none';
+    document.getElementById('sel-field-name').value = '';
 
     // 进入步骤2
     collectorGoStep(2);
-    document.getElementById('col-preview-btn').disabled = true;
-    document.getElementById('sel-rules-count').textContent = '0';
-    document.getElementById('sel-rules-list').innerHTML = '<p style="color:var(--text-dim);font-size:11px;">点击截图选择元素，然后添加规则</p>';
-    document.getElementById('sel-detail-card').style.display = 'none';
-    document.getElementById('selector-overlay').innerHTML = '';
 
-    showToast('页面加载完成！共 ' + data.snapshot.elements_count + ' 个可选元素');
   } catch (err) {
     showToast('启动失败: ' + err.message, 'error');
-    status.textContent = ' 启动失败: ' + err.message;
+    status.textContent = '❌ 启动失败: ' + err.message;
   }
   btn.disabled = false;
-  btn.innerHTML = ' 打开页面并分析元素';
-}
-
-async function collectorHandleClick(clickX, clickY, displayX, displayY) {
-  try {
-    const resp = await fetch('/api/collector/element_info', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ session_id: collectorSessionId, x: clickX, y: clickY })
-    });
-    const data = await resp.json();
-    if (!data.ok) { showToast(data.message, 'error'); return; }
-
-    const elem = data.element;
-    const overlay = document.getElementById('selector-overlay');
-
-    // 清除上一个高亮
-    overlay.querySelectorAll('.selector-highlight').forEach(h => h.remove());
-
-    if (!elem) {
-      showToast('附近没有找到可选元素，请尝试点击表格或文本区域', 'error');
-      return;
-    }
-
-    // 屏幕坐标 → 图片坐标
-    const img = document.getElementById('selector-img');
-    const rect = img.getBoundingClientRect();
-    const scaleX = rect.width / collectorSnapshot.viewport_width;
-    const scaleY = rect.height / collectorSnapshot.viewport_height;
-
-    // 添加高亮
-    const hl = document.createElement('div');
-    hl.className = 'selector-highlight';
-    hl.style.left = (elem.x * scaleX - 3) + 'px';
-    hl.style.top = (elem.y * scaleY - 3) + 'px';
-    hl.style.width = (Math.max(elem.w, 20) * scaleX + 6) + 'px';
-    hl.style.height = (Math.max(elem.h, 16) * scaleY + 6) + 'px';
-    overlay.appendChild(hl);
-
-    // 显示元素详情
-    const card = document.getElementById('sel-detail-card');
-    const content = document.getElementById('sel-detail-content');
-    content.innerHTML = `
-      <dt>标签</dt><dd>${escapeHtml(elem.tag)}</dd>
-      <dt>内容</dt><dd style="font-family:inherit;font-size:12px;color:var(--text);">${escapeHtml(elem.text || '(空)')}</dd>
-      <dt>CSS 选择器</dt><dd>${escapeHtml(elem.best_selector || elem.css)}</dd>
-      <dt>XPath</dt><dd>${escapeHtml(elem.xpath)}</dd>
-      <dt>父元素</dt><dd>${escapeHtml(elem.parent_tag)}</dd>
-      ${elem.attrs && elem.attrs.id ? '<dt>ID</dt><dd>' + escapeHtml(elem.attrs.id) + '</dd>' : ''}
-      ${elem.attrs && elem.attrs.class ? '<dt>Class</dt><dd>' + escapeHtml(elem.attrs.class) + '</dd>' : ''}
-    `;
-    card.style.display = 'block';
-
-    // 预填字段名
-    const fieldInput = document.getElementById('sel-field-name');
-    if (!fieldInput.value && elem.text) {
-      // 自动推断字段名
-      const text = elem.text.trim();
-      if (text.length <= 10) fieldInput.value = text;
-      else if (elem.attrs && elem.attrs['data-label']) fieldInput.value = elem.attrs['data-label'];
-      else if (elem.tag === 'th') fieldInput.value = text;
-    }
-
-    // 存储当前选中元素
-    collectorSnapshot._selectedElement = elem;
-
-    if (data.siblings_count > 0) {
-      showToast(`已选中: ${elem.tag} "${elem.text.substring(0,30)}" — 发现 ${data.siblings_count} 个相似元素`);
-    } else {
-      showToast(`已选中: ${elem.tag} "${elem.text.substring(0,30)}"`);
-    }
-  } catch (err) {
-    showToast('查询失败: ' + err.message, 'error');
-  }
+  btn.innerHTML = '🚀 打开页面并分析元素';
 }
 
 async function collectorAddRule() {
-  const elem = collectorSnapshot._selectedElement;
-  if (!elem) { showToast('请先在截图上点击选择一个元素', 'error'); return; }
+  const elem = collectorPickedElement;
+  if (!elem) { showToast('请先在页面中点击选择一个数据元素', 'error'); return; }
 
   const fieldName = document.getElementById('sel-field-name').value.trim();
   if (!fieldName) { showToast('请填写字段名称', 'error'); return; }
@@ -1069,18 +1129,17 @@ async function collectorAddRule() {
   const isList = document.getElementById('sel-is-list').checked || extractType === 'list';
 
   try {
-    const elemIndex = collectorSnapshot.elements.findIndex(
-      e => e.css === elem.css || e.css === elem.best_selector
-    );
     const resp = await fetch('/api/collector/select', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         session_id: collectorSessionId,
-        element_index: elemIndex >= 0 ? elemIndex : 0,
         field_name: fieldName,
         extract_type: isList ? 'list' : extractType,
         attribute_name: attrName,
         is_list: isList,
+        // ── 代理模式：直接传入选择器 ──
+        css_selector_override: elem.css || '',
+        xpath_override: elem.xpath || '',
       })
     });
     const data = await resp.json();
@@ -1088,32 +1147,12 @@ async function collectorAddRule() {
 
     collectorSelectedRules.push(data.rule);
 
-    // 在截图上标记已选
-    const overlay = document.getElementById('selector-overlay');
-    const img = document.getElementById('selector-img');
-    const rect = img.getBoundingClientRect();
-    const scaleX = rect.width / collectorSnapshot.viewport_width;
-    const scaleY = rect.height / collectorSnapshot.viewport_height;
-    const mark = document.createElement('div');
-    mark.className = 'selector-saved-mark';
-    mark.style.left = (elem.x * scaleX - 1) + 'px';
-    mark.style.top = (elem.y * scaleY - 1) + 'px';
-    mark.style.width = (Math.max(elem.w || 20, 20) * scaleX + 2) + 'px';
-    mark.style.height = (Math.max(elem.h || 16, 16) * scaleY + 2) + 'px';
-    const label = document.createElement('div');
-    label.className = 'selector-label saved';
-    label.textContent = fieldName;
-    label.style.left = (elem.x * scaleX) + 'px';
-    label.style.top = (elem.y * scaleY - 22) + 'px';
-    overlay.appendChild(mark);
-    overlay.appendChild(label);
-    overlay.querySelectorAll('.selector-highlight').forEach(h => h.remove());
-
     // 更新规则列表
     renderRulesList();
     document.getElementById('col-preview-btn').disabled = false;
     document.getElementById('sel-field-name').value = '';
     document.getElementById('sel-detail-card').style.display = 'none';
+    collectorPickedElement = null;
     showToast(`已添加: ${fieldName}`);
   } catch (err) {
     showToast('添加失败: ' + err.message, 'error');
@@ -1124,7 +1163,7 @@ function renderRulesList() {
   const container = document.getElementById('sel-rules-list');
   document.getElementById('sel-rules-count').textContent = collectorSelectedRules.length;
   if (collectorSelectedRules.length === 0) {
-    container.innerHTML = '<p style="color:var(--text-dim);font-size:11px;">点击截图选择元素，然后添加规则</p>';
+    container.innerHTML = '<p style="color:var(--text-dim);font-size:11px;">在页面中点选数据元素，然后添加规则</p>';
     return;
   }
   container.innerHTML = collectorSelectedRules.map((r, i) => `
@@ -1275,24 +1314,108 @@ async function collectorExecuteTask(taskId) {
   const username = document.getElementById('username').value.trim();
   const password = document.getElementById('password').value;
 
-  showToast('正在执行采集任务...');
+  // 弹出加载状态
+  const modal = document.getElementById('result-modal');
+  const modalBody = document.getElementById('result-modal-body');
+  const modalTitle = document.getElementById('result-modal-title');
+  modalTitle.textContent = '正在执行采集...';
+  modalBody.innerHTML = '<div style="text-align:center;padding:40px;"><div class="spinner" style="margin:0 auto;"></div><p style="margin-top:12px;color:var(--text-dim);">正在启动浏览器、登录并提取数据，请耐心等待...</p></div>';
+  modal.style.display = 'flex';
+  document.getElementById('result-download-btn').style.display = 'none';
+  document.getElementById('result-download-csv-btn').style.display = 'none';
+
   try {
     const resp = await fetch('/api/collector/tasks/' + taskId + '/execute', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ host, username, password, headless: true, max_rows: 5000 })
     });
     const data = await resp.json();
-    if (!data.ok || !data.success) { showToast(data.message || '执行失败', 'error'); return; }
 
-    showToast(`采集完成: ${data.data.total} 条, ${data.data.columns.length} 字段`);
-    // 下载结果
-    const blob = new Blob([JSON.stringify(data.data, null, 2)], { type: 'application/json' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'collection_result_' + new Date().toISOString().slice(0,19).replace(/:/g,'-') + '.json';
-    a.click();
+    if (!data.ok) {
+      modalTitle.textContent = '执行失败';
+      modalBody.innerHTML = '<div style="padding:20px;color:var(--red);font-size:14px;">' + escapeHtml(data.message || '未知错误') + '</div>';
+      return;
+    }
+
+    if (!data.success) {
+      modalTitle.textContent = '执行失败';
+      const errMsg = data.message || data.error || '未知错误';
+      const errList = (data.errors && data.errors.length > 0)
+        ? '<ul style="margin-top:12px;color:var(--text-dim);font-size:12px;">' + data.errors.map(e => '<li>' + escapeHtml(e.field + ': ' + e.error) + '</li>').join('') + '</ul>'
+        : '';
+      modalBody.innerHTML = '<div style="padding:20px;color:var(--red);font-size:14px;">' + escapeHtml(errMsg) + '</div>' + errList;
+      return;
+    }
+
+    // 成功
+    const result = data.data;
+    const total = result.total || 0;
+    const cols = result.columns || [];
+    const rows = result.rows || [];
+    modalTitle.textContent = '采集完成 — ' + total + ' 条数据, ' + cols.length + ' 个字段';
+
+    if (total === 0) {
+      modalBody.innerHTML = '<div style="padding:30px;text-align:center;color:var(--text-dim);"><p style="font-size:16px;">采集完成，但未提取到任何数据（0 条）</p><p style="font-size:12px;margin-top:8px;">可能原因：页面未加载完成、选择器不匹配、或需要登录后才能看到数据</p></div>';
+    } else {
+      // 渲染表格（最多展示前100行）
+      const displayRows = rows.slice(0, 100);
+      let tableHtml = '<table style="width:100%;border-collapse:collapse;font-size:12px;"><thead><tr>';
+      cols.forEach(c => { tableHtml += '<th style="padding:8px 10px;border:1px solid var(--border);background:var(--bg);text-align:left;color:var(--accent);white-space:nowrap;">' + escapeHtml(c) + '</th>'; });
+      tableHtml += '</tr></thead><tbody>';
+      displayRows.forEach(r => {
+        tableHtml += '<tr>';
+        cols.forEach(c => {
+          const v = r[c] !== undefined && r[c] !== null ? String(r[c]) : '';
+          tableHtml += '<td style="padding:6px 10px;border:1px solid var(--border);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="' + escapeHtml(v) + '">' + escapeHtml(v.substring(0, 100)) + '</td>';
+        });
+        tableHtml += '</tr>';
+      });
+      tableHtml += '</tbody></table>';
+      if (rows.length > 100) {
+        tableHtml += '<p style="margin-top:8px;color:var(--text-dim);font-size:11px;">仅展示前 100 行，共 ' + rows.length + ' 行。点击下方按钮下载完整数据。</p>';
+      }
+      // 错误信息
+      if (data.errors && data.errors.length > 0) {
+        tableHtml += '<div style="margin-top:12px;padding:8px 12px;background:rgba(230,162,60,0.1);border:1px solid #e6a23c;border-radius:4px;font-size:11px;color:#e6a23c;">部分字段提取有误：' + data.errors.length + ' 个错误</div>';
+      }
+      modalBody.innerHTML = tableHtml;
+    }
+
+    // 下载按钮
+    const dlBtn = document.getElementById('result-download-btn');
+    dlBtn.style.display = '';
+    dlBtn.onclick = function() {
+      const blob = new Blob([JSON.stringify(result, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'collection_result_' + new Date().toISOString().slice(0,19).replace(/:/g,'-') + '.json';
+      a.click();
+    };
+    const csvBtn = document.getElementById('result-download-csv-btn');
+    csvBtn.style.display = total > 0 ? '' : 'none';
+    csvBtn.onclick = function() {
+      // 生成 CSV（UTF-8 BOM 防止 Excel 乱码）
+      let csv = '\uFEFF';
+      csv += cols.map(c => '"' + String(c).replace(/"/g, '""') + '"').join(',') + '\r\n';
+      rows.forEach(r => {
+        csv += cols.map(c => {
+          const v = r[c] !== undefined && r[c] !== null ? String(r[c]) : '';
+          return '"' + v.replace(/"/g, '""') + '"';
+        }).join(',') + '\r\n';
+      });
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'collection_result_' + new Date().toISOString().slice(0,19).replace(/:/g,'-') + '.csv';
+      a.click();
+    };
+
+    showToast('采集完成: ' + total + ' 条数据');
     collectorRefreshTaskList();
-  } catch (err) { showToast('执行失败: ' + err.message, 'error'); }
+  } catch (err) {
+    modalTitle.textContent = '执行异常';
+    modalBody.innerHTML = '<div style="padding:20px;color:var(--red);font-size:14px;">网络错误: ' + escapeHtml(err.message) + '</div>';
+  }
 }
 
 async function collectorLoadTask(taskId) {

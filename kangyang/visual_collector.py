@@ -1020,6 +1020,7 @@ def execute_collection(
     password: str = "",
     headless: bool = True,
     max_rows: int = 0,
+    storage_state: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     """
     执行一个完整的采集任务（供 CLI 和 API 调用）。
@@ -1029,6 +1030,8 @@ def execute_collection(
         username, password: 覆盖任务中的登录凭证
         headless: 无头模式
         max_rows: 最大行数限制（0 = 不限制）
+        storage_state: Playwright storage_state 格式的认证状态（可选）。
+                      传入后跳过登录，直接用该状态创建已认证 context。
 
     返回:
         {"success": bool, "data": {"columns": [...], "rows": [...], "total": N}, "errors": [...]}
@@ -1058,15 +1061,26 @@ def execute_collection(
 
     with sync_playwright() as pw:
         browser = pw.chromium.launch(headless=headless)
-        context = browser.new_context(
-            viewport={"width": 1440, "height": 900},
-            locale="zh-CN",
-        )
+
+        # ── 如果有已认证的 storage_state，直接用它创建 context，跳过登录 ──
+        if storage_state:
+            logger.info(f"[VisualCollector] 使用 storage_state 创建已认证 context "
+                        f"(cookies: {len(storage_state.get('cookies', []))} 条)")
+            context = browser.new_context(
+                viewport={"width": 1440, "height": 900},
+                locale="zh-CN",
+                storage_state=storage_state,
+            )
+        else:
+            context = browser.new_context(
+                viewport={"width": 1440, "height": 900},
+                locale="zh-CN",
+            )
         page = context.new_page()
 
         try:
-            # 登录
-            if task.login_required:
+            # 登录（仅在没有 storage_state 时才执行）
+            if task.login_required and not storage_state:
                 login_url = host.rstrip("/") + "/login"
                 page.goto(login_url, wait_until="networkidle", timeout=30000)
                 page.wait_for_timeout(1000)
