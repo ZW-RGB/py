@@ -150,7 +150,8 @@ def get_feedback_boost(user_query, candidate_endpoints):
         candidate_endpoints: 候选端点列表 [{"endpoint": ep_dict, "score": float, ...}]
 
     Returns:
-        修改了 score 的候选列表（在原 score 基础上叠加 boost）
+        修改了 score 的候选列表（在原 score 基础上叠加 boost）；
+        若学习到的正确端点不在候选中，则注入为高权重新候选，确保「学一次、永久对」。
     """
     data = _load_feedback()
     records = data.get("records", [])
@@ -158,14 +159,37 @@ def get_feedback_boost(user_query, candidate_endpoints):
     if not records:
         return candidate_endpoints
 
-    # 找最相似的历史查询
-    best_sim = 0
+    # 找最相似的历史查询，且优先选用「用户修正/确认」过的记录，
+    # 避免被 parse_intent 自动记录的（可能错配的）历史污染。
+    best_sim = 0.0
     best_record = None
+    best_sim_corrected = 0.0
+    best_record_corrected = None
+    best_sim_confirmed = 0.0
+    best_record_confirmed = None
     for rec in records[-200:]:  # 只看最近 200 条
         sim = _query_similarity(user_query, rec["query"])
+        if sim <= 0.6:
+            continue
+        if rec.get("corrected_endpoint"):
+            if sim > best_sim_corrected:
+                best_sim_corrected = sim
+                best_record_corrected = rec
+        elif rec.get("user_confirmed"):
+            if sim > best_sim_confirmed:
+                best_sim_confirmed = sim
+                best_record_confirmed = rec
         if sim > best_sim:
             best_sim = sim
             best_record = rec
+
+    # 优先级：用户修正 > 用户确认 > 最相似兜底（兜底记录通常无信号，不误学）
+    if best_record_corrected:
+        best_record = best_record_corrected
+        best_sim = best_sim_corrected
+    elif best_record_confirmed:
+        best_record = best_record_confirmed
+        best_sim = best_sim_confirmed
 
     # 如果相似度足够高（> 0.6），应用 boost
     if best_sim > 0.6 and best_record:
@@ -180,13 +204,35 @@ def get_feedback_boost(user_query, candidate_endpoints):
             if best_record.get("user_confirmed"):
                 boost += 0.1  # 用户确认过的额外加分
 
+            # 1) 若目标端点已在候选中 → 直接加权
+            injected = False
             for cand in candidate_endpoints:
                 if cand["endpoint"]["path"] == target_endpoint:
                     cand["score"] += boost
                     cand["feedback_boost"] = round(boost, 3)
                     cand["feedback_source"] = f"历史相似查询(相似度={best_sim:.2f})"
                     logger.info(f"反馈 boost: {cand['endpoint']['name']} +{boost:.3f} (相似度={best_sim:.2f})")
+                    injected = True
                     break
+
+            # 2) 关键修复：目标端点在候选中不存在（被规则引擎漏掉/错配父级）时，
+            #    把它作为新候选注入并给「压过规则匹配」的高权重，使学习结果真正胜出。
+            if not injected:
+                existing_max = max([c["score"] for c in candidate_endpoints], default=0.0)
+                injected_score = max(existing_max, 1.0) + boost + 0.05
+                ep = _lookup_endpoint(target_endpoint)
+                new_cand = {
+                    "endpoint": ep,
+                    "score": round(injected_score, 3),
+                    "matched_keywords": ["反馈学习"],
+                    "match_type": "feedback_learned",
+                    "feedback_boost": round(boost + 0.05, 3),
+                    "feedback_source": f"历史相似查询(相似度={best_sim:.2f})",
+                }
+                if best_record.get("parsed_fields") and best_sim > 0.7:
+                    new_cand["feedback_fields"] = best_record["parsed_fields"]
+                candidate_endpoints.append(new_cand)
+                logger.info(f"反馈注入新候选: {ep.get('name', target_endpoint)} score={injected_score:.3f} (相似度={best_sim:.2f})")
 
         # 如果历史记录中有字段信息，也返回供参考
         if best_record.get("parsed_fields") and best_sim > 0.7:
@@ -195,6 +241,20 @@ def get_feedback_boost(user_query, candidate_endpoints):
                     cand["feedback_fields"] = best_record["parsed_fields"]
 
     return candidate_endpoints
+
+
+def _lookup_endpoint(path):
+    """按路径查找真实端点元数据；找不到则构造最小可用 dict（path + 推导 name）。"""
+    try:
+        from kangyang.api_crawler import KNOWN_ENDPOINTS as _KEP
+        for e in _KEP:
+            if e.get("path") == path:
+                return e
+    except Exception:
+        pass
+    segs = [s for s in path.rstrip("/").split("/") if s and s != "dev-api"]
+    name = segs[-2] if (len(segs) >= 2 and segs[-1] == "list") else segs[-1] if segs else path
+    return {"path": path, "name": name or path, "module": segs[0] if segs else ""}
 
 
 def get_endpoint_stats():

@@ -31,9 +31,9 @@ _ROUTES_YAML = os.path.join(_CONFIG_DIR, "routes.yaml")
 _DEFAULT_ENDPOINTS = [
     {"module": "elderlyCare", "name": "入住处理", "path": "/dev-api/elderlyCare/EnrollmentProcessing/list"},
     {"module": "elderlyCare", "name": "入住概览", "path": "/dev-api/elderlyCare/enrollmentView/list"},
+    {"module": "basicinformation", "name": "长者档案", "path": "/dev-api/basicinformation/community/list"},
     {"module": "enrollmentApply", "name": "入住申请", "path": "/dev-api/enrollmentApply/enrollmentApply/list"},
     {"module": "oldCare", "name": "老人护理", "path": "/dev-api/oldCare/oldCare/list"},
-    {"module": "basicinformation", "name": "社区信息", "path": "/dev-api/basicinformation/community/list"},
     {"module": "basicinformation", "name": "社区管理", "path": "/dev-api/basicinformation/communityManagement/list"},
     {"module": "basicinformation", "name": "医生信息", "path": "/dev-api/basicinformation/doctor/list"},
     {"module": "basicinformation", "name": "护士信息", "path": "/dev-api/basicinformation/nurse/list"},
@@ -41,7 +41,12 @@ _DEFAULT_ENDPOINTS = [
     {"module": "contract", "name": "合同管理", "path": "/dev-api/contract/contract/list"},
     {"module": "nurseLevel", "name": "护理等级", "path": "/dev-api/nurseLevel/nurseLevel/list"},
     {"module": "devManagement", "name": "床位管理", "path": "/dev-api/devManagement/bedroomsManagement/list"},
+    {"module": "devManagement", "name": "分配床位", "path": "/dev-api/device/bedroom/list"},
+    {"module": "devManagement", "name": "设备分配", "path": "/dev-api/assigner/assigner/list"},
+    {"module": "devManagement", "name": "熙康设备", "path": "/dev-api/personbasicinfo/personbasicinfo/list"},
+    {"module": "devManagement", "name": "设备办理", "path": "/dev-api/securityEquipment/equipment/list"},
     {"module": "ability", "name": "能力评估", "path": "/dev-api/ability/ability/list"},
+    {"module": "ability", "name": "抑郁评估", "path": "/dev-api/depression/depression/list"},
     {"module": "activities", "name": "活动管理", "path": "/dev-api/activities/activities/list"},
     {"module": "securityEquipment", "name": "安全设备", "path": "/dev-api/securityEquipment/equipment/list"},
     {"module": "endDevice", "name": "终端设备", "path": "/dev-api/endDevice/endDevice/list"},
@@ -55,6 +60,7 @@ _DEFAULT_ENDPOINTS = [
 _DEFAULT_ROUTES = [
     {"name": "入住处理", "route": "/elderly/checkin", "module": "老人管理"},
     {"name": "入住概览", "route": "/elderly/overview", "module": "老人管理"},
+    {"name": "长者档案", "route": "/elderly/files", "module": "老人管理"},
     {"name": "入住申请", "route": "/elderly/apply", "module": "老人管理"},
     {"name": "老人护理", "route": "/elderly/nursing", "module": "老人护理"},
     {"name": "社区信息", "route": "/base/community", "module": "基本信息"},
@@ -159,6 +165,51 @@ class ConfigLoader:
             self._load_all()
             logger.info(f"配置已重载: 端点={self._endpoints_source}, 路由={self._routes_source}")
 
+    def save_endpoints(self, new_eps):
+        """
+        合并并落盘端点配置（不覆盖已有、按 path 去重）。
+
+        Args:
+            new_eps: 新增/覆盖的端点列表 [{module, name, path}, ...]
+        Returns:
+            (ok: bool, total: int)
+        """
+        with self._lock:
+            existing = {e.get("path"): e for e in (self._endpoints_cache or []) if e.get("path")}
+            for ne in new_eps:
+                p = ne.get("path")
+                if not p:
+                    continue
+                # 保留已有 name/module 作默认（用户未填时用）
+                old = existing.get(p, {})
+                merged = {
+                    "module": ne.get("module") or old.get("module") or "",
+                    "name": ne.get("name") or old.get("name") or "",
+                    "path": p,
+                }
+                # 枚举解码映射 / 样本值（自动发现解码用，保留已有）
+                if ne.get("field_enums"):
+                    merged["field_enums"] = ne["field_enums"]
+                elif old.get("field_enums"):
+                    merged["field_enums"] = old["field_enums"]
+                if ne.get("field_samples"):
+                    merged["field_samples"] = ne["field_samples"]
+                elif old.get("field_samples"):
+                    merged["field_samples"] = old["field_samples"]
+                existing[p] = merged
+            merged_list = list(existing.values())
+            self._endpoints_cache = merged_list
+            self._endpoints_source = "yaml"
+        try:
+            import yaml
+            with open(_ENDPOINTS_YAML, "w", encoding="utf-8") as f:
+                yaml.safe_dump({"endpoints": merged_list}, f, allow_unicode=True, sort_keys=False)
+            logger.info(f"已保存 {len(merged_list)} 个端点到 {_ENDPOINTS_YAML}")
+            return True, len(merged_list)
+        except Exception as e:
+            logger.error(f"写入 endpoints.yaml 失败: {e}")
+            return False, 0
+
     def merge_routes(self, discovered_routes, strategy="append"):
         """
         合并自动发现的路由
@@ -244,6 +295,9 @@ def get_config_status():
 
 def reset_routes():
     _config_loader.reset_routes()
+
+def save_endpoints(eps):
+    return _config_loader.save_endpoints(eps)
 
 
 # 延迟属性：每次访问时动态获取最新值

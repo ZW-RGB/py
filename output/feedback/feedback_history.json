@@ -1,199 +1,24 @@
 {
   "records": [
     {
-      "query": "获取压疮评估页面所有数据",
-      "timestamp": "2026-07-16T14:35:04.451078",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [],
-      "parsed_confidence": 0.85,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "压疮评估页面所有数据",
-      "timestamp": "2026-07-16T14:35:11.451856",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [],
-      "parsed_confidence": 0.85,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "获取压疮评估页面所有数据",
-      "timestamp": "2026-07-16T14:38:28.717753",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [],
-      "parsed_confidence": 0.85,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "获取压疮评估页面所有数据",
-      "timestamp": "2026-07-16T14:46:14.153979",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [],
-      "parsed_confidence": 0.85,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "获取http://192.168.18.143:1024/evaluation/pressure页面所有数据",
-      "timestamp": "2026-07-16T14:49:56.631585",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
+      "query": "获取长者档案页面的前50条数据",
+      "timestamp": "2026-07-23T15:07:28.220562",
+      "parsed_endpoint": "/dev-api/basicinformation/community/list",
+      "parsed_api_name": "长者档案",
       "parsed_fields": [],
       "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "获取http://192.168.18.143:1024/evaluation/evaluation页面所有数据",
-      "timestamp": "2026-07-16T14:50:22.365095",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "获取首页全部数据",
-      "timestamp": "2026-07-16T16:37:51.890375",
-      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
-      "parsed_api_name": "入住概览",
-      "parsed_fields": [],
-      "parsed_confidence": 0.32,
       "user_confirmed": false,
       "corrected_endpoint": "",
       "corrected_fields": [],
       "source_type": "api"
     },
     {
-      "query": "你能做数据分析么",
-      "timestamp": "2026-07-16T16:53:53.221742",
-      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
-      "parsed_api_name": "入住概览",
+      "query": "只要前30条心率数据",
+      "timestamp": "2026-07-23T15:07:28.231710",
+      "parsed_endpoint": "/dev-api/watchData/watchHeartrate/watchHeartrate/list",
+      "parsed_api_name": "心率监测",
       "parsed_fields": [
-        "你能做数据分析么"
-      ],
-      "parsed_confidence": 0.1,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "api"
-    },
-    {
-      "query": "我想要获取这个平台中的长者数据",
-      "timestamp": "2026-07-16T17:15:09.978277",
-      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
-      "parsed_api_name": "入住概览",
-      "parsed_fields": [
-        "我这个平台"
-      ],
-      "parsed_confidence": 0.85,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "api"
-    },
-    {
-      "query": "获取长者档案所有数据",
-      "timestamp": "2026-07-17T10:22:07.224703",
-      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
-      "parsed_api_name": "入住概览",
-      "parsed_fields": [],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "api"
-    },
-    {
-      "query": "获取长者档案所有长者信息",
-      "timestamp": "2026-07-17T10:55:59.620714",
-      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
-      "parsed_api_name": "入住概览",
-      "parsed_fields": [],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "api"
-    },
-    {
-      "query": "获取http://192.168.18.143:1024/index数据",
-      "timestamp": "2026-07-17T11:04:15.602258",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "获取所有数据",
-      "timestamp": "2026-07-17T11:18:18.440559",
-      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
-      "parsed_api_name": "入住概览",
-      "parsed_fields": [],
-      "parsed_confidence": 0.32,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "api"
-    },
-    {
-      "query": "我想要获取所有页面的所有数据",
-      "timestamp": "2026-07-17T11:25:58.003507",
-      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
-      "parsed_api_name": "入住概览",
-      "parsed_fields": [],
-      "parsed_confidence": 0.1,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "api"
-    },
-    {
-      "query": "我想要获取http://192.168.18.143:1024/index页面的所有数据",
-      "timestamp": "2026-07-17T11:28:15.922120",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "获取所有老人的姓名、年龄、护理等级和房间号",
-      "timestamp": "2026-07-17T13:53:04.245830",
-      "parsed_endpoint": "/dev-api/nurseLevel/nurseLevel/list",
-      "parsed_api_name": "护理等级",
-      "parsed_fields": [
-        "姓名",
-        "年龄",
-        "护理等级",
-        "房间号"
+        "心率"
       ],
       "parsed_confidence": 0.98,
       "user_confirmed": false,
@@ -202,13 +27,13 @@
       "source_type": "api"
     },
     {
-      "query": "查询心率监测中老人的心率数据和采集时间",
-      "timestamp": "2026-07-17T13:53:43.832190",
+      "query": "获取心率监测的前20条心率和血氧",
+      "timestamp": "2026-07-23T15:07:28.240350",
       "parsed_endpoint": "/dev-api/watchData/watchHeartrate/watchHeartrate/list",
       "parsed_api_name": "心率监测",
       "parsed_fields": [
         "心率",
-        "时间"
+        "血氧"
       ],
       "parsed_confidence": 0.98,
       "user_confirmed": false,
@@ -217,339 +42,112 @@
       "source_type": "api"
     },
     {
-      "query": "获取合同管理中所有合同编号、缴费金额、签订日期和到期日期",
-      "timestamp": "2026-07-17T13:53:59.636901",
+      "query": "第5条合同记录",
+      "timestamp": "2026-07-23T15:07:32.678934",
       "parsed_endpoint": "/dev-api/contract/contract/list",
       "parsed_api_name": "合同管理",
-      "parsed_fields": [
-        "合同编号",
-        "缴费金额",
-        "签订日期",
-        "到期日期"
-      ],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "api"
-    },
-    {
-      "query": "爬取 http://192.168.18.143:1024/elderly/checkin 页面的表单数据",
-      "timestamp": "2026-07-17T13:55:16.539303",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
       "parsed_fields": [],
       "parsed_confidence": 0.95,
       "user_confirmed": false,
       "corrected_endpoint": "",
       "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "获取所有老人的姓名、年龄、护理等级和房间号",
-      "timestamp": "2026-07-17T14:44:47.244750",
-      "parsed_endpoint": "/dev-api/nurseLevel/nurseLevel/list",
-      "parsed_api_name": "护理等级",
-      "parsed_fields": [
-        "姓名",
-        "年龄",
-        "护理等级",
-        "房间号"
-      ],
-      "parsed_confidence": 0.98,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
       "source_type": "api"
     },
     {
-      "query": "获取所有老人的姓名、年龄、护理等级和房间号",
-      "timestamp": "2026-07-17T14:59:24.777376",
-      "parsed_endpoint": "/dev-api/nurseLevel/nurseLevel/list",
-      "parsed_api_name": "护理等级",
-      "parsed_fields": [
-        "姓名",
-        "年龄",
-        "护理等级",
-        "房间号"
-      ],
-      "parsed_confidence": 0.98,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "api"
-    },
-    {
-      "query": "爬取 http://192.168.18.143:1024/elderly/checkin 页面的表单数据",
-      "timestamp": "2026-07-17T14:59:43.089880",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
+      "query": "获取前50条长者档案",
+      "timestamp": "2026-07-23T15:07:32.696109",
+      "parsed_endpoint": "/dev-api/basicinformation/community/list",
+      "parsed_api_name": "长者档案",
       "parsed_fields": [],
       "parsed_confidence": 0.95,
       "user_confirmed": false,
       "corrected_endpoint": "",
       "corrected_fields": [],
-      "source_type": "page"
+      "source_type": "api"
     },
     {
-      "query": "爬取http://192.168.18.143:1024/basicinformation/doctor页面的表单数据",
-      "timestamp": "2026-07-17T15:00:04.998850",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
+      "query": "获取长者档案页面的前50条数据",
+      "timestamp": "2026-07-23T15:08:49.709102",
+      "parsed_endpoint": "/dev-api/basicinformation/community/list",
+      "parsed_api_name": "长者档案",
       "parsed_fields": [],
       "parsed_confidence": 0.95,
       "user_confirmed": false,
       "corrected_endpoint": "",
       "corrected_fields": [],
-      "source_type": "page"
+      "source_type": "api"
     },
     {
-      "query": "爬取 http://192.168.18.143:1024/basicinformation/doctor页面的表单数据",
-      "timestamp": "2026-07-17T15:05:32.918436",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
+      "query": "获取长者档案页面的前50条数据",
+      "timestamp": "2026-07-23T15:09:03.199287",
+      "parsed_endpoint": "/dev-api/basicinformation/community/list",
+      "parsed_api_name": "长者档案",
       "parsed_fields": [],
       "parsed_confidence": 0.95,
       "user_confirmed": false,
       "corrected_endpoint": "",
       "corrected_fields": [],
-      "source_type": "page"
+      "source_type": "api"
     },
     {
-      "query": "爬取 http://192.168.18.143:1024/elderly/checkin 页面的表单数据",
-      "timestamp": "2026-07-17T15:20:28.120770",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
+      "query": "获取长者档案页面的前50条数据",
+      "timestamp": "2026-07-23T15:34:08.794212",
+      "parsed_endpoint": "/dev-api/basicinformation/community/list",
+      "parsed_api_name": "长者档案",
       "parsed_fields": [],
       "parsed_confidence": 0.95,
       "user_confirmed": false,
       "corrected_endpoint": "",
       "corrected_fields": [],
-      "source_type": "page"
+      "source_type": "api"
     },
     {
-      "query": "爬取 http://192.168.18.143:1024/index页面的数据",
-      "timestamp": "2026-07-17T15:21:40.179000",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
+      "query": "获取长者档案页面的长者姓名和性别前50条数据",
+      "timestamp": "2026-07-23T15:34:58.453799",
+      "parsed_endpoint": "/dev-api/basicinformation/community/list",
+      "parsed_api_name": "长者档案",
+      "parsed_fields": [
+        "长者姓名",
+        "性别"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取长者档案页面的前50条数据",
+      "timestamp": "2026-07-23T15:35:57.792628",
+      "parsed_endpoint": "/dev-api/basicinformation/community/list",
+      "parsed_api_name": "长者档案",
       "parsed_fields": [],
       "parsed_confidence": 0.95,
       "user_confirmed": false,
       "corrected_endpoint": "",
       "corrected_fields": [],
-      "source_type": "page"
+      "source_type": "api"
     },
     {
-      "query": "查询心率监测中老人的心率数据和采集时间",
-      "timestamp": "2026-07-17T15:23:10.296215",
-      "parsed_endpoint": "/dev-api/watchData/watchHeartrate/watchHeartrate/list",
-      "parsed_api_name": "心率监测",
+      "query": "获取主机页面的前50条数据",
+      "timestamp": "2026-07-23T15:36:48.886303",
+      "parsed_endpoint": "/dev-api/endDevice/endDevice/list",
+      "parsed_api_name": "终端设备",
       "parsed_fields": [
-        "心率",
-        "时间"
+        "主机"
       ],
-      "parsed_confidence": 0.98,
+      "parsed_confidence": 0.7,
       "user_confirmed": false,
       "corrected_endpoint": "",
       "corrected_fields": [],
       "source_type": "api"
     },
     {
-      "query": "查询心率监测中老人的心率数据和测量时间和长者姓名",
-      "timestamp": "2026-07-17T15:24:19.535668",
-      "parsed_endpoint": "/dev-api/watchData/watchHeartrate/watchHeartrate/list",
-      "parsed_api_name": "心率监测",
-      "parsed_fields": [
-        "心率",
-        "时间",
-        "长者姓名"
-      ],
-      "parsed_confidence": 0.98,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "api"
-    },
-    {
-      "query": "查询社区管理中社区名称和位置",
-      "timestamp": "2026-07-17T15:25:57.672885",
-      "parsed_endpoint": "/dev-api/basicinformation/communityManagement/list",
-      "parsed_api_name": "社区管理",
-      "parsed_fields": [
-        "社区管理",
-        "名称",
-        "位置"
-      ],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "api"
-    },
-    {
-      "query": "查询社区管理页面中社区名称和位置",
-      "timestamp": "2026-07-17T15:26:19.562110",
+      "query": "获取熙康设备页面的前50条数据",
+      "timestamp": "2026-07-23T15:41:13.429627",
       "parsed_endpoint": "",
       "parsed_api_name": "",
-      "parsed_fields": [
-        "名称",
-        "位置"
-      ],
-      "parsed_confidence": 0.85,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "查询社区管理页面中社区名称和位置",
-      "timestamp": "2026-07-17T15:27:14.690848",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [
-        "名称",
-        "位置"
-      ],
-      "parsed_confidence": 0.85,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "查询社区管理页面中社区名称和位置",
-      "timestamp": "2026-07-17T15:27:15.648842",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [
-        "名称",
-        "位置"
-      ],
-      "parsed_confidence": 0.85,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "查询社区管理页面中社区名称和位置",
-      "timestamp": "2026-07-17T15:27:16.330122",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [
-        "名称",
-        "位置"
-      ],
-      "parsed_confidence": 0.85,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "查询社区管理页面中社区名称和位置",
-      "timestamp": "2026-07-17T15:27:16.463128",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [
-        "名称",
-        "位置"
-      ],
-      "parsed_confidence": 0.85,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "查询社区管理中社区名称和位置",
-      "timestamp": "2026-07-17T15:27:20.503424",
-      "parsed_endpoint": "/dev-api/basicinformation/communityManagement/list",
-      "parsed_api_name": "社区管理",
-      "parsed_fields": [
-        "社区管理",
-        "名称",
-        "位置"
-      ],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "api"
-    },
-    {
-      "query": "查询社区管理的社区名称和位置床位数",
-      "timestamp": "2026-07-17T15:27:36.859508",
-      "parsed_endpoint": "/dev-api/basicinformation/communityManagement/list",
-      "parsed_api_name": "社区管理",
-      "parsed_fields": [
-        "名称",
-        "位置床位数"
-      ],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "api"
-    },
-    {
-      "query": "查询社区管理的社区名称和位置和床位数",
-      "timestamp": "2026-07-17T15:27:49.469585",
-      "parsed_endpoint": "/dev-api/basicinformation/communityManagement/list",
-      "parsed_api_name": "社区管理",
-      "parsed_fields": [
-        "名称",
-        "位置",
-        "床位数"
-      ],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "api"
-    },
-    {
-      "query": "查询护士管理的护士姓名和工作年限",
-      "timestamp": "2026-07-17T15:28:32.234529",
-      "parsed_endpoint": "/dev-api/basicinformation/nurse/list",
-      "parsed_api_name": "护士信息",
-      "parsed_fields": [
-        "姓名",
-        "工作年限"
-      ],
-      "parsed_confidence": 0.85,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "api"
-    },
-    {
-      "query": "查询护士管理的护士姓名和工作年限、护工收入",
-      "timestamp": "2026-07-17T15:29:20.716567",
-      "parsed_endpoint": "/dev-api/basicinformation/nurse/list",
-      "parsed_api_name": "护士信息",
-      "parsed_fields": [
-        "护士管理",
-        "姓名",
-        "工作年限",
-        "护工收入"
-      ],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "api"
-    },
-    {
-      "query": "查询护士管理页面中的护士姓名和工作年限、护工收入",
-      "timestamp": "2026-07-17T15:29:40.435393",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [
-        "姓名",
-        "工作年限",
-        "护工收入"
-      ],
+      "parsed_fields": [],
       "parsed_confidence": 0.7,
       "user_confirmed": false,
       "corrected_endpoint": "",
@@ -557,15 +155,25 @@
       "source_type": "page"
     },
     {
-      "query": "查询护士管理的护士姓名和工作年限、护工收入",
-      "timestamp": "2026-07-17T15:29:48.263894",
-      "parsed_endpoint": "/dev-api/basicinformation/nurse/list",
-      "parsed_api_name": "护士信息",
+      "query": "获取熙康设备页面的前50条数据",
+      "timestamp": "2026-07-23T15:43:30.893323",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取长者档案页面的前50条数据的姓名和联系方式",
+      "timestamp": "2026-07-23T16:09:47.097472",
+      "parsed_endpoint": "/dev-api/basicinformation/community/list",
+      "parsed_api_name": "长者档案",
       "parsed_fields": [
-        "护士管理",
         "姓名",
-        "工作年限",
-        "护工收入"
+        "联系方式"
       ],
       "parsed_confidence": 0.95,
       "user_confirmed": false,
@@ -574,243 +182,13 @@
       "source_type": "api"
     },
     {
-      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse页面上所有长者姓名、联系方式及入住日期",
-      "timestamp": "2026-07-17T15:30:03.211345",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [
-        "长者姓名",
-        "联系方式",
-        "入住日期",
-        "日期"
-      ],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse页面上所有护士姓名、工作年限",
-      "timestamp": "2026-07-17T15:31:00.867929",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
+      "query": "获取长者档案页面的前50条数据的姓名和联系方式",
+      "timestamp": "2026-07-23T16:13:09.484008",
+      "parsed_endpoint": "/dev-api/basicinformation/community/list",
+      "parsed_api_name": "长者档案",
       "parsed_fields": [
         "姓名",
-        "工作年限"
-      ],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse页面上护士姓名、工作年限",
-      "timestamp": "2026-07-17T15:32:52.627941",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [
-        "姓名",
-        "工作年限"
-      ],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse页面上护士姓名、工作年限",
-      "timestamp": "2026-07-17T15:32:56.041661",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [
-        "姓名",
-        "工作年限"
-      ],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse页面上护士姓名、工作年限",
-      "timestamp": "2026-07-17T15:32:56.740511",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [
-        "姓名",
-        "工作年限"
-      ],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse护士姓名、工作年限",
-      "timestamp": "2026-07-17T15:33:07.806729",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [
-        "姓名",
-        "工作年限"
-      ],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse护士姓名、工作年限",
-      "timestamp": "2026-07-17T15:33:09.064168",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [
-        "姓名",
-        "工作年限"
-      ],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse护士姓名、工作年限",
-      "timestamp": "2026-07-17T15:33:09.232296",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [
-        "姓名",
-        "工作年限"
-      ],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse护士姓名、工作年限",
-      "timestamp": "2026-07-17T15:33:09.452770",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [
-        "姓名",
-        "工作年限"
-      ],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse护士姓名、工作年限",
-      "timestamp": "2026-07-17T15:33:09.571533",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [
-        "姓名",
-        "工作年限"
-      ],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse 的护士姓名、工作年限",
-      "timestamp": "2026-07-17T15:33:14.256343",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [
-        "姓名",
-        "工作年限"
-      ],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse 的护士姓名和工作年限",
-      "timestamp": "2026-07-17T15:33:18.754317",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [
-        "姓名",
-        "工作年限"
-      ],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse 的护士姓名和工作年限",
-      "timestamp": "2026-07-17T15:33:19.835191",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [
-        "姓名",
-        "工作年限"
-      ],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "采集 http://192.168.18.143:1024/basicinformation/nurse 的护士姓名和工作年限和护士收入",
-      "timestamp": "2026-07-17T15:33:31.202799",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [
-        "姓名",
-        "工作年限",
-        "护士收入"
-      ],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "采集 http://192.168.18.143:1024/basicinformation/doctor的医生姓名和工作年限",
-      "timestamp": "2026-07-17T15:34:30.232896",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [
-        "姓名",
-        "工作年限"
-      ],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "获取合同管理中所有合同编号、缴费金额、签订日期和到期日期",
-      "timestamp": "2026-07-17T15:35:28.844532",
-      "parsed_endpoint": "/dev-api/contract/contract/list",
-      "parsed_api_name": "合同管理",
-      "parsed_fields": [
-        "合同编号",
-        "缴费金额",
-        "签订日期",
-        "到期日期"
+        "联系方式"
       ],
       "parsed_confidence": 0.95,
       "user_confirmed": false,
@@ -819,10 +197,220 @@
       "source_type": "api"
     },
     {
-      "query": "获取入托办理中全部数据",
-      "timestamp": "2026-07-17T15:36:15.326751",
-      "parsed_endpoint": "/dev-api/elderlyCare/EnrollmentProcessing/list",
-      "parsed_api_name": "入住处理",
+      "query": "获取熙康设备页面",
+      "timestamp": "2026-07-23T16:13:23.134524",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取设备配置页面",
+      "timestamp": "2026-07-23T16:13:48.013027",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.7,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取设备配置页面",
+      "timestamp": "2026-07-23T16:33:01.935048",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.7,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取设备配置页面",
+      "timestamp": "2026-07-23T16:33:03.010509",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.7,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取设备配置页面",
+      "timestamp": "2026-07-23T16:33:03.209397",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.7,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取设备配置页面",
+      "timestamp": "2026-07-23T16:33:03.396125",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.7,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取设备配置页面",
+      "timestamp": "2026-07-23T16:33:03.566296",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.7,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取养老评估的数据",
+      "timestamp": "2026-07-23T16:33:31.391969",
+      "parsed_endpoint": "/dev-api/ability/ability/list",
+      "parsed_api_name": "能力评估",
+      "parsed_fields": [
+        "养老评估"
+      ],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估的数据",
+      "timestamp": "2026-07-23T16:34:17.416008",
+      "parsed_endpoint": "/dev-api/ability/ability/list",
+      "parsed_api_name": "能力评估",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.45,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估的数据",
+      "timestamp": "2026-07-23T16:57:24.569344",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估的数据",
+      "timestamp": "2026-07-23T16:58:15.472330",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估的数据",
+      "timestamp": "2026-07-23T16:58:16.536874",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估的数据",
+      "timestamp": "2026-07-23T16:58:16.778754",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取抑郁评估的数据",
+      "timestamp": "2026-07-23T16:58:26.207266",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "抑郁评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取抑郁评估的数据",
+      "timestamp": "2026-07-23T16:58:28.277104",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "抑郁评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "抑郁评估",
+      "timestamp": "2026-07-23T16:58:41.263957",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "抑郁评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "长者档案",
+      "timestamp": "2026-07-23T16:58:50.783340",
+      "parsed_endpoint": "/dev-api/basicinformation/community/list",
+      "parsed_api_name": "长者档案",
       "parsed_fields": [],
       "parsed_confidence": 0.95,
       "user_confirmed": false,
@@ -831,79 +419,10 @@
       "source_type": "api"
     },
     {
-      "query": "获取在线用户全部数据",
-      "timestamp": "2026-07-17T16:01:15.762622",
-      "parsed_endpoint": "/dev-api/system/user/list",
-      "parsed_api_name": "用户列表",
-      "parsed_fields": [],
-      "parsed_confidence": 0.75,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "api"
-    },
-    {
-      "query": "获取http://192.168.18.143:1024/evaluation/morse页面所有数据",
-      "timestamp": "2026-07-17T16:01:58.796788",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "获取http://192.168.18.143:1024/evaluation/morse页面姓名\t年龄\t性别",
-      "timestamp": "2026-07-17T16:03:49.815587",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [
-        "姓名",
-        "年龄",
-        "性别"
-      ],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "获取所有老人的姓名、年龄、护理等级和房间号",
-      "timestamp": "2026-07-17T16:05:27.857172",
-      "parsed_endpoint": "/dev-api/nurseLevel/nurseLevel/list",
-      "parsed_api_name": "护理等级",
-      "parsed_fields": [
-        "姓名",
-        "年龄",
-        "护理等级",
-        "房间号"
-      ],
-      "parsed_confidence": 0.98,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "api"
-    },
-    {
-      "query": "获取https://www.cenc.ac.cn/cenc/index.html数据",
-      "timestamp": "2026-07-17T17:26:11.428250",
-      "parsed_endpoint": "",
-      "parsed_api_name": "",
-      "parsed_fields": [],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "page"
-    },
-    {
-      "query": "获取档案管理的长者档案全部数据",
-      "timestamp": "2026-07-20T09:59:00.694468",
-      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
-      "parsed_api_name": "入住概览",
+      "query": "长者档案",
+      "timestamp": "2026-07-23T17:00:02.222782",
+      "parsed_endpoint": "/dev-api/basicinformation/community/list",
+      "parsed_api_name": "长者档案",
       "parsed_fields": [],
       "parsed_confidence": 0.95,
       "user_confirmed": false,
@@ -912,53 +431,12 @@
       "source_type": "api"
     },
     {
-      "query": "获取长者档案全部数据",
-      "timestamp": "2026-07-20T09:59:48.491355",
-      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
-      "parsed_api_name": "入住概览",
+      "query": "获取抑郁评估",
+      "timestamp": "2026-07-23T17:00:27.496106",
+      "parsed_endpoint": "/dev-api/depression/depression/list",
+      "parsed_api_name": "抑郁评估",
       "parsed_fields": [],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "api"
-    },
-    {
-      "query": "获取长者档案全部数据",
-      "timestamp": "2026-07-20T09:59:54.726308",
-      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
-      "parsed_api_name": "入住概览",
-      "parsed_fields": [],
-      "parsed_confidence": 0.95,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "api"
-    },
-    {
-      "query": "获取所有老人的姓名、年龄、护理等级和房间号",
-      "timestamp": "2026-07-20T10:00:09.816728",
-      "parsed_endpoint": "/dev-api/nurseLevel/nurseLevel/list",
-      "parsed_api_name": "护理等级",
-      "parsed_fields": [
-        "姓名",
-        "年龄",
-        "护理等级",
-        "房间号"
-      ],
-      "parsed_confidence": 0.98,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "api"
-    },
-    {
-      "query": "获取医生管理的全部数据",
-      "timestamp": "2026-07-20T10:01:02.034572",
-      "parsed_endpoint": "/dev-api/basicinformation/doctor/list",
-      "parsed_api_name": "医生信息",
-      "parsed_fields": [],
-      "parsed_confidence": 0.95,
+      "parsed_confidence": 1.0,
       "user_confirmed": false,
       "corrected_endpoint": "",
       "corrected_fields": [],
@@ -966,9 +444,9 @@
     },
     {
       "query": "获取长者档案的数据",
-      "timestamp": "2026-07-20T10:02:55.793361",
-      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
-      "parsed_api_name": "入住概览",
+      "timestamp": "2026-07-24T13:49:33.341887",
+      "parsed_endpoint": "/dev-api/basicinformation/community/list",
+      "parsed_api_name": "长者档案",
       "parsed_fields": [],
       "parsed_confidence": 0.95,
       "user_confirmed": false,
@@ -977,24 +455,52 @@
       "source_type": "api"
     },
     {
-      "query": "获取医生管理的数据",
-      "timestamp": "2026-07-20T10:03:17.368428",
-      "parsed_endpoint": "/dev-api/basicinformation/doctor/list",
-      "parsed_api_name": "医生信息",
+      "query": "压疮评估",
+      "timestamp": "2026-07-24T15:02:29.438707",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
       "parsed_fields": [
-        "医生管理"
+        "压疮评估"
       ],
-      "parsed_confidence": 0.85,
+      "parsed_confidence": 0.32,
       "user_confirmed": false,
       "corrected_endpoint": "",
       "corrected_fields": [],
       "source_type": "api"
     },
     {
-      "query": "获取医生管理的全部数据",
-      "timestamp": "2026-07-20T10:03:47.088056",
-      "parsed_endpoint": "/dev-api/basicinformation/doctor/list",
-      "parsed_api_name": "医生信息",
+      "query": "褥疮评估",
+      "timestamp": "2026-07-24T15:02:29.444406",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "褥疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估数据",
+      "timestamp": "2026-07-24T15:02:29.449523",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "老人能力评估",
+      "timestamp": "2026-07-24T15:02:29.456654",
+      "parsed_endpoint": "/dev-api/ability/ability/list",
+      "parsed_api_name": "能力评估",
       "parsed_fields": [],
       "parsed_confidence": 0.95,
       "user_confirmed": false,
@@ -1003,54 +509,27 @@
       "source_type": "api"
     },
     {
-      "query": "获取健康评估的长者姓名",
-      "timestamp": "2026-07-20T16:13:07.215883",
-      "parsed_endpoint": "/dev-api/ability/ability/list",
-      "parsed_api_name": "能力评估",
+      "query": "跌倒评估",
+      "timestamp": "2026-07-24T15:02:29.461404",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
       "parsed_fields": [
-        "长者姓名"
+        "跌倒评估"
       ],
-      "parsed_confidence": 0.85,
+      "parsed_confidence": 0.32,
       "user_confirmed": false,
       "corrected_endpoint": "",
       "corrected_fields": [],
       "source_type": "api"
     },
     {
-      "query": "获取养老评估中健康评估的长者姓名",
-      "timestamp": "2026-07-20T16:14:09.196991",
-      "parsed_endpoint": "/dev-api/ability/ability/list",
-      "parsed_api_name": "能力评估",
+      "query": "获取长者档案的姓名和联系方式",
+      "timestamp": "2026-07-24T15:15:19.357778",
+      "parsed_endpoint": "/dev-api/basicinformation/community/list",
+      "parsed_api_name": "长者档案",
       "parsed_fields": [
-        "长者姓名"
-      ],
-      "parsed_confidence": 0.85,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "api"
-    },
-    {
-      "query": "获取养老评估模块中健康评估的长者姓名",
-      "timestamp": "2026-07-20T16:14:22.230248",
-      "parsed_endpoint": "/dev-api/ability/ability/list",
-      "parsed_api_name": "能力评估",
-      "parsed_fields": [
-        "长者姓名"
-      ],
-      "parsed_confidence": 0.85,
-      "user_confirmed": false,
-      "corrected_endpoint": "",
-      "corrected_fields": [],
-      "source_type": "api"
-    },
-    {
-      "query": "获取腕表数据中的血氧",
-      "timestamp": "2026-07-20T16:14:55.029731",
-      "parsed_endpoint": "/dev-api/watchData/watchOxygen/watchOxygen/list",
-      "parsed_api_name": "血氧监测",
-      "parsed_fields": [
-        "血氧"
+        "姓名",
+        "联系方式"
       ],
       "parsed_confidence": 0.95,
       "user_confirmed": false,
@@ -1059,36 +538,396 @@
       "source_type": "api"
     },
     {
-      "query": "获取睡眠时长中的长者姓名",
-      "timestamp": "2026-07-20T16:15:56.635035",
-      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
-      "parsed_api_name": "入住概览",
+      "query": "获取压疮评估的数据",
+      "timestamp": "2026-07-24T15:15:35.900786",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
       "parsed_fields": [
-        "长者姓名"
+        "压疮评估"
       ],
-      "parsed_confidence": 0.4,
+      "parsed_confidence": 0.32,
       "user_confirmed": false,
       "corrected_endpoint": "",
       "corrected_fields": [],
       "source_type": "api"
     },
     {
-      "query": "获取老年人数据",
-      "timestamp": "2026-07-20T17:18:53.601862",
-      "parsed_endpoint": "/dev-api/elderlyCare/enrollmentView/list",
-      "parsed_api_name": "入住概览",
+      "query": "获取压疮评估的数据",
+      "timestamp": "2026-07-24T15:18:31.625949",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
       "parsed_fields": [
-        "老年人"
+        "压疮评估"
       ],
-      "parsed_confidence": 0.7,
+      "parsed_confidence": 0.32,
       "user_confirmed": false,
       "corrected_endpoint": "",
       "corrected_fields": [],
       "source_type": "api"
     },
     {
-      "query": "实时",
-      "timestamp": "2026-07-20T17:21:58.483686",
+      "query": "获取压疮评估的数据",
+      "timestamp": "2026-07-24T15:18:46.130049",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估的数据",
+      "timestamp": "2026-07-24T15:19:37.236740",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估数据",
+      "timestamp": "2026-07-24T15:22:13.330004",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估数据",
+      "timestamp": "2026-07-24T15:24:07.493607",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估数据",
+      "timestamp": "2026-07-24T15:24:08.644337",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估数据",
+      "timestamp": "2026-07-24T15:24:09.394408",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估数据",
+      "timestamp": "2026-07-24T15:24:09.785076",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估数据",
+      "timestamp": "2026-07-24T15:24:09.943148",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估数据",
+      "timestamp": "2026-07-24T15:24:10.081698",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估数据",
+      "timestamp": "2026-07-24T15:24:51.685198",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估数据",
+      "timestamp": "2026-07-24T15:25:13.288406",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "压疮评估数据",
+      "timestamp": "2026-07-24T15:27:02.403026",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估的数据",
+      "timestamp": "2026-07-24T15:27:15.444803",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "压疮评估数据",
+      "timestamp": "2026-07-24T15:27:46.174278",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮数据",
+      "timestamp": "2026-07-24T15:28:01.877789",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估的数据",
+      "timestamp": "2026-07-24T15:29:43.641679",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮数据",
+      "timestamp": "2026-07-24T15:29:47.021327",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估的数据",
+      "timestamp": "2026-07-24T15:30:09.920532",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估的数据",
+      "timestamp": "2026-07-24T15:33:43.617314",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮数据",
+      "timestamp": "2026-07-24T15:41:34.384022",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮数据",
+      "timestamp": "2026-07-24T15:41:55.040198",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取抑郁数据",
+      "timestamp": "2026-07-24T15:44:37.455678",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "抑郁"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取抑郁数据",
+      "timestamp": "2026-07-24T15:44:39.166007",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "抑郁"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取抑郁评估数据",
+      "timestamp": "2026-07-24T15:44:48.819701",
+      "parsed_endpoint": "/dev-api/depression/depression/list",
+      "parsed_api_name": "抑郁评估",
+      "parsed_fields": [],
+      "parsed_confidence": 0.6,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取抑郁评估数据10条",
+      "timestamp": "2026-07-24T15:45:14.210897",
+      "parsed_endpoint": "/dev-api/depression/depression/list",
+      "parsed_api_name": "抑郁评估",
+      "parsed_fields": [],
+      "parsed_confidence": 1.0,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估数据10条",
+      "timestamp": "2026-07-24T15:46:32.635968",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "你是谁",
+      "timestamp": "2026-07-24T15:46:50.042553",
       "parsed_endpoint": "",
       "parsed_api_name": "",
       "parsed_fields": [],
@@ -1097,61 +936,2350 @@
       "corrected_endpoint": "",
       "corrected_fields": [],
       "source_type": "api"
+    },
+    {
+      "query": "我想要获取数据",
+      "timestamp": "2026-07-24T15:48:30.666650",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估的数据",
+      "timestamp": "2026-07-24T15:58:09.073668",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估的数据",
+      "timestamp": "2026-07-24T16:00:08.662793",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "查一下上周跌倒风险评估记录",
+      "timestamp": "2026-07-24T16:03:38.903558",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取抑郁风险评估数据",
+      "timestamp": "2026-07-24T16:04:30.905284",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "抑郁风险评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取抑郁评估数据",
+      "timestamp": "2026-07-24T16:04:41.275601",
+      "parsed_endpoint": "/dev-api/depression/depression/list",
+      "parsed_api_name": "抑郁评估",
+      "parsed_fields": [],
+      "parsed_confidence": 0.6,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "今天周几",
+      "timestamp": "2026-07-24T16:05:13.635727",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.0,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "康养与大数据有什么关系",
+      "timestamp": "2026-07-24T16:05:31.546279",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "康养",
+        "大数据有什么关系"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "康养与大数据有什么关系",
+      "timestamp": "2026-07-24T16:05:33.451633",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "康养",
+        "大数据有什么关系"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "康养与大数据有什么关系",
+      "timestamp": "2026-07-24T16:05:34.117861",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "康养",
+        "大数据有什么关系"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "康养与大数据有什么关系",
+      "timestamp": "2026-07-24T16:05:34.348488",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "康养",
+        "大数据有什么关系"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "康养与大数据有什么关系",
+      "timestamp": "2026-07-24T16:05:34.598358",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "康养",
+        "大数据有什么关系"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "康养与大数据有什么关系",
+      "timestamp": "2026-07-24T16:05:34.831727",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "康养",
+        "大数据有什么关系"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "康养与大数据有什么关系",
+      "timestamp": "2026-07-24T16:05:35.227314",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "康养",
+        "大数据有什么关系"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "我想要所有长者的数据",
+      "timestamp": "2026-07-24T16:05:55.724229",
+      "parsed_endpoint": "/dev-api/basicinformation/community/list",
+      "parsed_api_name": "长者档案",
+      "parsed_fields": [],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "我想要焦虑评估的数据",
+      "timestamp": "2026-07-24T16:06:45.082749",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "我焦虑评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "我想要焦虑评估的数据",
+      "timestamp": "2026-07-24T16:06:56.000942",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "我焦虑评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "平台有什么功能",
+      "timestamp": "2026-07-24T16:08:07.163788",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "平台有什么功能"
+      ],
+      "parsed_confidence": 0.4,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "平台有什么功能",
+      "timestamp": "2026-07-24T16:08:13.360696",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "平台有什么功能"
+      ],
+      "parsed_confidence": 0.4,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "平台有什么功能",
+      "timestamp": "2026-07-24T16:08:13.999753",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "平台有什么功能"
+      ],
+      "parsed_confidence": 0.4,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "平台有什么功能",
+      "timestamp": "2026-07-24T16:08:14.184385",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "平台有什么功能"
+      ],
+      "parsed_confidence": 0.4,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "平台有什么功能",
+      "timestamp": "2026-07-24T16:08:14.389021",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "平台有什么功能"
+      ],
+      "parsed_confidence": 0.4,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "这个平台有什么功能",
+      "timestamp": "2026-07-24T16:08:20.450690",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.4,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "这个平台有什么功能",
+      "timestamp": "2026-07-24T16:08:21.726331",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.4,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "这个平台有什么功能",
+      "timestamp": "2026-07-24T16:08:21.897719",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.4,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "这个平台有什么功能",
+      "timestamp": "2026-07-24T16:08:22.504049",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.4,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "这个平台有什么功能",
+      "timestamp": "2026-07-24T16:08:22.683931",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.4,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "这个平台有什么功能",
+      "timestamp": "2026-07-24T16:08:22.876537",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.4,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "这个平台有什么功能",
+      "timestamp": "2026-07-24T16:08:23.050984",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.4,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "这个平台有什么功能",
+      "timestamp": "2026-07-24T16:08:23.244087",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.4,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "这个平台有什么功能",
+      "timestamp": "2026-07-24T16:08:23.419078",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.4,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "这个平台有什么功能",
+      "timestamp": "2026-07-24T16:08:23.607838",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.4,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "这个平台有什么功能",
+      "timestamp": "2026-07-24T16:08:23.813935",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.4,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "这个平台的功能",
+      "timestamp": "2026-07-24T16:08:30.322817",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "这个平台",
+        "功能"
+      ],
+      "parsed_confidence": 0.4,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "这个平台的功能",
+      "timestamp": "2026-07-24T16:08:31.558591",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "这个平台",
+        "功能"
+      ],
+      "parsed_confidence": 0.4,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "我想要获取压疮评估的数据",
+      "timestamp": "2026-07-24T16:08:42.711158",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "我压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "爬取http://192.168.18.143:1024/evaluation/anxiety",
+      "timestamp": "2026-07-24T16:08:44.530713",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "爬取http://192.168.18.143:1024/evaluation/anxiety分页采集",
+      "timestamp": "2026-07-24T16:09:28.337364",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "爬取分页采集"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "我想要获取压疮评估的数据",
+      "timestamp": "2026-07-24T16:09:45.126804",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "我压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "爬取http://192.168.18.143:1024/evaluation/anxiety 我要分页采集",
+      "timestamp": "2026-07-24T16:09:45.229095",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "爬取http://192.168.18.143:1024/evaluation/anxiety 我要30条",
+      "timestamp": "2026-07-24T16:09:53.506610",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "爬取 我要"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "我想要获取压疮评估的数据",
+      "timestamp": "2026-07-24T16:17:03.464099",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "我压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "我想要获取压疮评估的数据",
+      "timestamp": "2026-07-24T16:20:20.716843",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "我压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "我想要获取压疮评估",
+      "timestamp": "2026-07-24T16:21:01.571824",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "我压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "我想要获取压疮评估",
+      "timestamp": "2026-07-24T16:21:05.605944",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "我压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "我想要获取压疮评估",
+      "timestamp": "2026-07-24T16:21:06.997015",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "我压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "我想要获取压疮评估",
+      "timestamp": "2026-07-24T16:21:07.161687",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "我压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "我想要获取压疮评估",
+      "timestamp": "2026-07-24T16:21:07.402740",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "我压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估",
+      "timestamp": "2026-07-24T16:21:12.001607",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估的页面数据",
+      "timestamp": "2026-07-24T16:21:19.314226",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取焦虑评估的数据",
+      "timestamp": "2026-07-24T16:24:26.604421",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "焦虑评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取心率监测数据",
+      "timestamp": "2026-07-24T16:25:14.252697",
+      "parsed_endpoint": "/dev-api/watchData/watchHeartrate/watchHeartrate/list",
+      "parsed_api_name": "心率监测",
+      "parsed_fields": [
+        "心率"
+      ],
+      "parsed_confidence": 0.98,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取心率监测全部数据",
+      "timestamp": "2026-07-24T16:25:23.536084",
+      "parsed_endpoint": "/dev-api/watchData/watchHeartrate/watchHeartrate/list",
+      "parsed_api_name": "心率监测",
+      "parsed_fields": [],
+      "parsed_confidence": 0.98,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取焦虑评估所有数据",
+      "timestamp": "2026-07-24T16:25:37.253863",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取心率监测数据",
+      "timestamp": "2026-07-24T16:28:58.749240",
+      "parsed_endpoint": "/dev-api/watchData/watchHeartrate/watchHeartrate/list",
+      "parsed_api_name": "心率监测",
+      "parsed_fields": [
+        "心率"
+      ],
+      "parsed_confidence": 0.98,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "我想要获取压疮评估的数据",
+      "timestamp": "2026-07-24T16:29:09.355250",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "我压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "想要获取压疮评估的数据",
+      "timestamp": "2026-07-24T16:29:13.865084",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "想要获取压疮评估的所有数据",
+      "timestamp": "2026-07-24T16:29:18.779494",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "想要获取抑郁评估的所有数据",
+      "timestamp": "2026-07-24T16:30:18.266810",
+      "parsed_endpoint": "/dev-api/depression/depression/list",
+      "parsed_api_name": "抑郁评估",
+      "parsed_fields": [],
+      "parsed_confidence": 1.0,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "想要获取跌倒评估的所有数据",
+      "timestamp": "2026-07-24T16:30:36.129557",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "想要获取评估总览的所有数据",
+      "timestamp": "2026-07-24T16:31:16.538443",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.45,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "想要获取体温的所有数据",
+      "timestamp": "2026-07-24T16:31:52.674246",
+      "parsed_endpoint": "/dev-api/careDashBoard/careRecord/list",
+      "parsed_api_name": "护理记录",
+      "parsed_fields": [],
+      "parsed_confidence": 0.7,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "想要获取熙康数据体温的所有数据",
+      "timestamp": "2026-07-24T16:33:17.531717",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "http://192.168.18.143:1024/healthy/healthydata/xiKang/temperature",
+      "timestamp": "2026-07-24T16:34:11.237078",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "想要获取熙康设备数据/体温的所有数据",
+      "timestamp": "2026-07-24T16:35:00.637139",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [
+        "体温"
+      ],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "想要获取熙康设备数据下体温页面的所有数据",
+      "timestamp": "2026-07-24T16:36:10.150087",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "想要获取熙康设备数据下三围页面的所有数据",
+      "timestamp": "2026-07-24T16:37:03.306526",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "我想获取熙康设备数据下面体温这个页面所有数据",
+      "timestamp": "2026-07-24T16:47:46.931294",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "我想获取熙康设备数据下面体温这个页面所有数据",
+      "timestamp": "2026-07-24T16:48:59.715313",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "我想获取熙康设备数据下面体温这个页面所有数据",
+      "timestamp": "2026-07-24T16:52:42.958097",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取熙康体温数据",
+      "timestamp": "2026-07-24T16:53:07.206262",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [
+        "体温"
+      ],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "我想获取熙康设备数据下面体温这个页面所有数据",
+      "timestamp": "2026-07-24T16:55:11.742577",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取长者档案",
+      "timestamp": "2026-07-24T16:56:54.317499",
+      "parsed_endpoint": "/dev-api/basicinformation/community/list",
+      "parsed_api_name": "长者档案",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "我想获取熙康设备数据下面体温这个页面所有数据",
+      "timestamp": "2026-07-24T16:57:04.128327",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [],
+      "parsed_confidence": 0.8,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "想要获取熙康设备数据下三围页面的所有数据",
+      "timestamp": "2026-07-24T16:57:30.084326",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [],
+      "parsed_confidence": 0.8,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取长者档案",
+      "timestamp": "2026-07-24T16:58:29.424132",
+      "parsed_endpoint": "/dev-api/basicinformation/community/list",
+      "parsed_api_name": "长者档案",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "我想获取熙康设备数据下面体温这个页面所有数据",
+      "timestamp": "2026-07-24T16:58:41.065676",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [],
+      "parsed_confidence": 0.6,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取长者档案",
+      "timestamp": "2026-07-24T16:59:21.281648",
+      "parsed_endpoint": "/dev-api/basicinformation/community/list",
+      "parsed_api_name": "长者档案",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "我想获取熙康设备数据下面体温这个页面所有数据",
+      "timestamp": "2026-07-24T16:59:30.901859",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估的数据",
+      "timestamp": "2026-07-24T16:59:35.384273",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "想要获取熙康设备数据下体温页面的所有数据",
+      "timestamp": "2026-07-24T16:59:47.858484",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [],
+      "parsed_confidence": 0.6,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取熙康血糖数据",
+      "timestamp": "2026-07-24T16:59:54.941511",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [
+        "血糖"
+      ],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取护理记录",
+      "timestamp": "2026-07-24T17:00:05.194418",
+      "parsed_endpoint": "/dev-api/careDashBoard/careRecord/list",
+      "parsed_api_name": "护理记录",
+      "parsed_fields": [
+        "照护记录"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "想要获取熙康设备数据下中医体质页面的所有数据",
+      "timestamp": "2026-07-24T17:00:06.752867",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [],
+      "parsed_confidence": 0.7,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取老人能力评估",
+      "timestamp": "2026-07-24T17:00:10.246720",
+      "parsed_endpoint": "/dev-api/ability/ability/list",
+      "parsed_api_name": "能力评估",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取心率监测数据",
+      "timestamp": "2026-07-24T17:00:18.784215",
+      "parsed_endpoint": "/dev-api/watchData/watchHeartrate/watchHeartrate/list",
+      "parsed_api_name": "心率监测",
+      "parsed_fields": [
+        "心率"
+      ],
+      "parsed_confidence": 0.98,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "想要获取熙康设备数据下中医体质页面的所有数据",
+      "timestamp": "2026-07-24T17:00:24.291119",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [],
+      "parsed_confidence": 0.8,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "想要获取熙康设备数据下血脂页面的所有数据",
+      "timestamp": "2026-07-24T17:02:04.268088",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "想要获取熙康设备数据下血脂页面的检测设备号字段",
+      "timestamp": "2026-07-24T17:02:50.163948",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [
+        "检测设备号"
+      ],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取长者档案",
+      "timestamp": "2026-07-24T17:03:17.325368",
+      "parsed_endpoint": "/dev-api/basicinformation/community/list",
+      "parsed_api_name": "长者档案",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "我想获取熙康设备数据下面体温这个页面所有数据",
+      "timestamp": "2026-07-24T17:03:30.042534",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估的数据",
+      "timestamp": "2026-07-24T17:03:34.620731",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取熙康血糖数据",
+      "timestamp": "2026-07-24T17:04:04.411575",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [
+        "血糖"
+      ],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取护理记录",
+      "timestamp": "2026-07-24T17:04:14.177413",
+      "parsed_endpoint": "/dev-api/careDashBoard/careRecord/list",
+      "parsed_api_name": "护理记录",
+      "parsed_fields": [
+        "照护记录"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "想要获取健康管理数据下健康报告页面的所有数据",
+      "timestamp": "2026-07-24T17:04:15.643364",
+      "parsed_endpoint": "/dev-api/careDashBoard/careRecord/list",
+      "parsed_api_name": "护理记录",
+      "parsed_fields": [],
+      "parsed_confidence": 0.5,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取老人能力评估",
+      "timestamp": "2026-07-24T17:04:18.989079",
+      "parsed_endpoint": "/dev-api/ability/ability/list",
+      "parsed_api_name": "能力评估",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取心率监测数据",
+      "timestamp": "2026-07-24T17:04:26.656946",
+      "parsed_endpoint": "/dev-api/watchData/watchHeartrate/watchHeartrate/list",
+      "parsed_api_name": "心率监测",
+      "parsed_fields": [
+        "心率"
+      ],
+      "parsed_confidence": 0.98,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "想要获取健康管理数据下健康评估页面的所有数据",
+      "timestamp": "2026-07-24T17:04:50.011471",
+      "parsed_endpoint": "/dev-api/ability/ability/list",
+      "parsed_api_name": "能力评估",
+      "parsed_fields": [],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "想要获取健康监控数据下主机报警页面的所有数据",
+      "timestamp": "2026-07-24T17:05:29.917475",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取主机报警页面的所有数据",
+      "timestamp": "2026-07-24T17:05:45.892589",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取主机报警页面的所有数据",
+      "timestamp": "2026-07-24T17:05:54.849807",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取主机报警页面的所有数据",
+      "timestamp": "2026-07-24T17:06:13.222466",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取主机报警的所有数据",
+      "timestamp": "2026-07-24T17:06:20.065108",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取终端报警的所有数据",
+      "timestamp": "2026-07-24T17:07:30.392766",
+      "parsed_endpoint": "/dev-api/endDevice/endDevice/list",
+      "parsed_api_name": "终端设备",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取终端报警页面的所有数据",
+      "timestamp": "2026-07-24T17:07:41.929716",
+      "parsed_endpoint": "/dev-api/endDevice/endDevice/list",
+      "parsed_api_name": "终端设备",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取终端报警数据",
+      "timestamp": "2026-07-24T17:08:00.089295",
+      "parsed_endpoint": "/dev-api/endDevice/endDevice/list",
+      "parsed_api_name": "终端设备",
+      "parsed_fields": [
+        "终端报警"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取终端报警数据",
+      "timestamp": "2026-07-24T17:08:00.809439",
+      "parsed_endpoint": "/dev-api/endDevice/endDevice/list",
+      "parsed_api_name": "终端设备",
+      "parsed_fields": [
+        "终端报警"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取终端报警数据",
+      "timestamp": "2026-07-24T17:08:01.084707",
+      "parsed_endpoint": "/dev-api/endDevice/endDevice/list",
+      "parsed_api_name": "终端设备",
+      "parsed_fields": [
+        "终端报警"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取终端报警数据",
+      "timestamp": "2026-07-24T17:08:01.277689",
+      "parsed_endpoint": "/dev-api/endDevice/endDevice/list",
+      "parsed_api_name": "终端设备",
+      "parsed_fields": [
+        "终端报警"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取终端报警数据",
+      "timestamp": "2026-07-24T17:08:01.490173",
+      "parsed_endpoint": "/dev-api/endDevice/endDevice/list",
+      "parsed_api_name": "终端设备",
+      "parsed_fields": [
+        "终端报警"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取终端报警数据",
+      "timestamp": "2026-07-24T17:08:01.675313",
+      "parsed_endpoint": "/dev-api/endDevice/endDevice/list",
+      "parsed_api_name": "终端设备",
+      "parsed_fields": [
+        "终端报警"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取终端报警数据",
+      "timestamp": "2026-07-24T17:08:01.867928",
+      "parsed_endpoint": "/dev-api/endDevice/endDevice/list",
+      "parsed_api_name": "终端设备",
+      "parsed_fields": [
+        "终端报警"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取终端报警数据",
+      "timestamp": "2026-07-24T17:08:02.077510",
+      "parsed_endpoint": "/dev-api/endDevice/endDevice/list",
+      "parsed_api_name": "终端设备",
+      "parsed_fields": [
+        "终端报警"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取健康监控中终端报警数据",
+      "timestamp": "2026-07-24T17:08:16.954177",
+      "parsed_endpoint": "/dev-api/endDevice/endDevice/list",
+      "parsed_api_name": "终端设备",
+      "parsed_fields": [
+        "健康监控",
+        "终端报警"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取健康监控中终端报警数据",
+      "timestamp": "2026-07-24T17:08:17.620388",
+      "parsed_endpoint": "/dev-api/endDevice/endDevice/list",
+      "parsed_api_name": "终端设备",
+      "parsed_fields": [
+        "健康监控",
+        "终端报警"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取健康监控中终端报警数据",
+      "timestamp": "2026-07-24T17:08:17.811578",
+      "parsed_endpoint": "/dev-api/endDevice/endDevice/list",
+      "parsed_api_name": "终端设备",
+      "parsed_fields": [
+        "健康监控",
+        "终端报警"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取健康监控中终端报警数据",
+      "timestamp": "2026-07-24T17:08:18.000815",
+      "parsed_endpoint": "/dev-api/endDevice/endDevice/list",
+      "parsed_api_name": "终端设备",
+      "parsed_fields": [
+        "健康监控",
+        "终端报警"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取健康监控中终端报警数据",
+      "timestamp": "2026-07-24T17:08:18.154799",
+      "parsed_endpoint": "/dev-api/endDevice/endDevice/list",
+      "parsed_api_name": "终端设备",
+      "parsed_fields": [
+        "健康监控",
+        "终端报警"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取健康监控中终端报警数据",
+      "timestamp": "2026-07-24T17:08:18.308946",
+      "parsed_endpoint": "/dev-api/endDevice/endDevice/list",
+      "parsed_api_name": "终端设备",
+      "parsed_fields": [
+        "健康监控",
+        "终端报警"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取健康监控中终端报警数据",
+      "timestamp": "2026-07-24T17:08:18.468162",
+      "parsed_endpoint": "/dev-api/endDevice/endDevice/list",
+      "parsed_api_name": "终端设备",
+      "parsed_fields": [
+        "健康监控",
+        "终端报警"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取健康监控中终端报警数据",
+      "timestamp": "2026-07-24T17:08:18.585637",
+      "parsed_endpoint": "/dev-api/endDevice/endDevice/list",
+      "parsed_api_name": "终端设备",
+      "parsed_fields": [
+        "健康监控",
+        "终端报警"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取腕表跌倒报警数据",
+      "timestamp": "2026-07-24T17:09:14.721654",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "腕表跌倒报警"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取腕表跌倒报警页面数据",
+      "timestamp": "2026-07-24T17:09:30.894157",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "腕表"
+      ],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取腕表跌倒报警的页面数据",
+      "timestamp": "2026-07-24T17:09:37.425758",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "腕表"
+      ],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取腕表跌倒报警的页面数据",
+      "timestamp": "2026-07-24T17:09:38.011563",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "腕表"
+      ],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取腕表跌倒报警的页面数据",
+      "timestamp": "2026-07-24T17:09:38.135543",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "腕表"
+      ],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取腕表跌倒报警的所有数据",
+      "timestamp": "2026-07-24T17:09:47.210234",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取跌倒报警的所有数据",
+      "timestamp": "2026-07-24T17:10:28.152608",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取跌倒报警的所有数据",
+      "timestamp": "2026-07-24T17:11:11.214071",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取腕表跌倒报警的所有数据",
+      "timestamp": "2026-07-24T17:11:29.165688",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取腕表 跌倒报警的所有数据",
+      "timestamp": "2026-07-24T17:11:35.300017",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取腕表 跌倒报警页面的所有数据",
+      "timestamp": "2026-07-24T17:11:44.481571",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取小度紧急呼救页面的所有数据",
+      "timestamp": "2026-07-24T17:12:09.291646",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "page"
+    },
+    {
+      "query": "获取小度紧急呼救的所有数据",
+      "timestamp": "2026-07-24T17:12:13.105632",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取sos通话的所有数据",
+      "timestamp": "2026-07-24T17:12:49.338799",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取Sos通话的所有数据",
+      "timestamp": "2026-07-24T17:13:08.646002",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取小度紧急呼救的所有数据",
+      "timestamp": "2026-07-24T17:13:16.046875",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取视频浏览的所有数据",
+      "timestamp": "2026-07-24T17:13:35.267950",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取百度推送通知的所有数据",
+      "timestamp": "2026-07-24T17:13:53.677361",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取费用总览的所有数据",
+      "timestamp": "2026-07-24T17:14:20.068399",
+      "parsed_endpoint": "/dev-api/contract/contract/list",
+      "parsed_api_name": "合同管理",
+      "parsed_fields": [],
+      "parsed_confidence": 0.5,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取预缴明细的所有数据",
+      "timestamp": "2026-07-24T17:14:37.785636",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "我想获取熙康设备数据下面体温这个页面所有数据",
+      "timestamp": "2026-07-24T17:15:24.767499",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [],
+      "parsed_confidence": 0.6,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取长者档案的数据",
+      "timestamp": "2026-07-27T09:02:14.470345",
+      "parsed_endpoint": "/dev-api/basicinformation/community/list",
+      "parsed_api_name": "长者档案",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取活动报名的数据",
+      "timestamp": "2026-07-27T10:06:47.109098",
+      "parsed_endpoint": "/dev-api/activities/activities/list",
+      "parsed_api_name": "活动管理",
+      "parsed_fields": [
+        "活动名称"
+      ],
+      "parsed_confidence": 0.45,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取活动总结的数据",
+      "timestamp": "2026-07-27T10:07:37.368655",
+      "parsed_endpoint": "/dev-api/activities/activities/list",
+      "parsed_api_name": "活动管理",
+      "parsed_fields": [
+        "活动总结"
+      ],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取护理记录的数据",
+      "timestamp": "2026-07-27T10:08:02.817644",
+      "parsed_endpoint": "/dev-api/careDashBoard/careRecord/list",
+      "parsed_api_name": "护理记录",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取长者需求的数据",
+      "timestamp": "2026-07-27T10:08:51.240402",
+      "parsed_endpoint": "/dev-api/basicinformation/community/list",
+      "parsed_api_name": "长者档案",
+      "parsed_fields": [
+        "长者需求"
+      ],
+      "parsed_confidence": 0.8,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取照护看板长者需求的数据",
+      "timestamp": "2026-07-27T10:09:16.244984",
+      "parsed_endpoint": "/dev-api/careDashBoard/careRecord/list",
+      "parsed_api_name": "护理记录",
+      "parsed_fields": [
+        "长者需求"
+      ],
+      "parsed_confidence": 0.8,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取熙康设备体温数据",
+      "timestamp": "2026-07-27T10:22:14.478735",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [
+        "体温"
+      ],
+      "parsed_confidence": 1.0,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取熙康设备体温数据",
+      "timestamp": "2026-07-27T10:22:14.815010",
+      "parsed_endpoint": "/dev-api/temperature/temperature/list",
+      "parsed_api_name": "体温",
+      "parsed_fields": [
+        "体温"
+      ],
+      "parsed_confidence": 0,
+      "user_confirmed": false,
+      "corrected_endpoint": "/dev-api/temperature/temperature/list",
+      "corrected_fields": [
+        "体温"
+      ],
+      "source_type": "api"
+    },
+    {
+      "query": "获取熙康设备体温数据",
+      "timestamp": "2026-07-27T10:22:51.041093",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [
+        "体温"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取熙康设备体温数据",
+      "timestamp": "2026-07-27T10:24:53.611446",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [
+        "体温"
+      ],
+      "parsed_confidence": 1.0,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取熙康设备体温数据",
+      "timestamp": "2026-07-27T10:26:17.019578",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [
+        "体温"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取熙康设备体温数据",
+      "timestamp": "2026-07-27T10:27:46.464101",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [
+        "体温"
+      ],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取熙康设备体温数据",
+      "timestamp": "2026-07-27T10:29:56.921257",
+      "parsed_endpoint": "/dev-api/contract/contract/list",
+      "parsed_api_name": "合同管理",
+      "parsed_fields": [
+        "体温"
+      ],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取熙康设备体温数据",
+      "timestamp": "2026-07-27T10:32:05.594932",
+      "parsed_endpoint": "/dev-api/temperature/temperature/list",
+      "parsed_api_name": "temperature",
+      "parsed_fields": [
+        "体温"
+      ],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取压疮评估的数据",
+      "timestamp": "2026-07-27T10:32:05.658511",
+      "parsed_endpoint": "",
+      "parsed_api_name": "",
+      "parsed_fields": [
+        "压疮评估"
+      ],
+      "parsed_confidence": 0.32,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取熙康设备血糖数据",
+      "timestamp": "2026-07-27T10:32:16.634076",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [
+        "血糖"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取熙康设备体温数据",
+      "timestamp": "2026-07-27T10:33:47.973342",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [
+        "体温"
+      ],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取熙康设备体温数据",
+      "timestamp": "2026-07-27T10:36:29.457872",
+      "parsed_endpoint": "/dev-api/temperature/temperature/list",
+      "parsed_api_name": "temperature",
+      "parsed_fields": [
+        "体温"
+      ],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取熙康设备体温数据",
+      "timestamp": "2026-07-27T10:39:28.032873",
+      "parsed_endpoint": "/dev-api/temperature/temperature/list",
+      "parsed_api_name": "temperature",
+      "parsed_fields": [
+        "体温"
+      ],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取老人基本信息",
+      "timestamp": "2026-07-27T10:40:50.326493",
+      "parsed_endpoint": "/dev-api/basicinformation/community/list",
+      "parsed_api_name": "长者档案",
+      "parsed_fields": [
+        "老人基本"
+      ],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "你想获取熙康设备血糖数据",
+      "timestamp": "2026-07-27T10:40:58.994805",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [
+        "血糖"
+      ],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取护理记录数据",
+      "timestamp": "2026-07-27T10:40:59.380359",
+      "parsed_endpoint": "/dev-api/careDashBoard/careRecord/list",
+      "parsed_api_name": "护理记录",
+      "parsed_fields": [
+        "照护记录"
+      ],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取熙康设备体温数据",
+      "timestamp": "2026-07-27T10:41:55.311198",
+      "parsed_endpoint": "/dev-api/temperature/temperature/list",
+      "parsed_api_name": "temperature",
+      "parsed_fields": [
+        "体温"
+      ],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取护士排班所有数据",
+      "timestamp": "2026-07-27T10:47:15.424798",
+      "parsed_endpoint": "/dev-api/basicinformation/nurse/list",
+      "parsed_api_name": "护士信息",
+      "parsed_fields": [],
+      "parsed_confidence": 0.6,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取护士记录所有数据",
+      "timestamp": "2026-07-27T10:50:28.806637",
+      "parsed_endpoint": "/dev-api/basicinformation/nurse/list",
+      "parsed_api_name": "护士信息",
+      "parsed_fields": [],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取护士记录所有数据",
+      "timestamp": "2026-07-27T10:51:03.125302",
+      "parsed_endpoint": "/dev-api/careDashBoard/careRecord/list",
+      "parsed_api_name": "护士记录",
+      "parsed_fields": [],
+      "parsed_confidence": 0.85,
+      "user_confirmed": false,
+      "corrected_endpoint": "/dev-api/careDashBoard/careRecord/list",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取熙康所有数据",
+      "timestamp": "2026-07-27T10:51:42.876497",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [],
+      "parsed_confidence": 1.0,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取熙康所有数据",
+      "timestamp": "2026-07-27T10:52:06.253814",
+      "parsed_endpoint": "/dev-api/personbasicinfo/personbasicinfo/list",
+      "parsed_api_name": "熙康设备",
+      "parsed_fields": [],
+      "parsed_confidence": 1,
+      "user_confirmed": true,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取熙康设备体温数据",
+      "timestamp": "2026-07-27T10:52:13.214675",
+      "parsed_endpoint": "/dev-api/temperature/temperature/list",
+      "parsed_api_name": "temperature",
+      "parsed_fields": [
+        "体温"
+      ],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取熙康设备体温数据",
+      "timestamp": "2026-07-27T10:52:16.142473",
+      "parsed_endpoint": "/dev-api/temperature/temperature/list",
+      "parsed_api_name": "temperature",
+      "parsed_fields": [
+        "体温"
+      ],
+      "parsed_confidence": 0.9,
+      "user_confirmed": true,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取熙康设备体温数据",
+      "timestamp": "2026-07-27T10:52:26.447206",
+      "parsed_endpoint": "/dev-api/temperature/temperature/list",
+      "parsed_api_name": "temperature",
+      "parsed_fields": [],
+      "parsed_confidence": 0.9,
+      "user_confirmed": false,
+      "corrected_endpoint": "/dev-api/temperature/temperature/list",
+      "corrected_fields": [],
+      "source_type": "api"
+    },
+    {
+      "query": "获取活动管理的数据",
+      "timestamp": "2026-07-27T11:19:34.140344",
+      "parsed_endpoint": "/dev-api/activities/activities/list",
+      "parsed_api_name": "活动管理",
+      "parsed_fields": [],
+      "parsed_confidence": 0.95,
+      "user_confirmed": false,
+      "corrected_endpoint": "",
+      "corrected_fields": [],
+      "source_type": "api"
     }
   ],
   "stats": {
-    "/dev-api/elderlyCare/enrollmentView/list": {
-      "total": 13,
-      "confirmed": 0,
-      "corrected_to": 0
-    },
-    "/dev-api/nurseLevel/nurseLevel/list": {
-      "total": 5,
+    "/dev-api/basicinformation/community/list": {
+      "total": 21,
       "confirmed": 0,
       "corrected_to": 0
     },
     "/dev-api/watchData/watchHeartrate/watchHeartrate/list": {
-      "total": 3,
+      "total": 7,
       "confirmed": 0,
       "corrected_to": 0
     },
     "/dev-api/contract/contract/list": {
-      "total": 2,
-      "confirmed": 0,
-      "corrected_to": 0
-    },
-    "/dev-api/basicinformation/communityManagement/list": {
-      "total": 4,
-      "confirmed": 0,
-      "corrected_to": 0
-    },
-    "/dev-api/basicinformation/nurse/list": {
       "total": 3,
       "confirmed": 0,
       "corrected_to": 0
     },
-    "/dev-api/elderlyCare/EnrollmentProcessing/list": {
-      "total": 1,
+    "/dev-api/endDevice/endDevice/list": {
+      "total": 19,
       "confirmed": 0,
       "corrected_to": 0
     },
-    "/dev-api/system/user/list": {
-      "total": 1,
-      "confirmed": 0,
-      "corrected_to": 0
-    },
-    "/dev-api/basicinformation/doctor/list": {
-      "total": 3,
-      "confirmed": 0,
+    "/dev-api/personbasicinfo/personbasicinfo/list": {
+      "total": 34,
+      "confirmed": 1,
       "corrected_to": 0
     },
     "/dev-api/ability/ability/list": {
+      "total": 6,
+      "confirmed": 0,
+      "corrected_to": 0
+    },
+    "/dev-api/depression/depression/list": {
+      "total": 5,
+      "confirmed": 0,
+      "corrected_to": 0
+    },
+    "/dev-api/careDashBoard/careRecord/list": {
+      "total": 8,
+      "confirmed": 0,
+      "corrected_to": 1
+    },
+    "/dev-api/activities/activities/list": {
       "total": 3,
       "confirmed": 0,
       "corrected_to": 0
     },
-    "/dev-api/watchData/watchOxygen/watchOxygen/list": {
-      "total": 1,
+    "/dev-api/temperature/temperature/list": {
+      "total": 8,
+      "confirmed": 1,
+      "corrected_to": 2
+    },
+    "/dev-api/basicinformation/nurse/list": {
+      "total": 2,
       "confirmed": 0,
       "corrected_to": 0
     }

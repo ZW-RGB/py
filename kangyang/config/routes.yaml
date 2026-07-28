@@ -9,6 +9,9 @@ routes:
   - name: 入住概览
     route: /elderly/overview
     module: 老人管理
+  - name: 长者档案
+    route: /elderly/files
+    module: 老人管理
   - name: 入住申请
     route: /elderly/apply
     module: 老人管理

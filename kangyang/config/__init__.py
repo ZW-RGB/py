@@ -4,6 +4,7 @@ from kangyang.config.config_loader import (
     get_routes,
     reload_config as _reload_config,
     merge_discovered_routes as _merge_discovered_routes,
+    save_endpoints,
     get_config_status,
     reset_routes,
     lazy as config_lazy,

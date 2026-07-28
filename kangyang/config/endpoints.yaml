@@ -1,94 +1,247 @@
-# 康养平台 API 端点配置
-# 格式: module + name + path (RuoYi 若依框架标准)
-# 修改此文件后无需改代码，重启服务或调用 /api/config/reload 即可生效
 endpoints:
-  # ── 老人管理 ──
-  - module: elderlyCare
-    name: 入住处理
-    path: /dev-api/elderlyCare/EnrollmentProcessing/list
-  - module: elderlyCare
-    name: 入住概览
-    path: /dev-api/elderlyCare/enrollmentView/list
-
-  # ── 入住申请 ──
-  - module: enrollmentApply
-    name: 入住申请
-    path: /dev-api/enrollmentApply/enrollmentApply/list
-
-  # ── 老人护理 ──
-  - module: oldCare
-    name: 老人护理
-    path: /dev-api/oldCare/oldCare/list
-
-  # ── 基本信息 ──
-  - module: basicinformation
-    name: 社区信息
-    path: /dev-api/basicinformation/community/list
-  - module: basicinformation
-    name: 社区管理
-    path: /dev-api/basicinformation/communityManagement/list
-  - module: basicinformation
-    name: 医生信息
-    path: /dev-api/basicinformation/doctor/list
-  - module: basicinformation
-    name: 护士信息
-    path: /dev-api/basicinformation/nurse/list
-
-  # ── 护理看板 ──
-  - module: careDashBoard
-    name: 护理记录
-    path: /dev-api/careDashBoard/careRecord/list
-
-  # ── 合同管理 ──
-  - module: contract
-    name: 合同管理
-    path: /dev-api/contract/contract/list
-
-  # ── 护理等级 ──
-  - module: nurseLevel
-    name: 护理等级
-    path: /dev-api/nurseLevel/nurseLevel/list
-
-  # ── 设备管理 ──
-  - module: devManagement
-    name: 床位管理
-    path: /dev-api/devManagement/bedroomsManagement/list
-
-  # ── 能力评估 ──
-  - module: ability
-    name: 能力评估
-    path: /dev-api/ability/ability/list
-
-  # ── 活动管理 ──
-  - module: activities
-    name: 活动管理
-    path: /dev-api/activities/activities/list
-
-  # ── 安全设备 ──
-  - module: securityEquipment
-    name: 安全设备
-    path: /dev-api/securityEquipment/equipment/list
-
-  # ── 终端设备 ──
-  - module: endDevice
-    name: 终端设备
-    path: /dev-api/endDevice/endDevice/list
-
-  # ── 健康监测 ──
-  - module: watchData
-    name: 心率监测
-    path: /dev-api/watchData/watchHeartrate/watchHeartrate/list
-  - module: watchData
-    name: 血氧监测
-    path: /dev-api/watchData/watchOxygen/watchOxygen/list
-
-  # ── 系统管理 ──
-  - module: system
-    name: 用户列表
-    path: /dev-api/system/user/list
-  - module: system
-    name: 角色列表
-    path: /dev-api/system/role/list
-  - module: system
-    name: 字典数据
-    path: /dev-api/system/dict/data/list
+- module: elderlyCare
+  name: 入住处理
+  path: /dev-api/elderlyCare/EnrollmentProcessing/list
+- module: elderlyCare
+  name: 入住概览
+  path: /dev-api/elderlyCare/enrollmentView/list
+- module: basicinformation
+  name: 长者档案
+  path: /dev-api/basicinformation/community/list
+- module: enrollmentApply
+  name: 入住申请
+  path: /dev-api/enrollmentApply/enrollmentApply/list
+- module: oldCare
+  name: 老人护理
+  path: /dev-api/oldCare/oldCare/list
+- module: basicinformation
+  name: 社区管理
+  path: /dev-api/basicinformation/communityManagement/list
+- module: basicinformation
+  name: 医生信息
+  path: /dev-api/basicinformation/doctor/list
+- module: basicinformation
+  name: 护士信息
+  path: /dev-api/basicinformation/nurse/list
+- module: careDashBoard
+  name: 护理记录
+  path: /dev-api/careDashBoard/careRecord/list
+- module: contract
+  name: 合同管理
+  path: /dev-api/contract/contract/list
+- module: nurseLevel
+  name: 护理等级
+  path: /dev-api/nurseLevel/nurseLevel/list
+- module: devManagement
+  name: 床位管理
+  path: /dev-api/devManagement/bedroomsManagement/list
+- module: device
+  name: 分配床位
+  path: /dev-api/device/bedroom/list
+- module: securityEquipment
+  name: 安全设备
+  path: /dev-api/securityEquipment/equipment/list
+- module: assigner
+  name: 设备分配
+  path: /dev-api/assigner/assigner/list
+- module: devManagement
+  name: 熙康设备
+  path: /dev-api/personbasicinfo/personbasicinfo/list
+- module: ability
+  name: 能力评估
+  path: /dev-api/ability/ability/list
+- module: activities
+  name: 活动管理
+  path: /dev-api/activities/activities/list
+- module: endDevice
+  name: 终端设备
+  path: /dev-api/endDevice/endDevice/list
+- module: watchData
+  name: 心率监测
+  path: /dev-api/watchData/watchHeartrate/watchHeartrate/list
+- module: watchData
+  name: 血氧监测
+  path: /dev-api/watchData/watchOxygen/watchOxygen/list
+- module: system
+  name: 用户列表
+  path: /dev-api/system/user/list
+- module: system
+  name: 角色列表
+  path: /dev-api/system/role/list
+- module: system
+  name: 字典数据
+  path: /dev-api/system/dict/data/list
+- module: depression
+  name: 抑郁评估
+  path: /dev-api/depression/depression/list
+- module: BaiduCallRecords
+  name: 小度通话记录
+  path: /dev-api/BaiduCallRecords/CallRecords/list
+- module: BaiduMessageService
+  name: 百度服务留言
+  path: /dev-api/BaiduMessageService/baiduservice/list
+- module: InactivityNotification
+  name: 老人不活跃预警通知
+  path: /dev-api/InactivityNotification/oldNotification/list
+- module: MessagesNotification
+  name: 消息通知
+  path: /dev-api/MessagesNotification/notification/list
+- module: SocSendData
+  name: 主机报警
+  path: /dev-api/SocSendData/SosSenddata/list
+- module: anxiety
+  name: 焦虑评估
+  path: /dev-api/anxiety/anxiety/list
+- module: baiduCallHelp
+  name: 小度紧急呼救
+  path: /dev-api/baiduCallHelp/callhelp/list
+- module: baiduPushNotification
+  name: 百度推送通知
+  path: /dev-api/baiduPushNotification/baiduNotification/list
+- module: bloodOxygen
+  name: 熙康血氧数据
+  path: /dev-api/bloodOxygen/bloodOxygen/list
+- module: bloodPressure
+  name: 熙康血压数据
+  path: /dev-api/bloodPressure/bloodPressure/list
+- module: bloodSugar
+  name: 熙康血糖数据
+  path: /dev-api/bloodSugar/bloodSugar/list
+- module: breathingrate
+  name: 睡眠呼吸
+  path: /dev-api/breathingrate/breathingrate/list
+- module: careDashBoard
+  name: 护理计划
+  path: /dev-api/careDashBoard/careplan/list
+- module: composition
+  name: 熙康人体成分
+  path: /dev-api/composition/composition/list
+- module: configDevice
+  name: 设备配置
+  path: /dev-api/configDevice/configkeys/list
+- module: dimensional
+  name: 熙康三维数据
+  path: /dev-api/dimensional/dimensional/list
+- module: duration
+  name: 睡眠时长
+  path: /dev-api/duration/duration/list
+- module: ecg
+  name: 熙康心电数据
+  path: /dev-api/ecg/ecg/list
+- module: elderlyCare
+  name: 退托管理
+  path: /dev-api/elderlyCare/exitcare/list
+- module: endDeviceLowPower
+  name: 终低电数据
+  path: /dev-api/endDeviceLowPower/endDeviceLow/list
+- module: evaluation
+  name: 评估总览
+  path: /dev-api/evaluation/assessmentView/list
+- module: fallGait
+  name: 相机跌倒报警
+  path: /dev-api/fallGait/fallen/list
+- module: feeDetails
+  name: 缴费明细
+  path: /dev-api/feeDetails/feedetails/list
+- module: feeview
+  name: 费用总览
+  path: /dev-api/feeview/feeview/list
+- module: healthy
+  name: 健康报告
+  path: /dev-api/healthy/archives/list
+- module: healthy
+  name: 健康评估
+  path: /dev-api/healthy/assessment/list
+- module: healthy
+  name: 健康干预
+  path: /dev-api/healthy/interventions/list
+- module: heartrate
+  name: 睡眠心率
+  path: /dev-api/heartrate/heartrate/list
+- module: heightWeight
+  name: 熙康身高体重数据
+  path: /dev-api/heightWeight/heightWeight/list
+- module: hostDevice
+  name: 开关机数据
+  path: /dev-api/hostDevice/hostDevice/list
+- module: interrupt
+  name: 睡眠中断
+  path: /dev-api/interrupt/interrupt/list
+- module: lipids
+  name: 熙康血脂数据
+  path: /dev-api/lipids/lipids/list
+- module: monitor
+  name: 定时任务
+  path: /dev-api/monitor/job/list
+- module: monitor
+  name: 登录日志
+  path: /dev-api/monitor/logininfor/list
+- module: monitor
+  name: 在线用户
+  path: /dev-api/monitor/online/list
+- module: monitor
+  name: 操作日志
+  path: /dev-api/monitor/operlog/list
+- module: morse
+  name: 跌倒风险评估
+  path: /dev-api/morse/morse/list
+- module: nursingProject
+  name: 护理服务项目
+  path: /dev-api/nursingProject/nursingProject/list
+- module: pattern
+  name: 睡眠规律
+  path: /dev-api/pattern/pattern/list
+- module: pressure
+  name: 压疮评估
+  path: /dev-api/pressure/pressure/list
+- module: pulseRate
+  name: 熙康脉率数据
+  path: /dev-api/pulseRate/pulseRate/list
+- module: realdata
+  name: 实时数据
+  path: /dev-api/realdata/realdata/list
+- module: reminderReply
+  name: 提醒答复
+  path: /dev-api/reminderReply/reminderReplyData/list
+- module: riskICVD
+  name: ICVD风险评估
+  path: /dev-api/riskICVD/riskICVD/list
+- module: sleep_score
+  name: 睡眠评分概览
+  path: /dev-api/sleep_score/sleep_score/list
+- module: staging
+  name: 睡眠分期
+  path: /dev-api/staging/staging/list
+- module: system
+  name: 参数设置
+  path: /dev-api/system/config/list
+- module: system
+  name: 部门管理
+  path: /dev-api/system/dept/list
+- module: system
+  name: 菜单管理
+  path: /dev-api/system/menu/list
+- module: system
+  name: 通知公告
+  path: /dev-api/system/notice/list
+- module: system
+  name: 岗位管理
+  path: /dev-api/system/post/list
+- module: tcmconstitution
+  name: 中医体质
+  path: /dev-api/tcmconstitution/tcmconstitution/list
+- module: telephoneData
+  name: Sos通话
+  path: /dev-api/telephoneData/telephone/list
+- module: temperature
+  name: 熙康体温
+  path: /dev-api/temperature/temperature/list
+- module: tool
+  name: 代码生成
+  path: /dev-api/tool/gen/list
+- module: uricacid
+  name: 熙康尿酸数据
+  path: /dev-api/uricacid/uricacid/list
+- module: variability
+  name: 心率变异
+  path: /dev-api/variability/variability/list

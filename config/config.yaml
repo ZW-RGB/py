@@ -8,7 +8,8 @@ llm:
   api_base: "https://llm-1v0imtosbtixzb6g.cn-beijing.maas.aliyuncs.com/compatible-mode/v1"
   api_key: "sk-1028f0aa250441e7a71d437d37c885ab"
 #  model: "deepseek-v4-pro"
-  model: "kimi-k2.6"
+#  model: "kimi-k2.6"
+  model: "qwen3.7-max"
   temperature: 0.1
   max_tokens: 4096
   request_timeout: 120          # 单次请求超时（秒）

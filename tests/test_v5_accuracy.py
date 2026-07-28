@@ -181,7 +181,7 @@ def test_multidimensional_scoring():
         )
 
     # 多关键词匹配应累加分数
-    candidates = _rule_based_match_endpoint("老人档案的入住日期和联系电话")
+    candidates = _rule_based_match_endpoint("入住老人的入住日期和联系电话")
     if candidates:
         check(
             "多关键词匹配-入住概览",
@@ -252,7 +252,7 @@ def test_regression_v3():
     clear_feedback()
 
     test_cases = [
-        ("获取长者档案页面的所有长者姓名以及联系方式", "入住概览", ["联系方式"]),
+        ("获取长者档案页面的所有长者姓名以及联系方式", "长者档案", ["联系方式"]),
         ("查看老人护理记录", "老人护理", []),
         ("获取合同管理列表的合同编号和签订日期", "合同管理", ["合同编号", "签订日期"]),
         ("查看血氧监测数据", "血氧监测", []),
@@ -309,8 +309,8 @@ def test_edge_cases():
     candidates = _rule_based_match_endpoint("老人家档案")
     if candidates:
         check(
-            "同义词变体-老人家→入住概览",
-            "入住概览" in candidates[0]["endpoint"]["name"],
+            "同义词变体-老人家档案→长者档案",
+            "长者档案" in candidates[0]["endpoint"]["name"],
             f"got={candidates[0]['endpoint']['name']}"
         )
 

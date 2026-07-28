@@ -70,6 +70,10 @@ class ExtractionRule:
     sample_value: str           # 预览值
     is_list: bool               # 是否提取为列表
     parent_index: int           # 在父容器中的 index（用于列表提取）
+    text_pattern: str = ""      # 文本兜底样本（CSS/XPath 均失败时按文本定位）
+    source_url: str = ""        # 捕获时所在页面的真实路由（多页面采集时用于回放导航）
+    scope: str = "page"         # page=固定来源页字段；detail=列表遍历时在各详情页提取
+    is_detail_link: bool = False  # 是否为“进入详情页的链接”规则（在列表页捕获）
 
     def get(self, key: str, default=None):
         """兼容 dict 访问方式"""
@@ -139,6 +143,10 @@ class CollectionTask:
                     "sample_value": r.sample_value,
                     "is_list": r.is_list,
                     "parent_index": r.parent_index,
+                    "text_pattern": r.text_pattern,
+                    "source_url": getattr(r, "source_url", ""),
+                    "scope": getattr(r, "scope", "page"),
+                    "is_detail_link": getattr(r, "is_detail_link", False),
                 }
             return {
                 "field_name": r.get("field_name", ""),
@@ -149,6 +157,10 @@ class CollectionTask:
                 "sample_value": r.get("sample_value", ""),
                 "is_list": r.get("is_list", False),
                 "parent_index": r.get("parent_index", 0),
+                "text_pattern": r.get("text_pattern", ""),
+                "source_url": r.get("source_url", ""),
+                "scope": r.get("scope", "page"),
+                "is_detail_link": r.get("is_detail_link", False),
             }
         return {
             "task_id": self.task_id,
@@ -179,6 +191,10 @@ class CollectionTask:
                 sample_value=r.get("sample_value", ""),
                 is_list=r.get("is_list", False),
                 parent_index=r.get("parent_index", 0),
+                text_pattern=r.get("text_pattern", ""),
+                source_url=r.get("source_url", ""),
+                scope=r.get("scope", "page"),
+                is_detail_link=r.get("is_detail_link", False),
             )
             for r in d.get("rules", [])
         ]
@@ -789,6 +805,7 @@ def _run_extraction_on_page(
         extract_type = rule.extract_type if hasattr(rule, "extract_type") else rule.get("extract_type", "text")
         attribute_name = rule.attribute_name if hasattr(rule, "attribute_name") else rule.get("attribute_name", "")
         is_list = rule.is_list if hasattr(rule, "is_list") else rule.get("is_list", False)
+        text_pattern = rule.text_pattern if hasattr(rule, "text_pattern") else rule.get("text_pattern", "")
 
         columns.append(field_name)
         try:
@@ -818,6 +835,17 @@ def _run_extraction_on_page(
                         logger.info(f"[VisualCollector]   → 简化选择器匹配 {count} 个元素")
                     except Exception:
                         count = 0
+
+            # 仍然 0，尝试按文本兜底（text_pattern）：匹配不含子元素且文本包含的叶子节点
+            if count == 0 and text_pattern:
+                try:
+                    safe_pat = text_pattern.replace("\\", "\\\\").replace("'", "\\'")
+                    text_xpath = f"xpath=//*[not(*) and contains(normalize-space(.), '{safe_pat}')]"
+                    els = page.locator(text_xpath)
+                    count = els.count()
+                    logger.info(f"[VisualCollector]   → 文本兜底匹配 {count} 个元素 (pattern='{text_pattern[:30]}')")
+                except Exception:
+                    count = 0
 
             if count == 0:
                 # 收集页面上实际存在的元素信息用于诊断
@@ -1014,6 +1042,84 @@ def preview_extraction(
             browser.close()
 
 
+def _download_image(url, save_dir, cookies=None, timeout=30):
+    """下载图片到 save_dir，返回本地相对路径（如 images/xxx.jpg）；失败返回 ''。"""
+    try:
+        import requests
+        os.makedirs(save_dir, exist_ok=True)
+        ext = os.path.splitext(url.split('?')[0])[1].lower()
+        if ext not in ('.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.svg'):
+            ext = '.jpg'
+        fname = hashlib.md5(url.encode('utf-8')).hexdigest()[:16] + ext
+        fpath = os.path.join(save_dir, fname)
+        if os.path.exists(fpath):
+            return os.path.relpath(fpath, os.path.dirname(save_dir)).replace('\\', '/')
+        req_cookies = {}
+        if cookies:
+            for c in cookies:
+                if isinstance(c, dict):
+                    req_cookies[c.get("name", "")] = c.get("value", "")
+        headers = {"User-Agent": "Mozilla/5.0", "Referer": url}
+        r = requests.get(url, headers=headers, cookies=req_cookies, timeout=timeout)
+        if r.status_code == 200 and r.content:
+            with open(fpath, 'wb') as f:
+                f.write(r.content)
+            return os.path.relpath(fpath, os.path.dirname(save_dir)).replace('\\', '/')
+    except Exception as e:
+        logger.warning(f"[VisualCollector] 图片下载失败 {url}: {e}")
+    return ""
+
+
+def _save_collection_files(task, columns, rows, out_dir, export_format):
+    """按 export_format 将采集结果落地为文件，返回 {格式: 路径}。"""
+    import csv as _csv
+    saved = {}
+    os.makedirs(out_dir, exist_ok=True)
+    ts = time.strftime("%Y%m%d_%H%M%S")
+    name_hint = re.sub(r'[^\w\u4e00-\u9fa5-]', '_', (task.name or 'data'))[:40] or 'data'
+    if export_format in ('csv', 'all'):
+        path = os.path.join(out_dir, f"{name_hint}_{ts}.csv")
+        with open(path, 'w', encoding='utf-8-sig', newline='', errors='replace') as f:
+            w = _csv.writer(f)
+            w.writerow(columns)
+            for r in rows:
+                w.writerow([r.get(c, '') for c in columns])
+        saved['csv'] = path
+    if export_format in ('json', 'all'):
+        path = os.path.join(out_dir, f"{name_hint}_{ts}.json")
+        with open(path, 'w', encoding='utf-8', errors='replace') as f:
+            json.dump(rows, f, ensure_ascii=False, indent=2)
+        saved['json'] = path
+    if export_format in ('txt', 'all'):
+        path = os.path.join(out_dir, f"{name_hint}_{ts}.txt")
+        with open(path, 'w', encoding='utf-8', errors='replace') as f:
+            for r in rows:
+                f.write(' | '.join(str(r.get(c, '')) for c in columns) + '\n')
+        saved['txt'] = path
+    if export_format in ('xlsx', 'all'):
+        try:
+            import openpyxl
+            wb = openpyxl.Workbook()
+            ws = wb.active
+            ws.append(columns)
+            for r in rows:
+                ws.append([r.get(c, '') for c in columns])
+            path = os.path.join(out_dir, f"{name_hint}_{ts}.xlsx")
+            wb.save(path)
+            saved['xlsx'] = path
+        except Exception as e:
+            logger.warning(f"[VisualCollector] xlsx 导出失败，回退 csv: {e}")
+            if 'csv' not in saved:
+                path = os.path.join(out_dir, f"{name_hint}_{ts}.csv")
+                with open(path, 'w', encoding='utf-8-sig', newline='', errors='replace') as f:
+                    w = _csv.writer(f)
+                    w.writerow(columns)
+                    for r in rows:
+                        w.writerow([r.get(c, '') for c in columns])
+                saved['csv'] = path
+    return saved
+
+
 def execute_collection(
     task: CollectionTask,
     username: str = "",
@@ -1021,6 +1127,8 @@ def execute_collection(
     headless: bool = True,
     max_rows: int = 0,
     storage_state: Optional[Dict[str, Any]] = None,
+    resume: bool = False,
+    start_page: int = 1,
 ) -> Dict[str, Any]:
     """
     执行一个完整的采集任务（供 CLI 和 API 调用）。
@@ -1059,6 +1167,40 @@ def execute_collection(
 
     logger.info(f"[VisualCollector] 执行采集任务: {task.name} → {full_url}")
 
+    # ── 断点续采与多格式落地的准备 ──
+    retry_count = max(1, int(task.pagination.get("retry_count", 3) or 3))
+    storage_cookies = storage_state.get("cookies") if storage_state else None
+    collected_dir = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+        "data", "collected", task.task_id or "default"
+    )
+    os.makedirs(collected_dir, exist_ok=True)
+    progress_path = os.path.join(collected_dir, ".progress.json")
+
+    # 断点续采：读取已有进度
+    existing_rows = []
+    if resume and os.path.exists(progress_path):
+        try:
+            with open(progress_path, "r", encoding="utf-8") as _pf:
+                _prog = json.load(_pf)
+            start_page = max(int(start_page or 1), int(_prog.get("current_page", 1)))
+            existing_rows = _prog.get("rows", []) or []
+            logger.info(f"[VisualCollector] 断点续采: 从第 {start_page} 页继续，已采 {len(existing_rows)} 行")
+        except Exception as _pe:
+            logger.warning(f"[VisualCollector] 读取断点进度失败: {_pe}")
+
+    def save_progress(page_num, rows, status="running"):
+        try:
+            with open(progress_path, "w", encoding="utf-8") as _pf:
+                json.dump({
+                    "current_page": page_num,
+                    "total_rows": len(rows),
+                    "status": status,
+                    "updated_at": time.strftime("%Y-%m-%d %H:%M:%S"),
+                }, _pf, ensure_ascii=False)
+        except Exception:
+            pass
+
     with sync_playwright() as pw:
         browser = pw.chromium.launch(headless=headless)
 
@@ -1095,69 +1237,218 @@ def execute_collection(
                 page.wait_for_url(lambda u: "/login" not in u.lower(), timeout=30000, wait_until="networkidle")
                 page.wait_for_timeout(2000)
 
-            # 导航到目标页
-            logger.info(f"[VisualCollector] 采集导航到: {full_url}")
-            page.goto(full_url, wait_until="networkidle", timeout=60000)
-            page.wait_for_timeout(1500)
+            # ── 收集规则并按“来源页”分组（支持任意页面 / 详情页捕获）──
+            rules_all = task.rules
+
+            def _rule_attr(rule, name, default=None):
+                return rule.get(name, default) if isinstance(rule, dict) else getattr(rule, name, default)
+
+            detail_link_rules = [r for r in rules_all if _rule_attr(r, "is_detail_link", False)]
+            detail_rules = [r for r in rules_all if _rule_attr(r, "scope", "page") == "detail"]
+            page_groups = {}
+            for r in rules_all:
+                if _rule_attr(r, "is_detail_link", False):
+                    continue
+                if _rule_attr(r, "scope", "page") != "page":
+                    continue
+                su = (_rule_attr(r, "source_url", "") or "").strip()
+                if not su:
+                    su = target  # 旧规则无来源页时回退到任务目标页
+                page_groups.setdefault(su, []).append(r)
+            if not page_groups:
+                page_groups[target] = [r for r in rules_all if not _rule_attr(r, "is_detail_link", False)]
+
+            # 主列表页：含列表规则或详情链接规则的来源页（用于分页 / 断点续采）
+            primary_su = None
+            for su, grules in page_groups.items():
+                if any(_rule_attr(r, "is_list", False) for r in grules) or any(_rule_attr(r, "is_detail_link", False) for r in grules):
+                    primary_su = su
+                    break
 
             all_columns = []
-            all_rows = []
             errors = []
+            page_results = {}
+            total_pages = 0
 
-            # 分页处理
-            page_num = 1
-            while True:
-                if task.pagination.get("enabled") and page_num > 1:
-                    # 等待表格重新渲染
-                    page.wait_for_load_state("domcontentloaded")
-                    page.wait_for_timeout(1500)
-
-                for rule in task.rules:
-                    field_name = rule.field_name if hasattr(rule, "field_name") else rule.get("field_name", "")
-                    css_selector = rule.css_selector if hasattr(rule, "css_selector") else rule.get("css_selector", "")
-                    extract_type = rule.extract_type if hasattr(rule, "extract_type") else rule.get("extract_type", "text")
-                    attribute_name = rule.attribute_name if hasattr(rule, "attribute_name") else rule.get("attribute_name", "")
-
-                    if page_num == 1:
-                        all_columns.append(field_name)
-
+            def _normalize_nav_url(url):
+                if not url:
+                    return ""
+                u = str(url).strip()
+                if u.startswith("/api/collector/proxy"):
+                    u = u[len("/api/collector/proxy"):] or "/"
+                if u.startswith("http://") or u.startswith("https://"):
                     try:
-                        els = page.locator(css_selector)
-                        count = els.count()
-                        values = []
-                        limit = min(count, (max_rows if max_rows > 0 else 200))
-                        for i in range(limit):
-                            val = _extract_value(els.nth(i), extract_type, attribute_name)
-                            values.append(val)
-
-                        for row_idx in range(len(values)):
-                            while row_idx >= len(all_rows):
-                                all_rows.append({})
-                            all_rows[row_idx][field_name] = values[row_idx]
-
-                    except Exception as e:
-                        errors.append({"field": field_name, "page": page_num, "error": str(e)})
-
-                # 分页检查
-                if not task.pagination.get("enabled"):
-                    break
-                if task.pagination.get("max_pages", 0) > 0 and page_num >= task.pagination["max_pages"]:
-                    break
-
-                next_sel = task.pagination.get("next_button_selector", "")
-                if next_sel:
-                    try:
-                        next_btn = page.locator(next_sel).first
-                        if not next_btn.is_visible() or next_btn.is_disabled():
-                            break
-                        next_btn.click()
-                        page_num += 1
+                        from urllib.parse import urlparse
+                        p = urlparse(u)
+                        u = p.path or "/"
+                        if p.query:
+                            u += "?" + p.query
                     except Exception:
-                        break
-                else:
-                    break
+                        pass
+                if not u.startswith("/"):
+                    u = "/" + u
+                return u
 
-            logger.info(f"[VisualCollector] 采集完成: {len(all_rows)} 行, {len(all_columns)} 列, {page_num} 页")
+            def _navigate(url, attempt_retry=retry_count):
+                norm = _normalize_nav_url(url)
+                full = norm if norm.startswith("http") else (host.rstrip("/") + norm)
+                for _a in range(1, attempt_retry + 1):
+                    try:
+                        logger.info(f"[VisualCollector] 导航到 {full} (尝试 {_a}/{attempt_retry})")
+                        page.goto(full, wait_until="networkidle", timeout=60000)
+                        page.wait_for_timeout(1500)
+                        return True
+                    except Exception as _ne:
+                        logger.warning(f"[VisualCollector] 导航失败(尝试 {_a}): {_ne}")
+                        if _a < attempt_retry:
+                            page.wait_for_timeout(2000 * _a)
+                return False
+
+            def _extract_rows(rules):
+                if not rules:
+                    return []
+                vals_map = {}
+                max_count = 0
+                for rule in rules:
+                    fn = _rule_attr(rule, "field_name", "")
+                    css = _rule_attr(rule, "css_selector", "")
+                    et = _rule_attr(rule, "extract_type", "text")
+                    an = _rule_attr(rule, "attribute_name", "")
+                    try:
+                        els = page.locator(css)
+                        count = els.count()
+                        vals = []
+                        limit = min(count, (max_rows if max_rows > 0 else 500))
+                        for i in range(limit):
+                            try:
+                                v = _extract_value(els.nth(i), et, an)
+                            except Exception:
+                                v = ""
+                            if an == "src" and v and str(v).lower().startswith("http"):
+                                try:
+                                    _local = _download_image(v, os.path.join(collected_dir, "images"), cookies=storage_cookies)
+                                    if _local:
+                                        v = _local
+                                except Exception:
+                                    pass
+                            vals.append(v)
+                        vals_map[fn] = vals
+                        if len(vals) > max_count:
+                            max_count = len(vals)
+                    except Exception as e:
+                        errors.append({"field": fn, "error": str(e)[:200]})
+                        vals_map[fn] = []
+                rows = []
+                for i in range(max_count):
+                    row = {}
+                    for rule in rules:
+                        fn = _rule_attr(rule, "field_name", "")
+                        vv = vals_map.get(fn, [])
+                        row[fn] = vv[i] if i < len(vv) else ""
+                    rows.append(row)
+                return rows
+
+            resume_skip = max(1, int(start_page or 1)) if resume else 1
+
+            # ── 逐来源页采集 ──
+            for su, grules in page_groups.items():
+                if not _navigate(su):
+                    errors.append({"field": "*", "error": f"来源页导航失败: {su}"})
+                    continue
+                has_list = any(_rule_attr(r, "is_list", False) for r in grules) or any(_rule_attr(r, "is_detail_link", False) for r in grules)
+                paginate = bool(task.pagination.get("enabled")) and has_list
+                is_primary = (su == primary_su)
+                skip = resume_skip if (is_primary and resume) else 1
+                rows_page = []
+                pnum = 1
+                # 断点续采：跳过已采集的列表页
+                if skip > 1 and paginate:
+                    _sk = 1
+                    while _sk < skip:
+                        ns = task.pagination.get("next_button_selector", "")
+                        if not ns:
+                            break
+                        try:
+                            nb = page.locator(ns).first
+                            if not nb.is_visible() or nb.is_disabled():
+                                break
+                            nb.click()
+                            _sk += 1
+                            page.wait_for_timeout(1500)
+                        except Exception:
+                            break
+                    pnum = _sk
+                while True:
+                    rws = _extract_rows(grules)
+                    rows_page.extend(rws)
+                    total_pages += 1
+                    if not paginate:
+                        break
+                    if task.pagination.get("max_pages", 0) > 0 and pnum >= task.pagination["max_pages"]:
+                        break
+                    ns = task.pagination.get("next_button_selector", "")
+                    if ns:
+                        try:
+                            nb = page.locator(ns).first
+                            if not nb.is_visible() or nb.is_disabled():
+                                break
+                            nb.click()
+                            pnum += 1
+                            page.wait_for_timeout(1500)
+                        except Exception:
+                            break
+                    else:
+                        break
+                page_results[su] = rows_page
+
+            # 断点续采：主列表页已采数据前置合并
+            if resume and primary_su and primary_su in page_results:
+                page_results[primary_su] = list(existing_rows) + page_results[primary_su]
+
+            # ── 列表遍历详情页：逐条进入详情页抓取 scope=detail 字段 ──
+            if detail_link_rules and detail_rules:
+                link_rule = detail_link_rules[0]
+                link_field = _rule_attr(link_rule, "field_name", "")
+                link_src = (_rule_attr(link_rule, "source_url", "") or "").strip() or primary_su or target
+                base_rows = page_results.get(link_src, [])
+                for row in base_rows:
+                    du = _normalize_nav_url(row.get(link_field, ""))
+                    if not du or du == "/":
+                        continue
+                    if not _navigate(du):
+                        errors.append({"field": link_field, "error": f"详情页导航失败: {du}"})
+                        continue
+                    dvals = _extract_rows(detail_rules)
+                    if dvals:
+                        row.update(dvals[0])
+                    else:
+                        for dr in detail_rules:
+                            row[_rule_attr(dr, "field_name", "")] = ""
+
+            # ── 汇总输出 ──
+            multi = len(page_groups) > 1
+            all_rows = []
+            for su, rws in page_results.items():
+                for row in rws:
+                    if multi:
+                        row = dict(row)
+                        row["__source_page__"] = su
+                    all_rows.append(row)
+            seen_cols = []
+            for r in rules_all:
+                fn = _rule_attr(r, "field_name", "")
+                if fn and fn not in seen_cols:
+                    seen_cols.append(fn)
+            if multi and "__source_page__" not in seen_cols:
+                seen_cols.append("__source_page__")
+            all_columns = seen_cols
+            page_num = total_pages
+
+            logger.info(f"[VisualCollector] 采集完成: {len(all_rows)} 行, {len(all_columns)} 列, {page_num} 页（来源页 {len(page_groups)} 个）")
+
+            # 多格式落地
+            saved_files = _save_collection_files(task, all_columns, all_rows, collected_dir, task.export_format)
+            save_progress(page_num, all_rows, "done")
 
             return {
                 "success": True,
@@ -1168,6 +1459,8 @@ def execute_collection(
                     "pages": page_num,
                 },
                 "errors": errors,
+                "saved_files": saved_files,
+                "collected_dir": collected_dir,
             }
 
         except Exception as e:

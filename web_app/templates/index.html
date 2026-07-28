@@ -185,6 +185,19 @@
     font-family: monospace; font-size: 13px;
   }
   .intent-field.full { grid-column: 1 / -1; }
+  .mode-toggle { display: flex; gap: 10px; flex-wrap: wrap; }
+  .mode-opt {
+    display: flex; align-items: center; gap: 6px; padding: 8px 12px; border: 1px solid var(--border);
+    border-radius: 8px; cursor: pointer; font-size: 12px; background: var(--bg); transition: all .15s;
+  }
+  .mode-opt:hover { border-color: var(--accent); }
+  .mode-opt input { accent-color: var(--accent); }
+  .intent-input {
+    width: 100%; padding: 8px 10px; border: 1px solid var(--border); border-radius: 6px;
+    background: var(--bg); color: var(--text); font-size: 13px; box-sizing: border-box;
+    font-family: monospace;
+  }
+  .intent-input:focus { outline: none; border-color: var(--orange); }
   .confidence-bar {
     display: flex; align-items: center; gap: 8px; grid-column: 1 / -1;
     margin-top: 4px;
@@ -206,6 +219,22 @@
   .field-tag {
     font-size: 11px; padding: 3px 10px; border-radius: 12px;
     background: rgba(78,140,240,0.15); color: var(--accent); border: 1px solid rgba(78,140,240,0.3);
+  }
+
+  /* 智能模式对话气泡 */
+  .chat-bubble {
+    display: flex; gap: 10px; align-items: flex-start; padding: 4px 2px;
+  }
+  .chat-avatar {
+    flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    display: flex; align-items: center; justify-content: center; font-size: 16px;
+    box-shadow: var(--shadow);
+  }
+  .chat-text {
+    flex: 1; background: var(--card); border: 1px solid var(--border);
+    border-radius: 4px 14px 14px 14px; padding: 12px 14px; font-size: 13px;
+    line-height: 1.7; color: var(--text); white-space: pre-wrap; word-break: break-word;
   }
 
   /* 结果卡片 */
@@ -420,7 +449,9 @@
     <div class="toolbar">
       <span id="selected-count">已选 0 张表</span>
       <a onclick="selectAll()">全选</a><a onclick="deselectAll()">取消</a>
+      <button class="btn outline" id="discover-btn" onclick="discoverAllEndpoints()" style="margin-left:auto;font-size:11px;padding:3px 10px;">🔄 加载全部接口</button>
     </div>
+    <div id="discover-status" style="font-size:11px;color:var(--text-dim);padding:4px 2px 8px;min-height:16px;"></div>
     <div class="table-list" id="table-list"></div>
     <div class="action-bar">
       <button class="btn outline" onclick="resetAll()" style="flex:0">重置</button>
@@ -447,7 +478,7 @@
   <div id="page-sidebar" style="display:none; padding:16px 20px; flex:1;">
     <div style="font-size:12px; color:var(--text-dim); line-height:1.8;">
       <p style="color:var(--green);font-weight:600;margin-bottom:8px;">页面采集说明</p>
-      <p>使用无头浏览器完整爬取平台页面上的 <b>所有可见内容</b>：</p>
+      <p>完整爬取平台页面上的 <b>所有可见内容</b>：</p>
       <p style="margin-top:6px;">1. 在右侧选择目标页面路由</p>
       <p>2. 点击"开始页面采集"</p>
       <p>3. 查看分类结果：</p>
@@ -457,9 +488,10 @@
       <p style="padding-left:10px;color:var(--accent);">· 表格数据（表头+数据行）</p>
       <p style="padding-left:10px;color:var(--accent);">· 表单字段（标签+值）</p>
       <p style="margin-top:10px;">支持导出为 JSON/CSV/Excel/TXT</p>
-      <p style="margin-top:10px;color:var(--orange);">注意：首次使用需安装 Playwright 浏览器</p>
-      <p style="color:var(--text-dim);font-size:10px;">pip install playwright</p>
-      <p style="color:var(--text-dim);font-size:10px;">python -m playwright install chromium</p>
+      <p style="margin-top:10px;">支持存储到MySQL数据库中</p>
+<!--      <p style="margin-top:10px;color:var(&#45;&#45;orange);">注意：首次使用需安装 Playwright 浏览器</p>-->
+<!--      <p style="color:var(&#45;&#45;text-dim);font-size:10px;">pip install playwright</p>-->
+<!--      <p style="color:var(&#45;&#45;text-dim);font-size:10px;">python -m playwright install chromium</p>-->
     </div>
   <!-- 可视化采集模式：提示 -->
   <div id="collector-sidebar" style="display:none; padding:16px 20px; flex:1;">
@@ -492,6 +524,7 @@
     <button class="btn outline" onclick="exportAll('json')" style="font-size:10px;padding:4px 12px;">JSON</button>
     <button class="btn outline" onclick="exportAll('xlsx')" style="font-size:10px;padding:4px 12px;">Excel</button>
     <button class="btn outline" onclick="exportAll('txt')" style="font-size:10px;padding:4px 12px;">TXT</button>
+    <button class="btn primary" onclick="openMysqlModal('standard')" style="font-size:10px;padding:4px 12px;background:var(--accent);color:#fff;border-color:var(--accent);">🗄 写入 MySQL</button>
   </div>
 
   <!-- 标准模式结果区 -->
@@ -523,7 +556,19 @@
       <div class="intent-grid" id="intent-grid"></div>
       <div class="intent-buttons">
         <button class="btn success" id="confirm-btn" onclick="executeCustomCrawl()">确认并开始爬取</button>
+        <button class="btn outline" id="edit-btn" onclick="openIntentEditor()">✏️ 修正</button>
         <button class="btn outline" onclick="clearIntent()">重新输入</button>
+        <span id="edited-badge" style="display:none;background:var(--orange);color:#fff;font-size:10px;padding:3px 8px;border-radius:4px;">✏️ 已手动修正</span>
+      </div>
+    </div>
+
+    <!-- 修正编辑面板（初始隐藏） -->
+    <div class="intent-card" id="intent-editor" style="display:none;border-color:var(--orange);">
+      <h3>✏️ 修正解析结果</h3>
+      <div id="editor-body"></div>
+      <div class="intent-buttons">
+        <button class="btn success" onclick="saveIntentEdit()">保存修正</button>
+        <button class="btn outline" onclick="cancelIntentEdit()">取消</button>
       </div>
     </div>
 
@@ -541,6 +586,7 @@
       <button class="btn outline" onclick="exportCustom('json')" style="font-size:10px;padding:4px 12px;">JSON</button>
       <button class="btn outline" onclick="exportCustom('xlsx')" style="font-size:10px;padding:4px 12px;">Excel</button>
       <button class="btn outline" onclick="exportCustom('txt')" style="font-size:10px;padding:4px 12px;">TXT</button>
+      <button class="btn primary" onclick="openMysqlModal('smart')" style="font-size:10px;padding:4px 12px;background:var(--accent);color:#fff;border-color:var(--accent);">🗄 写入 MySQL</button>
     </div>
   </div>
 
@@ -650,6 +696,7 @@
       <span style="margin-left:8px;font-size:10px;color:var(--text-dim);">批量导出：</span>
       <button class="btn outline" onclick="exportBatchScrape('csv')" style="font-size:10px;padding:4px 12px;">CSV</button>
       <button class="btn outline" onclick="exportBatchScrape('json')" style="font-size:10px;padding:4px 12px;">JSON</button>
+      <button class="btn primary" onclick="openMysqlModal('page')" style="font-size:10px;padding:4px 12px;background:var(--accent);color:#fff;border-color:var(--accent);">🗄 写入 MySQL</button>
     </div>
 
     <!-- 分类结果标签 -->
@@ -699,6 +746,45 @@
                    style="font-size:14px;padding:10px 14px;">
           </div>
           <p style="font-size:10px;color:var(--text-dim);margin:-8px 0 14px 0;">左侧已填写的登录信息将自动用于平台认证</p>
+
+          <!-- 高级设置折叠面板 -->
+          <details id="col-advanced-opts" style="margin-bottom:14px;border:1px solid var(--border);border-radius:6px;padding:0 14px;">
+            <summary style="cursor:pointer;padding:10px 0;font-size:12px;color:var(--text-dim);user-select:none;">
+              ⚙️ 高级设置（加载优化 + 资源过滤）
+            </summary>
+            <div style="padding-bottom:12px;display:flex;flex-wrap:wrap;gap:14px;">
+              <div class="fg" style="flex:1;min-width:140px;">
+                <label>页面等待时间（秒）</label>
+                <input type="number" id="col-wait-time" value="2" min="0" max="30" step="0.5"
+                       style="width:100%;padding:6px 10px;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:4px;font-size:12px;">
+              </div>
+              <div class="fg" style="flex:1;min-width:140px;">
+                <label>AJAX 等待时长（秒）</label>
+                <input type="number" id="col-ajax-wait" value="3" min="0" max="30" step="0.5"
+                       style="width:100%;padding:6px 10px;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:4px;font-size:12px;">
+              </div>
+              <div class="fg" style="flex:1;min-width:140px;">
+                <label>页面加载超时（秒）</label>
+                <input type="number" id="col-load-timeout" value="30" min="5" max="120" step="1"
+                       style="width:100%;padding:6px 10px;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:4px;font-size:12px;">
+              </div>
+            </div>
+            <div style="padding-bottom:12px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;">
+              <label style="display:flex;align-items:center;gap:6px;font-size:11px;cursor:pointer;color:var(--text-dim);">
+                <input type="checkbox" id="col-no-ads" checked> 🚫 关闭网页广告
+              </label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:11px;cursor:pointer;color:var(--text-dim);">
+                <input type="checkbox" id="col-no-anim" checked> 🎬 关闭 CSS 动画
+              </label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:11px;cursor:pointer;color:var(--text-dim);">
+                <input type="checkbox" id="col-no-video" checked> ▶️ 阻止视频自动播放
+              </label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:11px;cursor:pointer;color:var(--text-dim);">
+                <input type="checkbox" id="col-lazy-img"> 🖼️ 延迟加载非关键图片
+              </label>
+            </div>
+          </details>
+
           <button class="btn primary" id="col-start-btn" onclick="collectorStartSession()" style="width:100%;padding:12px;font-size:14px;">
             🚀 打开页面并分析元素
           </button>
@@ -712,10 +798,20 @@
           <h3 style="color:var(--accent);">第2步：在页面中直接点选数据元素</h3>
           <span style="font-size:11px;color:var(--text-dim);" id="proxy-status-hint">页面加载后，点击数据区域 → 右侧配置字段名 → 添加规则</span>
         </div>
+        <div style="display:flex;gap:8px;margin-bottom:10px;align-items:center;">
+          <input id="proxy-url-input" placeholder="输入平台内任意页面路径或完整网址，如 /elderly/detail/123 或 https://平台域名/xxx" style="flex:1;padding:8px 12px;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:6px;font-size:13px;">
+          <button class="btn-sm success" onclick="navigateProxyFromInput()" title="打开该页面进行点选">前往</button>
+          <button class="btn-sm" onclick="refreshProxyIframe()" title="重新加载当前页面">↻ 刷新</button>
+          <button class="btn-sm" id="capture-toggle-btn" onclick="toggleCapture()" title="捕获此页面发出的 API 请求，自动建库">🔍 捕获API</button>
+        </div>
         <div class="selector-container">
           <div class="selector-preview" id="selector-preview" style="position:relative;overflow:hidden;">
+            <div id="proxy-progress-bar-wrap" style="display:none;position:absolute;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,0.1);z-index:20;">
+              <div id="proxy-progress-bar" style="height:100%;width:0%;background:var(--accent);transition:width 0.3s;"></div>
+            </div>
             <div class="empty-state" id="proxy-loading" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:10;">
-              <div class="spinner"></div><p style="margin-top:8px;">正在连接代理页面...</p>
+              <div class="spinner"></div><p style="margin-top:8px;" id="proxy-loading-text">正在连接代理页面...</p>
+              <p id="proxy-loading-stage" style="font-size:10px;color:var(--text-dim);margin-top:4px;"></p>
             </div>
             <div class="empty-state" id="proxy-empty" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:10;display:none;">
               <p>请先在步骤1打开目标页面</p>
@@ -749,7 +845,12 @@
                 <label style="display:flex;align-items:center;gap:6px;font-size:11px;cursor:pointer;">
                   <input type="checkbox" id="sel-is-list" onchange="document.getElementById('sel-extract-type').value = this.checked ? 'list' : 'text'"> 提取为列表（多行数据）
                 </label>
+                <label style="display:flex;align-items:center;gap:6px;font-size:11px;cursor:pointer;" title="勾选后，采集时会先逐条进入列表项的详情页，再从详情页提取该字段">
+                  <input type="checkbox" id="sel-scope-detail"> 详情页字段（采集时逐条进入详情页抓取）
+                </label>
+                <div id="sel-source-hint" style="font-size:10px;color:var(--text-dim);word-break:break-all;"></div>
                 <button class="btn success" onclick="collectorAddRule()" style="width:100%;">➕ 添加此字段</button>
+                <button class="btn" onclick="collectorAddDetailLink()" style="width:100%;font-size:12px;">🔗 捕获为详情页链接</button>
               </div>
             </div>
             <!-- 已选规则列表 -->
@@ -762,6 +863,21 @@
             </div>
           </div>
         </div>
+
+        <!-- API 自动捕获面板 -->
+        <div id="capture-panel" style="display:none;margin-top:14px;border:1px solid var(--border);border-radius:10px;background:var(--card);padding:14px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <h4 style="color:var(--accent);margin:0;">🔌 页面 API 自动捕获</h4>
+            <span id="capture-status" style="font-size:11px;color:var(--text-dim);"></span>
+          </div>
+          <p style="font-size:11px;color:var(--text-dim);margin:0 0 10px;">在左侧页面点击查询/翻页，触发的 <code>/dev-api/</code> 接口会自动出现在这里。勾选要入库的，填好中文名与模块后点「写入配置」。</p>
+          <div id="capture-list" style="display:flex;flex-direction:column;gap:8px;max-height:280px;overflow-y:auto;"></div>
+          <div style="display:flex;gap:8px;margin-top:12px;align-items:center;">
+            <button class="btn success" onclick="saveCapturedEndpoints()">💾 写入配置</button>
+            <span id="capture-save-msg" style="font-size:11px;color:var(--text-dim);"></span>
+          </div>
+        </div>
+
       </div>
 
       <!-- Step 3: 预览确认 -->
@@ -771,6 +887,7 @@
         <button class="btn primary" id="col-do-preview-btn" onclick="collectorDoPreview()" style="margin-bottom:16px;">🔍 开始预览</button>
         <div class="preview-container" id="preview-container" style="display:none;">
           <div class="preview-stats" id="preview-stats"></div>
+          <button class="btn primary" id="col-mysql-btn" onclick="openMysqlModal('collector')" style="display:none;margin-bottom:12px;background:var(--accent);color:#fff;border-color:var(--accent);">🗄 写入 MySQL</button>
           <div id="preview-errors"></div>
           <div class="preview-table-wrap" id="preview-table-wrap"></div>
         </div>
@@ -805,7 +922,7 @@
               <input type="checkbox" id="col-pagination-enabled" onchange="this.checked?document.getElementById('col-pagination-opts').style.display='block':document.getElementById('col-pagination-opts').style.display='none'">
               启用分页采集
             </label>
-            <div id="col-pagination-opts" style="display:none;margin-top:8px;display:flex;gap:12px;">
+            <div id="col-pagination-opts" style="display:none;margin-top:8px;display:flex;gap:12px;flex-wrap:wrap;">
               <div class="fg" style="flex:1;">
                 <label>每页条数</label>
                 <input id="col-page-size" type="number" value="20" min="5" max="100">
@@ -813,6 +930,10 @@
               <div class="fg" style="flex:1;">
                 <label>最大页数(0=全部)</label>
                 <input id="col-max-pages" type="number" value="0" min="0">
+              </div>
+              <div class="fg" style="flex:1 1 100%;">
+                <label>下一页按钮选择器（点"🔁 选分页"自动捕获）</label>
+                <input id="col-next-selector" placeholder="如：.el-pagination .btn-next" style="font-size:12px;padding:6px 10px;">
               </div>
             </div>
           </div>
@@ -860,6 +981,10 @@ const KNOWN_ROUTES = {{ routes | tojson }};
 let crawlResults = [], pollTimer = null;
 let activeMode = 'standard';
 let parsedIntent = null;
+let lastCustomTotalRows = 0;   // 智能模式最近一次爬取的总行数（用于 MySQL 弹窗显示）
+let currentMysqlMode = 'smart'; // 当前写入 MySQL 的模式：smart / page / collector / standard
+let lastCollectorTotal = 0;     // 标注模式最近一次预览的总记录数
+let lastStandardTotalRows = 0;  // 标准模式最近一次爬取的所有表总行数（用于 MySQL 弹窗显示）
 
 // ═══════════ 模式切换 ═══════════
 function switchMode(mode) {
@@ -908,6 +1033,7 @@ let collectorPreviewOk = false;
 let collectorIframeLoaded = false;
 let collectorIframeTimer = null;
 let collectorPickedElement = null;  // 当前在 iframe 中选中的元素信息
+let collectorPickedSourceUrl = '';  // 当前选中元素所在的页面真实路由（多页面采集用）
 
 function collectorGoStep(step) {
   if (step === 3 && collectorSelectedRules.length === 0) {
@@ -933,8 +1059,107 @@ function collectorGoStep(step) {
   if (step === 4) collectorRefreshTaskList();
 }
 
+// ═══════════ API 自动捕获 ═══════════
+let capturePollTimer = null;
+
+function toggleCapture() {
+  const btn = document.getElementById('capture-toggle-btn');
+  const panel = document.getElementById('capture-panel');
+  const running = btn.textContent.indexOf('停止') >= 0;
+  if (running) {
+    fetch('/api/collector/capture_stop', { method: 'POST' }).catch(() => {});
+    btn.textContent = '🔍 捕获API';
+    btn.style.background = ''; btn.style.color = '';
+    panel.style.display = 'none';
+    if (capturePollTimer) { clearInterval(capturePollTimer); capturePollTimer = null; }
+    return;
+  }
+  fetch('/api/collector/capture_start', { method: 'POST' })
+    .then(r => r.json())
+    .then(d => {
+      if (!d.ok) { showToast(d.message || '启动捕获失败'); return; }
+      btn.textContent = '⏹ 停止捕获';
+      btn.style.background = '#e74c3c'; btn.style.color = '#fff';
+      panel.style.display = 'block';
+      pollCapturedApis();
+      capturePollTimer = setInterval(pollCapturedApis, 1500);
+    })
+    .catch(e => showToast('启动捕获失败: ' + e));
+}
+
+function pollCapturedApis() {
+  fetch('/api/collector/captured_apis')
+    .then(r => r.json())
+    .then(d => {
+      if (!d.ok) return;
+      const list = document.getElementById('capture-list');
+      const status = document.getElementById('capture-status');
+      status.textContent = '已捕获 ' + d.count + ' 个接口';
+      if (!d.apis || !d.apis.length) {
+        list.innerHTML = '<p style="color:var(--text-dim);font-size:11px;">暂无捕获，请在左侧页面操作（点击查询/翻页）</p>';
+        return;
+      }
+      let html = '';
+      d.apis.forEach(a => {
+        const fp = (a.fields || []).slice(0, 10).join(', ');
+        const pagi = a.has_pagination ? '✅分页' : '—';
+        html += '<div style="border:1px solid var(--border);border-radius:8px;padding:8px 10px;background:var(--bg);">'
+          + '<label style="display:flex;gap:8px;align-items:flex-start;cursor:pointer;font-size:12px;">'
+          + '<input type="checkbox" class="cap-chk" data-path="' + escAttr(a.path) + '" checked style="margin-top:3px;">'
+          + '<div style="flex:1;min-width:0;">'
+          + '<div style="font-family:monospace;font-size:11px;word-break:break-all;color:var(--accent);">' + escHtml(a.path) + '</div>'
+          + '<div style="font-size:10px;color:var(--text-dim);margin-top:2px;">字段 ' + a.field_count + ' · 样本 ' + a.sample_count + ' · ' + pagi + '</div>'
+          + '<div style="font-size:10px;color:var(--text-dim);margin-top:2px;word-break:break-all;">' + escHtml(fp) + '</div>'
+          + '<div style="display:flex;gap:6px;margin-top:6px;">'
+          + '<input class="cap-name" placeholder="中文名(如 长者档案)" value="' + escAttr(a.name_hint || '') + '" style="flex:1;padding:4px 6px;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:4px;font-size:11px;">'
+          + '<input class="cap-module" placeholder="模块(如 老人管理)" value="' + escAttr(a.module_seg || '') + '" style="flex:1;padding:4px 6px;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:4px;font-size:11px;">'
+          + '</div></div></label></div>';
+      });
+      list.innerHTML = html;
+    })
+    .catch(() => {});
+}
+
+function saveCapturedEndpoints() {
+  const chks = document.querySelectorAll('.cap-chk');
+  const eps = [];
+  chks.forEach(c => {
+    if (!c.checked) return;
+    const label = c.closest('label');
+    const nameEl = label.querySelector('.cap-name');
+    const modEl = label.querySelector('.cap-module');
+    eps.push({ path: c.getAttribute('data-path'), name: nameEl ? nameEl.value : '', module: modEl ? modEl.value : '' });
+  });
+  if (!eps.length) { showToast('请先勾选至少一个接口'); return; }
+  const msg = document.getElementById('capture-save-msg');
+  msg.textContent = '保存中...';
+  fetch('/api/config/endpoints/save', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoints: eps }) })
+    .then(r => r.json())
+    .then(d => {
+      if (d.ok) {
+        msg.textContent = '✅ ' + d.message;
+        showToast('已写入配置并热重载');
+        setTimeout(() => { if (capturePollTimer) { clearInterval(capturePollTimer); capturePollTimer = null; } toggleCapture(); }, 1200);
+      } else {
+        msg.textContent = '❌ ' + (d.message || '失败');
+        showToast(d.message || '保存失败');
+      }
+    })
+    .catch(e => { msg.textContent = '❌ ' + e; });
+}
+
+function escHtml(s) { return String(s == null ? '' : s).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c])); }
+function escAttr(s) { return String(s == null ? '' : s).replace(/"/g, '&quot;'); }
+
 // ── 清理代理 iframe ──
 function cleanupProxyIframe() {
+  // 停止 API 捕获
+  if (capturePollTimer) { clearInterval(capturePollTimer); capturePollTimer = null; }
+  const cbtn = document.getElementById('capture-toggle-btn');
+  if (cbtn) { cbtn.textContent = '🔍 捕获API'; cbtn.style.background = ''; cbtn.style.color = ''; }
+  const cpanel = document.getElementById('capture-panel');
+  if (cpanel) cpanel.style.display = 'none';
+  fetch('/api/collector/capture_stop', { method: 'POST' }).catch(() => {});
   const iframe = document.getElementById('proxy-iframe');
   iframe.src = '';
   iframe.style.display = 'none';
@@ -952,6 +1177,45 @@ function cleanupProxyIframe() {
   }
 }
 
+// ── 代理 iframe 地址栏导航（支持任意平台内页面 / 详情页）──
+function navigateProxy(rawUrl) {
+  if (!rawUrl) return;
+  let url = String(rawUrl).trim();
+  if (!url) return;
+  const PROXY = '/api/collector/proxy';
+  let target;
+  if (url.startsWith(PROXY)) {
+    target = url;
+  } else if (url.startsWith('http://') || url.startsWith('https://')) {
+    const afterProto = url.substring(url.indexOf('//') + 2);
+    const slash = afterProto.indexOf('/');
+    target = PROXY + (slash >= 0 ? afterProto.substring(slash) : '/');
+  } else if (url.startsWith('//')) {
+    const afterProto = url.substring(2);
+    const slash = afterProto.indexOf('/');
+    target = PROXY + (slash >= 0 ? afterProto.substring(slash) : '/');
+  } else if (url.startsWith('/')) {
+    target = PROXY + url;
+  } else {
+    target = PROXY + '/' + url;   // 相对路径
+  }
+  const iframe = document.getElementById('proxy-iframe');
+  iframe.src = target;
+  iframe.style.display = 'block';
+  document.getElementById('proxy-loading').style.display = '';
+  if (collectorIframeTimer) { clearTimeout(collectorIframeTimer); collectorIframeTimer = null; }
+}
+
+function navigateProxyFromInput() {
+  const inp = document.getElementById('proxy-url-input');
+  navigateProxy(inp.value);
+}
+
+function refreshProxyIframe() {
+  const iframe = document.getElementById('proxy-iframe');
+  try { if (iframe.contentWindow) iframe.contentWindow.location.reload(true); } catch(_) { iframe.src = iframe.src; }
+}
+
 // ── postMessage 监听：接收代理页面 iframe 发来的元素选择事件 ──
 window.addEventListener('message', function(e) {
   // iframe 中的代理页面通过 postMessage(JSON.stringify({...})) 发送消息
@@ -962,12 +1226,44 @@ window.addEventListener('message', function(e) {
   }
   if (!d || !d.type) return;
   switch (d.type) {
+    case 'kwb_proxy_progress':
+      // 加载进度更新
+      var pgBar = document.getElementById('proxy-progress-bar');
+      var pgWrap = document.getElementById('proxy-progress-bar-wrap');
+      var pgStage = document.getElementById('proxy-loading-stage');
+      var pgText = document.getElementById('proxy-loading-text');
+      if (pgWrap) pgWrap.style.display = '';
+      if (pgBar) pgBar.style.width = Math.max(0, Math.min(100, d.progress || 0)) + '%';
+      if (pgStage) pgStage.textContent = '阶段: ' + (d.stage || 'loading') + ' | ' + (d.loaded || 0) + '/' + (d.total || '?') + ' 资源';
+      if (d.stage === 'interactive' && pgText) pgText.textContent = 'DOM 已解析，正在加载资源...';
+      if (d.stage === 'complete' && pgText) pgText.textContent = '页面加载完成！';
+      break;
+
+    case 'kwb_proxy_reloading':
+      // iframe 正在重新加载
+      if (collectorIframeTimer) { clearTimeout(collectorIframeTimer); collectorIframeTimer = null; }
+      collectorIframeLoaded = false;
+      document.getElementById('proxy-loading').style.display = '';
+      document.getElementById('proxy-loading-text').textContent = '正在' + (d.message || '重新加载') + '...';
+      document.getElementById('proxy-loading-stage').textContent = '';
+      document.getElementById('proxy-progress-bar').style.width = '0%';
+      document.getElementById('proxy-progress-bar-wrap').style.display = 'none';
+      break;
+
     case 'kwb_proxy_dom_ready':
       // 代理页面 DOM 就绪
       if (collectorIframeTimer) { clearTimeout(collectorIframeTimer); collectorIframeTimer = null; }
       collectorIframeLoaded = true;
       document.getElementById('proxy-loading').style.display = 'none';
+      document.getElementById('proxy-progress-bar-wrap').style.display = 'none';
       document.getElementById('proxy-status-hint').textContent = '页面已加载！点击数据元素 → 右侧配置字段名 → 添加规则';
+      // 把地址栏同步为当前真实路径（去掉代理前缀），方便用户确认所在页面
+      try {
+        const iframe = document.getElementById('proxy-iframe');
+        const loc = iframe.contentWindow.location;
+        const p = loc.pathname.replace(/^\/api\/collector\/proxy/, '') + loc.search + loc.hash;
+        document.getElementById('proxy-url-input').value = p;
+      } catch(_) {}
       break;
 
     case 'kwb_proxy_error':
@@ -983,6 +1279,11 @@ window.addEventListener('message', function(e) {
       // 用户选中了表格
       handleTableColumns(d);
       break;
+
+    case 'kwb_pagination_selected':
+      // 用户用"选分页"捕获了下一页按钮
+      handlePaginationSelected(d);
+      break;
   }
 });
 
@@ -990,6 +1291,7 @@ window.addEventListener('message', function(e) {
 function handlePickedElement(d) {
   const elem = d.element || {};
   collectorPickedElement = elem;
+  collectorPickedSourceUrl = d.source_url || '';
 
   const card = document.getElementById('sel-detail-card');
   const content = document.getElementById('sel-detail-content');
@@ -1001,6 +1303,12 @@ function handlePickedElement(d) {
     ${elem.parent_tag ? '<dt>父元素</dt><dd>' + escapeHtml(elem.parent_tag) + '</dd>' : ''}
   `;
   card.style.display = 'block';
+
+  // 显示来源页并重置详情页勾选（每次点选重新判定）
+  const sh = document.getElementById('sel-source-hint');
+  if (sh) sh.textContent = '来源页: ' + (collectorPickedSourceUrl || '(未知)');
+  const sd = document.getElementById('sel-scope-detail');
+  if (sd) sd.checked = false;
 
   // 预填字段名
   const fieldInput = document.getElementById('sel-field-name');
@@ -1026,6 +1334,7 @@ function handleTableColumns(d) {
   const headers = d.headers || [];
   const selectors = d.selectors || [];
   const xpaths = d.xpaths || [];
+  collectorPickedSourceUrl = d.source_url || collectorPickedSourceUrl;
   if (headers.length === 0) return;
   showToast(`检测到表格，共 ${headers.length} 列，请逐列添加字段`);
   // 自动选中第一列
@@ -1041,6 +1350,20 @@ function handleTableColumns(d) {
       similar_count: headers.length
     });
   }
+}
+
+// ── 处理 iframe 捕获的分页按钮 ──
+async function handlePaginationSelected(d) {
+  const sel = d.next_button_selector || '';
+  const totalPages = d.total_pages || 0;
+  document.getElementById('col-pagination-enabled').checked = true;
+  document.getElementById('col-pagination-opts').style.display = 'flex';
+  if (sel) document.getElementById('col-next-selector').value = sel;
+  if (totalPages) {
+    const mp = document.getElementById('col-max-pages');
+    if (!mp.value || parseInt(mp.value) === 0) mp.value = totalPages;
+  }
+  showToast('已捕获翻页按钮' + (sel ? '：' + sel : '') + (totalPages ? '，共 ' + totalPages + ' 页' : ''));
 }
 
 async function collectorStartSession() {
@@ -1062,9 +1385,20 @@ async function collectorStartSession() {
   cleanupProxyIframe();
 
   try {
+    // 读取高级配置
+    const advConfig = {
+      wait_time: parseFloat(document.getElementById('col-wait-time').value) || 2,
+      ajax_wait: parseFloat(document.getElementById('col-ajax-wait').value) || 3,
+      load_timeout: parseInt(document.getElementById('col-load-timeout').value) || 30,
+      no_ads: document.getElementById('col-no-ads').checked,
+      no_anim: document.getElementById('col-no-anim').checked,
+      no_video: document.getElementById('col-no-video').checked,
+      lazy_img: document.getElementById('col-lazy-img').checked,
+    };
+
     const resp = await fetch('/api/collector/proxy_start', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ host, username, password, target })
+      body: JSON.stringify({ host, username, password, target, advanced: advConfig })
     });
     const data = await resp.json();
     if (!data.ok) { showToast(data.message, 'error'); btn.disabled = false; btn.innerHTML = '🚀 打开页面并分析元素'; status.textContent = ''; return; }
@@ -1127,6 +1461,7 @@ async function collectorAddRule() {
   const extractType = document.getElementById('sel-extract-type').value;
   const attrName = extractType === 'attribute' ? document.getElementById('sel-attr-name').value.trim() : '';
   const isList = document.getElementById('sel-is-list').checked || extractType === 'list';
+  const scope = document.getElementById('sel-scope-detail').checked ? 'detail' : 'page';
 
   try {
     const resp = await fetch('/api/collector/select', {
@@ -1140,6 +1475,11 @@ async function collectorAddRule() {
         // ── 代理模式：直接传入选择器 ──
         css_selector_override: elem.css || '',
         xpath_override: elem.xpath || '',
+        text_pattern_override: (elem.text || ''),
+        // ── 多页面 / 详情页采集 ──
+        source_url_override: collectorPickedSourceUrl,
+        scope_override: scope,
+        is_detail_link_override: false,
       })
     });
     const data = await resp.json();
@@ -1151,9 +1491,49 @@ async function collectorAddRule() {
     renderRulesList();
     document.getElementById('col-preview-btn').disabled = false;
     document.getElementById('sel-field-name').value = '';
+    document.getElementById('sel-scope-detail').checked = false;
     document.getElementById('sel-detail-card').style.display = 'none';
     collectorPickedElement = null;
-    showToast(`已添加: ${fieldName}`);
+    showToast(`已添加: ${fieldName}` + (scope === 'detail' ? '（详情页字段）' : ''));
+  } catch (err) {
+    showToast('添加失败: ' + err.message, 'error');
+  }
+}
+
+// ── 捕获“进入详情页的链接”规则（在列表页捕获，采集时逐条进入详情页）──
+async function collectorAddDetailLink() {
+  const elem = collectorPickedElement;
+  if (!elem) { showToast('请先在页面中点击一个详情页链接元素', 'error'); return; }
+
+  const fieldName = (document.getElementById('sel-field-name').value.trim()) || '详情链接';
+  try {
+    const resp = await fetch('/api/collector/select', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        session_id: collectorSessionId,
+        field_name: fieldName,
+        extract_type: 'attribute',
+        attribute_name: 'href',
+        is_list: true,
+        css_selector_override: elem.css || '',
+        xpath_override: elem.xpath || '',
+        text_pattern_override: (elem.text || ''),
+        source_url_override: collectorPickedSourceUrl,
+        scope_override: 'page',
+        is_detail_link_override: true,
+      })
+    });
+    const data = await resp.json();
+    if (!data.ok) { showToast(data.message, 'error'); return; }
+
+    collectorSelectedRules.push(data.rule);
+    renderRulesList();
+    document.getElementById('col-preview-btn').disabled = false;
+    document.getElementById('sel-field-name').value = '';
+    document.getElementById('sel-scope-detail').checked = false;
+    document.getElementById('sel-detail-card').style.display = 'none';
+    collectorPickedElement = null;
+    showToast(`已添加详情链接: ${fieldName}`);
   } catch (err) {
     showToast('添加失败: ' + err.message, 'error');
   }
@@ -1166,14 +1546,30 @@ function renderRulesList() {
     container.innerHTML = '<p style="color:var(--text-dim);font-size:11px;">在页面中点选数据元素，然后添加规则</p>';
     return;
   }
-  container.innerHTML = collectorSelectedRules.map((r, i) => `
-    <div class="rule-item">
-      <span class="field-badge">${escapeHtml(r.field_name)}</span>
-      <span class="rule-selector">${escapeHtml(r.css_selector)}</span>
-      <span style="font-size:10px;color:var(--text-dim);">${r.extract_type}</span>
-      <span class="rule-remove" onclick="collectorRemoveRule(${i})" title="移除">✕</span>
-    </div>
-  `).join('');
+    container.innerHTML = collectorSelectedRules.map((r, i) => {
+      const isDetail = r.scope === 'detail';
+      const isLink = r.is_detail_link;
+      const badge = isLink
+        ? '<span class="field-badge" style="background:#a855f7;color:#fff;">🔗详情链接</span>'
+        : isDetail
+          ? '<span class="field-badge" style="background:#e6a23c;color:#fff;">详情字段</span>'
+          : '';
+      const src = r.source_url ? `<span style="font-size:9px;color:var(--text-dim);display:block;word-break:break-all;">📄 ${escapeHtml(r.source_url)}</span>` : '';
+      return `
+      <div class="rule-item" data-css="${escapeHtml(r.css_selector)}">
+        <span class="field-badge">${escapeHtml(r.field_name)}</span>
+        ${badge}
+        <span class="rule-selector">${escapeHtml(r.css_selector)}</span>
+        <span style="font-size:10px;color:var(--text-dim);">${r.extract_type}</span>
+        ${src}
+        <span class="rule-remove" onclick="collectorRemoveRule(${i})" title="移除">✕</span>
+      </div>`;
+    }).join('');
+    // 规则项 hover → 联动 iframe 内高亮对应元素
+    container.onmouseover = function(e) {
+      var item = e.target.closest('.rule-item');
+      if (item && item.dataset.css) highlightRuleInIframe(item.dataset.css);
+    };
 }
 
 function collectorRemoveRule(index) {
@@ -1182,6 +1578,15 @@ function collectorRemoveRule(index) {
   if (collectorSelectedRules.length === 0) {
     document.getElementById('col-preview-btn').disabled = true;
   }
+}
+
+// ── 联动：在 iframe 内高亮某个选择器对应的元素 ──
+function highlightRuleInIframe(css) {
+  const iframe = document.getElementById('proxy-iframe');
+  if (!iframe || !iframe.contentWindow) return;
+  try {
+    iframe.contentWindow.postMessage(JSON.stringify({ type: 'kwb_highlight', css: css, color: '#f56c6c' }), '*');
+  } catch(_) {}
 }
 
 async function collectorDoPreview() {
@@ -1200,6 +1605,8 @@ async function collectorDoPreview() {
     document.getElementById('preview-container').style.display = 'block';
     document.getElementById('col-save-next-btn').disabled = false;
     collectorPreviewOk = true;
+    lastCollectorTotal = data.total || 0;
+    document.getElementById('col-mysql-btn').style.display = 'inline-block';
 
     // 统计
     document.getElementById('preview-stats').innerHTML = `
@@ -1253,6 +1660,8 @@ async function collectorSaveTask() {
     enabled: document.getElementById('col-pagination-enabled').checked,
     page_size: parseInt(document.getElementById('col-page-size').value) || 20,
     max_pages: parseInt(document.getElementById('col-max-pages').value) || 0,
+    next_button_selector: document.getElementById('col-next-selector').value || '',
+    retry_count: 3,
   };
 
   try {
@@ -1293,7 +1702,8 @@ async function collectorRefreshTaskList() {
           <div class="task-meta">${t.rules_count} 条规则 | ${t.export_format} | 执行 ${t.total_runs} 次</div>
         </div>
         <div class="task-actions" style="margin-left:auto;">
-          <button class="btn-sm success" onclick="collectorExecuteTask('${t.task_id}')" title="执行采集">▶ 执行</button>
+          <button class="btn-sm success" onclick="collectorExecuteTask('${t.task_id}', false)" title="从头执行采集">▶ 执行</button>
+          <button class="btn-sm" onclick="collectorExecuteTask('${t.task_id}', true)" title="从断点继续采集">⏩ 续采</button>
           <button class="btn-sm" onclick="collectorLoadTask('${t.task_id}')" title="加载到编辑器">📋 加载</button>
           <button class="btn-sm" onclick="collectorExportTask('${t.task_id}')" title="导出JSON">📥</button>
           <button class="btn-sm danger" onclick="collectorDeleteTask('${t.task_id}')" title="删除">✕</button>
@@ -1309,7 +1719,7 @@ async function collectorRefreshTaskList() {
   } catch (err) { /* ignore */ }
 }
 
-async function collectorExecuteTask(taskId) {
+async function collectorExecuteTask(taskId, resume = false) {
   const host = document.getElementById('host').value.trim();
   const username = document.getElementById('username').value.trim();
   const password = document.getElementById('password').value;
@@ -1327,7 +1737,7 @@ async function collectorExecuteTask(taskId) {
   try {
     const resp = await fetch('/api/collector/tasks/' + taskId + '/execute', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ host, username, password, headless: true, max_rows: 5000 })
+      body: JSON.stringify({ host, username, password, headless: true, max_rows: 5000, resume: !!resume, start_page: 1 })
     });
     const data = await resp.json();
 
@@ -1380,6 +1790,24 @@ async function collectorExecuteTask(taskId) {
       }
       modalBody.innerHTML = tableHtml;
     }
+
+    // 服务端已保存的文件（多格式落地）
+    try {
+      const sf = data.saved_files || (data.data && data.data.saved_files) || {};
+      const keys = Object.keys(sf || {});
+      if (keys.length > 0) {
+        const fmtLabel = { csv: 'CSV', json: 'JSON', xlsx: 'Excel', txt: 'TXT' };
+        let fileHtml = '<div style="margin-top:16px;padding:12px;border:1px solid var(--border);border-radius:6px;background:var(--bg);">';
+        fileHtml += '<div style="font-size:12px;color:var(--text);font-weight:600;margin-bottom:8px;">📁 已保存到服务器：</div>';
+        fileHtml += '<div style="display:flex;gap:8px;flex-wrap:wrap;">';
+        keys.forEach(k => {
+          const url = sf[k];
+          fileHtml += '<a href="' + url + '" target="_blank" style="padding:6px 12px;background:var(--accent);color:#fff;border-radius:4px;font-size:12px;text-decoration:none;">⬇ ' + (fmtLabel[k] || k) + '</a>';
+        });
+        fileHtml += '</div></div>';
+        modalBody.insertAdjacentHTML('beforeend', fileHtml);
+      }
+    } catch(_) {}
 
     // 下载按钮
     const dlBtn = document.getElementById('result-download-btn');
@@ -1482,6 +1910,74 @@ function updateSelection() {
 function selectAll() { document.querySelectorAll('#table-list input').forEach(cb => cb.checked = true); updateSelection(); }
 function deselectAll() { document.querySelectorAll('#table-list input').forEach(cb => cb.checked = false); updateSelection(); }
 
+// ── 标准模式：从后端加载全部真实接口 ──
+function discoverAllEndpoints() {
+  const host = document.getElementById('host').value.trim();
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+  if (!host || !username) { showToast('请先填写平台地址和账号', 'error'); return; }
+  const btn = document.getElementById('discover-btn');
+  btn.disabled = true;
+  const st = document.getElementById('discover-status');
+  st.textContent = '正在启动...';
+  fetch('/api/endpoints/discover', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ host, username, password })
+  })
+    .then(r => r.json())
+    .then(d => {
+      if (!d.ok) { showToast(d.message, 'error'); btn.disabled = false; st.textContent = ''; return; }
+      pollDiscover();
+    })
+    .catch(e => { showToast('请求失败: ' + e.message, 'error'); btn.disabled = false; st.textContent = ''; });
+}
+
+function pollDiscover() {
+  fetch('/api/endpoints/discover/status')
+    .then(r => r.json())
+    .then(s => {
+      const st = document.getElementById('discover-status');
+      const btn = document.getElementById('discover-btn');
+      if (s.running) {
+        st.textContent = `正在探测 ${s.progress}/${s.total}… 已找到 ${s.found}`;
+        setTimeout(pollDiscover, 800);
+      } else {
+        btn.disabled = false;
+        if (s.error) {
+          st.textContent = '失败: ' + s.error;
+          showToast('发现失败: ' + s.error, 'error');
+          return;
+        }
+        mergeDiscoveredEndpoints(s.endpoints || []);
+        const added = (s.endpoints || []).length;
+        st.textContent = `已加载 ${added} 个接口（探测 ${s.stats.total || added} 个候选）`;
+        showToast(`已从后端加载 ${added} 个数据接口`, 'success');
+      }
+    })
+    .catch(e => { document.getElementById('discover-btn').disabled = false; });
+}
+
+function mergeDiscoveredEndpoints(endpoints) {
+  const list = document.getElementById('table-list');
+  const existing = new Set([...list.querySelectorAll('input[data-path]')].map(i => i.dataset.path));
+  endpoints.forEach(ep => {
+    if (existing.has(ep.path)) return;
+    const div = document.createElement('div');
+    div.className = 'table-item';
+    div.innerHTML = `<input type="checkbox" data-path="${escapeHtml(ep.path)}" onchange="updateSelection()">` +
+      `<span>${escapeHtml(ep.name || ep.path)}</span>` +
+      `<span style="font-size:10px;color:var(--text-dim)">${escapeHtml(ep.module || '')}</span>`;
+    div.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'INPUT') {
+        const cb = div.querySelector('input'); cb.checked = !cb.checked; updateSelection();
+      }
+    });
+    list.appendChild(div);
+    existing.add(ep.path);
+  });
+  updateSelection();
+}
+
 // ═══════════ 标准模式 - 爬取 ═══════════
 async function startCrawl() {
   const host = document.getElementById('host').value.trim();
@@ -1546,6 +2042,7 @@ async function loadResults() {
   const resp = await fetch('/api/crawl_status');
   const state = await resp.json();
   crawlResults = state.summary || [];
+  lastStandardTotalRows = crawlResults.reduce((s, r) => s + (parseInt(r.count, 10) || 0), 0);
   const area = document.getElementById('results-area');
   area.innerHTML = '';
   document.getElementById('global-export').className = 'global-export show';
@@ -1598,6 +2095,9 @@ async function previewTable(index) {
 function escapeHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
 // ═══════════ 智能模式 - 意图解析 ═══════════
+let intentEdited = false;     // 用户是否在预览面板手动修正过解析结果
+let lastSmartQuery = '';      // 最近一次解析的原始自然语言查询（用于反馈回灌）
+
 async function parseIntent() {
   const query = document.getElementById('smart-query').value.trim();
   if (!query) { showToast('请输入您要提取的数据需求', 'error'); return; }
@@ -1616,6 +2116,10 @@ async function parseIntent() {
     if (!data.ok) { showToast(data.message, 'error'); btn.disabled = false; btn.innerHTML = '&#x1F50D; 解析需求'; return; }
 
     parsedIntent = data.intent;
+    lastSmartQuery = query;
+    intentEdited = false;
+    document.getElementById('edited-badge').style.display = 'none';
+    document.getElementById('intent-editor').style.display = 'none';
     showIntentPreview(data.intent);
     showToast('解析完成! 确认无误后点击"开始爬取"');
   } catch (err) {
@@ -1628,6 +2132,27 @@ async function parseIntent() {
 function showIntentPreview(intent) {
   const card = document.getElementById('intent-card');
   const grid = document.getElementById('intent-grid');
+  const confirmBtn = document.getElementById('confirm-btn');
+
+  // ── 对话分支：非爬取意图，直接以气泡展示 LLM 回复 ──
+  if (intent.type === 'chat') {
+    grid.innerHTML = `
+      <div class="chat-bubble">
+        <div class="chat-avatar">🤖</div>
+        <div class="chat-text">${escapeHtml(intent.reply || '（无回复）')}</div>
+      </div>`;
+    card.style.display = 'block';
+    confirmBtn.style.display = 'none';
+    document.getElementById('edit-btn').style.display = 'none';
+    document.getElementById('custom-results').style.display = 'none';
+    document.getElementById('custom-export').style.display = 'none';
+    document.getElementById('custom-progress').style.display = 'none';
+    return;
+  }
+
+  // 非对话意图：恢复确认按钮，走原爬取预览逻辑
+  confirmBtn.style.display = '';
+  document.getElementById('edit-btn').style.display = '';
 
   const conf = intent.confidence || 0;
   const confCls = conf >= 0.8 ? 'conf-high' : conf >= 0.5 ? 'conf-mid' : 'conf-low';
@@ -1763,11 +2288,118 @@ function showIntentPreview(intent) {
 
 function clearIntent() {
   parsedIntent = null;
+  intentEdited = false;
   document.getElementById('intent-card').style.display = 'none';
+  document.getElementById('intent-editor').style.display = 'none';
+  document.getElementById('edited-badge').style.display = 'none';
+  document.getElementById('confirm-btn').style.display = '';
   document.getElementById('custom-results').style.display = 'none';
   document.getElementById('custom-export').style.display = 'none';
   document.getElementById('custom-progress').style.display = 'none';
   document.getElementById('smart-query').value = '';
+}
+
+// ── 修正编辑面板 ──
+function openIntentEditor() {
+  if (!parsedIntent) { showToast('请先解析需求', 'error'); return; }
+  const mode = parsedIntent.source_type === 'page' ? 'page' : 'api';
+  const fieldsVal = (parsedIntent.fields || []).join('、');
+  const html = `
+    <div class="intent-field full">
+      <label>采集方式（切换为「页面采集」即可直接抓取可见页面，不走接口）</label>
+      <div class="mode-toggle">
+        <label class="mode-opt"><input type="radio" name="ed-mode" value="api" ${mode==='api'?'checked':''} onchange="renderEditorFields()"> 接口采集（按端口取数）</label>
+        <label class="mode-opt"><input type="radio" name="ed-mode" value="page" ${mode==='page'?'checked':''} onchange="renderEditorFields()"> 页面采集（抓页面可见数据）</label>
+      </div>
+    </div>
+    <div id="editor-fields">${buildEditorFields(mode, fieldsVal)}</div>`;
+  document.getElementById('editor-body').innerHTML = html;
+  document.getElementById('intent-editor').style.display = 'block';
+}
+
+// 根据当前选中的采集方式，生成对应的字段编辑区（切换方式时保留已填字段值）
+function buildEditorFields(mode, fieldsVal) {
+  let h = '';
+  if (mode === 'page') {
+    h += `<div class="intent-field full"><label>页面 URL / 路由（粘贴你要采集的页面地址，如 http://host/xxx 或 /xxx/yyy）</label>
+      <input id="ed-url" class="intent-input" value="${escapeHtml(parsedIntent.url_or_route || '')}"></div>`;
+  } else {
+    h += `<div class="intent-field full"><label>目标 API 接口</label>
+      <input id="ed-api" class="intent-input" value="${escapeHtml(parsedIntent.target_api || '')}"></div>`;
+    h += `<div class="intent-field full"><label>对应数据表名</label>
+      <input id="ed-name" class="intent-input" value="${escapeHtml(parsedIntent.api_name || '')}"></div>`;
+  }
+  h += `<div class="intent-field full"><label>提取字段（用 、或逗号分隔；留空 = 全部字段 / 全部表格列）</label>
+    <input id="ed-fields" class="intent-input" value="${escapeHtml(fieldsVal)}"></div>`;
+  return h;
+}
+
+function renderEditorFields() {
+  const mode = document.querySelector('input[name="ed-mode"]:checked').value;
+  const fieldsVal = document.getElementById('ed-fields')
+    ? document.getElementById('ed-fields').value
+    : (parsedIntent.fields || []).join('、');
+  document.getElementById('editor-fields').innerHTML = buildEditorFields(mode, fieldsVal);
+}
+
+function saveIntentEdit() {
+  if (!parsedIntent) return;
+  const mode = document.querySelector('input[name="ed-mode"]:checked').value;
+
+  if (mode === 'page') {
+    // 切换 / 保持为「页面采集」：抓可见页面，清空端口，后端走 _execute_page_crawl
+    const u = document.getElementById('ed-url').value.trim();
+    if (!u) { showToast('页面采集需填写页面 URL / 路由', 'error'); return; }
+    parsedIntent.source_type = 'page';
+    parsedIntent.url_or_route = u;
+    parsedIntent.target_api = '';   // 清空端口，确保不被当成接口采集
+    if (!parsedIntent.api_name) parsedIntent.api_name = '页面采集';
+  } else {
+    // 切回「接口采集」：去掉 page 标记，写回端口
+    parsedIntent.source_type = '';
+    const a = document.getElementById('ed-api').value.trim();
+    const n = document.getElementById('ed-name').value.trim();
+    if (a) parsedIntent.target_api = a;
+    if (n) parsedIntent.api_name = n;
+    if (!parsedIntent.target_api) { showToast('接口采集需填写目标 API', 'error'); return; }
+  }
+
+  // 关键标记：用户手动修正后，后端灵活层不再覆盖该接口
+  parsedIntent._user_corrected = true;
+  const fRaw = document.getElementById('ed-fields').value.trim();
+  parsedIntent.fields = fRaw ? fRaw.split(/[、,，\s]+/).filter(Boolean) : [];
+  intentEdited = true;
+  document.getElementById('intent-editor').style.display = 'none';
+  document.getElementById('edited-badge').style.display = 'inline-block';
+  showIntentPreview(parsedIntent);
+  showToast('已更新解析结果，可点击「确认并开始爬取」');
+}
+
+function cancelIntentEdit() {
+  document.getElementById('intent-editor').style.display = 'none';
+}
+
+// ── 反馈回灌：把「确认/修正」结果教给学习系统（/api/feedback）──
+async function submitFeedback() {
+  if (!lastSmartQuery || !parsedIntent) return;
+  const payload = {
+    user_query: lastSmartQuery,
+    intent: parsedIntent,
+    action: intentEdited ? 'correct' : 'confirm',
+  };
+  if (intentEdited) {
+    // 页面采集模式：corrected_endpoint 用页面 URL 记录，避免为空污染学习库
+    payload.corrected_endpoint = parsedIntent.target_api || parsedIntent.url_or_route || '';
+    payload.corrected_api_name = parsedIntent.api_name || '';
+    payload.corrected_fields = parsedIntent.fields || [];
+    payload.source_type = parsedIntent.source_type || 'api';
+  }
+  try {
+    await fetch('/api/feedback', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  } catch (e) { /* 反馈为尽力而为，失败不影响本次爬取 */ }
 }
 
 // ═══════════ 智能模式 - 执行自定义爬取 ═══════════
@@ -1800,6 +2432,7 @@ async function executeCustomCrawl() {
     document.getElementById('custom-progress-text').textContent = `完成！共提取 ${data.total_rows} 条记录`;
 
     displayCustomResults(data);
+    submitFeedback();
   } catch (err) {
     showToast('爬取失败: ' + err.message, 'error');
     resetCustomButton();
@@ -1807,6 +2440,7 @@ async function executeCustomCrawl() {
 }
 
 function displayCustomResults(data) {
+  lastCustomTotalRows = data.total_rows || (data.rows || []).length;
   const container = document.getElementById('custom-results');
   const columns = data.columns || [];
   const rows = data.rows || [];
@@ -3043,7 +3677,187 @@ function downloadBlob(blob, filename) {
   URL.revokeObjectURL(url);
 }
 
+// ═══════════ 写入 MySQL ═══════════
+function _countPageTableRows() {
+  // 统计页面采集所有表格（含分页 merged_tables）的行数
+  let total = 0;
+  const r = pageScrapeResult;
+  if (r) {
+    if (r.merged_tables) {
+      for (const t of r.merged_tables) total += (t.rows || []).length;
+    }
+    if (r.tables) {
+      for (const t of r.tables) total += (t.rows || []).length;
+    }
+  }
+  return total;
+}
+
+function openMysqlModal(mode) {
+  currentMysqlMode = mode || 'smart';
+  let rowCount = 0;
+  let def = 'crawled_data';
+  let showTip = false;
+  if (currentMysqlMode === 'smart') {
+    rowCount = lastCustomTotalRows;
+    def = (parsedIntent && parsedIntent.api_name) ? parsedIntent.api_name : 'crawled_data';
+  } else if (currentMysqlMode === 'page') {
+    rowCount = _countPageTableRows();
+    def = 'page_scrape_data';
+  } else if (currentMysqlMode === 'collector') {
+    rowCount = lastCollectorTotal;
+    def = 'collector_data';
+  } else if (currentMysqlMode === 'standard') {
+    rowCount = lastStandardTotalRows;
+    def = 'standard_data';   // 作为表名前缀（可空）
+    showTip = true;
+  }
+
+  if (rowCount <= 0) {
+    const tips = {
+      smart: '请先执行一次智能模式爬取',
+      page: '请先完成一次页面采集',
+      collector: '请先在标注模式预览一次提取结果',
+      standard: '请先在标准模式执行一次爬取',
+    };
+    showToast(tips[currentMysqlMode] || '当前没有可写入的数据', 'error');
+    return;
+  }
+  document.getElementById('mysql-row-count').textContent = rowCount;
+  // 默认表名（安全化由后端处理）
+  if (!document.getElementById('mysql-table').value) {
+    document.getElementById('mysql-table').value = def;
+  }
+  // 标准模式多表：显示「逐表写入」提示
+  const tip = document.getElementById('mysql-tip');
+  if (tip) {
+    if (showTip) {
+      tip.style.display = 'block';
+      tip.textContent = '标准模式包含多张表，将按每张表分别写入独立的 MySQL 表，表名 = 上方「表名」+ "_" + 原表名（留空则用原表名）。';
+    } else {
+      tip.style.display = 'none';
+    }
+  }
+  document.getElementById('mysql-msg').style.display = 'none';
+  document.getElementById('mysql-modal').style.display = 'flex';
+}
+
+function closeMysqlModal() {
+  document.getElementById('mysql-modal').style.display = 'none';
+}
+
+async function writeToMysql() {
+  const host = document.getElementById('mysql-host').value.trim();
+  const port = document.getElementById('mysql-port').value.trim() || '3306';
+  const database = document.getElementById('mysql-db').value.trim();
+  const user = document.getElementById('mysql-user').value.trim();
+  const password = document.getElementById('mysql-pass').value;
+  const table = document.getElementById('mysql-table').value.trim() || 'crawled_data';
+  const mode = document.getElementById('mysql-mode').value;
+
+  const msg = document.getElementById('mysql-msg');
+  const btn = document.getElementById('mysql-submit');
+
+  if (!host || !database || !user) {
+    msg.style.display = 'block';
+    msg.style.background = 'rgba(255,80,80,0.12)';
+    msg.style.color = '#ff6b6b';
+    msg.style.border = '1px solid #ff6b6b';
+    msg.textContent = '请填写主机、数据库、用户名（必填）';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = '写入中...';
+  msg.style.display = 'block';
+  msg.style.background = 'rgba(0,120,255,0.1)';
+  msg.style.color = 'var(--accent)';
+  msg.style.border = '1px solid var(--accent)';
+  msg.textContent = '正在连接数据库并写入数据...';
+
+  try {
+    // 按当前模式路由到对应后端接口
+    const endpoint = {
+      smart: '/api/crawl_custom_mysql',
+      page: '/api/page/crawl_mysql',
+      collector: '/api/collector/mysql',
+      standard: '/api/crawl/standard_mysql',
+    }[currentMysqlMode] || '/api/crawl_custom_mysql';
+
+    const resp = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        mysql: { host, port: parseInt(port, 10), user, password, database },
+        table, mode
+      })
+    });
+    const data = await resp.json();
+    if (data.ok) {
+      msg.style.background = 'rgba(40,200,120,0.12)';
+      msg.style.color = '#2ecc71';
+      msg.style.border = '1px solid #2ecc71';
+      msg.textContent = `✅ ${data.message}`;
+      showToast(data.message, 'success');
+    } else {
+      msg.style.background = 'rgba(255,80,80,0.12)';
+      msg.style.color = '#ff6b6b';
+      msg.style.border = '1px solid #ff6b6b';
+      msg.textContent = `❌ ${data.message}`;
+      showToast(data.message, 'error');
+    }
+  } catch (err) {
+    msg.style.background = 'rgba(255,80,80,0.12)';
+    msg.style.color = '#ff6b6b';
+    msg.style.border = '1px solid #ff6b6b';
+    msg.textContent = '❌ 请求失败: ' + err.message;
+    showToast('写入失败: ' + err.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '开始写入';
+  }
+}
+
 init();
 </script>
+
+<!-- ════════════ 写入 MySQL 弹窗 ════════════ -->
+<div id="mysql-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:10000;justify-content:center;align-items:center;">
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;width:420px;max-width:92vw;max-height:90vh;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.4);">
+    <div style="padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;">
+      <h3 style="color:var(--accent);font-size:15px;margin:0;">🗄 写入 MySQL 数据库</h3>
+      <button onclick="closeMysqlModal()" style="margin-left:auto;background:none;border:none;font-size:18px;cursor:pointer;color:var(--text-dim);">✕</button>
+    </div>
+    <div style="padding:16px 18px;display:flex;flex-direction:column;gap:10px;">
+      <div style="font-size:11px;color:var(--text-dim);">将当前爬取结果（共 <span id="mysql-row-count" style="color:var(--accent);">0</span> 行）写入指定 MySQL 表。</div>
+      <div id="mysql-tip" style="display:none;font-size:11px;color:#ffb347;background:rgba(255,179,71,0.1);border:1px solid rgba(255,179,71,0.4);border-radius:6px;padding:7px 10px;"></div>
+
+      <label style="font-size:12px;font-weight:600;">主机 Host<input id="mysql-host" placeholder="如 127.0.0.1 或 localhost" style="margin-top:4px;width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font-size:12px;"></label>
+      <div style="display:flex;gap:10px;">
+        <label style="font-size:12px;font-weight:600;flex:1;">端口 Port<input id="mysql-port" value="3306" style="margin-top:4px;width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font-size:12px;"></label>
+        <label style="font-size:12px;font-weight:600;flex:1.6;">数据库 Database<input id="mysql-db" placeholder="数据库名" style="margin-top:4px;width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font-size:12px;"></label>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <label style="font-size:12px;font-weight:600;flex:1;">用户名 User<input id="mysql-user" placeholder="如 root" style="margin-top:4px;width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font-size:12px;"></label>
+        <label style="font-size:12px;font-weight:600;flex:1;">密码 Password<input id="mysql-pass" type="password" placeholder="可空" style="margin-top:4px;width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font-size:12px;"></label>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <label style="font-size:12px;font-weight:600;flex:1.6;">表名 Table<input id="mysql-table" placeholder="如 crawled_data" style="margin-top:4px;width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font-size:12px;"></label>
+        <label style="font-size:12px;font-weight:600;flex:1;">写入模式
+          <select id="mysql-mode" style="margin-top:4px;width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font-size:12px;">
+            <option value="append">追加（保留旧数据）</option>
+            <option value="replace">覆盖（先删后建）</option>
+          </select>
+        </label>
+      </div>
+      <div id="mysql-msg" style="font-size:11px;display:none;padding:8px 10px;border-radius:6px;"></div>
+      <div style="display:flex;gap:10px;margin-top:4px;">
+        <button onclick="closeMysqlModal()" class="btn outline" style="flex:1;">取消</button>
+        <button onclick="writeToMysql()" id="mysql-submit" class="btn primary" style="flex:2;background:var(--accent);color:#fff;border-color:var(--accent);">开始写入</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
